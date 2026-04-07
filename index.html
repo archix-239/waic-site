@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women In AI Cameroon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar"><div class="container"><div class="topbar-left"><a href="mailto:womeninaicameroon@gmail.com"><i class="fas fa-envelope"></i> womeninaicameroon@gmail.com</a><a href="tel:+237682573699"><i class="fas fa-phone"></i> (+237) 682 573 699</a></div><div class="lang-switch"><span class="active">FR</span><span>EN</span></div></div></div>
+
+<!-- NAVBAR -->
+<nav class="navbar"><div class="container">
+<a href="#home" class="logo" onclick="navigateTo('home')"><img src="images/page_3_img_1.jpeg" alt="Women In AI Cameroon" class="logo-img"></a>
+<div class="nav-links">
+  <a href="#home" class="nav-link active" id="nav-home" onclick="navigateTo('home')">Accueil</a>
+  <div class="dropdown"><span class="nav-link" id="nav-ong">L'ONG <i class="fas fa-chevron-down"></i></span><div class="dropdown-menu"><a href="#about" onclick="navigateTo('about')">À Propos de nous</a><a href="#partners" onclick="navigateTo('partners')">Partenariats</a><a href="#testimonials" onclick="navigateTo('testimonials')">Témoignages</a></div></div>
+  <div class="dropdown"><span class="nav-link" id="nav-actions">Nos Actions <i class="fas fa-chevron-down"></i></span><div class="dropdown-menu"><a href="#programmes" onclick="navigateTo('programmes')">Programmes</a><a href="#formations" onclick="navigateTo('formations')">Formations</a></div></div>
+  <div class="dropdown"><span class="nav-link" id="nav-ressources">Ressources <i class="fas fa-chevron-down"></i></span><div class="dropdown-menu"><a href="#magazine" onclick="navigateTo('magazine')">Magazine</a><a href="#blog" onclick="navigateTo('blog')">Blog</a><a href="#events" onclick="navigateTo('events')">Actualités &amp; Agenda</a><a href="#gallery" onclick="navigateTo('gallery')">Galerie Photo</a></div></div>
+  <a href="#boutique" class="nav-link" id="nav-boutique" onclick="navigateTo('boutique')">Boutique</a>
+</div>
+<div class="nav-right"><a href="#donate" class="btn-dons" onclick="navigateTo('donate')"><i class="fas fa-heart"></i> Dons</a><button class="btn-membre" onclick="navigateTo('member')">Espace Membre <i class="fas fa-user"></i></button></div>
+<button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#home" onclick="navigateTo('home');closeMobileMenu()">Accueil</a>
+  <a href="#about" onclick="navigateTo('about');closeMobileMenu()">À Propos de nous</a>
+  <a href="#partners" onclick="navigateTo('partners');closeMobileMenu()">Partenariats</a>
+  <a href="#testimonials" onclick="navigateTo('testimonials');closeMobileMenu()">Témoignages</a>
+  <a href="#programmes" onclick="navigateTo('programmes');closeMobileMenu()">Programmes</a>
+  <a href="#formations" onclick="navigateTo('formations');closeMobileMenu()">Formations</a>
+  <a href="#magazine" onclick="navigateTo('magazine');closeMobileMenu()">Magazine</a>
+  <a href="#blog" onclick="navigateTo('blog');closeMobileMenu()">Blog</a>
+  <a href="#events" onclick="navigateTo('events');closeMobileMenu()">Actualités &amp; Agenda</a>
+  <a href="#gallery" onclick="navigateTo('gallery');closeMobileMenu()">Galerie Photo</a>
+  <a href="#boutique" onclick="navigateTo('boutique');closeMobileMenu()">Boutique</a>
+  <div class="mobile-menu-footer">
+    <a href="#donate" class="btn btn-primary" onclick="navigateTo('donate');closeMobileMenu()"><i class="fas fa-heart"></i> Faire un don</a>
+    <a href="#member" class="btn btn-orange" onclick="navigateTo('member');closeMobileMenu()">Espace Membre</a>
+  </div>
+</div>
+
+
+<!-- ===================== PAGE: HOME ===================== -->
+<div id="page-home" class="page active">
+<section class="hero"><div class="hero-bg"><img src="images/page_1_img_1.jpeg" alt="WAI-CAM"></div><div class="container hero-content">
+<div class="hero-badge">REJOIGNEZ LE MOUVEMENT</div>
+<h1>Inspirer. Former. <span class="highlight">Connecter les femmes</span> dans l'IA</h1>
+<p class="hero-desc">Ensemble, construisons un futur où les femmes camerounaises sont au cœur de l'innovation technologique. L'IA pour toutes, l'avenir entre nos mains.</p>
+<div class="hero-buttons"><a href="#contact" class="btn btn-primary" onclick="navigateTo('contact')">Nous rejoindre <i class="fas fa-arrow-right"></i></a><a href="#about" class="btn btn-secondary" onclick="navigateTo('about')"><i class="fas fa-play-circle"></i> Découvrir WAIC</a></div>
+</div></section>
+
+<section class="engagement"><div class="container"><div class="engagement-grid">
+<div class="e-card"><div class="e-card-icon"><i class="fas fa-heart"></i></div><h3>Soutenir WAIC</h3><p>Contribuez à la formation et l'accompagnement de la prochaine génération de leaders en IA.</p><a href="#donate" class="arrow-link" onclick="navigateTo('donate')">Faire un don <i class="fas fa-chevron-right"></i></a></div>
+<div class="e-card featured"><div class="e-card-icon"><i class="fas fa-users"></i></div><h3>Devenir Membre</h3><p>Rejoignez une communauté bienveillante et solidaire de femmes passionnées par la tech.</p><a href="#member" class="arrow-link" onclick="navigateTo('member')">S'inscrire <i class="fas fa-chevron-right"></i></a></div>
+<div class="e-card"><div class="e-card-icon"><i class="fas fa-handshake"></i></div><h3>Partenariats</h3><p>Devenez partenaire et associez votre image à l'inclusion et l'innovation au Cameroun.</p><a href="#partners" class="arrow-link" onclick="navigateTo('partners')">Collaborer <i class="fas fa-chevron-right"></i></a></div>
+</div></div></section>
+
+<section class="section"><div class="container text-center">
+<div class="section-label">NOS ACTIONS</div><h2 class="section-title">Piliers Stratégiques</h2>
+<p class="section-desc centered">Nous déployons des programmes concrets pour démocratiser l'IA et soutenir les projets innovants menés par des femmes.</p>
+<div class="programmes-grid">
+<div class="prog-card"><div class="prog-card-img"><img src="images/page_5_img_2.jpeg" alt="Youth & AI"><span class="prog-card-badge">Formation</span></div><div class="prog-card-body"><div class="prog-card-icon"><i class="fas fa-book-open"></i></div><h3>Youth &amp; AI</h3><p>Sensibiliser les jeunes à l'IA et encourager la création d'emplois dans le numérique.</p><a href="#programmes" class="arrow-link" onclick="navigateTo('programmes')">Voir les formations <i class="fas fa-arrow-right"></i></a></div></div>
+<div class="prog-card"><div class="prog-card-img"><img src="images/page_5_img_4.jpeg" alt="Women Leaders"><span class="prog-card-badge">Mentorat</span></div><div class="prog-card-body"><div class="prog-card-icon"><i class="fas fa-user-friends"></i></div><h3>Women Leaders for AI</h3><p>Former des ambassadrices régionales au leadership numérique et à la vulgarisation de l'IA.</p><a href="#programmes" class="arrow-link" onclick="navigateTo('programmes')">Trouver un mentor <i class="fas fa-arrow-right"></i></a></div></div>
+<div class="prog-card"><div class="prog-card-img"><img src="images/page_5_img_5.jpeg" alt="AI Communities"><span class="prog-card-badge">Innovation</span></div><div class="prog-card-body"><div class="prog-card-icon"><i class="fas fa-lightbulb"></i></div><h3>AI for Communities</h3><p>Développer des micro-projets locaux où l'IA répond à des besoins concrets.</p><a href="#programmes" class="arrow-link" onclick="navigateTo('programmes')">Découvrir les projets <i class="fas fa-arrow-right"></i></a></div></div>
+</div>
+<a href="#programmes" class="btn btn-outline" style="margin-top:40px" onclick="navigateTo('programmes')">Voir tous les programmes</a>
+</div></section>
+
+<section class="section testimonials"><div class="container">
+<div class="testimonials-header"><div><div class="section-label"><i class="fas fa-star" style="color:var(--orange)"></i> SUCCESS STORIES</div><h2 class="section-title">Elles transforment le monde avec l'IA</h2></div><div class="testimonials-nav"><button id="t-prev"><i class="fas fa-chevron-left"></i></button><button id="t-next"><i class="fas fa-chevron-right"></i></button></div></div>
+<div class="testimonials-track-wrapper"><div class="testimonials-grid" id="testimonials-track">
+<div class="t-card"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_8_img_4.jpeg" alt=""></div><div><div class="t-card-name">MAFFO Esther</div><div class="t-card-role">Resp. régionale Ouest &amp; Nord-Ouest</div></div></div><p class="t-card-text">"J'utilise l'IA comme un outil d'optimisation pour gagner en efficacité. Je la considère comme une opportunité majeure d'autonomisation des femmes au Cameroun."</p></div>
+<div class="t-card featured"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_8_img_3.jpeg" alt=""></div><div><div class="t-card-name">KAMGNO Stéphanie</div><div class="t-card-role">Chercheure en sciences sociales</div></div></div><p class="t-card-text">"La recherche m'a conduite à l'IA. Aujourd'hui, je me définis comme une « chercheure augmentée », convaincue que l'IA est un allié du quotidien pour toutes les femmes."</p></div>
+<div class="t-card"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_7_img_2.jpeg" alt=""></div><div><div class="t-card-name">TEFAK Clety</div><div class="t-card-role">Entrepreneure</div></div></div><p class="t-card-text">"J'utilise l'intelligence artificielle comme un facilitateur au quotidien dans la gestion de mes entreprises. Cet outil me permet de gagner du temps et de créer de la valeur."</p></div>
+<div class="t-card"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_6_img_3.jpeg" alt=""></div><div><div class="t-card-name">PETNGA Christine</div><div class="t-card-role">Secrétaire Générale</div></div></div><p class="t-card-text">"Mon engagement vise à vulgariser l'IA et à l'ancrer dans le quotidien professionnel des femmes. Gestionnaire RH, je crois en une IA qui réduit les inégalités."</p></div>
+<div class="t-card featured"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_8_img_2.jpeg" alt=""></div><div><div class="t-card-name">KANGNE Aïssatou</div><div class="t-card-role">Resp. régionale Nord &amp; Adamaoua</div></div></div><p class="t-card-text">"Je perçois l'IA comme un outil capable de faciliter le quotidien des femmes et de favoriser leur épanouissement dans tous les environnements."</p></div>
+<div class="t-card"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_9_img_2.jpeg" alt=""></div><div><div class="t-card-name">HAOUAOU Abdoulaye</div><div class="t-card-role">Resp. régionale Extrême-Nord</div></div></div><p class="t-card-text">"Chaque téléphone Android est aujourd'hui un outil puissant permettant à la jeune fille et à la femme de construire son avenir."</p></div>
+</div></div></div></section>
+
+<section class="cta-section"><div class="container"><h2>Prête à façonner l'avenir de l'IA ?</h2><p>Rejoignez le mouvement Women In AI Cameroon et participez à l'émergence d'une technologie inclusive et porteuse de sens.</p><div class="cta-buttons"><a href="#member" class="btn btn-white" onclick="navigateTo('member')">Devenir membre</a><a href="#contact" class="btn btn-ghost" onclick="navigateTo('contact')">Nous contacter</a></div></div></section>
+</div>
+
+
+<!-- ===================== PAGE: ABOUT ===================== -->
+<div id="page-about" class="page">
+<div class="page-hero"><h1>À Propos de WAIC</h1><p>Découvrez notre mission, notre vision et notre équipe dévouée à l'inclusion dans l'IA.</p></div>
+<div class="container">
+<div class="about-grid section"><div><h2>Notre Histoire</h2><p><strong>Women in AI Cameroon (WAI-CAM)</strong> est un mouvement citoyen qui vise à démystifier l'intelligence artificielle et à la rendre accessible à toutes les femmes, quel que soit leur âge, leur métier ou leur niveau d'éducation.</p><p>Son ambition : démocratiser l'IA au Cameroun, en la rendant accessible, utile et humaine.</p><div class="about-quote">« Quand une femme comprend l'IA, c'est toute une communauté qui apprend à rêver différemment. »</div></div><div class="about-img-wrapper"><img src="images/page_11_img_6.jpeg" alt="Équipe"><div class="stat-overlay"><div class="num">1000+</div><div class="lbl">FEMMES IMPACTÉES</div></div></div></div>
+<div class="stats-row"><div class="stat-item"><div class="num">500</div><div class="lbl">Ambassadrices régionales</div></div><div class="stat-item"><div class="num">50 000</div><div class="lbl">Femmes sensibilisées d'ici 2030</div></div><div class="stat-item"><div class="num">1M</div><div class="lbl">Femmes bénéficiaires</div></div><div class="stat-item"><div class="num">10</div><div class="lbl">Régions couvertes</div></div></div>
+<div class="vm-grid"><div class="vm-card"><h3>Vision</h3><p>Un Cameroun où chaque femme, du Nord au Sud, de l'Est à l'Ouest, comprend comment l'IA influence son quotidien et sait l'utiliser pour entreprendre, apprendre et décider.</p></div><div class="vm-card"><h3>Mission</h3><p>Promouvoir une intelligence artificielle inclusive, éthique et participative au service du développement durable et du leadership féminin.</p></div></div>
+<div class="section mission-grid"><div class="about-img-wrapper"><img src="images/page_13_img_2.jpeg" alt="Mission" style="height:380px"></div><div><div class="section-label">NOTRE ENGAGEMENT</div><h2 class="section-title">Promouvoir une IA inclusive</h2><p style="color:var(--text-sec);line-height:1.75;margin-bottom:24px">Notre ambition est claire : œuvrer pour que les femmes camerounaises et africaines ne soient pas spectatrices mais actrices et pionnières de la révolution de l'intelligence artificielle.</p><div class="m-point"><div class="m-point-icon"><i class="fas fa-universal-access"></i></div><div><h4>Accessibilité</h4><p>Nous formons toutes les femmes, quelle que soit leur formation de départ.</p></div></div><div class="m-point"><div class="m-point-icon"><i class="fas fa-chart-line"></i></div><div><h4>Impact Réel</h4><p>Nos programmes répondent aux défis concrets du Cameroun avec des solutions IA pertinentes.</p></div></div></div></div>
+<div class="section text-center"><div class="section-label">NOS VALEURS</div><h2 class="section-title">Principes Fondateurs</h2><div class="values-grid"><div class="value-card"><div class="value-card-icon"><i class="fas fa-door-open"></i></div><h3>Accessibilité</h3><p>Pas besoin d'être ingénieure pour comprendre l'IA.</p></div><div class="value-card"><div class="value-card-icon"><i class="fas fa-hands-helping"></i></div><h3>Solidarité</h3><p>Des femmes qui forment et inspirent d'autres femmes.</p></div><div class="value-card"><div class="value-card-icon"><i class="fas fa-crown"></i></div><h3>Leadership</h3><p>L'IA comme levier d'autonomie et de décision.</p></div></div></div>
+<div class="section text-center"><div class="section-label">NOTRE ÉQUIPE</div><h2 class="section-title">Des visages, des parcours, une vision commune</h2><p class="section-desc centered">Derrière WAI-CAM se trouvent des personnalités engagées, issues de différents horizons professionnels.</p>
+<div class="team-grid">
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_6_img_2.png" alt=""></div><h4>Armelle FOSSO</h4><div class="role">Présidente</div><p>Créer un mouvement citoyen où chaque femme comprend l'impact de l'IA dans sa vie.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_6_img_3.jpeg" alt=""></div><h4>PETNGA Christine</h4><div class="role">Secrétaire Générale</div><p>Vulgariser l'IA et l'ancrer dans le quotidien professionnel des femmes.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_6_img_4.jpeg" alt=""></div><h4>ABENA Xavérie</h4><div class="role">Trésorière</div><p>L'IA est un véritable levier d'innovation et de productivité.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_6_img_5.jpeg" alt=""></div><h4>Habiba HOURAY</h4><div class="role">Commissaire aux comptes n°1</div><p>Accompagner les femmes dans le développement de nouvelles compétences.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_6_img_6.jpeg" alt=""></div><h4>PEGHUE Lydie Audrey</h4><div class="role">Commissaire aux comptes n°2</div><p>Militer pour une utilisation éthique et responsable de l'IA.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_7_img_2.jpeg" alt=""></div><h4>Irène H. NGOUMNIA</h4><div class="role">Responsable R&amp;D</div><p>Utiliser l'IA pour promouvoir l'inclusion et l'autonomisation des femmes.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_7_img_2.jpeg" alt=""></div><h4>TEFAK Clety</h4><div class="role">Resp. Communication</div><p>L'IA comme facilitateur au quotidien dans la gestion d'entreprises.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_9_img_2.jpeg" alt=""></div><h4>Kevin Obam Ekono</h4><div class="role">Resp. Littoral &amp; Sud-Ouest</div><p>L'IA est une opportunité historique pour les femmes africaines.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_8_img_4.jpeg" alt=""></div><h4>MAFFO Esther</h4><div class="role">Resp. Ouest &amp; Nord-Ouest</div><p>L'IA comme outil d'optimisation et d'autonomisation.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_8_img_2.jpeg" alt=""></div><h4>KANGNE Aïssatou</h4><div class="role">Resp. Nord &amp; Adamaoua</div><p>Faciliter le quotidien des femmes grâce à l'IA.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_8_img_3.jpeg" alt=""></div><h4>Mme KAMGNO Stéphanie</h4><div class="role">Resp. Centre/Est</div><p>Chercheure augmentée, convaincue que l'IA est un allié pour toutes.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_9_img_2.jpeg" alt=""></div><h4>HAOUAOU Abdoulaye</h4><div class="role">Resp. Extrême-Nord</div><p>L'IA comme levier essentiel de lutte contre la pauvreté.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_8_img_5.jpeg" alt=""></div><h4>Obiang Nkouna Emery</h4><div class="role">Resp. régionale Sud</div><p>Contribuer à l'autonomisation des couches sociales vulnérables à travers des outils accessibles.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_9_img_3.jpeg" alt=""></div><h4>SAHLANG Octavie</h4><div class="role">Resp. antenne Europe &amp; Asie</div><p>L'IA comme levier pour transformer les données en solutions créatrices de valeur.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_9_img_4.jpeg" alt=""></div><h4>Jean Paul F.</h4><div class="role">Resp. antenne WAI-USA Branch</div><p>L'IA est une opportunité historique pour les femmes africaines, dans la continuité de la vision de Nelly Chatue-Diop.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_7_img_6.jpeg" alt=""></div><h4>Yohann DAVID</h4><div class="role">Resp. Projet Jeune Adjoint n°1</div><p>L'IA comme partenaire éthique capable de corriger les inégalités et créer des environnements plus justes.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_8_img_6.jpeg" alt=""></div><h4>EKE Daniel</h4><div class="role">Resp. Projet Jeune Adjoint n°2</div><p>Passionné de génie civil et d'IA appliquée aux infrastructures, développeur de VibraSafe.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_7_img_3.png" alt=""></div><h4>AFANA Joseph Marie</h4><div class="role">Resp. Projet Jeune n°1</div><p>L'IA comme levier d'autonomisation des femmes par l'éducation, l'innovation et l'entrepreneuriat.</p></div>
+<div class="team-card"><div class="team-card-avatar"><img src="images/page_9_img_5.jpeg" alt=""></div><h4>MBAMFON Lucie</h4><div class="role">Resp. Projet Jeune n°2</div><p>L'IA comme puissant outil d'autonomisation des femmes, accessible à toutes et créateur d'opportunités durables.</p></div>
+<div class="team-card"><div class="team-card-avatar team-card-avatar--placeholder"><i class="fas fa-user"></i></div><h4>SIEWE Philippe Gérard</h4><div class="role">Resp. adjoint WAI-USA Branch</div><p>Engagé pour la vulgarisation de l'IA et l'autonomisation des femmes au-delà des frontières.</p></div>
+</div></div></div>
+<section class="hommage"><div class="container"><div class="text-center" style="margin-bottom:36px"><div class="section-label">HOMMAGE</div></div><div class="hommage-grid"><div class="hommage-img"><img src="images/page_10_img_2.jpeg" alt="Nelly Chatue-Diop"></div><div><h3>Hommage à Nelly Chatue-Diop</h3><p>C'est avec une profonde tristesse que Women in AI Cameroon rend hommage à <strong>Nelly Chatue-Diop</strong>, notre Responsable Antenne Littoral / Sud-Ouest, qui nous a quittés le 8 janvier 2026.</p><p>Visionnaire dans le domaine de l'innovation et de l'inclusion financière, elle s'était illustrée par son engagement à démocratiser l'accès aux technologies pour les populations africaines.</p><div class="hommage-quote">« Toutes les grandes révolutions technologiques nous sont passées sous le nez. Pas question, cette fois, que les Africains ratent le train ! »<span class="author">— Nelly Chatue-Diop</span></div></div></div></div></section>
+</div>
+
+
+<!-- ===================== PAGE: PROGRAMMES ===================== -->
+<div id="page-programmes" class="page">
+<div class="page-hero"><h1>Nos Programmes</h1><p>Pour concrétiser sa vision, Women in AI Cameroon déploie quatre programmes structurants.</p></div>
+<div class="container">
+<div class="prog-detail section"><div class="prog-detail-img"><img src="images/page_5_img_2.jpeg" alt="Youth & AI"></div><div><div class="prog-detail-icon"><i class="fas fa-graduation-cap"></i></div><h3>Youth &amp; AI</h3><p>Sensibiliser les jeunes à l'IA et encourager la création d'emplois dans le numérique.</p><ul class="checklist"><li>Masterclasses</li><li>Bootcamps</li><li>Mentorat</li><li>Concours d'idées</li></ul><button class="btn btn-orange">Découvrir le calendrier <i class="fas fa-arrow-right"></i></button></div></div>
+<div class="prog-detail reverse"><div class="prog-detail-img"><img src="images/page_5_img_3.jpeg" alt="IA Public Service"></div><div><div class="prog-detail-icon"><i class="fas fa-landmark"></i></div><h3>IA &amp; Public Service</h3><p>Accompagner les femmes du secteur public à utiliser l'IA pour améliorer leurs performances.</p><ul class="checklist"><li>Ateliers pratiques</li><li>Kits de productivité numérique</li><li>Formations sectorielles</li></ul><button class="btn btn-orange">En savoir plus <i class="fas fa-arrow-right"></i></button></div></div>
+<div class="prog-detail"><div class="prog-detail-img"><img src="images/page_5_img_4.jpeg" alt="Women Leaders"></div><div><div class="prog-detail-icon"><i class="fas fa-trophy"></i></div><h3>Women Leaders for AI</h3><p>Former des ambassadrices régionales au leadership numérique et à la vulgarisation de l'IA.</p><ul class="checklist"><li>Formations</li><li>Partages d'expériences</li><li>Storytelling</li><li>Plaidoyer</li></ul><button class="btn btn-orange">Trouver un Mentor <i class="fas fa-arrow-right"></i></button></div></div>
+<div class="prog-detail reverse" style="border-bottom:none"><div class="prog-detail-img"><img src="images/page_5_img_5.jpeg" alt="AI Communities"></div><div><div class="prog-detail-icon"><i class="fas fa-seedling"></i></div><h3>AI for Communities</h3><p>Développer des micro-projets locaux où l'IA répond à des besoins concrets : santé maternelle, marchés agricoles, éducation des filles.</p><ul class="checklist"><li>Appels à projets</li><li>Micro-financements</li><li>Suivi d'impact</li></ul><button class="btn btn-orange">Proposer un projet <i class="fas fa-arrow-right"></i></button></div></div>
+</div></div>
+
+
+<!-- ===================== PAGE: FORMATIONS ===================== -->
+<div id="page-formations" class="page">
+<div class="page-hero"><h1>Nos Formations</h1><p>Des formations en ligne et en présentiel adaptées à vos objectifs.</p></div>
+<div class="container section"><div class="programmes-grid">
+<div class="prog-card"><div class="training-card-header"><i class="fas fa-robot"></i><span class="training-badge online">En ligne</span></div><div class="prog-card-body"><h3>Initiation à l'IA</h3><p>Comprendre les fondamentaux de l'intelligence artificielle sans prérequis technique.</p><div class="training-footer"><span class="training-price free">Gratuit</span><a href="#" class="arrow-link">S'inscrire</a></div></div></div>
+<div class="prog-card"><div class="training-card-header"><i class="fas fa-code"></i><span class="training-badge hybrid">Hybride</span></div><div class="prog-card-body"><h3>Python pour la Data</h3><p>Maîtrisez les bibliothèques Pandas, NumPy et Scikit-Learn pour l'analyse de données.</p><div class="training-footer"><span class="training-price">50 000 FCFA</span><a href="#" class="arrow-link">Voir le détail</a></div></div></div>
+<div class="prog-card"><div class="training-card-header"><i class="fas fa-brain"></i><span class="training-badge inperson">Présentiel</span></div><div class="prog-card-body"><h3>Machine Learning Avancé</h3><p>Développement et déploiement de modèles prédictifs. Prérequis : Python.</p><div class="training-footer"><span class="training-price">150 000 FCFA</span><a href="#" class="arrow-link">S'inscrire</a></div></div></div>
+</div></div></div>
+
+
+<!-- ===================== PAGE: MAGAZINE ===================== -->
+<div id="page-magazine" class="page">
+<div class="page-hero"><h1>Magazine WAI-CAM</h1><p>Retrouvez nos publications et éditions spéciales sur l'IA et les femmes au Cameroun.</p></div>
+<div class="container section"><div class="magazine-grid">
+<div class="magazine-card"><div class="magazine-cover"><i class="fas fa-book-open"></i></div><div class="magazine-info"><span class="magazine-edition">Édition 2026</span><h3>L'IA au service des femmes camerounaises</h3><p>Dossier spécial sur les initiatives locales d'IA inclusive et témoignages de nos ambassadrices.</p><a href="#" class="arrow-link">Lire <i class="fas fa-arrow-right"></i></a></div></div>
+<div class="magazine-card"><div class="magazine-cover"><i class="fas fa-book-open"></i></div><div class="magazine-info"><span class="magazine-edition">Édition 2025 — N°2</span><h3>Youth &amp; AI : la relève numérique</h3><p>Focus sur notre programme jeunesse : bootcamps, concours d'idées et success stories.</p><a href="#" class="arrow-link">Lire <i class="fas fa-arrow-right"></i></a></div></div>
+<div class="magazine-card"><div class="magazine-cover"><i class="fas fa-book-open"></i></div><div class="magazine-info"><span class="magazine-edition">Édition 2025 — N°1</span><h3>Lancement de Women In AI Cameroon</h3><p>Retour sur la création du mouvement, notre vision fondatrice et les premiers pas.</p><a href="#" class="arrow-link">Lire <i class="fas fa-arrow-right"></i></a></div></div>
+<div class="magazine-card"><div class="magazine-cover"><i class="fas fa-book-open"></i></div><div class="magazine-info"><span class="magazine-edition">Édition 2024</span><h3>L'IA en Afrique : état des lieux</h3><p>Panorama des usages de l'IA sur le continent et des opportunités pour les femmes.</p><a href="#" class="arrow-link">Lire <i class="fas fa-arrow-right"></i></a></div></div>
+</div></div></div>
+
+
+<!-- ===================== PAGE: BLOG ===================== -->
+<div id="page-blog" class="page">
+<div class="page-hero"><h1>Blog &amp; Actualités</h1><p>Suivez les dernières nouvelles, analyses et réflexions de la communauté WAI-CAM.</p></div>
+<div class="container section"><div class="blog-grid">
+<article class="blog-card"><div class="blog-card-img"><img src="images/page_11_img_1.jpeg" alt=""><div class="blog-card-tag">Formation</div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fas fa-calendar"></i> 24 Jan 2026</span><span><i class="fas fa-user"></i> WAI-CAM</span></div><h3>Retour sur notre première session de formation IA</h3><p>Women in AI Cameroon a organisé une session dédiée aux femmes et aux jeunes, axée sur l'appropriation concrète de l'IA.</p><a href="#" class="arrow-link">Lire l'article <i class="fas fa-arrow-right"></i></a></div></article>
+<article class="blog-card"><div class="blog-card-img"><img src="images/page_12_img_2.jpeg" alt=""><div class="blog-card-tag">Stratégie</div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fas fa-calendar"></i> 15 Jan 2026</span><span><i class="fas fa-user"></i> Armelle FOSSO</span></div><h3>WAI-CAM et les Objectifs de Développement Durable</h3><p>Comment notre mouvement s'inscrit dans les ODD 4, 5 et 9 pour promouvoir une IA inclusive au Cameroun.</p><a href="#" class="arrow-link">Lire l'article <i class="fas fa-arrow-right"></i></a></div></article>
+<article class="blog-card"><div class="blog-card-img"><img src="images/page_10_img_2.jpeg" alt=""><div class="blog-card-tag">Hommage</div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fas fa-calendar"></i> 8 Jan 2026</span><span><i class="fas fa-user"></i> WAI-CAM</span></div><h3>Hommage à Nelly Chatue-Diop</h3><p>Retour sur le parcours exceptionnel de Nelly Chatue-Diop, pionnière de la fintech en Afrique.</p><a href="#" class="arrow-link">Lire l'article <i class="fas fa-arrow-right"></i></a></div></article>
+<article class="blog-card"><div class="blog-card-img"><img src="images/page_13_img_2.jpeg" alt=""><div class="blog-card-tag">Communauté</div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fas fa-calendar"></i> 20 Déc 2025</span><span><i class="fas fa-user"></i> TEFAK Clety</span></div><h3>L'IA dans l'entrepreneuriat féminin au Cameroun</h3><p>Comment les femmes entrepreneures camerounaises utilisent l'IA pour structurer leurs activités.</p><a href="#" class="arrow-link">Lire l'article <i class="fas fa-arrow-right"></i></a></div></article>
+<article class="blog-card"><div class="blog-card-img"><img src="images/page_4_img_1.jpeg" alt=""><div class="blog-card-tag">Partenariat</div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fas fa-calendar"></i> 5 Déc 2025</span><span><i class="fas fa-user"></i> WAI-CAM</span></div><h3>70% des femmes africaines sans accès au numérique</h3><p>Selon l'UNESCO, la fracture numérique de genre reste un défi majeur. Notre approche pour inverser la tendance.</p><a href="#" class="arrow-link">Lire l'article <i class="fas fa-arrow-right"></i></a></div></article>
+<article class="blog-card"><div class="blog-card-img"><img src="images/page_5_img_1.jpeg" alt=""><div class="blog-card-tag">Programme</div></div><div class="blog-card-body"><div class="blog-card-meta"><span><i class="fas fa-calendar"></i> 18 Nov 2025</span><span><i class="fas fa-user"></i> WAI-CAM</span></div><h3>Lancement du programme Youth &amp; AI</h3><p>Masterclasses, bootcamps, mentorat et concours d'idées pour la jeunesse camerounaise.</p><a href="#" class="arrow-link">Lire l'article <i class="fas fa-arrow-right"></i></a></div></article>
+</div></div></div>
+
+
+<!-- ===================== PAGE: EVENTS ===================== -->
+<div id="page-events" class="page">
+<div class="page-hero"><h1>Actualités &amp; Agenda</h1><p>Ne manquez aucun événement de la communauté Women in AI Cameroon.</p></div>
+<div class="container section">
+<h3 style="font-size:24px;font-weight:700;color:var(--navy);margin-bottom:24px">Événements à venir</h3>
+<div class="event-item"><div class="event-date"><div class="month">JANVIER</div><div class="day">24</div></div><div class="event-info"><span class="event-badge">Formation</span><h3>Session de formation IA : femmes et jeunes</h3><p>Comprendre et s'approprier concrètement l'IA au quotidien professionnel.</p><div class="event-meta"><span><i class="fas fa-clock"></i> 09:00 – 17:00</span><span><i class="fas fa-map-marker-alt"></i> Yaoundé</span></div></div><button class="btn btn-orange">S'inscrire</button></div>
+<div class="event-item"><div class="event-date"><div class="month">JUILLET</div><div class="day">15</div></div><div class="event-info"><span class="event-badge">Conférence</span><h3>Tech Summit : Les femmes de l'IA</h3><p>Conférences et panels dédiés aux innovations portées par les femmes.</p><div class="event-meta"><span><i class="fas fa-clock"></i> 09:00 – 17:00</span><span><i class="fas fa-map-marker-alt"></i> Yaoundé Hilton Hotel</span></div></div><button class="btn btn-orange">S'inscrire</button></div>
+<div class="event-item"><div class="event-date"><div class="month">JUILLET</div><div class="day">22</div></div><div class="event-info"><span class="event-badge">Atelier</span><h3>Initiation à l'analyse de données avec Python</h3><p>Atelier pratique pour faire ses premiers pas en Data Science.</p><div class="event-meta"><span><i class="fas fa-clock"></i> 14:00 – 18:00</span><span><i class="fas fa-map-marker-alt"></i> Douala, ActivSpaces</span></div></div><button class="btn btn-orange">S'inscrire</button></div>
+</div></div>
+
+
+<!-- ===================== PAGE: GALLERY ===================== -->
+<div id="page-gallery" class="page">
+<div class="page-hero"><h1>Galerie Photo</h1><p>Revivez les moments forts de notre communauté.</p></div>
+<div class="container section"><div class="gallery-grid">
+<div class="gallery-item"><img src="images/page_11_img_6.jpeg" alt=""><div class="gallery-overlay"><span>Session de formation 2026</span></div></div>
+<div class="gallery-item"><img src="images/page_11_img_2.jpeg" alt=""><div class="gallery-overlay"><span>Atelier pratique IA</span></div></div>
+<div class="gallery-item"><img src="images/page_11_img_3.jpeg" alt=""><div class="gallery-overlay"><span>Formation IA — Yaoundé</span></div></div>
+<div class="gallery-item"><img src="images/page_11_img_4.jpeg" alt=""><div class="gallery-overlay"><span>Bootcamp Yaoundé 2026</span></div></div>
+<div class="gallery-item"><img src="images/page_13_img_2.jpeg" alt=""><div class="gallery-overlay"><span>Communauté WAIC</span></div></div>
+<div class="gallery-item"><img src="images/page_12_img_1.jpeg" alt=""><div class="gallery-overlay"><span>Rencontres &amp; échanges</span></div></div>
+<div class="gallery-item"><img src="images/page_11_img_1.jpeg" alt=""><div class="gallery-overlay"><span>Présentation plénière</span></div></div>
+<div class="gallery-item"><img src="images/page_4_img_1.jpeg" alt=""><div class="gallery-overlay"><span>Collaboration &amp; mentorat</span></div></div>
+<div class="gallery-item"><img src="images/page_11_img_5.jpeg" alt=""><div class="gallery-overlay"><span>Actions concrètes</span></div></div>
+</div></div></div>
+
+
+<!-- ===================== PAGE: BOUTIQUE ===================== -->
+<div id="page-boutique" class="page">
+<div class="page-hero"><h1>Boutique en Ligne</h1><p>Accédez à nos formations premium, ressources et services.</p></div>
+<div class="container section"><div class="shop-grid">
+<div class="shop-card"><div class="shop-icon"><i class="fas fa-play-circle"></i></div><div class="shop-label">Formation</div><h3>Masterclass Data Analysis 1</h3><p>Accès illimité aux vidéos et ressources de la masterclass de base.</p><div class="shop-footer"><span class="shop-price">25 000 FCFA</span><button class="shop-btn"><i class="fas fa-arrow-right"></i></button></div></div>
+<div class="shop-card"><div class="shop-icon"><i class="fas fa-play-circle"></i></div><div class="shop-label">Formation</div><h3>Masterclass Data Analysis 2</h3><p>Accès illimité aux vidéos et ressources de la masterclass intermédiaire.</p><div class="shop-footer"><span class="shop-price">25 000 FCFA</span><button class="shop-btn"><i class="fas fa-arrow-right"></i></button></div></div>
+<div class="shop-card"><div class="shop-icon"><i class="fas fa-play-circle"></i></div><div class="shop-label">Formation</div><h3>Masterclass Data Analysis 3</h3><p>Accès illimité aux vidéos et ressources de la masterclass avancée.</p><div class="shop-footer"><span class="shop-price">25 000 FCFA</span><button class="shop-btn"><i class="fas fa-arrow-right"></i></button></div></div>
+<div class="shop-card"><div class="shop-icon"><i class="fas fa-play-circle"></i></div><div class="shop-label">Formation</div><h3>Masterclass Data Analysis 4</h3><p>Accès illimité aux vidéos et ressources de la masterclass spécialisée.</p><div class="shop-footer"><span class="shop-price">25 000 FCFA</span><button class="shop-btn"><i class="fas fa-arrow-right"></i></button></div></div>
+</div></div></div>
+
+
+<!-- ===================== PAGE: DONATE ===================== -->
+<div id="page-donate" class="page">
+<div class="page-hero"><h1>Soutenir WAIC</h1><p>Votre don permet de former la prochaine génération de femmes leaders en IA.</p></div>
+<div class="container section"><div class="donate-card"><div class="donate-header"><i class="fas fa-heart"></i><h3>Faire un don</h3><p>Choisissez le montant de votre soutien</p></div><div class="donate-body">
+<div class="amount-grid"><div class="amount-btn" onclick="selectAmount(this)">10 000 FCFA</div><div class="amount-btn selected" onclick="selectAmount(this)">25 000 FCFA</div><div class="amount-btn" onclick="selectAmount(this)">Autre montant</div></div>
+<div class="form-row"><div class="form-group"><label>Prénom</label><input placeholder="Prénom"></div><div class="form-group"><label>Nom</label><input placeholder="Nom"></div></div>
+<div class="form-group"><label>Adresse e-mail</label><input type="email" placeholder="Adresse e-mail"></div>
+<label style="font-size:14px;font-weight:600;margin-bottom:10px;display:block">Méthode de paiement</label>
+<div class="payment-grid"><div class="payment-btn selected" onclick="selectPayment(this)"><i class="fas fa-mobile-alt"></i> Mobile Money</div><div class="payment-btn" onclick="selectPayment(this)"><i class="fas fa-credit-card"></i> Carte Bancaire</div></div>
+<button class="btn-donate"><i class="fas fa-lock"></i> Valider mon don de 25 000 FCFA</button>
+<p class="donate-secure"><i class="fas fa-shield-alt"></i> Paiement 100% sécurisé (SSL)</p>
+</div></div></div></div>
+
+
+<!-- ===================== PAGE: PARTNERS ===================== -->
+<div id="page-partners" class="page">
+<div class="page-hero"><h1>Partenariats</h1><p>Associez votre image à l'inclusion et l'innovation numérique au Cameroun.</p></div>
+<div class="container">
+<div class="about-grid section"><div class="about-img-wrapper"><img src="images/page_13_img_2.jpeg" alt="Partenariat" style="height:360px"></div><div><h2>Appel à partenariats</h2><p>Women in AI Cameroun invite les institutions publiques et privées, les entreprises et les partenaires techniques à rejoindre le mouvement en faveur d'une intelligence artificielle inclusive.</p><p><strong>En devenant partenaires, vous contribuez à :</strong></p><ul class="checklist"><li>La formation et l'autonomisation de milliers de femmes</li><li>La réduction de la fracture numérique de genre</li><li>La promotion d'une IA éthique, responsable et africaine</li></ul><p><strong>Les partenaires bénéficient de :</strong></p><ul class="checklist"><li>Une visibilité nationale et internationale</li><li>Un accès privilégié à un réseau de femmes leaders</li><li>Une contribution directe à l'impact social</li></ul></div></div>
+<div class="section text-center" style="border-top:1px solid var(--border);padding-top:60px"><h2 class="section-title">Devenir Partenaire</h2><p class="section-desc centered">Vous souhaitez soutenir nos actions et associer votre entreprise à l'innovation et l'inclusion numérique au Cameroun ?</p><a href="#contact" class="btn btn-primary" style="margin-top:28px" onclick="navigateTo('contact')">Contactez notre équipe <i class="fas fa-arrow-right"></i></a></div>
+</div></div>
+
+
+<!-- ===================== PAGE: TESTIMONIALS ===================== -->
+<div id="page-testimonials" class="page">
+<div class="page-hero"><h1>Témoignages</h1><p>Découvrez l'impact de nos programmes à travers la voix de nos membres.</p></div>
+<div class="container section"><div class="testimonials-grid">
+<div class="t-card"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_6_img_3.jpeg" alt=""></div><div><div class="t-card-name">PETNGA Christine</div><div class="t-card-role">Secrétaire Générale</div></div></div><p class="t-card-text">"Mon engagement vise à vulgariser l'IA et à l'ancrer dans le quotidien professionnel des femmes."</p></div>
+<div class="t-card"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_6_img_4.jpeg" alt=""></div><div><div class="t-card-name">ABENA Xavérie</div><div class="t-card-role">Trésorière</div></div></div><p class="t-card-text">"J'ai découvert l'IA à travers les réseaux sociaux et j'y ai vu un véritable levier d'innovation et de productivité."</p></div>
+<div class="t-card"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_6_img_6.jpeg" alt=""></div><div><div class="t-card-name">PEGHUE Lydie Audrey</div><div class="t-card-role">Étudiante</div></div></div><p class="t-card-text">"J'utilise régulièrement l'IA pour mes recherches académiques. Je milite pour une utilisation éthique de l'IA."</p></div>
+<div class="t-card"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_8_img_3.jpeg" alt=""></div><div><div class="t-card-name">KAMGNO Stéphanie</div><div class="t-card-role">Chercheure</div></div></div><p class="t-card-text">"Aujourd'hui, je me définis comme une « chercheure augmentée », convaincue que l'IA est un allié du quotidien."</p></div>
+<div class="t-card"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_8_img_4.jpeg" alt=""></div><div><div class="t-card-name">MAFFO Esther</div><div class="t-card-role">Resp. régionale Ouest &amp; Nord-Ouest</div></div></div><p class="t-card-text">"Je considère l'IA comme une opportunité majeure d'autonomisation des femmes au Cameroun."</p></div>
+<div class="t-card"><div class="quote-mark">❝</div><div class="t-card-header"><div class="t-card-avatar"><img src="images/page_9_img_2.jpeg" alt=""></div><div><div class="t-card-name">HAOUAOU Abdoulaye</div><div class="t-card-role">Professeure</div></div></div><p class="t-card-text">"Chaque téléphone Android est un outil puissant permettant à la femme de construire son avenir."</p></div>
+</div></div></div>
+
+
+<!-- ===================== PAGE: CONTACT ===================== -->
+<div id="page-contact" class="page">
+<div class="page-hero"><h1>Contactez-nous</h1><p>Une question, une suggestion ? N'hésitez pas à nous écrire.</p></div>
+<div class="container section"><div class="contact-grid">
+<div class="contact-info"><h3>Nos coordonnées</h3>
+<div class="info-item"><div class="info-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Adresse</h4><p>919 Boulevard de Rey-Bouba, Mballa 2<br>B.P.: 1 444 Yaoundé – Cameroun</p></div></div>
+<div class="info-item"><div class="info-icon"><i class="fas fa-phone"></i></div><div><h4>Téléphone</h4><p>(+237) 222 20 58 53 / 682 573 699 / 698 164 869</p></div></div>
+<div class="info-item"><div class="info-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><p>womeninaicameroon@gmail.com</p></div></div>
+<div class="info-item"><div class="info-icon"><i class="fab fa-linkedin"></i></div><div><h4>LinkedIn</h4><p>womeninai.cam@gmail.com</p></div></div>
+</div>
+<div class="contact-form-card"><h3>Envoyez-nous un message</h3>
+<div class="form-row"><div class="form-group"><label>Prénom</label><input placeholder="Votre prénom"></div><div class="form-group"><label>Nom</label><input placeholder="Votre nom"></div></div>
+<div class="form-group"><label>E-mail</label><input type="email" placeholder="Votre adresse e-mail"></div>
+<div class="form-group"><label>Sujet</label><select><option>Sélectionnez un sujet</option><option>Devenir membre</option><option>Partenariat</option><option>Formation</option><option>Autre</option></select></div>
+<div class="form-group"><label>Message</label><textarea placeholder="Votre message..."></textarea></div>
+<button class="btn-submit btn">Envoyer le message <i class="fas fa-arrow-right"></i></button>
+</div></div></div></div>
+
+
+<!-- ===================== PAGE: MEMBER ===================== -->
+<div id="page-member" class="page">
+<div class="container"><div class="member-layout">
+<div class="member-sidebar"><div class="member-avatar"><i class="fas fa-user"></i></div><h4>Jeanne Doe</h4><div class="member-badge">Membre Active</div><nav class="member-nav"><a href="#" class="active"><i class="fas fa-user"></i> Mon Profil</a><a href="#"><i class="fas fa-book"></i> Mes Ressources</a><a href="#"><i class="fas fa-shopping-bag"></i> Mes Achats</a><a href="#"><i class="fas fa-cog"></i> Paramètres</a></nav></div>
+<div class="member-content"><h2>Informations Personnelles</h2>
+<div class="form-row"><div class="form-group"><label>Prénom</label><input value="Jeanne"></div><div class="form-group"><label>Nom</label><input value="Doe"></div></div>
+<div class="form-group"><label>Adresse E-mail</label><input value="jeanne.doe@example.com"></div>
+<div class="form-group"><label>Bio / Description courte</label><textarea>Passionnée par la Data Science et développeuse Python junior.</textarea></div>
+<div style="text-align:right;margin-top:20px"><button class="btn btn-purple" style="width:auto">Sauvegarder les modifications</button></div>
+<div class="member-resources"><h3>Ressources exclusives membres</h3><p>Découvrez notre bibliothèque de tutoriels, replays de webinaires et datasets pour vos projets IA.</p><a href="#">Accéder à la bibliothèque</a></div>
+</div></div></div></div>
+
+
+<!-- FOOTER -->
+<footer class="footer"><div class="container">
+<div class="footer-grid">
+<div class="footer-about"><div style="margin-bottom:18px"><img src="images/page_3_img_1.jpeg" alt="Women In AI Cameroon" class="logo-img footer-logo-img"></div><p>L'IA pour toutes, l'avenir entre nos mains. Nous œuvrons pour que les femmes camerounaises et africaines soient des actrices et pionnières de la révolution de l'intelligence artificielle.</p><div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+<div class="footer-links"><h4>Liens Rapides</h4><a href="#about" onclick="navigateTo('about')">À Propos de nous</a><a href="#programmes" onclick="navigateTo('programmes')">Nos Programmes</a><a href="#events" onclick="navigateTo('events')">Agenda &amp; Événements</a><a href="#blog" onclick="navigateTo('blog')">Blog et Actualités</a><a href="#gallery" onclick="navigateTo('gallery')">Galerie Photo</a><a href="#donate" onclick="navigateTo('donate')">Faire un don</a></div>
+<div class="footer-contact"><h4>Contact</h4><p><i class="fas fa-map-marker-alt"></i> 919 Boulevard de Rey-Bouba, Mballa 2<br>B.P.: 1 444 Yaoundé – Cameroun</p><p><i class="fas fa-phone"></i> +237 682 573 699</p><p><i class="fas fa-envelope"></i> womeninaicameroon@gmail.com</p></div>
+<div><h4>Newsletter</h4><p style="font-size:14px;margin-bottom:14px">Inscrivez-vous pour recevoir nos dernières actualités et invitations.</p><div class="newsletter-form"><input placeholder="Votre adresse email"><button><i class="fas fa-arrow-right"></i></button></div></div>
+</div>
+<div class="footer-bottom"><span>© 2026 Women In AI Cameroon. Tous droits réservés.</span><div class="footer-bottom-links"><a href="#">Mentions légales</a><a href="#">Politique de confidentialité</a></div></div>
+</div></footer>
+
+<button class="chat-btn"><i class="fas fa-comment-dots"></i></button>
+<script src="js/app.js"></script>
+</body>
+</html>
