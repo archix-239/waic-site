@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magazine — Women In AI Cameroon</title>
+<meta name="description" content="Le magazine numérique de Women In AI Cameroon : IA, genre, innovation et impact en Afrique.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="css/waic.css">
+</head>
+<body>
+
+<div class="waic-preloader" id="preloader">
+  <div class="waic-preloader__inner">
+    <img src="images/logo-waicam.png" alt="WAIC" class="waic-preloader__logo">
+    <div class="waic-preloader__dots"><span></span><span></span><span></span></div>
+  </div>
+</div>
+
+<div class="page-wrapper">
+
+<header class="main-header">
+  <div class="main-header__top">
+    <div class="container">
+      <div class="main-header__top-inner">
+        <ul class="main-header__top-contacts list-unstyled">
+          <li><i class="fas fa-phone-alt"></i><a href="tel:+237222205853">+237 222 20 58 53</a></li>
+          <li><i class="fas fa-envelope"></i><a href="mailto:womeninaicameroon@gmail.com">womeninaicameroon@gmail.com</a></li>
+          <li><i class="fas fa-map-marker-alt"></i><span>Yaoundé, Cameroun</span></li>
+        </ul>
+        <div class="main-header__top-right">
+          <a href="member.html">Connexion</a>
+          <a href="contact.html">Nous aider</a>
+          <div class="lang-switch"><a href="#" class="active">FR</a><span>|</span><a href="#">EN</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="main-nav" id="mainNav">
+    <div class="container">
+      <div class="main-nav__inner">
+        <div class="main-nav__logo"><a href="index.html"><img src="images/logo-waicam.png" alt="Women In AI Cameroon"></a></div>
+        <div class="main-nav__menu">
+          <a href="#" class="mobile-nav-toggler" id="mobileToggler"><i class="fas fa-bars"></i></a>
+          <ul class="main-nav__list list-unstyled">
+            <li><a href="index.html">Accueil</a></li>
+            <li class="dropdown"><a href="about.html">L'ONG <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu-custom">
+                <li><a href="about.html">À Propos de WAIC</a></li>
+                <li><a href="team.html">Notre Équipe</a></li>
+                <li><a href="partners.html">Partenariats</a></li>
+                <li><a href="testimonials.html">Témoignages</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="programmes.html">Nos Actions <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu-custom">
+                <li><a href="programmes.html">Programmes</a></li>
+                <li><a href="formations.html">Formations</a></li>
+                <li><a href="services.html">Services</a></li>
+              </ul>
+            </li>
+            <li class="dropdown current"><a href="blog.html">Ressources <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu-custom">
+                <li><a href="magazine.html">Magazine</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="events.html">Actualités &amp; Agenda</a></li>
+                <li><a href="gallery.html">Galerie Photo</a></li>
+              </ul>
+            </li>
+            <li><a href="boutique.html">Boutique</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="main-nav__right">
+          <a href="donate.html" class="waic-btn waic-btn--primary">Faire un don <i class="fas fa-heart"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <nav class="sticky-nav" id="stickyNav">
+    <div class="container">
+      <div class="main-nav__inner">
+        <div class="main-nav__logo"><a href="index.html"><img src="images/logo-waicam.png" alt="Women In AI Cameroon"></a></div>
+        <div class="main-nav__menu">
+          <a href="#" class="mobile-nav-toggler" id="mobileStickyToggler"><i class="fas fa-bars"></i></a>
+          <ul class="main-nav__list list-unstyled">
+            <li><a href="index.html">Accueil</a></li>
+            <li class="dropdown"><a href="about.html">L'ONG <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu-custom">
+                <li><a href="about.html">À Propos de WAIC</a></li>
+                <li><a href="team.html">Notre Équipe</a></li>
+                <li><a href="partners.html">Partenariats</a></li>
+                <li><a href="testimonials.html">Témoignages</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="programmes.html">Nos Actions <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu-custom">
+                <li><a href="programmes.html">Programmes</a></li>
+                <li><a href="formations.html">Formations</a></li>
+                <li><a href="services.html">Services</a></li>
+              </ul>
+            </li>
+            <li class="dropdown current"><a href="blog.html">Ressources <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu-custom">
+                <li><a href="magazine.html">Magazine</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="events.html">Actualités &amp; Agenda</a></li>
+                <li><a href="gallery.html">Galerie Photo</a></li>
+              </ul>
+            </li>
+            <li><a href="boutique.html">Boutique</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="main-nav__right">
+          <a href="donate.html" class="waic-btn waic-btn--primary">Faire un don <i class="fas fa-heart"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__inner">
+    <div class="mobile-menu__header">
+      <a href="index.html"><img src="images/logo-waicam.png" alt="WAIC" height="42"></a>
+      <button class="mobile-menu__close" id="mobileMenuClose"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="mobile-menu__nav">
+      <ul class="list-unstyled">
+        <li><a href="index.html">Accueil</a></li>
+        <li class="mob-parent">
+          <a href="#">L'ONG <span class="mob-arrow"><i class="fas fa-chevron-down"></i></span></a>
+          <ul class="mob-submenu">
+            <li><a href="about.html">À Propos de WAIC</a></li>
+            <li><a href="team.html">Notre Équipe</a></li>
+            <li><a href="partners.html">Partenariats</a></li>
+            <li><a href="testimonials.html">Témoignages</a></li>
+          </ul>
+        </li>
+        <li class="mob-parent">
+          <a href="#">Nos Actions <span class="mob-arrow"><i class="fas fa-chevron-down"></i></span></a>
+          <ul class="mob-submenu">
+            <li><a href="programmes.html">Programmes</a></li>
+            <li><a href="formations.html">Formations</a></li>
+            <li><a href="services.html">Services</a></li>
+          </ul>
+        </li>
+        <li class="mob-parent">
+          <a href="#">Ressources <span class="mob-arrow"><i class="fas fa-chevron-down"></i></span></a>
+          <ul class="mob-submenu">
+            <li><a href="magazine.html">Magazine</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="events.html">Actualités &amp; Agenda</a></li>
+            <li><a href="gallery.html">Galerie Photo</a></li>
+          </ul>
+        </li>
+        <li><a href="boutique.html">Boutique</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu__footer">
+      <a href="donate.html" class="waic-btn waic-btn--primary w-100 justify-content-center">Faire un don <i class="fas fa-heart"></i></a>
+      <a href="member.html" class="waic-btn waic-btn--outline w-100 justify-content-center mt-2">Espace Membre <i class="fas fa-user"></i></a>
+    </div>
+  </div>
+</div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero jarallax" data-jarallax data-speed="0.4" style="background-image:url('images/page_11_img_4.jpeg')">
+  <div class="page-hero__overlay"></div>
+  <div class="container">
+    <div class="page-hero__content">
+      <h1 class="wow fadeInDown">Magazine WAI-CAM</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb wow fadeInUp" data-wow-delay="200ms">
+          <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+          <li class="breadcrumb-item">Ressources</li>
+          <li class="breadcrumb-item active">Magazine</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- MAGAZINE ISSUES -->
+<section class="section-padding">
+  <div class="container">
+    <div class="text-center mb-60">
+      <div class="section-tag wow fadeInDown">Publication trimestrielle</div>
+      <h2 class="section-title wow fadeInUp">Tous les numéros du<br>Magazine Women In AI Cameroon.</h2>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="100ms">
+        <div class="magazine-card">
+          <div class="magazine-card__cover">
+            <img src="images/page_11_img_6.jpeg" alt="Magazine N°4">
+            <span class="magazine-card__num">N°4 — Jan 2026</span>
+          </div>
+          <div class="magazine-card__body">
+            <h4>IA &amp; Femmes Africaines : Bilan 2025</h4>
+            <p>Le bilan de 4 ans d'impact et les perspectives 2026–2030 pour WAI-CAM.</p>
+            <a href="#" class="blog-card__link mt-20" style="display:inline-flex">Lire en ligne <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+        <div class="magazine-card">
+          <div class="magazine-card__cover">
+            <img src="images/page_11_img_5.jpeg" alt="Magazine N°3">
+            <span class="magazine-card__num">N°3 — Oct 2025</span>
+          </div>
+          <div class="magazine-card__body">
+            <h4>Youth &amp; AI : La Nouvelle Génération</h4>
+            <p>Portraits de lycéennes et étudiantes qui utilisent l'IA pour transformer leurs communautés.</p>
+            <a href="#" class="blog-card__link mt-20" style="display:inline-flex">Lire en ligne <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+        <div class="magazine-card">
+          <div class="magazine-card__cover">
+            <img src="images/page_11_img_4.jpeg" alt="Magazine N°2">
+            <span class="magazine-card__num">N°2 — Juil 2025</span>
+          </div>
+          <div class="magazine-card__body">
+            <h4>IA Éthique : L'Afrique Prend la Parole</h4>
+            <p>Les femmes africaines au cœur des débats sur les biais algorithmiques et la gouvernance de l'IA.</p>
+            <a href="#" class="blog-card__link mt-20" style="display:inline-flex">Lire en ligne <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="400ms">
+        <div class="magazine-card">
+          <div class="magazine-card__cover">
+            <img src="images/page_11_img_3.jpeg" alt="Magazine N°1">
+            <span class="magazine-card__num">N°1 — Avr 2025</span>
+          </div>
+          <div class="magazine-card__body">
+            <h4>Naissance d'un Mouvement</h4>
+            <p>Premier numéro — Comment WAI-CAM est née et les femmes qui portent cette vision pour le Cameroun.</p>
+            <a href="#" class="blog-card__link mt-20" style="display:inline-flex">Lire en ligne <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="row mt-80 justify-content-center">
+      <div class="col-xl-7 text-center">
+        <div class="section-tag wow fadeInDown">Ne ratez rien</div>
+        <h3 class="section-title wow fadeInUp">Recevez chaque numéro<br>directement dans votre boîte mail.</h3>
+        <form class="d-flex gap-3 justify-content-center mt-30 flex-wrap wow fadeInUp" data-wow-delay="200ms">
+          <input type="email" class="form-control-waic" placeholder="Votre adresse e-mail" style="max-width:360px">
+          <button type="submit" class="waic-btn waic-btn--primary">S'abonner gratuitement</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__top">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-3 col-lg-4 col-md-6">
+          <div class="footer-widget footer-widget--about">
+            <a href="index.html" class="footer-widget__logo"><img src="images/logo-waicam.png" alt="Women In AI Cameroon"></a>
+            <p>Sensibiliser, former et autonomiser les femmes camerounaises dans le domaine de l'intelligence artificielle.</p>
+            <div class="footer-widget__socials">
+              <a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-6">
+          <div class="footer-widget">
+            <h4>Liens rapides</h4>
+            <ul class="footer-widget__links list-unstyled">
+              <li><a href="about.html">À Propos</a></li>
+              <li><a href="programmes.html">Programmes</a></li>
+              <li><a href="formations.html">Formations</a></li>
+              <li><a href="events.html">Événements</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6">
+          <div class="footer-widget">
+            <h4>Galerie</h4>
+            <div class="footer-widget__gallery">
+              <a href="gallery.html"><img src="images/page_11_img_1.jpeg" alt=""></a>
+              <a href="gallery.html"><img src="images/page_11_img_2.jpeg" alt=""></a>
+              <a href="gallery.html"><img src="images/page_11_img_3.jpeg" alt=""></a>
+              <a href="gallery.html"><img src="images/page_11_img_4.jpeg" alt=""></a>
+              <a href="gallery.html"><img src="images/page_11_img_5.jpeg" alt=""></a>
+              <a href="gallery.html"><img src="images/page_11_img_6.jpeg" alt=""></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-6">
+          <div class="footer-widget">
+            <h4>Newsletter</h4>
+            <p>Inscrivez-vous pour recevoir nos dernières actualités sur l'IA.</p>
+            <form class="footer-widget__newsletter">
+              <input type="email" placeholder="Votre adresse e-mail">
+              <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+            <div class="footer-widget__contact mt-20">
+              <p><i class="fas fa-phone-alt"></i>(+237) 222 20 58 53 / 682 573 699 / 698 164 869</p>
+              <p><i class="fas fa-envelope"></i>womeninaicameroon@gmail.com</p>
+              <p><i class="fas fa-map-marker-alt"></i>Yaoundé, Cameroun</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container">
+      <div class="footer__bottom-inner">
+        <p>© 2026 Women In AI Cameroon. Tous droits réservés. Réalisé par <a href="https://enix.cm" target="_blank">ENIX SARL</a>.</p>
+        <ul class="footer__bottom-links list-unstyled">
+          <li><a href="#">Politique de confidentialité</a></li>
+          <li><a href="#">Mentions légales</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<button class="scroll-top-btn" id="scrollTop" aria-label="Retour en haut"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jarallax@2/dist/jarallax.min.js"></script>
+<script src="js/waic.js"></script>
+</body>
+</html>

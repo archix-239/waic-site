@@ -1,0 +1,29 @@
+# ── Dossiers internes — ne pas publier ────────────────────────────
+docs/
+templates/
+
+# ── Images non utilisées / droits tiers ───────────────────────────
+images/logo_2.jpeg
+images/page_39_img_18.jpeg
+images/page_39_img_22.jpeg
+images/page_41_img_10.jpeg
+images/page_41_img_16.jpeg
+
+# ── OS ────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Éditeurs ──────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Node (si utilisé plus tard) ───────────────────────────────────
+node_modules/
+package-lock.json
+
+# ── Variables d'environnement ─────────────────────────────────────
+.env
+.env.*
