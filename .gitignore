@@ -2,12 +2,17 @@
 docs/
 templates/
 
-# ── Images non utilisées / droits tiers ───────────────────────────
-images/logo_2.jpeg
-images/page_39_img_18.jpeg
-images/page_39_img_22.jpeg
-images/page_41_img_10.jpeg
-images/page_41_img_16.jpeg
+# ── Originaux JPEG/PNG — remplacés par WebP ───────────────────────
+images/*.jpeg
+images/*.jpg
+images/*.png
+
+# ── WebP non utilisés / droits tiers ──────────────────────────────
+images/logo_2.webp
+images/page_39_img_18.webp
+images/page_39_img_22.webp
+images/page_41_img_10.webp
+images/page_41_img_16.webp
 
 # ── OS ────────────────────────────────────────────────────────────
 .DS_Store
