@@ -1,34 +1,39 @@
-# ── Dossiers internes — ne pas publier ────────────────────────────
-docs/
-templates/
+# ============================================================
+#  WAI-CAM — .gitignore
+# ============================================================
 
-# ── Originaux JPEG/PNG — remplacés par WebP ───────────────────────
-images/*.jpeg
-images/*.jpg
-images/*.png
+# Documents de travail (PDF, DOCX) — ne pas versionner
+*.pdf
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.pptx
 
-# ── WebP non utilisés / droits tiers ──────────────────────────────
-images/logo_2.webp
-images/page_39_img_18.webp
-images/page_39_img_22.webp
-images/page_41_img_10.webp
-images/page_41_img_16.webp
+# Photos terrain (dossier lourd, géré séparément)
+PHOTOS ACTIVITES WAIC/
 
-# ── OS ────────────────────────────────────────────────────────────
+# OS
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# ── Éditeurs ──────────────────────────────────────────────────────
+# Éditeurs
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# ── Node (si utilisé plus tard) ───────────────────────────────────
+# Node (si build tools ajoutés plus tard)
 node_modules/
-package-lock.json
+npm-debug.log*
+yarn-error.log*
 
-# ── Variables d'environnement ─────────────────────────────────────
+# WordPress — fichiers sensibles (si wp-config ajouté un jour)
+wp-config.php
+wp-config-local.php
 .env
-.env.*
+.env.local
+
+# Logs
+*.log

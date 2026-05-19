@@ -1,0 +1,20 @@
+/*
+Theme Name: WAI-CAM
+Theme URI: https://womeninaicameroon.org
+Author: ENIX SARL
+Author URI: https://enix.cm
+Description: Thème officiel de Women in AI Cameroon (WAI-CAM). Mouvement citoyen pour démocratiser l'intelligence artificielle auprès des femmes camerounaises.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.9
+Requires PHP: 8.0
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: waicam
+Tags: nonprofit, ngo, women, ai, cameroon, custom-menu, custom-logo, featured-images, translation-ready
+*/
+
+/*
+ * Ce fichier est requis par WordPress (en-tête du thème).
+ * Le CSS principal du site est chargé depuis assets/css/main.css via functions.php.
+ */

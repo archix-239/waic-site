@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rejoindre — Women in AI Cameroon</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/images/logo-waicam.png" alt="Women in AI Cameroon" style="height:56px;width:auto;" />
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Accueil</a>
+    <a href="about.html">À propos</a>
+    <a href="programmes.html">Programmes</a>
+    <a href="equipe.html">Équipe</a>
+    <a href="actualites.html">Actualités</a>
+    <a href="partenaires.html">Partenaires</a>
+    <a href="contact.html">Contact</a>
+    <a href="rejoindre.html" class="btn-nav active">Rejoindre</a>
+  </div>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO REJOINDRE -->
+<div style="background:linear-gradient(135deg,var(--primary-dark),var(--primary) 50%,var(--accent));padding:140px 5% 80px;text-align:center;color:white;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:url('assets/images/hero-women.jpg') center/cover;opacity:.08;"></div>
+  <div style="position:relative;z-index:2;">
+    <div class="breadcrumb" style="justify-content:center;">
+      <a href="index.html" style="color:white;">Accueil</a><span style="opacity:.5;">/</span><span>Rejoindre</span>
+    </div>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:16px;">Rejoignez le mouvement WAI-CAM</h1>
+    <p style="opacity:.85;max-width:560px;margin:0 auto 32px;font-size:1.05rem;">Devenez membre, ambassadrice ou bénévole et contribuez à démocratiser l'IA pour toutes les femmes camerounaises.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="#form-adhesion" class="btn-primary">✨ Formulaire d'adhésion</a>
+      <a href="#types" class="btn-outline">Découvrir les types de membres</a>
+    </div>
+  </div>
+</div>
+
+<!-- TYPES DE MEMBRES -->
+<section id="types" style="background:var(--gray-light);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-header">
+      <div class="section-tag">Membership</div>
+      <h2 class="section-title">Comment <span>s'impliquer ?</span></h2>
+      <p class="section-desc">Plusieurs façons de rejoindre et contribuer au mouvement WAI-CAM selon votre profil et vos disponibilités.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
+      <div style="background:white;border-radius:20px;padding:32px;box-shadow:var(--shadow);text-align:center;border-top:5px solid var(--primary);">
+        <div style="font-size:2.5rem;margin-bottom:16px;">👩‍💼</div>
+        <h3 style="margin-bottom:12px;font-size:1.1rem;">Membre Actif</h3>
+        <p style="font-size:.85rem;color:var(--gray);margin-bottom:20px;">Participez aux formations, événements et activités du mouvement. Accédez à notre réseau et nos ressources.</p>
+        <div style="background:var(--light);border-radius:10px;padding:12px;font-size:.8rem;color:var(--primary);font-weight:600;">Gratuit</div>
+      </div>
+      <div style="background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:20px;padding:32px;box-shadow:0 20px 50px rgba(107,33,168,.25);text-align:center;color:white;transform:scale(1.03);">
+        <div style="background:rgba(255,255,255,.2);display:inline-block;padding:4px 14px;border-radius:50px;font-size:.72rem;font-weight:700;margin-bottom:12px;">RECOMMANDÉ</div>
+        <div style="font-size:2.5rem;margin-bottom:16px;">🌟</div>
+        <h3 style="color:white;margin-bottom:12px;font-size:1.1rem;">Ambassadrice Régionale</h3>
+        <p style="opacity:.9;font-size:.85rem;margin-bottom:20px;">Représentez WAI-CAM dans votre région, formez d'autres femmes et portez la vision du mouvement.</p>
+        <div style="background:rgba(255,255,255,.2);border-radius:10px;padding:12px;font-size:.8rem;font-weight:600;">Formation incluse</div>
+      </div>
+      <div style="background:white;border-radius:20px;padding:32px;box-shadow:var(--shadow);text-align:center;border-top:5px solid var(--green);">
+        <div style="font-size:2.5rem;margin-bottom:16px;">🤝</div>
+        <h3 style="margin-bottom:12px;font-size:1.1rem;">Bénévole</h3>
+        <p style="font-size:.85rem;color:var(--gray);margin-bottom:20px;">Apportez vos compétences (communication, tech, logistique) pour soutenir les activités de WAI-CAM.</p>
+        <div style="background:var(--light);border-radius:10px;padding:12px;font-size:.8rem;color:var(--green);font-weight:600;">Flexible</div>
+      </div>
+      <div style="background:white;border-radius:20px;padding:32px;box-shadow:var(--shadow);text-align:center;border-top:5px solid var(--accent2);">
+        <div style="font-size:2.5rem;margin-bottom:16px;">🎓</div>
+        <h3 style="margin-bottom:12px;font-size:1.1rem;">Mentor / Expert</h3>
+        <p style="font-size:.85rem;color:var(--gray);margin-bottom:20px;">Partagez votre expertise IA, numérique ou entrepreneuriale pour accompagner les membres du mouvement.</p>
+        <div style="background:var(--light);border-radius:10px;padding:12px;font-size:.8rem;color:var(--accent2);font-weight:600;">Sur candidature</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULAIRE D'ADHÉSION -->
+<section id="form-adhesion">
+  <div style="max-width:800px;margin:0 auto;">
+    <div class="section-header">
+      <div class="section-tag">Formulaire d'adhésion</div>
+      <h2 class="section-title">Rejoindre <span>WAI-CAM</span></h2>
+      <p class="section-desc">Remplissez ce formulaire complet pour rejoindre le mouvement. Notre équipe vous contactera sous 48 heures.</p>
+    </div>
+
+    <div class="form-card">
+      <form data-form="adhesion">
+        <div class="form-fields">
+
+          <!-- Informations personnelles -->
+          <div style="background:var(--light);border-radius:12px;padding:20px 24px;margin-bottom:24px;">
+            <h4 style="font-size:.95rem;color:var(--primary);margin-bottom:4px;font-family:'Poppins',sans-serif;">👤 Informations personnelles</h4>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom <span>*</span></label>
+              <input type="text" class="form-control" placeholder="Votre prénom" required />
+            </div>
+            <div class="form-group">
+              <label>Nom <span>*</span></label>
+              <input type="text" class="form-control" placeholder="Votre nom" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date de naissance</label>
+              <input type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Genre</label>
+              <select class="form-control">
+                <option value="">-- Sélectionner --</option>
+                <option>Femme</option>
+                <option>Homme</option>
+                <option>Préfère ne pas préciser</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email <span>*</span></label>
+              <input type="email" class="form-control" placeholder="votre@email.com" required />
+            </div>
+            <div class="form-group">
+              <label>Téléphone <span>*</span></label>
+              <input type="tel" class="form-control" placeholder="(+237) XXX XXX XXX" required />
+            </div>
+          </div>
+
+          <!-- Localisation -->
+          <div style="background:var(--light);border-radius:12px;padding:20px 24px;margin:24px 0;">
+            <h4 style="font-size:.95rem;color:var(--primary);margin-bottom:4px;font-family:'Poppins',sans-serif;">📍 Localisation</h4>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Région <span>*</span></label>
+              <select class="form-control" required>
+                <option value="">-- Votre région --</option>
+                <option>Centre</option>
+                <option>Littoral</option>
+                <option>Ouest</option>
+                <option>Nord-Ouest</option>
+                <option>Sud-Ouest</option>
+                <option>Nord</option>
+                <option>Adamaoua</option>
+                <option>Est</option>
+                <option>Sud</option>
+                <option>Extrême-Nord</option>
+                <option>Diaspora — Europe</option>
+                <option>Diaspora — Amérique du Nord</option>
+                <option>Diaspora — Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Ville</label>
+              <input type="text" class="form-control" placeholder="Votre ville" />
+            </div>
+          </div>
+
+          <!-- Profil professionnel -->
+          <div style="background:var(--light);border-radius:12px;padding:20px 24px;margin:24px 0;">
+            <h4 style="font-size:.95rem;color:var(--primary);margin-bottom:4px;font-family:'Poppins',sans-serif;">💼 Profil professionnel</h4>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Statut professionnel</label>
+              <select class="form-control">
+                <option value="">-- Sélectionner --</option>
+                <option>Étudiante</option>
+                <option>Salariée du secteur privé</option>
+                <option>Fonctionnaire / Secteur public</option>
+                <option>Entrepreneure</option>
+                <option>Chercheuse</option>
+                <option>Sans emploi</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Domaine d'activité</label>
+              <input type="text" class="form-control" placeholder="Ex: Santé, Finance, Tech, Éducation..." />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Niveau d'études</label>
+            <select class="form-control">
+              <option value="">-- Sélectionner --</option>
+              <option>Primaire</option>
+              <option>Secondaire (BEPC / Baccalauréat)</option>
+              <option>Bac+2 / BTS / DUT</option>
+              <option>Licence (Bac+3)</option>
+              <option>Master (Bac+5)</option>
+              <option>Doctorat</option>
+            </select>
+          </div>
+
+          <!-- Type d'adhésion -->
+          <div style="background:var(--light);border-radius:12px;padding:20px 24px;margin:24px 0;">
+            <h4 style="font-size:.95rem;color:var(--primary);margin-bottom:4px;font-family:'Poppins',sans-serif;">🌟 Type d'adhésion</h4>
+          </div>
+
+          <div class="form-group">
+            <label>Je souhaite rejoindre WAI-CAM en tant que <span>*</span></label>
+            <select class="form-control" required>
+              <option value="">-- Sélectionner --</option>
+              <option>Membre actif(ve)</option>
+              <option>Ambassadrice régionale</option>
+              <option>Bénévole</option>
+              <option>Mentor / Expert(e)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Compétences que vous souhaitez apporter</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div class="form-check">
+                <input type="checkbox" id="sk1" />
+                <label for="sk1">Intelligence artificielle / Data</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="sk2" />
+                <label for="sk2">Communication / Marketing</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="sk3" />
+                <label for="sk3">Formation / Pédagogie</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="sk4" />
+                <label for="sk4">Entrepreneuriat / Business</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="sk5" />
+                <label for="sk5">Droit / Plaidoyer</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" id="sk6" />
+                <label for="sk6">Logistique / Organisation</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Niveau de connaissance en IA</label>
+            <select class="form-control">
+              <option value="">-- Sélectionner --</option>
+              <option>Débutante — Je découvre l'IA</option>
+              <option>Intermédiaire — J'utilise quelques outils IA</option>
+              <option>Avancée — Je travaille avec l'IA</option>
+              <option>Experte — Je développe des solutions IA</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Motivation <span>*</span></label>
+            <textarea class="form-control" rows="4" placeholder="Pourquoi souhaitez-vous rejoindre Women in AI Cameroon ? Qu'espérez-vous apporter et recevoir ?" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Comment avez-vous entendu parler de WAI-CAM ?</label>
+            <select class="form-control">
+              <option value="">-- Sélectionner --</option>
+              <option>Réseaux sociaux</option>
+              <option>Bouche à oreille</option>
+              <option>Événement / Formation</option>
+              <option>Média / Presse</option>
+              <option>Membre de l'équipe</option>
+              <option>Autre</option>
+            </select>
+          </div>
+
+          <div style="background:var(--light);border-radius:12px;padding:20px 24px;margin:24px 0;">
+            <div class="form-check" style="margin-bottom:12px;">
+              <input type="checkbox" id="consent-adh" required />
+              <label for="consent-adh">J'accepte les conditions d'adhésion de Women in AI Cameroon et que mes données soient utilisées pour la gestion de mon dossier. <span style="color:var(--accent);">*</span></label>
+            </div>
+            <div class="form-check" style="margin-bottom:12px;">
+              <input type="checkbox" id="newsletter-adh" />
+              <label for="newsletter-adh">Je souhaite recevoir la newsletter de WAI-CAM.</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="code-adh" />
+              <label for="code-adh">Je m'engage à respecter les valeurs d'inclusion, d'éthique et de solidarité du mouvement WAI-CAM.</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit" style="font-size:1rem;">
+            🚀 Soumettre ma demande d'adhésion
+          </button>
+        </div>
+        <div class="form-success">
+          <div class="success-icon">🎉</div>
+          <h4>Bienvenue dans le mouvement !</h4>
+          <p>Votre demande d'adhésion a été reçue. Notre équipe vous contactera dans les 48 heures pour finaliser votre intégration dans WAI-CAM.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section style="background:var(--gray-light);">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="section-header">
+      <div class="section-tag">Témoignages</div>
+      <h2 class="section-title">Elles ont <span>rejoint WAI-CAM</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+      <div style="background:white;border-radius:20px;padding:28px;box-shadow:var(--shadow);">
+        <div style="font-size:1.5rem;color:var(--accent2);margin-bottom:12px;">★★★★★</div>
+        <p style="font-style:italic;color:var(--gray);font-size:.9rem;line-height:1.7;margin-bottom:20px;">"WAI-CAM m'a ouvert les yeux sur les possibilités de l'IA pour mon activité entrepreneuriale. Je gagne du temps et je crée plus de valeur."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">F</div>
+          <div>
+            <div style="font-weight:700;font-size:.9rem;">Fatima K.</div>
+            <div style="font-size:.78rem;color:var(--gray);">Entrepreneure, Douala</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:white;border-radius:20px;padding:28px;box-shadow:var(--shadow);">
+        <div style="font-size:1.5rem;color:var(--accent2);margin-bottom:12px;">★★★★★</div>
+        <p style="font-style:italic;color:var(--gray);font-size:.9rem;line-height:1.7;margin-bottom:20px;">"Grâce aux formations de WAI-CAM, j'utilise maintenant l'IA dans mes recherches académiques. C'est un vrai accélérateur de compétences."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--accent2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">A</div>
+          <div>
+            <div style="font-weight:700;font-size:.9rem;">Aminata B.</div>
+            <div style="font-size:.78rem;color:var(--gray);">Étudiante en génie, Yaoundé</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:white;border-radius:20px;padding:28px;box-shadow:var(--shadow);">
+        <div style="font-size:1.5rem;color:var(--accent2);margin-bottom:12px;">★★★★★</div>
+        <p style="font-style:italic;color:var(--gray);font-size:.9rem;line-height:1.7;margin-bottom:20px;">"Être ambassadrice régionale de WAI-CAM me permet de transformer ma communauté. Chaque femme que je forme devient à son tour une ambassadrice."</p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--primary));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;">M</div>
+          <div>
+            <div style="font-weight:700;font-size:.9rem;">Marie-Claire N.</div>
+            <div style="font-size:.78rem;color:var(--gray);">Ambassadrice, Bafoussam</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid" style="max-width:1200px;margin:0 auto;">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <img src="assets/images/logo-waicam.png" alt="Women in AI Cameroon" style="height:52px;width:auto;filter:brightness(0) invert(1);" />
+      </div>
+      <p>L'IA pour toutes, l'avenir entre nos mains.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn">f</a>
+        <a href="#" class="social-btn">𝕏</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="mailto:womeninaicameroon@gmail.com" class="social-btn">✉</a>
+      </div>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+        <li><a href="actualites.html">Actualités</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Programmes</h4>
+      <ul>
+        <li><a href="programmes.html">Youth & AI</a></li>
+        <li><a href="programmes.html">IA & Service Public</a></li>
+        <li><a href="programmes.html">Women Leaders for AI</a></li>
+        <li><a href="programmes.html">AI for Communities</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="contact.html">Nous contacter</a></li>
+        <li><a href="partenaires.html">Partenariats</a></li>
+        <li><a href="rejoindre.html">Rejoindre</a></li>
+        <li><a href="mailto:womeninaicameroon@gmail.com">womeninaicameroon@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom" style="max-width:1200px;margin:0 auto;">
+    <span>© 2026 Women in AI Cameroon. Tous droits réservés.</span>
+    <span>919 Boulevard de Rey-Bouba, Mballa2, Yaoundé</span>
+  </div>
+</footer>
+
+<button class="back-top">↑</button>
+<div class="toast"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
