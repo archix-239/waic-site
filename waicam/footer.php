@@ -19,16 +19,28 @@
 			<div class="footer-socials">
 				<?php
 				$socials = array(
-					'facebook'  => array( 'url' => get_theme_mod( 'waicam_social_facebook', '#' ),  'label' => 'Facebook',  'icon' => '<i class="fa-brands fa-facebook-f"></i>' ),
-					'twitter'   => array( 'url' => get_theme_mod( 'waicam_social_twitter', '#' ),   'label' => 'Twitter',   'icon' => '<i class="fa-brands fa-x-twitter"></i>' ),
-					'linkedin'  => array( 'url' => get_theme_mod( 'waicam_social_linkedin', '#' ),  'label' => 'LinkedIn',  'icon' => '<i class="fa-brands fa-linkedin-in"></i>' ),
-					'instagram' => array( 'url' => get_theme_mod( 'waicam_social_instagram', '#' ), 'label' => 'Instagram', 'icon' => '<i class="fa-brands fa-instagram"></i>' ),
-					'email'     => array( 'url' => 'mailto:' . get_theme_mod( 'waicam_email', 'womeninaicameroon@gmail.com' ), 'label' => 'Email', 'icon' => '<i class="fa-solid fa-envelope"></i>' ),
+					'facebook'  => array( 'url' => get_theme_mod( 'waicam_social_facebook', '#' ),  'label' => 'Facebook',  'img' => 'logo-facebook.webp' ),
+					'twitter'   => array( 'url' => get_theme_mod( 'waicam_social_twitter', '#' ),   'label' => 'Twitter/X', 'img' => 'logo-twitter.webp'  ),
+					'linkedin'  => array( 'url' => get_theme_mod( 'waicam_social_linkedin', '#' ),  'label' => 'LinkedIn',  'img' => 'logo-linkedin.webp' ),
+					'instagram' => array( 'url' => get_theme_mod( 'waicam_social_instagram', '#' ), 'label' => 'Instagram', 'img' => ''                   ),
+					'email'     => array( 'url' => 'mailto:' . get_theme_mod( 'waicam_email', 'womeninaicameroon@gmail.com' ), 'label' => 'Email', 'img' => '' ),
 				);
 				foreach ( $socials as $key => $s ) :
+					if ( $s['img'] ) :
 				?>
-					<a href="<?php echo esc_url( $s['url'] ); ?>" class="social-btn" title="<?php echo esc_attr( $s['label'] ); ?>"><?php echo wp_kses_post( $s['icon'] ); ?></a>
-				<?php endforeach; ?>
+					<a href="<?php echo esc_url( $s['url'] ); ?>" class="social-btn" title="<?php echo esc_attr( $s['label'] ); ?>">
+						<img src="<?php echo esc_url( waicam_img( $s['img'] ) ); ?>" alt="<?php echo esc_attr( $s['label'] ); ?>" width="18" height="18" />
+					</a>
+				<?php
+					else :
+						// Instagram et Email : icône Font Awesome
+						$icon = $key === 'instagram' ? '<i class="fa-brands fa-instagram"></i>' : '<i class="fa-solid fa-envelope"></i>';
+				?>
+					<a href="<?php echo esc_url( $s['url'] ); ?>" class="social-btn" title="<?php echo esc_attr( $s['label'] ); ?>"><?php echo wp_kses_post( $icon ); ?></a>
+				<?php
+					endif;
+				endforeach;
+				?>
 			</div>
 		</div>
 

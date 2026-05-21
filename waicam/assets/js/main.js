@@ -4,6 +4,35 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---------- Diaporama hero ---------- */
+  const slides    = document.querySelectorAll('.hero-slide');
+  const dots      = document.querySelectorAll('.hero-dot');
+  let   slideIdx  = 0;
+  let   slideTimer;
+
+  function goToSlide(n) {
+    slides[slideIdx]?.classList.remove('active');
+    dots[slideIdx]?.classList.remove('active');
+    slideIdx = (n + slides.length) % slides.length;
+    slides[slideIdx]?.classList.add('active');
+    dots[slideIdx]?.classList.add('active');
+  }
+
+  function startSlideshow() {
+    slideTimer = setInterval(() => goToSlide(slideIdx + 1), 5000);
+  }
+
+  if (slides.length > 1) {
+    startSlideshow();
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        clearInterval(slideTimer);
+        goToSlide(parseInt(dot.dataset.slide));
+        startSlideshow();
+      });
+    });
+  }
+
   /* ---------- Navbar scroll effect ---------- */
   const navbar = document.querySelector('.navbar');
   const backTop = document.querySelector('.back-top');
@@ -30,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeMenu() {
     navLinks?.classList.remove('open');
     document.body.classList.remove('menu-open');
+    hamburger?.setAttribute('aria-expanded', 'false');
     hamburger?.querySelectorAll('span').forEach(s => {
       s.style.transform = '';
       s.style.opacity = '';
@@ -39,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function openMenu() {
     navLinks?.classList.add('open');
     document.body.classList.add('menu-open');
+    hamburger?.setAttribute('aria-expanded', 'true');
     const spans = hamburger.querySelectorAll('span');
     spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
     spans[1].style.opacity = '0';
@@ -47,15 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   hamburger?.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (navLinks?.classList.contains('open')) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
+    navLinks?.classList.contains('open') ? closeMenu() : openMenu();
   });
 
   /* Close menu on link click (mobile) */
-  navLinks?.querySelectorAll('a').forEach(a => {
+  navLinks?.querySelectorAll('a:not(.nav-item > a)').forEach(a => {
     a.addEventListener('click', () => {
       if (window.innerWidth <= 768) closeMenu();
     });
@@ -70,7 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* Close menu on escape key */
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
+    if (e.key === 'Escape') {
+      closeMenu();
+      closeAllDropdowns();
+    }
   });
 
   /* Close menu on window resize to desktop */
@@ -80,6 +110,43 @@ document.addEventListener('DOMContentLoaded', () => {
     resizeTimer = setTimeout(() => {
       if (window.innerWidth > 768) closeMenu();
     }, 100);
+  });
+
+  /* ---------- Dropdowns ---------- */
+  const navItems = document.querySelectorAll('.navbar .nav-item');
+
+  function closeAllDropdowns(except = null) {
+    navItems.forEach(item => {
+      if (item !== except) item.classList.remove('open');
+    });
+  }
+
+  navItems.forEach(item => {
+    const trigger = item.querySelector(':scope > a');
+    const dropdown = item.querySelector('.nav-dropdown');
+    if (!trigger || !dropdown) return;
+
+    /* Desktop : hover géré en CSS, clic pour accessibilité clavier */
+    trigger.addEventListener('click', (e) => {
+      if (window.innerWidth > 768) {
+        /* Sur desktop, le hover CSS suffit — le clic toggle pour accessibilité */
+        e.preventDefault();
+        const isOpen = item.classList.contains('open');
+        closeAllDropdowns();
+        if (!isOpen) item.classList.add('open');
+      } else {
+        /* Mobile : toggle le dropdown inline */
+        e.preventDefault();
+        const isOpen = item.classList.contains('open');
+        closeAllDropdowns();
+        if (!isOpen) item.classList.add('open');
+      }
+    });
+  });
+
+  /* Fermer les dropdowns au clic en dehors */
+  document.addEventListener('click', (e) => {
+    if (!navbar?.contains(e.target)) closeAllDropdowns();
   });
 
   /* ---------- Active nav link ---------- */

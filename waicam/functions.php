@@ -115,97 +115,141 @@ require_once WAICAM_DIR . '/inc/helpers.php';
 require_once WAICAM_DIR . '/inc/setup-wizard.php';
 
 /**
- * Menu walker — pour ajouter la classe .btn-nav sur l'item "Rejoindre"
+ * Menu walker — génère .nav-item avec .nav-dropdown pour les sous-menus
+ * Structure produite :
+ *   <div class="nav-item [active]">
+ *     <a href="...">Label ▾</a>
+ *     <div class="nav-dropdown">
+ *       <a href="...">Sous-item</a>
+ *     </div>
+ *   </div>
  */
 class WAICAM_Nav_Walker extends Walker_Nav_Menu {
+
+	/** Ouvre un élément de menu (li → div.nav-item) */
 	function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
-		$classes   = empty( $item->classes ) ? array() : (array) $item->classes;
-		$css_class = trim( implode( ' ', array_filter( $classes ) ) );
+		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
-		// Ajoute .btn-nav si l'item a la classe CSS "rejoindre" ou s'il porte le label "Rejoindre"
-		$is_cta = in_array( 'btn-nav', $classes, true ) || strtolower( $item->title ) === 'rejoindre';
-		if ( $is_cta ) {
-			$css_class .= ' btn-nav';
+		if ( $depth === 0 ) {
+			// ── Niveau 0 : wrapper .nav-item ──
+			$is_active  = in_array( 'current-menu-item', $classes, true )
+			           || in_array( 'current_page_item', $classes, true )
+			           || in_array( 'current-menu-ancestor', $classes, true );
+			$is_cta     = in_array( 'btn-nav', $classes, true )
+			           || strtolower( trim( $item->title ) ) === 'rejoindre';
+			$has_children = $args->walker->has_children;
+
+			$wrapper_class = 'nav-item';
+			if ( $is_active )  $wrapper_class .= ' active';
+			if ( $is_cta )     $wrapper_class .= ' btn-nav';
+
+			$output .= '<div class="' . esc_attr( $wrapper_class ) . '">';
+
+			// Lien principal
+			$link_class = '';
+			if ( $is_active ) $link_class .= ' active';
+			if ( $is_cta )    $link_class .= ' btn-nav';
+
+			$output .= '<a href="' . esc_url( $item->url ) . '"'
+			         . ( $link_class ? ' class="' . esc_attr( trim( $link_class ) ) . '"' : '' )
+			         . ( $has_children ? ' aria-haspopup="true" aria-expanded="false"' : '' )
+			         . '>' . esc_html( $item->title ) . '</a>';
+
+			// Ouvre le dropdown si l'item a des enfants
+			if ( $has_children ) {
+				$output .= '<div class="nav-dropdown" role="menu">';
+			}
+
+		} else {
+			// ── Niveau 1 : lien dans le dropdown ──
+			$is_active = in_array( 'current-menu-item', $classes, true );
+			$output .= '<a href="' . esc_url( $item->url ) . '"'
+			         . ( $is_active ? ' class="active"' : '' )
+			         . ' role="menuitem">'
+			         . esc_html( $item->title ) . '</a>';
 		}
-
-		// Active state
-		if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current_page_item', $classes, true ) ) {
-			$css_class .= ' active';
-		}
-
-		$attrs  = ' href="' . esc_url( $item->url ) . '"';
-		$attrs .= $css_class ? ' class="' . esc_attr( trim( $css_class ) ) . '"' : '';
-
-		$output .= '<a' . $attrs . '>' . esc_html( $item->title ) . '</a>';
 	}
 
+	/** Ferme un élément de menu */
+	function end_el( &$output, $item, $depth = 0, $args = null ) {
+		if ( $depth === 0 ) {
+			// Ferme le dropdown s'il a été ouvert
+			if ( $args->walker->has_children ) {
+				$output .= '</div>'; // .nav-dropdown
+			}
+			$output .= '</div>'; // .nav-item
+		}
+		// Niveau 1 : pas de balise fermante (les <a> sont auto-fermants)
+	}
+
+	/** Ouvre un sous-menu (déjà géré dans start_el) */
 	function start_lvl( &$output, $depth = 0, $args = null ) {}
+
+	/** Ferme un sous-menu (déjà géré dans end_el) */
 	function end_lvl( &$output, $depth = 0, $args = null ) {}
-	function end_el( &$output, $item, $depth = 0, $args = null ) {}
 }
 
 /**
  * Fallback du menu si l'admin ne l'a pas encore configuré
+ * Génère la même structure .nav-item / .nav-dropdown que le Walker
  */
 function waicam_default_menu() {
-	$pages = array(
-		'index.php'         => __( 'Accueil', 'waicam' ),
-		'about'             => __( 'À propos', 'waicam' ),
-		'programmes'        => __( 'Programmes', 'waicam' ),
-		'formations'        => __( 'Formations', 'waicam' ),
-		'equipe'            => __( 'Équipe', 'waicam' ),
-		'evenement'         => __( 'Évènements', 'waicam' ),
-		'blog'              => __( 'Blog', 'waicam' ),
-		'galerie'           => __( 'Galerie', 'waicam' ),
-		'partenaires'       => __( 'Partenaires', 'waicam' ),
-		'contact'           => __( 'Contact', 'waicam' ),
+
+	$current = function( $slug ) {
+		if ( $slug === 'home' ) return is_front_page();
+		return is_page( $slug );
+	};
+
+	// Structure : slug => [ label, sous-items[] ]
+	$items = array(
+		'home'        => array( __( 'Accueil', 'waicam' ), array() ),
+		'about'       => array( __( 'À propos', 'waicam' ), array(
+			home_url('/about')       => __( 'Qui sommes-nous', 'waicam' ),
+			home_url('/equipe')      => __( 'Équipe', 'waicam' ),
+			home_url('/partenaires') => __( 'Partenaires', 'waicam' ),
+		) ),
+		'educate'     => array( __( 'Educate', 'waicam' ), array(
+			home_url('/formations')  => __( 'Formations', 'waicam' ),
+			home_url('/programmes')  => __( 'Programmes', 'waicam' ),
+		) ),
+		'inspire'     => array( __( 'Inspire', 'waicam' ), array(
+			home_url('/blog')        => __( 'Blog', 'waicam' ),
+			home_url('/temoignages') => __( 'Témoignages', 'waicam' ),
+			home_url('/galerie')     => __( 'Galerie', 'waicam' ),
+		) ),
+		'get-involved' => array( __( 'Get Involved', 'waicam' ), array(
+			home_url('/rejoindre')   => __( 'Devenir membre', 'waicam' ),
+			home_url('/partenaires') => __( 'Partenariats', 'waicam' ),
+			home_url('/faire-un-don') => __( 'Faire un don', 'waicam' ),
+			home_url('/contact')     => __( 'Contact', 'waicam' ),
+		) ),
 	);
 
-	foreach ( $pages as $slug => $label ) {
-		$class  = '';
-		$href   = home_url( '/' );
-		if ( $slug === 'index.php' ) {
-			$href  = home_url( '/' );
-			$class = is_front_page() ? 'active' : '';
-		} elseif ( $slug === 'evenement' ) {
-			$href  = function_exists( 'waicam_events_archive_url' ) ? waicam_events_archive_url() : home_url( '/evenements/' );
-			$class = ( is_post_type_archive( 'tribe_events' ) || is_singular( 'tribe_events' ) ) ? 'active' : '';
-		} elseif ( $slug === 'blog' ) {
-			$href  = get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/blog' );
-			$class = is_home() || is_singular( 'post' ) || is_category() || is_tag() || is_author() || is_date() ? 'active' : '';
-		} else {
-			$page = get_page_by_path( $slug );
-			$href = $page ? get_permalink( $page ) : home_url( '/' . $slug );
-			$class = is_page( $slug ) ? 'active' : '';
+	foreach ( $items as $slug => $data ) {
+		list( $label, $children ) = $data;
+		$href        = $slug === 'home' ? home_url('/') : home_url('/' . $slug);
+		$is_active   = $current( $slug );
+		$has_children = ! empty( $children );
+
+		$wrapper_class = 'nav-item' . ( $is_active ? ' active' : '' );
+		$link_class    = $is_active ? ' class="active"' : '';
+
+		echo '<div class="' . esc_attr( $wrapper_class ) . '">';
+		echo '<a href="' . esc_url( $href ) . '"' . $link_class;
+		if ( $has_children ) echo ' aria-haspopup="true" aria-expanded="false"';
+		echo '>' . esc_html( $label ) . '</a>';
+
+		if ( $has_children ) {
+			echo '<div class="nav-dropdown" role="menu">';
+			foreach ( $children as $child_url => $child_label ) {
+				echo '<a href="' . esc_url( $child_url ) . '" role="menuitem">' . esc_html( $child_label ) . '</a>';
+			}
+			echo '</div>';
 		}
-		printf(
-			'<a href="%s"%s>%s</a>',
-			esc_url( $href ),
-			$class ? ' class="' . esc_attr( $class ) . '"' : '',
-			esc_html( $label )
-		);
+		echo '</div>';
 	}
 
-	// Bouton CTA "Rejoindre"
-	$rejoindre = get_page_by_path( 'rejoindre' );
-	$href      = $rejoindre ? get_permalink( $rejoindre ) : home_url( '/rejoindre' );
-	printf(
-		'<a href="%s" class="btn-nav%s">%s</a>',
-		esc_url( $href ),
-		is_page( 'rejoindre' ) ? ' active' : '',
-		esc_html__( 'Rejoindre', 'waicam' )
-	);
-
-	// Bouton CTA "Faire un don"
-	$don  = get_page_by_path( 'faire-un-don' );
-	$href = $don ? get_permalink( $don ) : home_url( '/faire-un-don' );
-	printf(
-		'<a href="%s" class="btn-nav btn-nav--don%s">%s %s</a>',
-		esc_url( $href ),
-		is_page( 'faire-un-don' ) ? ' active' : '',
-		'<i class="fa-solid fa-heart"></i>',
-		esc_html__( 'Faire un don', 'waicam' )
-	);
+	// Note : le bouton CTA "Rejoindre" est rendu directement dans header.php (.nav-right)
 }
 
 /**
