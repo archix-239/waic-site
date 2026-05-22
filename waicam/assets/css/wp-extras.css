@@ -59,6 +59,237 @@
 	color: var(--gray);
 }
 
+/* ─── Home : section post-hero (inspiration Girls Who Code, palette WAI-CAM) ─── */
+.home-posthero-gwc {
+	background: #ffffff;
+	padding: 72px 5% 80px;
+}
+.home-posthero-inner {
+	max-width: 1100px;
+	margin: 0 auto;
+}
+.home-posthero-top {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 56px;
+	align-items: center;
+	margin-bottom: 64px;
+}
+.home-posthero-media {
+	min-height: 240px;
+	background: #ffffff;
+	border: 2px dashed #1E1B4B;
+	border-radius: 8px;
+}
+.home-posthero-highlight h2 {
+	font-size: clamp(2rem, 4vw, 3.2rem);
+	color: #1E1B4B;
+	line-height: 1.02;
+	letter-spacing: -.02em;
+	margin-bottom: 8px;
+}
+.home-posthero-wave {
+	display: block;
+	width: 320px;
+	height: 16px;
+	margin-bottom: 20px;
+}
+.home-posthero-wave path {
+	fill: none;
+	stroke: #0E6A2E;
+	stroke-width: 2.5;
+	stroke-linecap: round;
+	stroke-dasharray: 380;
+	stroke-dashoffset: 380;
+	animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4;
+}
+.home-posthero-link {
+	font-weight: 700;
+	color: #0E6A2E;
+	font-size: clamp(1.2rem, 2vw, 1.8rem);
+	text-decoration: none;
+}
+.arrow-anim {
+	display: inline-grid;
+	margin-left: 8px;
+	vertical-align: middle;
+	align-items: center;
+}
+.arrow-plain,
+.arrow-wave {
+	grid-area: 1 / 1;
+}
+.arrow-plain {
+	display: inline-block;
+}
+.arrow-wave {
+	width: 0;
+	opacity: 0;
+	overflow: visible;
+}
+.arrow-wave path {
+	fill: none;
+	stroke: #0E6A2E;
+	stroke-width: 2.2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+.home-posthero-link:hover .arrow-plain,
+.home-posthero-link:focus-visible .arrow-plain {
+	opacity: 0;
+}
+.home-posthero-link:hover .arrow-wave,
+.home-posthero-link:focus-visible .arrow-wave {
+	width: 82px;
+	opacity: 1;
+	animation: waicam-arrow-wave-reveal .28s ease-out forwards;
+}
+.home-posthero-cards {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 40px;
+}
+.home-posthero-card {
+	background: #ffffff;
+	padding: 0 0 6px;
+}
+.home-posthero-badge {
+	display: inline-block;
+	background: #E41D44;
+	color: #fff;
+	font-weight: 700;
+	font-size: .78rem;
+	padding: 9px 14px;
+	margin-bottom: 20px;
+}
+.home-posthero-card h3 {
+	font-size: 2rem;
+	color: #1E1B4B;
+	margin-bottom: 14px;
+}
+.home-posthero-card p {
+	font-size: 1.1rem;
+	line-height: 1.55;
+	color: #111;
+	max-width: 90%;
+	margin-bottom: 22px;
+}
+@keyframes waicam-wave-draw {
+	to { stroke-dashoffset: 0; }
+}
+@keyframes waicam-wave-motion {
+	0%,100% { transform: translateY(0); }
+	50% { transform: translateY(-1.5px); }
+}
+@keyframes waicam-arrow-wave {
+	0%,100% { transform: translateX(0) translateY(0) rotate(0deg); }
+	25% { transform: translateX(2px) translateY(-1px) rotate(8deg); }
+	50% { transform: translateX(3px) translateY(1px) rotate(-8deg); }
+	75% { transform: translateX(2px) translateY(-1px) rotate(6deg); }
+}
+@keyframes waicam-arrow-wave-reveal {
+	0% { width: 0; opacity: 0; }
+	100% { width: 82px; opacity: 1; }
+}
+@media (max-width: 900px) {
+	.home-posthero-top,
+	.home-posthero-cards {
+		grid-template-columns: 1fr;
+	}
+	.home-posthero-wave {
+		width: 240px;
+	}
+}
+
+/* ─── Home : section impact (suite) ─── */
+.home-impact-gwc {
+	background: #F5F1E4;
+	padding: 84px 5% 80px;
+}
+.home-impact-inner {
+	max-width: 1100px;
+	margin: 0 auto;
+}
+.home-impact-intro {
+	max-width: 760px;
+}
+.home-impact-kicker {
+	color: #0E6A2E;
+	font-size: 1.9rem;
+	font-weight: 700;
+	margin-bottom: 8px;
+}
+.home-impact-intro h2 {
+	color: #1E1B4B;
+	font-size: clamp(2rem, 4vw, 3.4rem);
+	line-height: 1.05;
+	letter-spacing: -.02em;
+	margin-bottom: 10px;
+	max-width: 920px;
+}
+.home-impact-wave {
+	display: block;
+	width: 320px;
+	height: 16px;
+	margin-bottom: 22px;
+}
+.home-impact-wave path {
+	fill: none;
+	stroke: #0E6A2E;
+	stroke-width: 2.5;
+	stroke-linecap: round;
+	stroke-dasharray: 380;
+	stroke-dashoffset: 380;
+	animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4;
+}
+.home-impact-intro p {
+	color: #111;
+	font-size: clamp(1.05rem, 2vw, 1.25rem);
+	line-height: 1.5;
+	max-width: 780px;
+	margin-bottom: 22px;
+}
+.home-impact-link {
+	font-weight: 700;
+	color: #0E6A2E;
+	font-size: clamp(1.2rem, 2vw, 1.7rem);
+	text-decoration: none;
+}
+.home-impact-stats {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 44px;
+	margin-top: 72px;
+}
+.home-impact-stat-number {
+	color: #1E1B4B;
+	font-size: clamp(2.5rem, 5vw, 5rem);
+	font-weight: 500;
+	letter-spacing: .01em;
+	line-height: 1;
+	margin-bottom: 16px;
+}
+.home-impact-stat h3 {
+	color: #0E6A2E;
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 14px;
+}
+.home-impact-stat p {
+	color: #111;
+	font-size: 1.05rem;
+	line-height: 1.45;
+}
+@media (max-width: 1024px) {
+	.home-impact-stats {
+		grid-template-columns: 1fr;
+		gap: 30px;
+	}
+	.home-impact-wave {
+		width: 240px;
+	}
+}
+
 /* ─── About : Vision & Mission ─── */
 .vision-mission-section {
 	background: var(--gray-light);
