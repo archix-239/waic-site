@@ -2,10 +2,8 @@
 #  WAI-CAM — .gitignore
 # ============================================================
 
-# Documents de travail (PDF, DOCX) — ne pas versionner
-*.pdf
-*.docx
-*.doc
+# Documents de travail — exclusions sélectives
+# (les PDF/DOCX du projet sont versionnés car le repo est privé)
 *.xlsx
 *.xls
 *.pptx
