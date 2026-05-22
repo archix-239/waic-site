@@ -134,12 +134,23 @@
 	stroke-linecap: round;
 	stroke-linejoin: round;
 }
+.arrow-anim,
+.arrow-plain,
+.arrow-wave {
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+}
 .home-posthero-link:hover .arrow-plain,
-.home-posthero-link:focus-visible .arrow-plain {
+.home-posthero-link:focus-visible .arrow-plain,
+.home-impact-link:hover .arrow-plain,
+.home-impact-link:focus-visible .arrow-plain {
 	opacity: 0;
 }
 .home-posthero-link:hover .arrow-wave,
-.home-posthero-link:focus-visible .arrow-wave {
+.home-posthero-link:focus-visible .arrow-wave,
+.home-impact-link:hover .arrow-wave,
+.home-impact-link:focus-visible .arrow-wave {
 	width: 82px;
 	opacity: 1;
 	animation: waicam-arrow-wave-reveal .28s ease-out forwards;
@@ -254,6 +265,9 @@
 	color: #0E6A2E;
 	font-size: clamp(1.2rem, 2vw, 1.7rem);
 	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 2px;
 }
 .home-impact-stats {
 	display: grid;
