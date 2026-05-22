@@ -43,6 +43,48 @@ get_header(); ?>
 
 </section>
 
+<!-- ========== HOME — SECTION POST-HERO (STYLE INSTITUTIONNEL) ========== -->
+<section class="home-posthero-gwc">
+	<div class="home-posthero-inner">
+		<div class="home-posthero-top">
+			<div class="home-posthero-media" aria-hidden="true"></div>
+			<div class="home-posthero-highlight">
+				<h2><?php echo esc_html( get_theme_mod( 'waicam_home_posthero_title', '5 MILLIONS D’ICI 2030' ) ); ?></h2>
+				<p class="home-posthero-wave" aria-hidden="true">~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~</p>
+				<a href="<?php echo esc_url( get_theme_mod( 'waicam_home_posthero_cta_url', home_url( '/about' ) ) ); ?>" class="home-posthero-link">
+					<?php echo esc_html( get_theme_mod( 'waicam_home_posthero_cta_text', 'En savoir plus sur notre plan stratégique' ) ); ?> →
+				</a>
+			</div>
+		</div>
+
+		<div class="home-posthero-cards">
+			<?php
+			$cards = array(
+				array(
+					'badge' => 'AXE 01',
+					'title' => get_theme_mod( 'waicam_home_axis_1_title', 'Former' ),
+					'text'  => get_theme_mod( 'waicam_home_axis_1_text', 'Former les jeunes filles et femmes aux compétences numériques et à l’IA appliquée.' ),
+					'url'   => get_theme_mod( 'waicam_home_axis_1_url', home_url( '/formations' ) ),
+				),
+				array(
+					'badge' => 'AXE 02',
+					'title' => get_theme_mod( 'waicam_home_axis_2_title', 'Accompagner' ),
+					'text'  => get_theme_mod( 'waicam_home_axis_2_text', 'Accompagner les femmes vers des parcours concrets : leadership, entrepreneuriat et innovation.' ),
+					'url'   => get_theme_mod( 'waicam_home_axis_2_url', home_url( '/programmes' ) ),
+				),
+			);
+			foreach ( $cards as $card ) : ?>
+				<article class="home-posthero-card">
+					<div class="home-posthero-badge"><?php echo esc_html( $card['badge'] ); ?></div>
+					<h3><?php echo esc_html( $card['title'] ); ?></h3>
+					<p><?php echo esc_html( $card['text'] ); ?></p>
+					<a href="<?php echo esc_url( $card['url'] ); ?>" class="home-posthero-link">En savoir plus →</a>
+				</article>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</section>
+
 <!-- Icônes réseaux sociaux — fixes au scroll -->
 <div class="social-float" id="social-float">
 	<a href="<?php echo esc_url( get_theme_mod( 'waicam_social_linkedin', '#' ) ); ?>"

@@ -366,6 +366,39 @@ function waicam_customize_register( $wp_customize ) {
 			'type'    => 'number',
 		) );
 	}
+
+	// ────────── Section Home post-hero (modèle institutionnel) ──────────
+	$wp_customize->add_section( 'waicam_home_posthero', array(
+		'title'       => __( 'Accueil — Section post-hero', 'waicam' ),
+		'description' => __( 'Contenus du bloc immédiatement après le hero de la page d’accueil.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+
+	$home_posthero_fields = array(
+		'waicam_home_posthero_title'    => array( __( 'Titre principal', 'waicam' ), '5 MILLIONS D’ICI 2030', 'text' ),
+		'waicam_home_posthero_cta_text' => array( __( 'Texte du lien principal', 'waicam' ), 'En savoir plus sur notre plan stratégique', 'text' ),
+		'waicam_home_posthero_cta_url'  => array( __( 'URL du lien principal', 'waicam' ), home_url( '/about' ), 'url' ),
+		'waicam_home_axis_1_title'      => array( __( 'Axe 1 — Titre', 'waicam' ), 'Former', 'text' ),
+		'waicam_home_axis_1_text'       => array( __( 'Axe 1 — Description', 'waicam' ), 'Former les jeunes filles et femmes aux compétences numériques et à l’IA appliquée.', 'textarea' ),
+		'waicam_home_axis_1_url'        => array( __( 'Axe 1 — URL', 'waicam' ), home_url( '/formations' ), 'url' ),
+		'waicam_home_axis_2_title'      => array( __( 'Axe 2 — Titre', 'waicam' ), 'Accompagner', 'text' ),
+		'waicam_home_axis_2_text'       => array( __( 'Axe 2 — Description', 'waicam' ), 'Accompagner les femmes vers des parcours concrets : leadership, entrepreneuriat et innovation.', 'textarea' ),
+		'waicam_home_axis_2_url'        => array( __( 'Axe 2 — URL', 'waicam' ), home_url( '/programmes' ), 'url' ),
+	);
+
+	foreach ( $home_posthero_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
+		if ( $cfg[2] === 'textarea' ) $sanitize = 'sanitize_textarea_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_posthero',
+			'type'    => $cfg[2],
+		) );
+	}
 }
 add_action( 'customize_register', 'waicam_customize_register' );
 
