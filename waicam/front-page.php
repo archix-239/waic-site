@@ -280,6 +280,32 @@ get_header(); ?>
 	</svg>
 </section>
 
+<!-- ========== HOME — TÉMOIGNAGE CADRÉ (RÉFÉRENCE GWC) ========== -->
+<section class="home-quote-gwc">
+	<div class="home-quote-gwc__frame">
+		<div class="home-quote-gwc__panel">
+			<blockquote class="home-quote-gwc__text">
+				<?php echo esc_html( get_theme_mod( 'waicam_home_quote_text', 'Women in AI Cameroon a changé ma trajectoire professionnelle en me donnant les outils, la confiance et la communauté nécessaires pour agir concrètement.' ) ); ?>
+			</blockquote>
+			<p class="home-quote-gwc__meta">
+				<span class="home-quote-gwc__meta-wave" aria-hidden="true">~</span>
+				<?php echo esc_html( get_theme_mod( 'waicam_home_quote_author', 'MEMBRE WAI-CAM' ) ); ?>,
+				<?php echo esc_html( get_theme_mod( 'waicam_home_quote_role', 'Programme Leadership & Mentorat' ) ); ?>
+			</p>
+		</div>
+		<?php
+		$quote_img_id  = absint( get_theme_mod( 'waicam_home_quote_media_id', 0 ) );
+		$quote_img_url = $quote_img_id ? wp_get_attachment_image_url( $quote_img_id, 'large' ) : '';
+		$quote_img_alt = $quote_img_id ? get_post_meta( $quote_img_id, '_wp_attachment_image_alt', true ) : '';
+		?>
+		<div class="home-quote-gwc__media<?php echo $quote_img_url ? ' has-image' : ''; ?>">
+			<?php if ( $quote_img_url ) : ?>
+				<img src="<?php echo esc_url( $quote_img_url ); ?>" alt="<?php echo esc_attr( $quote_img_alt ?: 'Portrait témoignage WAI-CAM' ); ?>" loading="lazy" />
+			<?php endif; ?>
+		</div>
+	</div>
+</section>
+
 <!-- Icônes réseaux sociaux — fixes au scroll -->
 <div class="social-float" id="social-float">
 	<a href="<?php echo esc_url( get_theme_mod( 'waicam_social_linkedin', '#' ) ); ?>"

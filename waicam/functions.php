@@ -539,6 +539,43 @@ function waicam_customize_register( $wp_customize ) {
 			'type'    => $cfg[2],
 		) );
 	}
+
+	// ────────── Section Home témoignage cadré ──────────
+	$wp_customize->add_section( 'waicam_home_quote', array(
+		'title'       => __( 'Accueil — Témoignage cadré', 'waicam' ),
+		'description' => __( 'Bloc témoignage avec visuel et motif de cadre inspiré de la référence.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$quote_fields = array(
+		'waicam_home_quote_text'   => array( __( 'Texte du témoignage', 'waicam' ), 'Women in AI Cameroon a changé ma trajectoire professionnelle en me donnant les outils, la confiance et la communauté nécessaires pour agir concrètement.', 'textarea' ),
+		'waicam_home_quote_author' => array( __( 'Nom / signature', 'waicam' ), 'MEMBRE WAI-CAM', 'text' ),
+		'waicam_home_quote_role'   => array( __( 'Fonction / programme', 'waicam' ), 'Programme Leadership & Mentorat', 'text' ),
+	);
+	foreach ( $quote_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_quote',
+			'type'    => $cfg[2],
+		) );
+	}
+	$wp_customize->add_setting( 'waicam_home_quote_media_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control(
+		$wp_customize,
+		'waicam_home_quote_media_id',
+		array(
+			'label'      => __( 'Image témoignage', 'waicam' ),
+			'section'    => 'waicam_home_quote',
+			'mime_type'  => 'image',
+		)
+	) );
 	}
 	add_action( 'customize_register', 'waicam_customize_register' );
 
