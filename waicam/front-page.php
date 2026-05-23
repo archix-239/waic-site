@@ -52,7 +52,7 @@ get_header(); ?>
 					$posthero_img_url = $posthero_img_id ? wp_get_attachment_image_url( $posthero_img_id, 'large' ) : '';
 					$posthero_img_alt = $posthero_img_id ? get_post_meta( $posthero_img_id, '_wp_attachment_image_alt', true ) : '';
 					?>
-					<div class="home-posthero-media">
+					<div class="home-posthero-media<?php echo $posthero_img_url ? ' has-image' : ''; ?>">
 						<?php if ( $posthero_img_url ) : ?>
 							<img src="<?php echo esc_url( $posthero_img_url ); ?>" alt="<?php echo esc_attr( $posthero_img_alt ?: 'Visuel de section' ); ?>" loading="lazy" />
 						<?php endif; ?>
@@ -229,7 +229,7 @@ get_header(); ?>
 		$featured_img_url = $featured_img_id ? wp_get_attachment_image_url( $featured_img_id, 'large' ) : '';
 		$featured_img_alt = $featured_img_id ? get_post_meta( $featured_img_id, '_wp_attachment_image_alt', true ) : '';
 		?>
-		<div class="home-featured-initiative__media">
+		<div class="home-featured-initiative__media<?php echo $featured_img_url ? ' has-image' : ''; ?>">
 			<?php if ( $featured_img_url ) : ?>
 				<img src="<?php echo esc_url( $featured_img_url ); ?>" alt="<?php echo esc_attr( $featured_img_alt ?: 'Visuel initiative phare' ); ?>" loading="lazy" />
 			<?php endif; ?>

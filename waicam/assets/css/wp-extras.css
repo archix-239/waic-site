@@ -90,6 +90,10 @@
 	object-fit: cover;
 	display: block;
 }
+.home-posthero-media.has-image {
+	border-style: solid;
+	border-color: transparent;
+}
 .home-posthero-highlight h2 {
 	font-size: clamp(2rem, 4vw, 3.2rem);
 	color: #1E1B4B;
@@ -395,6 +399,10 @@
 	min-height: 520px;
 	object-fit: cover;
 	display: block;
+}
+.home-featured-initiative__media.has-image {
+	border-style: solid;
+	border-color: transparent;
 }
 .home-featured-initiative__content {
 	padding: 14px 0;
