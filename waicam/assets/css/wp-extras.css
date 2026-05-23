@@ -4422,19 +4422,18 @@ section .testimonials-grid .testimonial-card {
    HOME — NEWSLETTER (inspiration Girls Who Code)
    ========================================================= */
 .home-newsletter-gwc {
-  background: #ffffff;
+  background: #eaf8f5;
   padding: 0;
 }
 
 .home-newsletter-gwc__inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 72px 24px 56px;
+  padding: 72px 24px 92px;
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: 48px;
   align-items: start;
-  background: #eaf8f5;
 }
 
 .home-newsletter-gwc__content h2 {
@@ -4481,19 +4480,24 @@ section .testimonials-grid .testimonial-card {
   display: block;
   width: 100%;
   height: 28px;
+  margin-top: 0;
 }
 
 .home-newsletter-gwc__wave-divider path {
   fill: none;
   stroke: #1E1B4B;
   stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 1800;
+  stroke-dashoffset: 1800;
+  animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4;
 }
 
 @media (max-width: 900px) {
   .home-newsletter-gwc__inner {
     grid-template-columns: 1fr;
     gap: 24px;
-    padding: 48px 18px 40px;
+    padding: 48px 18px 64px;
   }
 
   .home-newsletter-gwc__content p {
