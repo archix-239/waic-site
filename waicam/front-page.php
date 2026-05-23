@@ -173,9 +173,9 @@ get_header(); ?>
 			<?php if ( $home_video_url ) :
 				$embed_html = wp_oembed_get( $home_video_url_sanitized, array( 'width' => 1280 ) );
 				if ( $embed_html ) : ?>
-					<div class="home-video-embed">
-						<?php echo $embed_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					</div>
+						<div class="home-video-embed">
+							<?php echo $embed_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						</div>
 				<?php
 				else :
 					$is_facebook_video_like = strpos( $home_video_url_sanitized, 'facebook.com' ) !== false
@@ -185,9 +185,9 @@ get_header(); ?>
 						$fb_embed = 'https://www.facebook.com/plugins/video.php?href='
 							. rawurlencode( $home_video_url_sanitized )
 							. '&show_text=false&width=1280'; ?>
-						<div class="home-video-embed">
-							<iframe
-								src="<?php echo esc_url( $fb_embed ); ?>"
+							<div class="home-video-embed home-video-embed--facebook">
+								<iframe
+									src="<?php echo esc_url( $fb_embed ); ?>"
 								width="1280"
 								height="720"
 								style="border:none;overflow:hidden"

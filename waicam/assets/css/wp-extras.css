@@ -330,10 +330,22 @@
 .home-video-frame-wrap {
 	width: 100%;
 }
-.home-video-embed iframe {
-	display: block;
+.home-video-embed {
+	position: relative;
 	width: 100%;
-	min-height: 520px;
+	aspect-ratio: 16 / 9;
+	background: #000;
+	overflow: hidden;
+}
+.home-video-embed iframe,
+.home-video-embed .wp-embedded-content,
+.home-video-embed .fb-video {
+	position: absolute;
+	inset: 0;
+	width: 100% !important;
+	height: 100% !important;
+	max-width: 100% !important;
+	display: block;
 	border: 0;
 }
 .home-video-placeholder {
@@ -349,9 +361,6 @@
 	text-align: center;
 }
 @media (max-width: 900px) {
-	.home-video-embed iframe {
-		min-height: 280px;
-	}
 	.home-video-placeholder {
 		min-height: 260px;
 	}
