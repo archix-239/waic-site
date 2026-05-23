@@ -386,7 +386,7 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_home_axis_2_url'        => array( __( 'Axe 2 — URL', 'waicam' ), home_url( '/programmes' ), 'url' ),
 	);
 
-	foreach ( $home_posthero_fields as $key => $cfg ) {
+		foreach ( $home_posthero_fields as $key => $cfg ) {
 		$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
 		if ( $cfg[2] === 'textarea' ) $sanitize = 'sanitize_textarea_field';
 		$wp_customize->add_setting( $key, array(
@@ -463,6 +463,19 @@ function waicam_customize_register( $wp_customize ) {
 			'type'    => $cfg[2],
 			) );
 		}
+		$wp_customize->add_setting( 'waicam_home_posthero_media_id', array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		) );
+		$wp_customize->add_control( new WP_Customize_Media_Control(
+			$wp_customize,
+			'waicam_home_posthero_media_id',
+			array(
+				'label'      => __( 'Image de la section (gauche)', 'waicam' ),
+				'section'    => 'waicam_home_posthero',
+				'mime_type'  => 'image',
+			)
+		) );
 
 		// ────────── Section Initiative phare (image + éditorial + CTA actualités) ──────────
 		$wp_customize->add_section( 'waicam_home_featured', array(
@@ -490,6 +503,19 @@ function waicam_customize_register( $wp_customize ) {
 				'type'    => $cfg[2],
 			) );
 		}
+		$wp_customize->add_setting( 'waicam_home_featured_media_id', array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		) );
+		$wp_customize->add_control( new WP_Customize_Media_Control(
+			$wp_customize,
+			'waicam_home_featured_media_id',
+			array(
+				'label'      => __( 'Image initiative phare (gauche)', 'waicam' ),
+				'section'    => 'waicam_home_featured',
+				'mime_type'  => 'image',
+			)
+		) );
 	}
 	add_action( 'customize_register', 'waicam_customize_register' );
 

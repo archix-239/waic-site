@@ -44,11 +44,20 @@ get_header(); ?>
 </section>
 
 <!-- ========== HOME — SECTION POST-HERO (STYLE INSTITUTIONNEL) ========== -->
-<section class="home-posthero-gwc">
-	<div class="home-posthero-inner">
-			<div class="home-posthero-top">
-				<div class="home-posthero-media" aria-hidden="true"></div>
-				<div class="home-posthero-highlight">
+	<section class="home-posthero-gwc">
+		<div class="home-posthero-inner">
+				<div class="home-posthero-top">
+					<?php
+					$posthero_img_id  = absint( get_theme_mod( 'waicam_home_posthero_media_id', 0 ) );
+					$posthero_img_url = $posthero_img_id ? wp_get_attachment_image_url( $posthero_img_id, 'large' ) : '';
+					$posthero_img_alt = $posthero_img_id ? get_post_meta( $posthero_img_id, '_wp_attachment_image_alt', true ) : '';
+					?>
+					<div class="home-posthero-media">
+						<?php if ( $posthero_img_url ) : ?>
+							<img src="<?php echo esc_url( $posthero_img_url ); ?>" alt="<?php echo esc_attr( $posthero_img_alt ?: 'Visuel de section' ); ?>" loading="lazy" />
+						<?php endif; ?>
+					</div>
+					<div class="home-posthero-highlight">
 					<h2><?php echo esc_html( get_theme_mod( 'waicam_home_posthero_title', '5 MILLIONS D’ICI 2030' ) ); ?></h2>
 					<svg class="home-posthero-wave" viewBox="0 0 320 16" role="presentation" aria-hidden="true" focusable="false">
 						<path d="M0 8 Q8 0 16 8 T32 8 T48 8 T64 8 T80 8 T96 8 T112 8 T128 8 T144 8 T160 8 T176 8 T192 8 T208 8 T224 8 T240 8 T256 8 T272 8 T288 8 T304 8 T320 8"></path>
@@ -215,7 +224,16 @@ get_header(); ?>
 <!-- ========== HOME — INITIATIVE PHARE WAI-CAM ========== -->
 <section class="home-featured-initiative">
 	<div class="home-featured-initiative__inner">
-		<div class="home-featured-initiative__media" aria-hidden="true"></div>
+		<?php
+		$featured_img_id  = absint( get_theme_mod( 'waicam_home_featured_media_id', 0 ) );
+		$featured_img_url = $featured_img_id ? wp_get_attachment_image_url( $featured_img_id, 'large' ) : '';
+		$featured_img_alt = $featured_img_id ? get_post_meta( $featured_img_id, '_wp_attachment_image_alt', true ) : '';
+		?>
+		<div class="home-featured-initiative__media">
+			<?php if ( $featured_img_url ) : ?>
+				<img src="<?php echo esc_url( $featured_img_url ); ?>" alt="<?php echo esc_attr( $featured_img_alt ?: 'Visuel initiative phare' ); ?>" loading="lazy" />
+			<?php endif; ?>
+		</div>
 
 		<div class="home-featured-initiative__content">
 			<div class="home-featured-initiative__kicker">
