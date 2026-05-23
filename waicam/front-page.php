@@ -155,6 +155,40 @@ get_header(); ?>
 	</div>
 </section>
 
+<!-- ========== HOME — SECTION VIDÉO ========== -->
+<section class="home-video-section">
+	<?php
+	$home_video_url   = trim( (string) get_theme_mod( 'waicam_home_video_url', '' ) );
+	$home_video_title = get_theme_mod( 'waicam_home_video_title', 'Regards croisés sur nos actions terrain' );
+	$home_video_text  = get_theme_mod( 'waicam_home_video_text', 'Découvrez nos initiatives, nos formations et nos témoignages en vidéo.' );
+	?>
+	<div class="home-video-inner">
+		<div class="home-video-head">
+			<h2><?php echo esc_html( $home_video_title ); ?></h2>
+			<p><?php echo esc_html( $home_video_text ); ?></p>
+		</div>
+
+		<div class="home-video-frame-wrap">
+			<?php if ( $home_video_url ) :
+				$embed_html = wp_oembed_get( esc_url_raw( $home_video_url ), array( 'width' => 1280 ) );
+				if ( $embed_html ) : ?>
+					<div class="home-video-embed">
+						<?php echo $embed_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					</div>
+				<?php else : ?>
+					<div class="home-video-placeholder">
+						<span><?php esc_html_e( 'Lien vidéo non reconnu. Vérifiez l’URL (YouTube / Vimeo).', 'waicam' ); ?></span>
+					</div>
+				<?php endif;
+			else : ?>
+				<div class="home-video-placeholder">
+					<span><?php esc_html_e( 'Ajoutez un lien vidéo dans Apparence → Personnaliser → WAI-CAM → Accueil — Section vidéo.', 'waicam' ); ?></span>
+				</div>
+			<?php endif; ?>
+		</div>
+	</div>
+</section>
+
 <!-- Icônes réseaux sociaux — fixes au scroll -->
 <div class="social-float" id="social-float">
 	<a href="<?php echo esc_url( get_theme_mod( 'waicam_social_linkedin', '#' ) ); ?>"

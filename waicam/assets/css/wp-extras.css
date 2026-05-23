@@ -304,6 +304,59 @@
 	}
 }
 
+/* ─── Home : section vidéo ─── */
+.home-video-section {
+	background: #ffffff;
+	padding: 24px 0 40px;
+}
+.home-video-inner {
+	max-width: 1340px;
+	margin: 0 auto;
+}
+.home-video-head {
+	max-width: 1100px;
+	margin: 0 auto 20px;
+	padding: 0 5%;
+}
+.home-video-head h2 {
+	color: #1E1B4B;
+	font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+	margin-bottom: 8px;
+}
+.home-video-head p {
+	color: #111;
+	font-size: 1.05rem;
+}
+.home-video-frame-wrap {
+	width: 100%;
+}
+.home-video-embed iframe {
+	display: block;
+	width: 100%;
+	min-height: 520px;
+	border: 0;
+}
+.home-video-placeholder {
+	min-height: 440px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #F3F6FF;
+	border: 2px dashed #1E1B4B;
+	color: #1E1B4B;
+	font-weight: 600;
+	padding: 24px;
+	text-align: center;
+}
+@media (max-width: 900px) {
+	.home-video-embed iframe {
+		min-height: 280px;
+	}
+	.home-video-placeholder {
+		min-height: 260px;
+	}
+}
+
 /* ─── About : Vision & Mission ─── */
 .vision-mission-section {
 	background: var(--gray-light);
