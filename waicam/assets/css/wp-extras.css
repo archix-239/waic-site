@@ -4495,13 +4495,32 @@ section .testimonials-grid .testimonial-card {
 
 @media (max-width: 900px) {
   .home-newsletter-gwc__inner {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    gap: 18px;
     padding: 48px 18px 64px;
+    align-items: start;
+  }
+
+  .home-newsletter-gwc__content h2 {
+    font-size: clamp(1.7rem, 5.8vw, 2.4rem);
+    margin-bottom: 14px;
   }
 
   .home-newsletter-gwc__content p {
-    font-size: 1.1rem;
+    font-size: .95rem;
+    line-height: 1.4;
+  }
+
+  .home-newsletter-gwc__form {
+    min-width: 0;
+  }
+
+  .home-newsletter-gwc__form input,
+  .home-newsletter-gwc__form select,
+  .home-newsletter-gwc__form textarea,
+  .home-newsletter-gwc__form button,
+  .home-newsletter-gwc__form input[type="submit"] {
+    font-size: .85rem;
   }
 }
 
