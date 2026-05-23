@@ -4417,3 +4417,86 @@ section .testimonials-grid .testimonial-card {
 	font-size: .9rem; color: var(--gray);
 	line-height: 1.7; font-style: italic;
 }
+
+/* =========================================================
+   HOME — NEWSLETTER (inspiration Girls Who Code)
+   ========================================================= */
+.home-newsletter-gwc {
+  background: #ffffff;
+  padding: 0;
+}
+
+.home-newsletter-gwc__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 24px 56px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  background: #eaf8f5;
+}
+
+.home-newsletter-gwc__content h2 {
+  margin: 0 0 22px;
+  font-size: clamp(2rem, 4.8vw, 4.2rem);
+  line-height: .95;
+  letter-spacing: -0.02em;
+  color: #1E1B4B;
+  text-transform: uppercase;
+}
+
+.home-newsletter-gwc__content p {
+  margin: 0;
+  max-width: 600px;
+  font-size: 1.35rem;
+  line-height: 1.45;
+  color: #000;
+}
+
+.home-newsletter-gwc__form input,
+.home-newsletter-gwc__form select,
+.home-newsletter-gwc__form textarea {
+  border: 2px solid #1E1B4B !important;
+  background: #fff !important;
+}
+
+.home-newsletter-gwc__form button,
+.home-newsletter-gwc__form input[type="submit"] {
+  border: 2px solid #1E1B4B !important;
+  background: transparent !important;
+  color: #1E1B4B !important;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.home-newsletter-gwc__placeholder {
+  border: 2px dashed #1E1B4B;
+  color: #1E1B4B;
+  background: #fff;
+  padding: 18px;
+}
+
+.home-newsletter-gwc__wave-divider {
+  display: block;
+  width: 100%;
+  height: 28px;
+}
+
+.home-newsletter-gwc__wave-divider path {
+  fill: none;
+  stroke: #1E1B4B;
+  stroke-width: 2;
+}
+
+@media (max-width: 900px) {
+  .home-newsletter-gwc__inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 48px 18px 40px;
+  }
+
+  .home-newsletter-gwc__content p {
+    font-size: 1.1rem;
+  }
+}

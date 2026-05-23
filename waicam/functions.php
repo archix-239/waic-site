@@ -516,6 +516,29 @@ function waicam_customize_register( $wp_customize ) {
 				'mime_type'  => 'image',
 			)
 		) );
+
+	// ────────── Section Home newsletter ──────────
+	$wp_customize->add_section( 'waicam_home_newsletter', array(
+		'title'       => __( 'Accueil — Newsletter', 'waicam' ),
+		'description' => __( 'Bloc newsletter après la section initiative phare.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$newsletter_fields = array(
+		'waicam_home_newsletter_title' => array( __( 'Titre', 'waicam' ), 'Restez informé(e) de nos actualités', 'text' ),
+		'waicam_home_newsletter_text'  => array( __( 'Texte', 'waicam' ), 'Recevez les mises à jour sur nos formations, événements, ressources et actions de terrain portées par Women in AI Cameroon.', 'textarea' ),
+	);
+	foreach ( $newsletter_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_newsletter',
+			'type'    => $cfg[2],
+		) );
+	}
 	}
 	add_action( 'customize_register', 'waicam_customize_register' );
 
