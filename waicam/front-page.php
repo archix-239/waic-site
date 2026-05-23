@@ -161,6 +161,7 @@ get_header(); ?>
 	$home_video_url   = trim( (string) get_theme_mod( 'waicam_home_video_url', '' ) );
 	$home_video_title = get_theme_mod( 'waicam_home_video_title', 'Regards croisés sur nos actions terrain' );
 	$home_video_text  = get_theme_mod( 'waicam_home_video_text', 'Découvrez nos initiatives, nos formations et nos témoignages en vidéo.' );
+	$home_video_url_sanitized = esc_url_raw( $home_video_url );
 	?>
 	<div class="home-video-inner">
 		<div class="home-video-head">
@@ -170,17 +171,39 @@ get_header(); ?>
 
 		<div class="home-video-frame-wrap">
 			<?php if ( $home_video_url ) :
-				$embed_html = wp_oembed_get( esc_url_raw( $home_video_url ), array( 'width' => 1280 ) );
+				$embed_html = wp_oembed_get( $home_video_url_sanitized, array( 'width' => 1280 ) );
 				if ( $embed_html ) : ?>
 					<div class="home-video-embed">
 						<?php echo $embed_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</div>
-				<?php else : ?>
-					<div class="home-video-placeholder">
-						<span><?php esc_html_e( 'Lien vidéo non reconnu. Vérifiez l’URL (YouTube / Vimeo).', 'waicam' ); ?></span>
-					</div>
-				<?php endif;
-			else : ?>
+				<?php
+				else :
+					$is_facebook_video_like = strpos( $home_video_url_sanitized, 'facebook.com' ) !== false
+						|| strpos( $home_video_url_sanitized, 'fb.watch' ) !== false;
+
+					if ( $is_facebook_video_like ) :
+						$fb_embed = 'https://www.facebook.com/plugins/video.php?href='
+							. rawurlencode( $home_video_url_sanitized )
+							. '&show_text=false&width=1280'; ?>
+						<div class="home-video-embed">
+							<iframe
+								src="<?php echo esc_url( $fb_embed ); ?>"
+								width="1280"
+								height="720"
+								style="border:none;overflow:hidden"
+								scrolling="no"
+								frameborder="0"
+								allowfullscreen="true"
+								allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+							</iframe>
+						</div>
+					<?php else : ?>
+						<div class="home-video-placeholder">
+							<span><?php esc_html_e( 'Lien vidéo non reconnu. Vérifiez l’URL (YouTube / Vimeo / Facebook vidéo publique).', 'waicam' ); ?></span>
+						</div>
+					<?php endif; ?>
+					<?php endif;
+				else : ?>
 				<div class="home-video-placeholder">
 					<span><?php esc_html_e( 'Ajoutez un lien vidéo dans Apparence → Personnaliser → WAI-CAM → Accueil — Section vidéo.', 'waicam' ); ?></span>
 				</div>
