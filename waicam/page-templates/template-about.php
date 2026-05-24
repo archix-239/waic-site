@@ -146,6 +146,55 @@ $about_change_cta_link_url   = get_theme_mod( 'waicam_about_change_cta_link_url'
 	</div>
 </section>
 
+
+<?php
+$about_values_title = get_theme_mod( 'waicam_about_values_title', 'NOS VALEURS' );
+$about_values_text  = get_theme_mod( 'waicam_about_values_text', "Ces valeurs définissent notre manière d'agir au quotidien." );
+$about_values = array(
+	array(
+		'icon_id' => (int) get_theme_mod( 'waicam_about_value_1_icon_id', 0 ),
+		'title'   => get_theme_mod( 'waicam_about_value_1_title', 'BRAVOURE' ),
+		'text'    => get_theme_mod( 'waicam_about_value_1_text', "Nous avançons avec résilience, ambition et persévérance pour ouvrir plus d'opportunités." ),
+	),
+	array(
+		'icon_id' => (int) get_theme_mod( 'waicam_about_value_2_icon_id', 0 ),
+		'title'   => get_theme_mod( 'waicam_about_value_2_title', 'SORORITÉ' ),
+		'text'    => get_theme_mod( 'waicam_about_value_2_text', "Nous croyons qu'une communauté diverse, solidaire et intergénérationnelle est plus forte." ),
+	),
+	array(
+		'icon_id' => (int) get_theme_mod( 'waicam_about_value_3_icon_id', 0 ),
+		'title'   => get_theme_mod( 'waicam_about_value_3_title', 'ENGAGEMENT' ),
+		'text'    => get_theme_mod( 'waicam_about_value_3_text', "Nous préparons les femmes et les jeunes à transformer durablement leur environnement." ),
+	),
+);
+?>
+<section class="about-values-gwc">
+	<div class="about-values-gwc__inner">
+		<h2 class="about-values-gwc__title"><?php echo esc_html( $about_values_title ); ?></h2>
+		<svg class="about-values-gwc__wave" viewBox="0 0 320 16" role="presentation" aria-hidden="true" focusable="false">
+			<path d="M0,8 C6,2 14,14 22,8 C30,2 38,14 46,8 C54,2 62,14 70,8 C78,2 86,14 94,8 C102,2 110,14 118,8 C126,2 134,14 142,8 C150,2 158,14 166,8 C174,2 182,14 190,8 C198,2 206,14 214,8 C222,2 230,14 238,8 C246,2 254,14 262,8 C270,2 278,14 286,8 C294,2 302,14 310,8 C314,6 317,8 320,8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+		</svg>
+		<p class="about-values-gwc__text"><?php echo esc_html( $about_values_text ); ?></p>
+		<div class="about-values-gwc__grid">
+			<?php foreach ( $about_values as $value ) :
+				$icon_url = $value['icon_id'] ? wp_get_attachment_image_url( $value['icon_id'], 'medium' ) : '';
+			?>
+				<article class="about-values-gwc__item">
+					<div class="about-values-gwc__icon<?php echo $icon_url ? ' has-image' : ''; ?>">
+						<?php if ( $icon_url ) : ?>
+							<img src="<?php echo esc_url( $icon_url ); ?>" alt="" loading="lazy" />
+						<?php else : ?>
+							<span>Icône</span>
+						<?php endif; ?>
+					</div>
+					<h3><?php echo esc_html( $value['title'] ); ?></h3>
+					<p><?php echo esc_html( $value['text'] ); ?></p>
+				</article>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</section>
+
 <!-- PRÉSENTATION -->
 <section>
 	<div class="about-grid" style="max-width:1100px;margin:0 auto;">

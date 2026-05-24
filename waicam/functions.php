@@ -791,6 +791,50 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
+
+	// ────────── Page About — Nos valeurs ──────────
+	$wp_customize->add_section( 'waicam_about_values', array(
+		'title'       => __( 'À propos — Nos valeurs', 'waicam' ),
+		'description' => __( 'Titre, description et 3 cartes valeurs.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+
+	$about_values_fields = array(
+		'waicam_about_values_title'        => array( __( 'Titre section', 'waicam' ), 'NOS VALEURS', 'text' ),
+		'waicam_about_values_text'         => array( __( 'Description section', 'waicam' ), "Ces valeurs définissent notre manière d'agir au quotidien.", 'textarea' ),
+		'waicam_about_value_1_title'       => array( __( 'Carte 1 — Titre', 'waicam' ), 'BRAVOURE', 'text' ),
+		'waicam_about_value_1_text'        => array( __( 'Carte 1 — Texte', 'waicam' ), "Nous avançons avec résilience, ambition et persévérance pour ouvrir plus d'opportunités.", 'textarea' ),
+		'waicam_about_value_2_title'       => array( __( 'Carte 2 — Titre', 'waicam' ), 'SORORITÉ', 'text' ),
+		'waicam_about_value_2_text'        => array( __( 'Carte 2 — Texte', 'waicam' ), "Nous croyons qu'une communauté diverse, solidaire et intergénérationnelle est plus forte.", 'textarea' ),
+		'waicam_about_value_3_title'       => array( __( 'Carte 3 — Titre', 'waicam' ), 'ENGAGEMENT', 'text' ),
+		'waicam_about_value_3_text'        => array( __( 'Carte 3 — Texte', 'waicam' ), "Nous préparons les femmes et les jeunes à transformer durablement leur environnement.", 'textarea' ),
+	);
+	foreach ( $about_values_fields as $key => $cfg ) {
+		$sanitize = 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_about_values',
+			'type'    => $cfg[2],
+		) );
+	}
+
+	for ( $i = 1; $i <= 3; $i++ ) {
+		$key = "waicam_about_value_{$i}_icon_id";
+		$wp_customize->add_setting( $key, array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		) );
+		$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, $key, array(
+			'label'     => sprintf( __( 'Carte %d — Icône', 'waicam' ), $i ),
+			'section'   => 'waicam_about_values',
+			'mime_type' => 'image',
+		) ) );
+	}
+
 	// ────────── Section Home partenaires ──────────
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),
