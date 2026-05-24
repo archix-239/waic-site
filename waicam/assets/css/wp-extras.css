@@ -5174,12 +5174,13 @@ footer ul li {
 .about-gap-gwc__point.p1 { left:42px; top:0; }
 .about-gap-gwc__point.p2 { right:140px; top:38%; }
 .about-gap-gwc__point.p3 { right:18px; top:46%; }
-.about-gap-gwc__axis-y { position:absolute; left:10px; top:56%; transform:translateY(-50%) rotate(-90deg); transform-origin:left top; color:#1E1B4B; font-size:.95rem; letter-spacing:.01em; }
+.about-gap-gwc__axis-y { position:absolute; left:10px; bottom:56px; transform:rotate(-90deg) translateY(100%); transform-origin:left bottom; color:#1E1B4B; font-size:.95rem; letter-spacing:.01em; }
 .about-gap-gwc__years { position:absolute; left:62px; right:26px; bottom:0; display:flex; justify-content:space-between; color:#1E1B4B; font-size:1rem; }
 @media (max-width:980px){
   .about-gap-gwc__chart { min-height:372px; padding:50px 14px 48px 44px; }
   .about-gap-gwc__area { left:44px; right:14px; bottom:48px; height:240px; }
   .about-gap-gwc__years { left:44px; right:14px; }
+  .about-gap-gwc__axis-y { bottom:48px; }
   .about-gap-gwc__point.p2 { right:95px; top:40%; }
   .about-gap-gwc__point.p3 { right:8px; top:49%; }
 }
