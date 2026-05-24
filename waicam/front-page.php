@@ -432,10 +432,12 @@ get_header(); ?>
 				endwhile;
 				wp_reset_postdata();
 			else :
-				$fallbacks = array( 'MINPOSTEL', 'UNESCO', 'SENADI', 'ONU Femmes', 'CNPS', 'Vision 4' );
-				foreach ( $fallbacks as $f ) : ?>
-					<div class="home-partners-gwc__logo-item"><span><?php echo esc_html( $f ); ?></span></div>
-				<?php endforeach;
+				if ( current_user_can( 'edit_theme_options' ) ) : ?>
+					<div class="home-partners-gwc__empty">
+						<?php esc_html_e( 'Aucun partenaire à afficher. Cochez “Afficher sur l’accueil” (show_on_home) sur les fiches partenaires concernées et ajoutez un logo.', 'waicam' ); ?>
+					</div>
+				<?php
+				endif;
 			endif;
 			?>
 			<div class="home-partners-gwc__cta-wrap">

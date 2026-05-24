@@ -4932,6 +4932,13 @@ section .testimonials-grid .testimonial-card {
 .home-partners-gwc__logo-item span { color: #0E6A2E; font-weight: 700; }
 .home-partners-gwc__logos .home-partners-gwc__logo-item:nth-child(odd) { justify-content: flex-start; }
 .home-partners-gwc__logos .home-partners-gwc__logo-item:nth-child(even) { justify-content: flex-end; }
+.home-partners-gwc__empty {
+  grid-column: 1 / -1;
+  border: 2px dashed #1E1B4B;
+  color: #1E1B4B;
+  padding: 12px 14px;
+  background: #fff;
+}
 .home-partners-gwc__cta-wrap { grid-column: 1 / -1; display: flex; justify-content: flex-start; margin-top: 8px; }
 .home-partners-gwc__cta {
   color: #0E6A2E;
