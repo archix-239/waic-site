@@ -394,7 +394,16 @@ get_header(); ?>
 			if ( $partners ) :
 				while ( $partners->have_posts() ) :
 					$partners->the_post();
-					$logo = waicam_partner_logo( get_the_ID() );
+					$logo = '';
+					if ( has_post_thumbnail( get_the_ID() ) ) {
+						$logo = get_the_post_thumbnail_url( get_the_ID(), 'medium' );
+					}
+					if ( ! $logo ) {
+						$logo = waicam_image_url( 'logo_partenaire', get_the_ID(), 'medium', '' );
+						if ( ! $logo || strpos( $logo, '/assets/images/' ) !== false ) {
+							$logo = '';
+						}
+					}
 					?>
 					<div class="home-partners-gwc__logo-item">
 						<?php if ( $logo ) : ?>
