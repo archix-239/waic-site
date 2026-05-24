@@ -390,8 +390,21 @@ get_header(); ?>
 		</div>
 		<div class="home-partners-gwc__logos">
 			<?php
-			$partners = waicam_get_partenaires( 6 );
-			if ( $partners ) :
+			$partners = new WP_Query( array(
+				'post_type'      => 'partenaire',
+				'posts_per_page' => 6,
+				'post_status'    => 'publish',
+				'orderby'        => 'title',
+				'order'          => 'ASC',
+				'meta_query'     => array(
+					array(
+						'key'     => 'show_on_home',
+						'value'   => '1',
+						'compare' => '=',
+					),
+				),
+			) );
+			if ( $partners->have_posts() ) :
 				while ( $partners->have_posts() ) :
 					$partners->the_post();
 					$logo = '';
