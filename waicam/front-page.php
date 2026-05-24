@@ -283,6 +283,9 @@ get_header(); ?>
 <!-- ========== HOME — TÉMOIGNAGE CADRÉ (RÉFÉRENCE GWC) ========== -->
 <section class="home-quote-gwc">
 	<div class="home-quote-gwc__frame">
+		<div class="home-quote-gwc__wave-desktop" aria-hidden="true">
+			<img src="<?php echo esc_url( waicam_img( 'profile-cta-wave.svg' ) ); ?>" alt="" loading="lazy" />
+		</div>
 		<div class="home-quote-gwc__panel">
 			<blockquote class="home-quote-gwc__text">
 				<?php echo esc_html( get_theme_mod( 'waicam_home_quote_text', 'Women in AI Cameroon a changé ma trajectoire professionnelle en me donnant les outils, la confiance et la communauté nécessaires pour agir concrètement.' ) ); ?>
