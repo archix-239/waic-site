@@ -309,6 +309,22 @@ get_header(); ?>
 	</div>
 </section>
 
+<!-- ========== HOME — GRAND CHIFFRE + CTA (RÉFÉRENCE GWC) ========== -->
+<section class="home-bigstat-gwc">
+	<div class="home-bigstat-gwc__inner">
+		<h2><?php echo esc_html( get_theme_mod( 'waicam_home_bigstat_title', '860 000 femmes et jeunes touchées par nos actions au Cameroun' ) ); ?></h2>
+		<div class="home-bigstat-gwc__bottom">
+			<p><?php echo esc_html( get_theme_mod( 'waicam_home_bigstat_text', 'WAI-CAM accélère l’inclusion numérique des femmes grâce à des programmes de formation, de mentorat et d’accompagnement sur le terrain.' ) ); ?></p>
+			<a href="<?php echo esc_url( get_theme_mod( 'waicam_home_bigstat_cta_url', home_url( '/don' ) ) ); ?>" class="home-bigstat-gwc__cta">
+				<?php echo esc_html( get_theme_mod( 'waicam_home_bigstat_cta_text', 'Soutenir nos actions' ) ); ?>
+			</a>
+		</div>
+	</div>
+	<svg class="home-bigstat-gwc__wave-divider" viewBox="0 0 1440 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+		<path d="M0 14 Q10 2 20 14 T40 14 T60 14 T80 14 T100 14 T120 14 T140 14 T160 14 T180 14 T200 14 T220 14 T240 14 T260 14 T280 14 T300 14 T320 14 T340 14 T360 14 T380 14 T400 14 T420 14 T440 14 T460 14 T480 14 T500 14 T520 14 T540 14 T560 14 T580 14 T600 14 T620 14 T640 14 T660 14 T680 14 T700 14 T720 14 T740 14 T760 14 T780 14 T800 14 T820 14 T840 14 T860 14 T880 14 T900 14 T920 14 T940 14 T960 14 T980 14 T1000 14 T1020 14 T1040 14 T1060 14 T1080 14 T1100 14 T1120 14 T1140 14 T1160 14 T1180 14 T1200 14 T1220 14 T1240 14 T1260 14 T1280 14 T1300 14 T1320 14 T1340 14 T1360 14 T1380 14 T1400 14 T1420 14 T1440 14"></path>
+	</svg>
+</section>
+
 <!-- Icônes réseaux sociaux — fixes au scroll -->
 <div class="social-float" id="social-float">
 	<a href="<?php echo esc_url( get_theme_mod( 'waicam_social_linkedin', '#' ) ); ?>"

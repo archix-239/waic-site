@@ -576,6 +576,32 @@ function waicam_customize_register( $wp_customize ) {
 			'mime_type'  => 'image',
 		)
 	) );
+
+	// ────────── Section Home grand chiffre + CTA ──────────
+	$wp_customize->add_section( 'waicam_home_bigstat', array(
+		'title'       => __( 'Accueil — Grand chiffre', 'waicam' ),
+		'description' => __( 'Bloc grand chiffre avec texte et CTA après le témoignage.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$bigstat_fields = array(
+		'waicam_home_bigstat_title'   => array( __( 'Titre principal', 'waicam' ), '860 000 femmes et jeunes touchées par nos actions au Cameroun', 'text' ),
+		'waicam_home_bigstat_text'    => array( __( 'Texte', 'waicam' ), 'WAI-CAM accélère l’inclusion numérique des femmes grâce à des programmes de formation, de mentorat et d’accompagnement sur le terrain.', 'textarea' ),
+		'waicam_home_bigstat_cta_text'=> array( __( 'Texte bouton', 'waicam' ), 'Soutenir nos actions', 'text' ),
+		'waicam_home_bigstat_cta_url' => array( __( 'URL bouton', 'waicam' ), home_url( '/don' ), 'url' ),
+	);
+	foreach ( $bigstat_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
+		if ( $cfg[2] === 'textarea' ) $sanitize = 'sanitize_textarea_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_bigstat',
+			'type'    => $cfg[2],
+		) );
+	}
 	}
 	add_action( 'customize_register', 'waicam_customize_register' );
 

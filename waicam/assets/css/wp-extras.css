@@ -4623,3 +4623,99 @@ section .testimonials-grid .testimonial-card {
     min-height: 220px;
   }
 }
+
+/* =========================================================
+   HOME — GRAND CHIFFRE + CTA (inspiration Girls Who Code)
+   ========================================================= */
+.home-bigstat-gwc {
+  background: #f5f5f7;
+  padding: 64px 0 0;
+}
+
+.home-bigstat-gwc__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+.home-bigstat-gwc__inner h2 {
+  margin: 0;
+  color: #063a54;
+  font-size: clamp(2.1rem, 7.2vw, 7rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  max-width: 930px;
+}
+
+.home-bigstat-gwc__bottom {
+  margin-top: 52px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 36px;
+  align-items: center;
+}
+
+.home-bigstat-gwc__bottom p {
+  margin: 0;
+  color: #1E1B4B;
+  max-width: 620px;
+  font-size: clamp(1rem, 1.8vw, 1.9rem);
+  line-height: 1.4;
+}
+
+.home-bigstat-gwc__cta {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 290px;
+  padding: 16px 26px;
+  border: 2px solid #0E6A2E;
+  color: #0E6A2E;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+.home-bigstat-gwc__cta:hover,
+.home-bigstat-gwc__cta:focus-visible {
+  background: #0E6A2E;
+  color: #fff;
+}
+
+.home-bigstat-gwc__wave-divider {
+  display: block;
+  width: 100%;
+  height: 28px;
+}
+
+.home-bigstat-gwc__wave-divider path {
+  fill: none;
+  stroke: #1E1B4B;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 1800;
+  stroke-dashoffset: 1800;
+  animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4;
+}
+
+@media (max-width: 900px) {
+  .home-bigstat-gwc {
+    padding-top: 42px;
+  }
+
+  .home-bigstat-gwc__inner {
+    padding: 0 18px 44px;
+  }
+
+  .home-bigstat-gwc__bottom {
+    margin-top: 28px;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .home-bigstat-gwc__cta {
+    width: 100%;
+    min-width: 0;
+  }
+}
