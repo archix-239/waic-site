@@ -5023,7 +5023,7 @@ footer ul li {
 /* About page - GWC inspired hero */
 .about-hero-gwc {
   position: relative;
-  min-height: clamp(380px, 64vh, 620px);
+  min-height: clamp(260px, 44vw, 460px);
   background-image: var(--about-hero-bg);
   background-size: cover;
   background-position: center;
@@ -5040,19 +5040,20 @@ footer ul li {
   z-index: 1;
   width: min(1200px, 92%);
   margin: 0 auto;
-  padding: clamp(44px, 8vw, 84px) 0;
+  padding: clamp(24px, 5vw, 52px) 0;
 }
 .about-hero-gwc__inner h1 {
   margin: 0;
-  max-width: 860px;
+  max-width: 640px;
   color: #fff;
-  font-size: clamp(2rem, 5.6vw, 4.6rem);
-  line-height: .98;
+  font-size: clamp(1.5rem, 4.2vw, 3.2rem);
+  line-height: 1.02;
   text-transform: uppercase;
   letter-spacing: .02em;
   font-weight: 800;
 }
 @media (max-width: 768px) {
-  .about-hero-gwc { min-height: 360px; }
-  .about-hero-gwc__inner h1 { max-width: 96%; }
+  .about-hero-gwc { min-height: 240px; }
+  .about-hero-gwc__inner { padding: 20px 0 26px; }
+  .about-hero-gwc__inner h1 { max-width: 96%; font-size: clamp(1.2rem, 7.4vw, 2.3rem); line-height: 1.03; }
 }
