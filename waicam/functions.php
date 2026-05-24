@@ -640,6 +640,33 @@ function waicam_customize_register( $wp_customize ) {
 	}
 
 
+
+	// ────────── Page Équipe — Hero ──────────
+	$wp_customize->add_section( 'waicam_team_hero', array(
+		'title'       => __( 'Équipe — Hero', 'waicam' ),
+		'description' => __( 'Première section de la page Notre Équipe.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+	$team_hero_fields = array(
+		'waicam_team_hero_kicker'   => array( __( 'Badge', 'waicam' ), 'NOTRE ÉQUIPE', 'text' ),
+		'waicam_team_hero_title'    => array( __( 'Titre', 'waicam' ), "RENCONTREZ L'ÉQUIPE QUI FAIT AVANCER WAI-CAM", 'text' ),
+		'waicam_team_hero_cta_text' => array( __( 'Texte CTA', 'waicam' ), 'Envie de rejoindre l’équipe ? Découvrir les opportunités', 'text' ),
+		'waicam_team_hero_cta_url'  => array( __( 'URL CTA', 'waicam' ), home_url( '/rejoindre/' ), 'url' ),
+	);
+	foreach ( $team_hero_fields as $key => $cfg ) {
+		$sanitize = 'url' === $cfg[2] ? 'esc_url_raw' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_team_hero',
+			'type'    => $cfg[2],
+		) );
+	}
+
+
 	// ────────── Page About — Hero ──────────
 	$wp_customize->add_section( 'waicam_about_hero', array(
 		'title'       => __( 'À propos — Hero', 'waicam' ),

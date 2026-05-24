@@ -5268,3 +5268,16 @@ footer ul li {
 @media (max-width: 680px) {
   .about-reports-gwc__grid { grid-template-columns:1fr; }
 }
+
+/* Team page — first section (GWC inspired) */
+.team-hero-gwc { position:relative; overflow:hidden; background:#f3f8f8; padding:clamp(42px,7vw,108px) 0; }
+.team-hero-gwc__bg-shape { position:absolute; inset:auto auto 0 0; width:100%; height:86%; background:rgba(14,106,46,.10); border-radius:42% 58% 58% 42% / 18% 24% 76% 82%; transform:translate(-18%, 12%); }
+.team-hero-gwc__inner { position:relative; z-index:1; width:min(1120px,92%); margin:0 auto; }
+.team-hero-gwc__kicker { display:inline-block; background:#0E6A2E; color:#fff; padding:12px 26px; font-size:.95rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:22px; }
+.team-hero-gwc__title { margin:0; max-width:920px; color:#00314A; text-transform:uppercase; font-size:clamp(2.1rem,6vw,5.3rem); line-height:.98; }
+.team-hero-gwc__cta { margin-top:clamp(34px,5vw,56px); display:inline-flex; align-items:center; gap:8px; color:#0E6A2E; text-decoration:none; font-weight:700; font-size:clamp(1.05rem,2vw,2rem); }
+.team-hero-gwc__cta .arrow-wave path { stroke:#0E6A2E; }
+.team-hero-gwc__cta:hover .arrow-plain,
+.team-hero-gwc__cta:focus-visible .arrow-plain { opacity:0; transform:translateX(2px); }
+.team-hero-gwc__cta:hover .arrow-wave,
+.team-hero-gwc__cta:focus-visible .arrow-wave { opacity:1; transform:translateX(2px); animation: waicam-arrow-wave-reveal .42s cubic-bezier(.22,.61,.36,1) forwards; }

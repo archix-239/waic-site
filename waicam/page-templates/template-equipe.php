@@ -12,19 +12,25 @@
 get_header(); ?>
 
 <?php
-get_template_part( 'template-parts/page-hero', null, array(
-	'title'    => __( 'Notre Équipe', 'waicam' ),
-	'subtitle' => __( "Des visages, des parcours, une vision commune. Derrière WAI-CAM se trouvent des personnalités engagées issues de différents horizons professionnels.", 'waicam' ),
-	'crumb'    => __( 'Équipe', 'waicam' ),
-) );
+$team_hero_kicker = get_theme_mod( 'waicam_team_hero_kicker', 'NOTRE ÉQUIPE' );
+$team_hero_title  = get_theme_mod( 'waicam_team_hero_title', "RENCONTREZ L'ÉQUIPE QUI FAIT AVANCER WAI-CAM" );
+$team_hero_cta_text = get_theme_mod( 'waicam_team_hero_cta_text', 'Envie de rejoindre l’équipe ? Découvrir les opportunités' );
+$team_hero_cta_url  = get_theme_mod( 'waicam_team_hero_cta_url', home_url( '/rejoindre/' ) );
 ?>
-
-<!-- INTRO -->
-<section style="padding-bottom:0;">
-	<div style="max-width:780px;margin:0 auto;text-align:center;">
-		<p style="color:var(--gray);font-size:1.05rem;line-height:1.7;">
-			<?php esc_html_e( "Ensemble, elles et ils portent une même ambition : faire de l'intelligence artificielle un levier d'autonomisation et d'opportunités pour les femmes camerounaises.", 'waicam' ); ?>
-		</p>
+<section class="team-hero-gwc">
+	<div class="team-hero-gwc__bg-shape" aria-hidden="true"></div>
+	<div class="team-hero-gwc__inner">
+		<div class="team-hero-gwc__kicker"><?php echo esc_html( $team_hero_kicker ); ?></div>
+		<h1 class="team-hero-gwc__title"><?php echo esc_html( $team_hero_title ); ?></h1>
+		<a class="team-hero-gwc__cta" href="<?php echo esc_url( $team_hero_cta_url ); ?>">
+			<?php echo esc_html( $team_hero_cta_text ); ?>
+			<span class="arrow-anim" aria-hidden="true">
+				<span class="arrow-plain">→</span>
+				<svg class="arrow-wave" viewBox="0 0 30 12" focusable="false" aria-hidden="true">
+					<path d="M1 6 C6 2,10 10,14 6 C18 2,22 10,26 6 M22 3 L28 6 L22 9"/>
+				</svg>
+			</span>
+		</a>
 	</div>
 </section>
 
