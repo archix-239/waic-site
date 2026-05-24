@@ -5258,9 +5258,9 @@ footer ul li {
 .about-reports-gwc__thumb { display:block; position:relative; aspect-ratio: 16/14; overflow:hidden; }
 .about-reports-gwc__thumb img { width:100%; height:100%; object-fit:cover; display:block; }
 .about-reports-gwc__ph { width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:rgba(30,27,75,.10); color:#1E1B4B; font-weight:700; }
-.about-reports-gwc__wavecut { position:absolute; left:-2%; right:-2%; bottom:-1px; height:18%; background:#00314A; clip-path:path('M 0 55 C 70 80, 130 30, 210 55 C 290 80, 360 30, 460 55 L 460 120 L 0 120 Z'); transform-origin:50% 100%; transition:transform .33s cubic-bezier(.22,.61,.36,1), bottom .33s cubic-bezier(.22,.61,.36,1); }
+.about-reports-gwc__wavecut { position:absolute; left:-1%; right:-1%; bottom:-1px; height:22%; background:#00314A; border-top-left-radius: 56% 72%; border-top-right-radius: 56% 72%; transform-origin:50% 100%; transition:transform .35s cubic-bezier(.22,.61,.36,1); }
 .about-reports-gwc__card:hover .about-reports-gwc__wavecut,
-.about-reports-gwc__card:focus-within .about-reports-gwc__wavecut { transform:scale(1.05) translateY(-7px); }
+.about-reports-gwc__card:focus-within .about-reports-gwc__wavecut { transform:translateY(-8px) scale(1.06); }
 .about-reports-gwc__year { color:#fff; text-align:center; font-weight:800; font-size:clamp(1.85rem,3.2vw,3rem); line-height:1; padding:22px 12px 26px; }
 @media (max-width: 980px) {
   .about-reports-gwc__grid { grid-template-columns:1fr 1fr; }
