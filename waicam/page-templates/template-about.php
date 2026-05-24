@@ -133,7 +133,15 @@ $about_change_cta_link_url   = get_theme_mod( 'waicam_about_change_cta_link_url'
 		<aside class="about-change-gwc__support">
 			<h3><?php echo esc_html( $about_change_cta_title ); ?></h3>
 			<p><?php echo esc_html( $about_change_cta_text ); ?></p>
-			<a href="<?php echo esc_url( $about_change_cta_link_url ); ?>"><?php echo esc_html( $about_change_cta_link_label ); ?> <span aria-hidden="true">→</span></a>
+			<a class="about-change-gwc__donate-link" href="<?php echo esc_url( $about_change_cta_link_url ); ?>">
+				<?php echo esc_html( $about_change_cta_link_label ); ?>
+				<span class="arrow-anim" aria-hidden="true">
+					<span class="arrow-plain">→</span>
+					<svg class="arrow-wave" viewBox="0 0 30 12" focusable="false" aria-hidden="true">
+						<path d="M1 6 C6 2,10 10,14 6 C18 2,22 10,26 6 M22 3 L28 6 L22 9"/>
+					</svg>
+				</span>
+			</a>
 		</aside>
 	</div>
 </section>
