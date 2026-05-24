@@ -835,6 +835,37 @@ function waicam_customize_register( $wp_customize ) {
 		) ) );
 	}
 
+
+	// ────────── Page About — Déclaration inclusion ──────────
+	$wp_customize->add_section( 'waicam_about_statement', array(
+		'title'       => __( 'À propos — Déclaration', 'waicam' ),
+		'description' => __( 'Bloc texte fort avec CTA après Nos valeurs.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+	$about_statement_fields = array(
+		'waicam_about_statement_title'    => array( __( 'Titre', 'waicam' ), "WAI-CAM place l'inclusion, l'éthique et l'impact social au cœur de sa mission.", 'textarea' ),
+		'waicam_about_statement_cta_text' => array( __( 'Texte lien', 'waicam' ), 'Lire notre déclaration d’inclusion', 'text' ),
+		'waicam_about_statement_cta_url'  => array( __( 'URL lien', 'waicam' ), home_url( '/a-propos/' ), 'url' ),
+	);
+	foreach ( $about_statement_fields as $key => $cfg ) {
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_about_statement',
+			'type'    => $cfg[2],
+		) );
+	}
+
 	// ────────── Section Home partenaires ──────────
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),

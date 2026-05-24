@@ -195,6 +195,27 @@ $about_values = array(
 	</div>
 </section>
 
+
+<?php
+$about_statement_title = get_theme_mod( 'waicam_about_statement_title', "WAI-CAM place l'inclusion, l'éthique et l'impact social au cœur de sa mission." );
+$about_statement_cta_text = get_theme_mod( 'waicam_about_statement_cta_text', 'Lire notre déclaration d’inclusion' );
+$about_statement_cta_url  = get_theme_mod( 'waicam_about_statement_cta_url', home_url( '/a-propos/' ) );
+?>
+<section class="about-statement-gwc">
+	<div class="about-statement-gwc__inner">
+		<h2><?php echo esc_html( $about_statement_title ); ?></h2>
+		<a class="about-statement-gwc__cta" href="<?php echo esc_url( $about_statement_cta_url ); ?>">
+			<?php echo esc_html( $about_statement_cta_text ); ?>
+			<span class="arrow-anim" aria-hidden="true">
+				<span class="arrow-plain">→</span>
+				<svg class="arrow-wave" viewBox="0 0 30 12" focusable="false" aria-hidden="true">
+					<path d="M1 6 C6 2,10 10,14 6 C18 2,22 10,26 6 M22 3 L28 6 L22 9"/>
+				</svg>
+			</span>
+		</a>
+	</div>
+</section>
+
 <!-- PRÉSENTATION -->
 <section>
 	<div class="about-grid" style="max-width:1100px;margin:0 auto;">
