@@ -263,6 +263,17 @@ function waicam_customize_register( $wp_customize ) {
 		'priority' => 30,
 	) );
 
+
+	$wp_customize->add_panel( 'waicam_home_panel', array(
+		'title'    => __( 'WAI-CAM — Accueil', 'waicam' ),
+		'priority' => 31,
+	) );
+
+	$wp_customize->add_panel( 'waicam_about_panel', array(
+		'title'    => __( 'WAI-CAM — À propos', 'waicam' ),
+		'priority' => 32,
+	) );
+
 	// ────────── Section Formulaires (IDs Fluent Forms) ──────────
 	$wp_customize->add_section( 'waicam_forms', array(
 		'title' => __( 'Formulaires Fluent Forms', 'waicam' ),
@@ -366,8 +377,412 @@ function waicam_customize_register( $wp_customize ) {
 			'type'    => 'number',
 		) );
 	}
-}
-add_action( 'customize_register', 'waicam_customize_register' );
+
+	// ────────── Section Home post-hero (modèle institutionnel) ──────────
+	$wp_customize->add_section( 'waicam_home_posthero', array(
+		'title'       => __( 'Accueil — Section post-hero', 'waicam' ),
+		'description' => __( 'Contenus du bloc immédiatement après le hero de la page d’accueil.', 'waicam' ),
+		'panel'       => 'waicam_home_panel',
+	) );
+
+	$home_posthero_fields = array(
+		'waicam_home_posthero_title'    => array( __( 'Titre principal', 'waicam' ), '5 MILLIONS D’ICI 2030', 'text' ),
+		'waicam_home_posthero_cta_text' => array( __( 'Texte du lien principal', 'waicam' ), 'En savoir plus sur notre plan stratégique', 'text' ),
+		'waicam_home_posthero_cta_url'  => array( __( 'URL du lien principal', 'waicam' ), home_url( '/about' ), 'url' ),
+		'waicam_home_axis_1_title'      => array( __( 'Axe 1 — Titre', 'waicam' ), 'Former', 'text' ),
+		'waicam_home_axis_1_text'       => array( __( 'Axe 1 — Description', 'waicam' ), 'Former les jeunes filles et femmes aux compétences numériques et à l’IA appliquée.', 'textarea' ),
+		'waicam_home_axis_1_url'        => array( __( 'Axe 1 — URL', 'waicam' ), home_url( '/formations' ), 'url' ),
+		'waicam_home_axis_2_title'      => array( __( 'Axe 2 — Titre', 'waicam' ), 'Accompagner', 'text' ),
+		'waicam_home_axis_2_text'       => array( __( 'Axe 2 — Description', 'waicam' ), 'Accompagner les femmes vers des parcours concrets : leadership, entrepreneuriat et innovation.', 'textarea' ),
+		'waicam_home_axis_2_url'        => array( __( 'Axe 2 — URL', 'waicam' ), home_url( '/programmes' ), 'url' ),
+	);
+
+		foreach ( $home_posthero_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
+		if ( $cfg[2] === 'textarea' ) $sanitize = 'sanitize_textarea_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_posthero',
+			'type'    => $cfg[2],
+		) );
+	}
+
+	// ────────── Section Home impact (suite section après post-hero) ──────────
+	$wp_customize->add_section( 'waicam_home_impact', array(
+		'title'       => __( 'Accueil — Section impact', 'waicam' ),
+		'description' => __( 'Bloc texte + statistiques après la section post-hero.', 'waicam' ),
+		'panel'       => 'waicam_home_panel',
+	) );
+
+		$impact_fields = array(
+		'waicam_home_impact_kicker'        => array( __( 'Sur-titre', 'waicam' ), 'INTELLIGENCE ARTIFICIELLE & INCLUSION', 'text' ),
+		'waicam_home_impact_title'         => array( __( 'Titre principal', 'waicam' ), 'BRISER LES BARRIÈRES À L’IA ET AUX TECHNOLOGIES ÉMERGENTES.', 'text' ),
+		'waicam_home_impact_text'          => array( __( 'Paragraphe', 'waicam' ), 'Women in AI Cameroon développe des parcours de formation, de sensibilisation et d’accompagnement pour permettre aux femmes et aux jeunes filles de participer pleinement à la révolution de l’intelligence artificielle.', 'textarea' ),
+		'waicam_home_impact_cta_text'      => array( __( 'Texte du lien', 'waicam' ), 'Découvrir nos actions', 'text' ),
+			'waicam_home_impact_cta_url'       => array( __( 'URL du lien', 'waicam' ), waicam_events_archive_url(), 'url' ),
+		'waicam_home_impact_stat_1_number' => array( __( 'Stat 1 — Chiffre', 'waicam' ), '860 000', 'text' ),
+		'waicam_home_impact_stat_1_label'  => array( __( 'Stat 1 — Label', 'waicam' ), 'PERSONNES SENSIBILISÉES', 'text' ),
+		'waicam_home_impact_stat_1_text'   => array( __( 'Stat 1 — Description', 'waicam' ), 'Des femmes et jeunes filles touchées par des campagnes de sensibilisation et des ateliers.', 'textarea' ),
+		'waicam_home_impact_stat_2_number' => array( __( 'Stat 2 — Chiffre', 'waicam' ), '425 000', 'text' ),
+		'waicam_home_impact_stat_2_label'  => array( __( 'Stat 2 — Label', 'waicam' ), 'COMMUNAUTÉ ENGAGÉE', 'text' ),
+		'waicam_home_impact_stat_2_text'   => array( __( 'Stat 2 — Description', 'waicam' ), 'Une communauté active autour du mentorat, du leadership et de l’apprentissage collaboratif.', 'textarea' ),
+		'waicam_home_impact_stat_3_number' => array( __( 'Stat 3 — Chiffre', 'waicam' ), '10 000', 'text' ),
+		'waicam_home_impact_stat_3_label'  => array( __( 'Stat 3 — Label', 'waicam' ), 'APPRENANTES IA', 'text' ),
+		'waicam_home_impact_stat_3_text'   => array( __( 'Stat 3 — Description', 'waicam' ), 'Des participantes formées sur des usages concrets de l’IA dans leurs secteurs.', 'textarea' ),
+	);
+		foreach ( $impact_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
+		if ( $cfg[2] === 'textarea' ) $sanitize = 'sanitize_textarea_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_impact',
+			'type'    => $cfg[2],
+		) );
+	}
+
+	// ────────── Section Home vidéo ──────────
+	$wp_customize->add_section( 'waicam_home_video', array(
+		'title'       => __( 'Accueil — Section vidéo', 'waicam' ),
+		'description' => __( 'Vidéo mise en avant après la section impact (URL YouTube/Vimeo).', 'waicam' ),
+		'panel'       => 'waicam_home_panel',
+	) );
+
+	$home_video_fields = array(
+		'waicam_home_video_title' => array( __( 'Titre', 'waicam' ), 'Regards croisés sur nos actions terrain', 'text' ),
+		'waicam_home_video_text'  => array( __( 'Texte', 'waicam' ), 'Découvrez nos initiatives, nos formations et nos témoignages en vidéo.', 'textarea' ),
+		'waicam_home_video_url'   => array( __( 'Lien vidéo (YouTube/Vimeo)', 'waicam' ), '', 'url' ),
+	);
+
+		foreach ( $home_video_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
+		if ( $cfg[2] === 'textarea' ) $sanitize = 'sanitize_textarea_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_video',
+			'type'    => $cfg[2],
+			) );
+		}
+		$wp_customize->add_setting( 'waicam_home_posthero_media_id', array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		) );
+		$wp_customize->add_control( new WP_Customize_Media_Control(
+			$wp_customize,
+			'waicam_home_posthero_media_id',
+			array(
+				'label'      => __( 'Image de la section (gauche)', 'waicam' ),
+				'section'    => 'waicam_home_posthero',
+				'mime_type'  => 'image',
+			)
+		) );
+
+		// ────────── Section Initiative phare (image + éditorial + CTA actualités) ──────────
+		$wp_customize->add_section( 'waicam_home_featured', array(
+			'title'       => __( 'Accueil — Initiative phare', 'waicam' ),
+			'description' => __( 'Bloc éditorial image/texte orienté actualités et actions WAI-CAM.', 'waicam' ),
+			'panel'       => 'waicam_home_panel',
+		) );
+		$featured_fields = array(
+			'waicam_home_featured_kicker'   => array( __( 'Sur-titre', 'waicam' ), 'INITIATIVE PHARE WAI-CAM', 'text' ),
+			'waicam_home_featured_title'    => array( __( 'Titre', 'waicam' ), 'Nos actions terrain pour démocratiser l’IA au Cameroun', 'text' ),
+			'waicam_home_featured_text'     => array( __( 'Texte', 'waicam' ), 'Formations, ateliers, conférences et rencontres institutionnelles : WAI-CAM agit sur le terrain pour rendre l’intelligence artificielle accessible, inclusive et utile aux femmes et aux jeunes filles.', 'textarea' ),
+			'waicam_home_featured_cta_text' => array( __( 'Texte du lien', 'waicam' ), 'Découvrir nos actualités', 'text' ),
+			'waicam_home_featured_cta_url'  => array( __( 'URL du lien', 'waicam' ), waicam_events_archive_url(), 'url' ),
+		);
+		foreach ( $featured_fields as $key => $cfg ) {
+			$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
+			if ( $cfg[2] === 'textarea' ) $sanitize = 'sanitize_textarea_field';
+			$wp_customize->add_setting( $key, array(
+				'default'           => $cfg[1],
+				'sanitize_callback' => $sanitize,
+			) );
+			$wp_customize->add_control( $key, array(
+				'label'   => $cfg[0],
+				'section' => 'waicam_home_featured',
+				'type'    => $cfg[2],
+			) );
+		}
+		$wp_customize->add_setting( 'waicam_home_featured_media_id', array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		) );
+		$wp_customize->add_control( new WP_Customize_Media_Control(
+			$wp_customize,
+			'waicam_home_featured_media_id',
+			array(
+				'label'      => __( 'Image initiative phare (gauche)', 'waicam' ),
+				'section'    => 'waicam_home_featured',
+				'mime_type'  => 'image',
+			)
+		) );
+
+	// ────────── Section Home newsletter ──────────
+	$wp_customize->add_section( 'waicam_home_newsletter', array(
+		'title'       => __( 'Accueil — Newsletter', 'waicam' ),
+		'description' => __( 'Bloc newsletter après la section initiative phare.', 'waicam' ),
+		'panel'       => 'waicam_home_panel',
+	) );
+	$newsletter_fields = array(
+		'waicam_home_newsletter_title' => array( __( 'Titre', 'waicam' ), 'Restez informé(e) de nos actualités', 'text' ),
+		'waicam_home_newsletter_text'  => array( __( 'Texte', 'waicam' ), 'Recevez les mises à jour sur nos formations, événements, ressources et actions de terrain portées par Women in AI Cameroon.', 'textarea' ),
+	);
+	foreach ( $newsletter_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_newsletter',
+			'type'    => $cfg[2],
+		) );
+	}
+
+	// ────────── Section Home témoignage cadré ──────────
+	$wp_customize->add_section( 'waicam_home_quote', array(
+		'title'       => __( 'Accueil — Témoignage cadré', 'waicam' ),
+		'description' => __( 'Bloc témoignage avec visuel et motif de cadre inspiré de la référence.', 'waicam' ),
+		'panel'       => 'waicam_home_panel',
+	) );
+	$quote_fields = array(
+		'waicam_home_quote_text'   => array( __( 'Texte du témoignage', 'waicam' ), 'Women in AI Cameroon a changé ma trajectoire professionnelle en me donnant les outils, la confiance et la communauté nécessaires pour agir concrètement.', 'textarea' ),
+		'waicam_home_quote_author' => array( __( 'Nom / signature', 'waicam' ), 'MEMBRE WAI-CAM', 'text' ),
+		'waicam_home_quote_role'   => array( __( 'Fonction / programme', 'waicam' ), 'Programme Leadership & Mentorat', 'text' ),
+	);
+	foreach ( $quote_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_quote',
+			'type'    => $cfg[2],
+		) );
+	}
+	$wp_customize->add_setting( 'waicam_home_quote_media_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control(
+		$wp_customize,
+		'waicam_home_quote_media_id',
+		array(
+			'label'      => __( 'Image témoignage', 'waicam' ),
+			'section'    => 'waicam_home_quote',
+			'mime_type'  => 'image',
+		)
+	) );
+
+	// ────────── Section Home grand chiffre + CTA ──────────
+	$wp_customize->add_section( 'waicam_home_bigstat', array(
+		'title'       => __( 'Accueil — Grand chiffre', 'waicam' ),
+		'description' => __( 'Bloc grand chiffre avec texte et CTA après le témoignage.', 'waicam' ),
+		'panel'       => 'waicam_home_panel',
+	) );
+	$bigstat_fields = array(
+		'waicam_home_bigstat_title'   => array( __( 'Titre principal', 'waicam' ), '860 000 femmes et jeunes touchées par nos actions au Cameroun', 'text' ),
+		'waicam_home_bigstat_text'    => array( __( 'Texte', 'waicam' ), 'WAI-CAM accélère l’inclusion numérique des femmes grâce à des programmes de formation, de mentorat et d’accompagnement sur le terrain.', 'textarea' ),
+		'waicam_home_bigstat_cta_text'=> array( __( 'Texte bouton', 'waicam' ), 'Soutenir nos actions', 'text' ),
+		'waicam_home_bigstat_cta_url' => array( __( 'URL bouton', 'waicam' ), home_url( '/don' ), 'url' ),
+	);
+	foreach ( $bigstat_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
+		if ( $cfg[2] === 'textarea' ) $sanitize = 'sanitize_textarea_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_bigstat',
+			'type'    => $cfg[2],
+		) );
+	}
+
+	// ────────── Section Home actualités (cartes) ──────────
+	$wp_customize->add_section( 'waicam_home_news', array(
+		'title'       => __( 'Accueil — Actualités (grille)', 'waicam' ),
+		'description' => __( 'Bloc actualités avec cartes après le grand chiffre.', 'waicam' ),
+		'panel'       => 'waicam_home_panel',
+	) );
+	$news_fields = array(
+		'waicam_home_news_kicker'   => array( __( 'Sur-titre', 'waicam' ), 'ACTUALITÉS', 'text' ),
+		'waicam_home_news_title'    => array( __( 'Titre', 'waicam' ), 'Restez connectés à nos actions', 'text' ),
+		'waicam_home_news_cta_text' => array( __( 'Texte lien bas', 'waicam' ), 'Voir toutes nos actualités', 'text' ),
+		'waicam_home_news_cta_url'  => array( __( 'URL lien bas', 'waicam' ), home_url( '/blog' ), 'url' ),
+	);
+	foreach ( $news_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_news',
+			'type'    => $cfg[2],
+		) );
+	}
+
+
+	// ────────── Page About — Hero ──────────
+	$wp_customize->add_section( 'waicam_about_hero', array(
+		'title'       => __( 'À propos — Hero', 'waicam' ),
+		'description' => __( 'Section hero de la page Qui sommes-nous.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+
+	$wp_customize->add_setting( 'waicam_about_hero_title', array(
+		'default'           => __( "NOUS SOMMES EN MISSION POUR RENDRE L'IA ACCESSIBLE AUX FEMMES ET AUX JEUNES DU CAMEROUN.", 'waicam' ),
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'waicam_about_hero_title', array(
+		'label'   => __( 'Titre hero', 'waicam' ),
+		'section' => 'waicam_about_hero',
+		'type'    => 'text',
+	) );
+
+	$wp_customize->add_setting( 'waicam_about_hero_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_about_hero_image_id', array(
+		'label'      => __( 'Image hero', 'waicam' ),
+		'section'    => 'waicam_about_hero',
+		'mime_type'  => 'image',
+	) ) );
+
+
+	// ────────── Page About — Intro texte ──────────
+	$wp_customize->add_section( 'waicam_about_intro', array(
+		'title'       => __( 'À propos — Intro texte', 'waicam' ),
+		'description' => __( 'Bloc texte après le hero.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+
+	$about_intro_fields = array(
+		'waicam_about_intro_kicker' => array( __( 'Sur-titre', 'waicam' ), 'IA ET TECHNOLOGIES ÉMERGENTES', 'text' ),
+		'waicam_about_intro_title'  => array( __( 'Titre', 'waicam' ), "BRISER LES BARRIÈRES À L'IA ET AUX TECHNOLOGIES ÉMERGENTES.", 'text' ),
+		'waicam_about_intro_text'   => array( __( 'Texte', 'waicam' ), "Nous développons des parcours d'apprentissage en IA qui rendent les compétences numériques accessibles aux femmes et aux jeunes, grâce à des programmes concrets, des ateliers terrain et un accompagnement durable.", 'textarea' ),
+	);
+	foreach ( $about_intro_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_about_intro',
+			'type'    => $cfg[2],
+		) );
+	}
+
+
+	// ────────── Page About — Chiffres d'impact ──────────
+	$wp_customize->add_section( 'waicam_about_stats', array(
+		'title'       => __( 'À propos — Chiffres', 'waicam' ),
+		'description' => __( 'Bloc des 3 chiffres de la page Qui sommes-nous.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+
+	$about_stats_fields = array(
+		'waicam_about_stat_1_number' => array( __( 'Chiffre 1', 'waicam' ), '860 000', 'text' ),
+		'waicam_about_stat_1_label'  => array( __( 'Label 1', 'waicam' ), 'PERSONNES TOUCHÉES', 'text' ),
+		'waicam_about_stat_1_text'   => array( __( 'Description 1', 'waicam' ), "WAI-CAM a déjà sensibilisé et accompagné des milliers de femmes et de jeunes à travers ses actions communautaires, éducatives et citoyennes.", 'textarea' ),
+		'waicam_about_stat_2_number' => array( __( 'Chiffre 2', 'waicam' ), '425 000', 'text' ),
+		'waicam_about_stat_2_label'  => array( __( 'Label 2', 'waicam' ), 'ALUMNI & COMMUNAUTÉ', 'text' ),
+		'waicam_about_stat_2_text'   => array( __( 'Description 2', 'waicam' ), "Une communauté active d'apprenantes, d'enseignantes, d'ambassadrices et de partenaires qui relaient l'adoption responsable de l'IA.", 'textarea' ),
+		'waicam_about_stat_3_number' => array( __( 'Chiffre 3', 'waicam' ), '10 000', 'text' ),
+		'waicam_about_stat_3_label'  => array( __( 'Label 3', 'waicam' ), 'APPRENANTES IA', 'text' ),
+		'waicam_about_stat_3_text'   => array( __( 'Description 3', 'waicam' ), "Des participantes formées aux bases de l'IA, de la culture numérique et des usages concrets dans l'éducation, l'entrepreneuriat et la vie quotidienne.", 'textarea' ),
+	);
+	foreach ( $about_stats_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_about_stats',
+			'type'    => $cfg[2],
+		) );
+	}
+
+
+	// ────────── Page About — Section fracture genre ──────────
+	$wp_customize->add_section( 'waicam_about_gap', array(
+		'title'       => __( 'À propos — Fracture genre', 'waicam' ),
+		'description' => __( 'Titre, texte et données du graphique de tendance.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+
+	$about_gap_fields = array(
+		'waicam_about_gap_title' => array( __( 'Titre', 'waicam' ), 'LA FRACTURE GENRE EN NUMÉRIQUE RESTE UN DÉFI MAJEUR.', 'text' ),
+		'waicam_about_gap_text'  => array( __( 'Texte', 'waicam' ), "Au Cameroun comme ailleurs, les femmes restent sous-représentées dans les filières technologiques. WAI-CAM agit en priorité auprès des adolescentes et jeunes femmes pour renforcer l'accès, la confiance et les compétences en intelligence artificielle.", 'textarea' ),
+		'waicam_about_gap_p1'    => array( __( 'Point 1 (%)', 'waicam' ), '37%', 'text' ),
+		'waicam_about_gap_p2'    => array( __( 'Point 2 (%)', 'waicam' ), '24%', 'text' ),
+		'waicam_about_gap_p3'    => array( __( 'Point 3 (%)', 'waicam' ), '22%', 'text' ),
+		'waicam_about_gap_y1'    => array( __( 'Année 1', 'waicam' ), '1995', 'text' ),
+		'waicam_about_gap_y2'    => array( __( 'Année 2', 'waicam' ), '2017', 'text' ),
+		'waicam_about_gap_y3'    => array( __( 'Année 3', 'waicam' ), '2022', 'text' ),
+	);
+	foreach ( $about_gap_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_about_gap',
+			'type'    => $cfg[2],
+		) );
+	}
+
+	// ────────── Section Home partenaires ──────────
+	$wp_customize->add_section( 'waicam_home_partners', array(
+		'title'       => __( 'Accueil — Partenaires', 'waicam' ),
+		'description' => __( 'Bloc partenaires de fin de page.', 'waicam' ),
+		'panel'       => 'waicam_home_panel',
+	) );
+	$partner_fields = array(
+		'waicam_home_partners_title'    => array( __( 'Titre', 'waicam' ), 'Devenez partenaire Women in AI Cameroon', 'text' ),
+		'waicam_home_partners_text'     => array( __( 'Texte', 'waicam' ), 'Chaque année, des entreprises et institutions soutiennent nos programmes de formation, mentorat et inclusion numérique au Cameroun.', 'textarea' ),
+		'waicam_home_partners_cta_text' => array( __( 'Texte lien', 'waicam' ), 'Voir nos partenaires', 'text' ),
+		'waicam_home_partners_cta_url'  => array( __( 'URL lien', 'waicam' ), home_url( '/partenaires' ), 'url' ),
+	);
+	foreach ( $partner_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
+		if ( $cfg[2] === 'textarea' ) $sanitize = 'sanitize_textarea_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_partners',
+			'type'    => $cfg[2],
+		) );
+	}
+	}
+	add_action( 'customize_register', 'waicam_customize_register' );
 
 /**
  * Sanitize CSS classes for body / nav (compat WP)
@@ -412,7 +827,8 @@ add_filter( 'woocommerce_add_cart_item_data', function( $cart_item_data, $produc
 			// Force unicité : chaque don a sa propre clé pour ne pas se cumuler en quantité
 			$cart_item_data['unique_key'] = md5( microtime() . wp_rand() );
 		}
-	}
+
+		}
 	return $cart_item_data;
 }, 10, 2 );
 
