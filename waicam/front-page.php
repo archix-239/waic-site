@@ -392,7 +392,7 @@ get_header(); ?>
 			<?php
 			$partners = new WP_Query( array(
 				'post_type'      => 'partenaire',
-				'posts_per_page' => 6,
+				'posts_per_page' => 8,
 				'post_status'    => 'publish',
 				'orderby'        => 'title',
 				'order'          => 'ASC',
@@ -413,6 +413,9 @@ get_header(); ?>
 					}
 					if ( ! $logo ) {
 						$logo = waicam_image_url( 'logo_partenaire', get_the_ID(), 'medium', '' );
+						if ( ! $logo || strpos( $logo, '/assets/images/' ) !== false ) {
+							$logo = waicam_image_url( 'logo', get_the_ID(), 'medium', '' );
+						}
 						if ( ! $logo || strpos( $logo, '/assets/images/' ) !== false ) {
 							$logo = '';
 						}
@@ -435,6 +438,7 @@ get_header(); ?>
 				<?php endforeach;
 			endif;
 			?>
+			<div class="home-partners-gwc__cta-wrap">
 			<a href="<?php echo esc_url( get_theme_mod( 'waicam_home_partners_cta_url', home_url( '/partenaires' ) ) ); ?>" class="home-partners-gwc__cta">
 				<?php echo esc_html( get_theme_mod( 'waicam_home_partners_cta_text', 'Voir nos partenaires' ) ); ?>
 				<span class="arrow-anim" aria-hidden="true">
@@ -445,6 +449,7 @@ get_header(); ?>
 					</svg>
 				</span>
 			</a>
+			</div>
 		</div>
 	</div>
 </section>
