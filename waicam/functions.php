@@ -725,6 +725,37 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
+
+	// ────────── Page About — Section fracture genre ──────────
+	$wp_customize->add_section( 'waicam_about_gap', array(
+		'title'       => __( 'À propos — Fracture genre', 'waicam' ),
+		'description' => __( 'Titre, texte et données du graphique de tendance.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+
+	$about_gap_fields = array(
+		'waicam_about_gap_title' => array( __( 'Titre', 'waicam' ), 'LA FRACTURE GENRE EN NUMÉRIQUE RESTE UN DÉFI MAJEUR.', 'text' ),
+		'waicam_about_gap_text'  => array( __( 'Texte', 'waicam' ), "Au Cameroun comme ailleurs, les femmes restent sous-représentées dans les filières technologiques. WAI-CAM agit en priorité auprès des adolescentes et jeunes femmes pour renforcer l'accès, la confiance et les compétences en intelligence artificielle.", 'textarea' ),
+		'waicam_about_gap_p1'    => array( __( 'Point 1 (%)', 'waicam' ), '37%', 'text' ),
+		'waicam_about_gap_p2'    => array( __( 'Point 2 (%)', 'waicam' ), '24%', 'text' ),
+		'waicam_about_gap_p3'    => array( __( 'Point 3 (%)', 'waicam' ), '22%', 'text' ),
+		'waicam_about_gap_y1'    => array( __( 'Année 1', 'waicam' ), '1995', 'text' ),
+		'waicam_about_gap_y2'    => array( __( 'Année 2', 'waicam' ), '2017', 'text' ),
+		'waicam_about_gap_y3'    => array( __( 'Année 3', 'waicam' ), '2022', 'text' ),
+	);
+	foreach ( $about_gap_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_about_gap',
+			'type'    => $cfg[2],
+		) );
+	}
+
 	// ────────── Section Home partenaires ──────────
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),

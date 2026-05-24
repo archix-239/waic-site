@@ -76,6 +76,41 @@ $about_stats = array(
 	</div>
 </section>
 
+
+<?php
+$about_gap_title = get_theme_mod( 'waicam_about_gap_title', 'LA FRACTURE GENRE EN NUMÉRIQUE RESTE UN DÉFI MAJEUR.' );
+$about_gap_text  = get_theme_mod( 'waicam_about_gap_text', "Au Cameroun comme ailleurs, les femmes restent sous-représentées dans les filières technologiques. WAI-CAM agit en priorité auprès des adolescentes et jeunes femmes pour renforcer l'accès, la confiance et les compétences en intelligence artificielle." );
+$about_gap_p1 = get_theme_mod( 'waicam_about_gap_p1', '37%' );
+$about_gap_p2 = get_theme_mod( 'waicam_about_gap_p2', '24%' );
+$about_gap_p3 = get_theme_mod( 'waicam_about_gap_p3', '22%' );
+$about_gap_y1 = get_theme_mod( 'waicam_about_gap_y1', '1995' );
+$about_gap_y2 = get_theme_mod( 'waicam_about_gap_y2', '2017' );
+$about_gap_y3 = get_theme_mod( 'waicam_about_gap_y3', '2022' );
+?>
+
+<section class="about-gap-gwc">
+	<div class="about-gap-gwc__inner">
+		<h2 class="about-gap-gwc__title"><?php echo esc_html( $about_gap_title ); ?></h2>
+		<svg class="about-gap-gwc__wave" viewBox="0 0 320 16" role="presentation" aria-hidden="true" focusable="false">
+			<path d="M0,8 C6,2 14,14 22,8 C30,2 38,14 46,8 C54,2 62,14 70,8 C78,2 86,14 94,8 C102,2 110,14 118,8 C126,2 134,14 142,8 C150,2 158,14 166,8 C174,2 182,14 190,8 C198,2 206,14 214,8 C222,2 230,14 238,8 C246,2 254,14 262,8 C270,2 278,14 286,8 C294,2 302,14 310,8 C314,6 317,8 320,8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+		</svg>
+		<p class="about-gap-gwc__text"><?php echo esc_html( $about_gap_text ); ?></p>
+
+		<div class="about-gap-gwc__chart" aria-label="Évolution de la représentation féminine">
+			<div class="about-gap-gwc__point p1"><span><?php echo esc_html( $about_gap_p1 ); ?></span><i></i></div>
+			<div class="about-gap-gwc__point p2"><span><?php echo esc_html( $about_gap_p2 ); ?></span><i></i></div>
+			<div class="about-gap-gwc__point p3"><span><?php echo esc_html( $about_gap_p3 ); ?></span><i></i></div>
+			<div class="about-gap-gwc__area" aria-hidden="true"></div>
+			<div class="about-gap-gwc__axis-y">% Femmes en IA et numérique</div>
+			<div class="about-gap-gwc__years">
+				<span><?php echo esc_html( $about_gap_y1 ); ?></span>
+				<span><?php echo esc_html( $about_gap_y2 ); ?></span>
+				<span><?php echo esc_html( $about_gap_y3 ); ?></span>
+			</div>
+		</div>
+	</div>
+</section>
+
 <!-- PRÉSENTATION -->
 <section>
 	<div class="about-grid" style="max-width:1100px;margin:0 auto;">
