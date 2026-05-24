@@ -693,6 +693,38 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
+
+	// ────────── Page About — Chiffres d'impact ──────────
+	$wp_customize->add_section( 'waicam_about_stats', array(
+		'title'       => __( 'À propos — Chiffres', 'waicam' ),
+		'description' => __( 'Bloc des 3 chiffres de la page Qui sommes-nous.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+
+	$about_stats_fields = array(
+		'waicam_about_stat_1_number' => array( __( 'Chiffre 1', 'waicam' ), '860 000', 'text' ),
+		'waicam_about_stat_1_label'  => array( __( 'Label 1', 'waicam' ), 'PERSONNES TOUCHÉES', 'text' ),
+		'waicam_about_stat_1_text'   => array( __( 'Description 1', 'waicam' ), "WAI-CAM a déjà sensibilisé et accompagné des milliers de femmes et de jeunes à travers ses actions communautaires, éducatives et citoyennes.", 'textarea' ),
+		'waicam_about_stat_2_number' => array( __( 'Chiffre 2', 'waicam' ), '425 000', 'text' ),
+		'waicam_about_stat_2_label'  => array( __( 'Label 2', 'waicam' ), 'ALUMNI & COMMUNAUTÉ', 'text' ),
+		'waicam_about_stat_2_text'   => array( __( 'Description 2', 'waicam' ), "Une communauté active d'apprenantes, d'enseignantes, d'ambassadrices et de partenaires qui relaient l'adoption responsable de l'IA.", 'textarea' ),
+		'waicam_about_stat_3_number' => array( __( 'Chiffre 3', 'waicam' ), '10 000', 'text' ),
+		'waicam_about_stat_3_label'  => array( __( 'Label 3', 'waicam' ), 'APPRENANTES IA', 'text' ),
+		'waicam_about_stat_3_text'   => array( __( 'Description 3', 'waicam' ), "Des participantes formées aux bases de l'IA, de la culture numérique et des usages concrets dans l'éducation, l'entrepreneuriat et la vie quotidienne.", 'textarea' ),
+	);
+	foreach ( $about_stats_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_about_stats',
+			'type'    => $cfg[2],
+		) );
+	}
+
 	// ────────── Section Home partenaires ──────────
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),

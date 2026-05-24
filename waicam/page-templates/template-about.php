@@ -41,6 +41,41 @@ $about_intro_text = get_theme_mod( 'waicam_about_intro_text', __( "Nous dévelop
 	</div>
 </section>
 
+
+<?php
+$about_stats = array(
+	array(
+		'number' => get_theme_mod( 'waicam_about_stat_1_number', '860 000' ),
+		'label'  => get_theme_mod( 'waicam_about_stat_1_label', 'PERSONNES TOUCHÉES' ),
+		'text'   => get_theme_mod( 'waicam_about_stat_1_text', "WAI-CAM a déjà sensibilisé et accompagné des milliers de femmes et de jeunes à travers ses actions communautaires, éducatives et citoyennes." ),
+	),
+	array(
+		'number' => get_theme_mod( 'waicam_about_stat_2_number', '425 000' ),
+		'label'  => get_theme_mod( 'waicam_about_stat_2_label', 'ALUMNI & COMMUNAUTÉ' ),
+		'text'   => get_theme_mod( 'waicam_about_stat_2_text', "Une communauté active d'apprenantes, d'enseignantes, d'ambassadrices et de partenaires qui relaient l'adoption responsable de l'IA." ),
+	),
+	array(
+		'number' => get_theme_mod( 'waicam_about_stat_3_number', '10 000' ),
+		'label'  => get_theme_mod( 'waicam_about_stat_3_label', 'APPRENANTES IA' ),
+		'text'   => get_theme_mod( 'waicam_about_stat_3_text', "Des participantes formées aux bases de l'IA, de la culture numérique et des usages concrets dans l'éducation, l'entrepreneuriat et la vie quotidienne." ),
+	),
+);
+?>
+
+<section class="about-impact-gwc">
+	<div class="about-impact-gwc__inner">
+		<div class="about-impact-gwc__grid">
+			<?php foreach ( $about_stats as $stat ) : ?>
+				<article class="about-impact-gwc__item">
+					<h3 class="about-impact-gwc__number"><?php echo esc_html( $stat['number'] ); ?></h3>
+					<p class="about-impact-gwc__label"><?php echo esc_html( $stat['label'] ); ?></p>
+					<p class="about-impact-gwc__text"><?php echo esc_html( $stat['text'] ); ?></p>
+				</article>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</section>
+
 <!-- PRÉSENTATION -->
 <section>
 	<div class="about-grid" style="max-width:1100px;margin:0 auto;">
