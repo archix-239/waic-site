@@ -102,7 +102,7 @@
 				<ul>
 					<li><a href="<?php echo esc_url( home_url( '/partenaires' ) ); ?>"><?php esc_html_e( 'Partenariats', 'waicam' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>"><?php esc_html_e( 'Contact', 'waicam' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/faire-un-don' ) ); ?>"><?php esc_html_e( 'Faire un don', 'waicam' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/faire-un-don' ) ); ?>"><i class="fa-solid fa-heart" style="color:#ef4444"></i> <?php esc_html_e( 'Faire un don', 'waicam' ); ?></a></li>
 					<li><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></li>
 				</ul>
 				<?php
