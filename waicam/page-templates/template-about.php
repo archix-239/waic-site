@@ -23,6 +23,24 @@ if ( ! $about_hero_image ) {
 	</div>
 </section>
 
+
+<?php
+$about_intro_kicker = get_theme_mod( 'waicam_about_intro_kicker', __( 'IA ET TECHNOLOGIES ÉMERGENTES', 'waicam' ) );
+$about_intro_title = get_theme_mod( 'waicam_about_intro_title', __( "BRISER LES BARRIÈRES À L'IA ET AUX TECHNOLOGIES ÉMERGENTES.", 'waicam' ) );
+$about_intro_text = get_theme_mod( 'waicam_about_intro_text', __( "Nous développons des parcours d'apprentissage en IA qui rendent les compétences numériques accessibles aux femmes et aux jeunes, grâce à des programmes concrets, des ateliers terrain et un accompagnement durable.", 'waicam' ) );
+?>
+
+<section class="about-intro-gwc">
+	<div class="about-intro-gwc__inner">
+		<p class="about-intro-gwc__kicker"><?php echo esc_html( $about_intro_kicker ); ?></p>
+		<h2 class="about-intro-gwc__title"><?php echo esc_html( $about_intro_title ); ?></h2>
+		<svg class="about-intro-gwc__wave" viewBox="0 0 320 16" role="presentation" aria-hidden="true" focusable="false">
+			<path d="M0,8 C6,2 14,14 22,8 C30,2 38,14 46,8 C54,2 62,14 70,8 C78,2 86,14 94,8 C102,2 110,14 118,8 C126,2 134,14 142,8 C150,2 158,14 166,8 C174,2 182,14 190,8 C198,2 206,14 214,8 C222,2 230,14 238,8 C246,2 254,14 262,8 C270,2 278,14 286,8 C294,2 302,14 310,8 C314,6 317,8 320,8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+		</svg>
+		<p class="about-intro-gwc__text"><?php echo esc_html( $about_intro_text ); ?></p>
+	</div>
+</section>
+
 <!-- PRÉSENTATION -->
 <section>
 	<div class="about-grid" style="max-width:1100px;margin:0 auto;">

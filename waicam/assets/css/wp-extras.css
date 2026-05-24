@@ -5065,3 +5065,46 @@ footer ul li {
 .waicam-wave-replay.is-visible path {
   animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4 !important;
 }
+
+/* About page - intro text block (GWC style) */
+.about-intro-gwc {
+  background: #fff;
+  padding: clamp(44px, 7vw, 88px) 0 clamp(28px, 5vw, 56px);
+}
+.about-intro-gwc__inner {
+  width: min(1120px, 92%);
+  margin: 0 auto;
+  color: #1E1B4B;
+}
+.about-intro-gwc__kicker {
+  margin: 0 0 10px;
+  color: #0E6A2E;
+  font-size: clamp(1rem, 1.3vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.about-intro-gwc__title {
+  margin: 0;
+  max-width: 760px;
+  font-size: clamp(2rem, 4.2vw, 4rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+  color: #1E1B4B;
+}
+.about-intro-gwc__wave {
+  margin: 10px 0 20px;
+  width: min(620px, 96%);
+  color: #15c7af;
+}
+.about-intro-gwc__text {
+  margin: 0;
+  max-width: 760px;
+  font-size: clamp(1.06rem, 2.1vw, 2rem);
+  line-height: 1.45;
+  color: #1E1B4B;
+}
+@media (max-width: 768px) {
+  .about-intro-gwc__title { max-width: 100%; }
+  .about-intro-gwc__text { max-width: 100%; }
+}

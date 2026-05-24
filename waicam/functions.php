@@ -667,6 +667,32 @@ function waicam_customize_register( $wp_customize ) {
 		'mime_type'  => 'image',
 	) ) );
 
+
+	// ────────── Page About — Intro texte ──────────
+	$wp_customize->add_section( 'waicam_about_intro', array(
+		'title'       => __( 'À propos — Intro texte', 'waicam' ),
+		'description' => __( 'Bloc texte après le hero.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+
+	$about_intro_fields = array(
+		'waicam_about_intro_kicker' => array( __( 'Sur-titre', 'waicam' ), 'IA ET TECHNOLOGIES ÉMERGENTES', 'text' ),
+		'waicam_about_intro_title'  => array( __( 'Titre', 'waicam' ), "BRISER LES BARRIÈRES À L'IA ET AUX TECHNOLOGIES ÉMERGENTES.", 'text' ),
+		'waicam_about_intro_text'   => array( __( 'Texte', 'waicam' ), "Nous développons des parcours d'apprentissage en IA qui rendent les compétences numériques accessibles aux femmes et aux jeunes, grâce à des programmes concrets, des ateliers terrain et un accompagnement durable.", 'textarea' ),
+	);
+	foreach ( $about_intro_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_about_intro',
+			'type'    => $cfg[2],
+		) );
+	}
+
 	// ────────── Section Home partenaires ──────────
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),
