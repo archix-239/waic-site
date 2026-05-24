@@ -397,9 +397,20 @@ get_header(); ?>
 				'orderby'        => 'title',
 				'order'          => 'ASC',
 				'meta_query'     => array(
+					'relation' => 'OR',
 					array(
 						'key'     => 'show_on_home',
 						'value'   => '1',
+						'compare' => '=',
+					),
+					array(
+						'key'     => 'show_on_home',
+						'value'   => 'true',
+						'compare' => '=',
+					),
+					array(
+						'key'     => 'show_on_home',
+						'value'   => 'True',
 						'compare' => '=',
 					),
 				),
