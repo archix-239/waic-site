@@ -627,6 +627,32 @@ function waicam_customize_register( $wp_customize ) {
 			'type'    => $cfg[2],
 		) );
 	}
+
+	// ────────── Section Home partenaires ──────────
+	$wp_customize->add_section( 'waicam_home_partners', array(
+		'title'       => __( 'Accueil — Partenaires', 'waicam' ),
+		'description' => __( 'Bloc partenaires de fin de page.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$partner_fields = array(
+		'waicam_home_partners_title'    => array( __( 'Titre', 'waicam' ), 'Devenez partenaire Women in AI Cameroon', 'text' ),
+		'waicam_home_partners_text'     => array( __( 'Texte', 'waicam' ), 'Chaque année, des entreprises et institutions soutiennent nos programmes de formation, mentorat et inclusion numérique au Cameroun.', 'textarea' ),
+		'waicam_home_partners_cta_text' => array( __( 'Texte lien', 'waicam' ), 'Voir nos partenaires', 'text' ),
+		'waicam_home_partners_cta_url'  => array( __( 'URL lien', 'waicam' ), home_url( '/partenaires' ), 'url' ),
+	);
+	foreach ( $partner_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
+		if ( $cfg[2] === 'textarea' ) $sanitize = 'sanitize_textarea_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_partners',
+			'type'    => $cfg[2],
+		) );
+	}
 	}
 	add_action( 'customize_register', 'waicam_customize_register' );
 

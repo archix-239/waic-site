@@ -381,6 +381,52 @@ get_header(); ?>
 	</div>
 </section>
 
+<!-- ========== HOME — PARTENAIRES (RÉFÉRENCE GWC) ========== -->
+<section class="home-partners-gwc">
+	<div class="home-partners-gwc__inner">
+		<div class="home-partners-gwc__content">
+			<h2><?php echo esc_html( get_theme_mod( 'waicam_home_partners_title', 'Devenez partenaire Women in AI Cameroon' ) ); ?></h2>
+			<p><?php echo esc_html( get_theme_mod( 'waicam_home_partners_text', 'Chaque année, des entreprises et institutions soutiennent nos programmes de formation, mentorat et inclusion numérique au Cameroun.' ) ); ?></p>
+		</div>
+		<div class="home-partners-gwc__logos">
+			<?php
+			$partners = waicam_get_partenaires( 6 );
+			if ( $partners ) :
+				while ( $partners->have_posts() ) :
+					$partners->the_post();
+					$logo = waicam_partner_logo( get_the_ID() );
+					?>
+					<div class="home-partners-gwc__logo-item">
+						<?php if ( $logo ) : ?>
+							<img src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy" />
+						<?php else : ?>
+							<span><?php the_title(); ?></span>
+						<?php endif; ?>
+					</div>
+				<?php
+				endwhile;
+				wp_reset_postdata();
+			else :
+				$fallbacks = array( 'MINPOSTEL', 'UNESCO', 'SENADI', 'ONU Femmes', 'CNPS', 'Vision 4' );
+				foreach ( $fallbacks as $f ) : ?>
+					<div class="home-partners-gwc__logo-item"><span><?php echo esc_html( $f ); ?></span></div>
+				<?php endforeach;
+			endif;
+			?>
+			<a href="<?php echo esc_url( get_theme_mod( 'waicam_home_partners_cta_url', home_url( '/partenaires' ) ) ); ?>" class="home-partners-gwc__cta">
+				<?php echo esc_html( get_theme_mod( 'waicam_home_partners_cta_text', 'Voir nos partenaires' ) ); ?>
+				<span class="arrow-anim" aria-hidden="true">
+					<span class="arrow-plain">→</span>
+					<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
+						<path d="M1 8 Q7 2 13 8 T25 8 T37 8 T49 8 T61 8 T73 8"></path>
+						<path d="M69 4 L77 8 L69 12"></path>
+					</svg>
+				</span>
+			</a>
+		</div>
+	</div>
+</section>
+
 <!-- Icônes réseaux sociaux — fixes au scroll -->
 <div class="social-float" id="social-float">
 	<a href="<?php echo esc_url( get_theme_mod( 'waicam_social_linkedin', '#' ) ); ?>"
