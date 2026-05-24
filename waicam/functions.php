@@ -756,6 +756,41 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
+
+	// ────────── Page About — Bloc transformation + soutien ──────────
+	$wp_customize->add_section( 'waicam_about_change', array(
+		'title'       => __( 'À propos — Transformation', 'waicam' ),
+		'description' => __( 'Bloc titre/texte avec encart de soutien à droite.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+
+	$about_change_fields = array(
+		'waicam_about_change_title'          => array( __( 'Titre principal', 'waicam' ), 'WAI-CAM TRANSFORME LA DONNE', 'text' ),
+		'waicam_about_change_text'           => array( __( 'Texte principal', 'waicam' ), "Nous mobilisons les femmes et les jeunes à travers des formations, du mentorat et des actions communautaires pour accélérer une adoption inclusive de l'intelligence artificielle au Cameroun.", 'textarea' ),
+		'waicam_about_change_cta_title'      => array( __( 'Titre encart', 'waicam' ), 'SOUTENEZ WAI-CAM', 'text' ),
+		'waicam_about_change_cta_text'       => array( __( 'Texte encart', 'waicam' ), "Votre contribution nous aide à former, outiller et accompagner davantage de femmes et de jeunes dans les métiers du numérique et de l'IA.", 'textarea' ),
+		'waicam_about_change_cta_link_label' => array( __( 'Texte lien', 'waicam' ), 'Faire un don', 'text' ),
+		'waicam_about_change_cta_link_url'   => array( __( 'URL lien', 'waicam' ), home_url( '/faire-un-don/' ), 'url' ),
+	);
+	foreach ( $about_change_fields as $key => $cfg ) {
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_about_change',
+			'type'    => $cfg[2],
+		) );
+	}
+
 	// ────────── Section Home partenaires ──────────
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),

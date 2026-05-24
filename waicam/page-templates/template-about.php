@@ -111,6 +111,33 @@ $about_gap_y3 = get_theme_mod( 'waicam_about_gap_y3', '2022' );
 	</div>
 </section>
 
+
+<?php
+$about_change_title = get_theme_mod( 'waicam_about_change_title', 'WAI-CAM TRANSFORME LA DONNE' );
+$about_change_text  = get_theme_mod( 'waicam_about_change_text', "Nous mobilisons les femmes et les jeunes à travers des formations, du mentorat et des actions communautaires pour accélérer une adoption inclusive de l'intelligence artificielle au Cameroun." );
+$about_change_cta_title = get_theme_mod( 'waicam_about_change_cta_title', 'SOUTENEZ WAI-CAM' );
+$about_change_cta_text  = get_theme_mod( 'waicam_about_change_cta_text', "Votre contribution nous aide à former, outiller et accompagner davantage de femmes et de jeunes dans les métiers du numérique et de l'IA." );
+$about_change_cta_link_label = get_theme_mod( 'waicam_about_change_cta_link_label', 'Faire un don' );
+$about_change_cta_link_url   = get_theme_mod( 'waicam_about_change_cta_link_url', home_url( '/faire-un-don/' ) );
+?>
+
+<section class="about-change-gwc">
+	<div class="about-change-gwc__inner">
+		<div class="about-change-gwc__content">
+			<h2 class="about-change-gwc__title"><?php echo esc_html( $about_change_title ); ?></h2>
+			<svg class="about-change-gwc__wave" viewBox="0 0 320 16" role="presentation" aria-hidden="true" focusable="false">
+				<path d="M0,8 C6,2 14,14 22,8 C30,2 38,14 46,8 C54,2 62,14 70,8 C78,2 86,14 94,8 C102,2 110,14 118,8 C126,2 134,14 142,8 C150,2 158,14 166,8 C174,2 182,14 190,8 C198,2 206,14 214,8 C222,2 230,14 238,8 C246,2 254,14 262,8 C270,2 278,14 286,8 C294,2 302,14 310,8 C314,6 317,8 320,8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+			</svg>
+			<p class="about-change-gwc__text"><?php echo esc_html( $about_change_text ); ?></p>
+		</div>
+		<aside class="about-change-gwc__support">
+			<h3><?php echo esc_html( $about_change_cta_title ); ?></h3>
+			<p><?php echo esc_html( $about_change_cta_text ); ?></p>
+			<a href="<?php echo esc_url( $about_change_cta_link_url ); ?>"><?php echo esc_html( $about_change_cta_link_label ); ?> <span aria-hidden="true">→</span></a>
+		</aside>
+	</div>
+</section>
+
 <!-- PRÉSENTATION -->
 <section>
 	<div class="about-grid" style="max-width:1100px;margin:0 auto;">
