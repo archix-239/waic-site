@@ -4529,7 +4529,7 @@ section .testimonials-grid .testimonial-card {
    ========================================================= */
 .home-quote-gwc {
   background: #f5f5f7;
-  padding: 84px 5% 88px;
+  padding: 44px 5% 48px;
 }
 
 .home-quote-gwc__frame {
@@ -4537,7 +4537,7 @@ section .testimonials-grid .testimonial-card {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 420px;
+  min-height: 260px;
   position: relative;
   overflow: hidden;
   background: #f5f5f7;
@@ -4561,19 +4561,19 @@ section .testimonials-grid .testimonial-card {
   position: relative;
   z-index: 1;
   background: #d9eff7;
-  padding: 64px 56px 52px;
+  padding: 38px 40px 32px;
 }
 
 .home-quote-gwc__text {
   margin: 0;
   color: #1E1B4B;
-  font-size: clamp(1.8rem, 3.8vw, 3.2rem);
+  font-size: clamp(1.35rem, 2.8vw, 2.2rem);
   line-height: 1.15;
   letter-spacing: -0.01em;
 }
 
 .home-quote-gwc__meta {
-  margin: 32px 0 0;
+  margin: 18px 0 0;
   color: #1E1B4B;
   font-size: clamp(1rem, 1.8vw, 1.6rem);
   text-transform: uppercase;
@@ -4608,7 +4608,7 @@ section .testimonials-grid .testimonial-card {
 
 @media (max-width: 980px) {
   .home-quote-gwc {
-    padding: 56px 4% 64px;
+    padding: 36px 4% 40px;
   }
 
   .home-quote-gwc__frame {
@@ -4616,10 +4616,10 @@ section .testimonials-grid .testimonial-card {
   }
 
   .home-quote-gwc__panel {
-    padding: 36px 26px;
+    padding: 28px 22px;
   }
 
   .home-quote-gwc__media {
-    min-height: 320px;
+    min-height: 220px;
   }
 }
