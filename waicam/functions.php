@@ -677,7 +677,7 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_team_spotlight_title'    => array( __( 'Titre principal', 'waicam' ), 'UNE LEADERSHIP FÉMININ ENGAGÉ POUR L’IA INCLUSIVE', 'text' ),
 		'waicam_team_spotlight_text'     => array( __( 'Texte', 'waicam' ), "WAI-CAM est portée par une présidence engagée qui agit pour réduire les inégalités d’accès au numérique, renforcer les compétences des femmes et promouvoir une intelligence artificielle éthique au Cameroun.", 'textarea' ),
 		'waicam_team_spotlight_cta_text' => array( __( 'Texte CTA', 'waicam' ), 'Découvrir notre gouvernance', 'text' ),
-		'waicam_team_spotlight_cta_url'  => array( __( 'URL CTA', 'waicam' ), home_url( '/a-propos/' ), 'url' ),
+		'waicam_team_spotlight_cta_url'  => array( __( 'URL CTA', 'waicam' ), home_url( '/about/' ), 'url' ),
 	);
 	foreach ( $team_spotlight_fields as $key => $cfg ) {
 		if ( 'textarea' === $cfg[2] ) {
@@ -706,6 +706,30 @@ function waicam_customize_register( $wp_customize ) {
 		'section'   => 'waicam_team_spotlight',
 		'mime_type' => 'image',
 	) ) );
+
+
+	// ────────── Page Équipe — Citation mouvement ──────────
+	$wp_customize->add_section( 'waicam_team_quote', array(
+		'title'       => __( 'Équipe — Citation', 'waicam' ),
+		'description' => __( 'Bloc citation après la section Présidence.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+	$team_quote_fields = array(
+		'waicam_team_quote_text'   => array( __( 'Texte citation', 'waicam' ), "WAI-CAM est plus qu'une organisation : c'est un mouvement citoyen qui agit pour l'inclusion numérique des femmes.", 'textarea' ),
+		'waicam_team_quote_author' => array( __( 'Auteur / signature', 'waicam' ), 'WAI-CAM — Leadership & Gouvernance', 'text' ),
+	);
+	foreach ( $team_quote_fields as $key => $cfg ) {
+		$sanitize = 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_team_quote',
+			'type'    => $cfg[2],
+		) );
+	}
 
 
 

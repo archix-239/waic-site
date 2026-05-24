@@ -41,7 +41,7 @@ $team_spotlight_kicker = get_theme_mod( 'waicam_team_spotlight_kicker', 'NOTRE P
 $team_spotlight_title  = get_theme_mod( 'waicam_team_spotlight_title', 'UNE LEADERSHIP FÉMININ ENGAGÉ POUR L’IA INCLUSIVE' );
 $team_spotlight_text   = get_theme_mod( 'waicam_team_spotlight_text', "WAI-CAM est portée par une présidence engagée qui agit pour réduire les inégalités d’accès au numérique, renforcer les compétences des femmes et promouvoir une intelligence artificielle éthique au Cameroun." );
 $team_spotlight_cta_text = get_theme_mod( 'waicam_team_spotlight_cta_text', 'Découvrir notre gouvernance' );
-$team_spotlight_cta_url  = get_theme_mod( 'waicam_team_spotlight_cta_url', home_url( '/a-propos/' ) );
+$team_spotlight_cta_url  = get_theme_mod( 'waicam_team_spotlight_cta_url', home_url( '/about/' ) );
 $team_spotlight_image_id = (int) get_theme_mod( 'waicam_team_spotlight_image_id', 0 );
 $team_spotlight_image = $team_spotlight_image_id ? wp_get_attachment_image_url( $team_spotlight_image_id, 'large' ) : '';
 ?>
@@ -72,6 +72,23 @@ $team_spotlight_image = $team_spotlight_image_id ? wp_get_attachment_image_url( 
 				<span><?php esc_html_e( 'Image présidence', 'waicam' ); ?></span>
 			<?php endif; ?>
 		</div>
+	</div>
+</section>
+
+
+
+<?php
+$team_quote_text   = get_theme_mod( 'waicam_team_quote_text', "WAI-CAM est plus qu'une organisation : c'est un mouvement citoyen qui agit pour l'inclusion numérique des femmes." );
+$team_quote_author = get_theme_mod( 'waicam_team_quote_author', 'WAI-CAM — Leadership & Gouvernance' );
+?>
+<section class="team-quote-gwc">
+	<div class="team-quote-gwc__shape" aria-hidden="true"></div>
+	<div class="team-quote-gwc__inner">
+		<blockquote class="team-quote-gwc__text">“<?php echo esc_html( $team_quote_text ); ?>”</blockquote>
+		<p class="team-quote-gwc__author">
+			<span class="team-quote-gwc__author-wave" aria-hidden="true"></span>
+			<?php echo esc_html( $team_quote_author ); ?>
+		</p>
 	</div>
 </section>
 

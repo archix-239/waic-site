@@ -5304,3 +5304,19 @@ footer ul li {
   .team-spotlight-gwc__inner { grid-template-columns:1fr; }
   .team-spotlight-gwc__media { max-width:480px; }
 }
+
+/* Team page — brand accent tune */
+.team-hero-gwc__kicker { background:#E41D44; }
+.team-hero-gwc__cta { color:#E41D44; }
+.team-hero-gwc__cta .arrow-wave path { stroke:#E41D44; }
+.team-spotlight-gwc__cta { color:#E41D44; }
+.team-spotlight-gwc__cta .arrow-wave path { stroke:#E41D44; }
+.team-spotlight-gwc__media { border-color:#E41D44; color:#E41D44; }
+
+/* Team page — quote section */
+.team-quote-gwc { position:relative; overflow:hidden; background:#efefef; padding:clamp(46px,7vw,110px) 0; }
+.team-quote-gwc__shape { position:absolute; inset:0; pointer-events:none; background: radial-gradient(80% 120% at 70% 0%, rgba(14,106,46,.08) 0%, rgba(14,106,46,.08) 38%, rgba(14,106,46,0) 39%); }
+.team-quote-gwc__inner { position:relative; z-index:1; width:min(1120px,92%); margin:0 auto; }
+.team-quote-gwc__text { margin:0; max-width:980px; color:#00314A; font-size:clamp(2rem,4.8vw,4.1rem); line-height:1.14; font-weight:500; }
+.team-quote-gwc__author { margin:34px 0 0; display:flex; align-items:center; gap:14px; color:#00314A; text-transform:uppercase; font-size:clamp(1rem,1.6vw,2rem); }
+.team-quote-gwc__author-wave { width:52px; height:12px; display:inline-block; background:#E41D44; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M1 6 C5 2 9 10 13 6 C17 2 21 10 25 6 C29 2 33 10 37 6 C41 2 45 10 49 6' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M1 6 C5 2 9 10 13 6 C17 2 21 10 25 6 C29 2 33 10 37 6 C41 2 45 10 49 6' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat; }
