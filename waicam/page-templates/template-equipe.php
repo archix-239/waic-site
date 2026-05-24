@@ -34,6 +34,47 @@ $team_hero_cta_url  = get_theme_mod( 'waicam_team_hero_cta_url', home_url( '/rej
 	</div>
 </section>
 
+
+
+<?php
+$team_spotlight_kicker = get_theme_mod( 'waicam_team_spotlight_kicker', 'NOTRE PRÉSIDENCE' );
+$team_spotlight_title  = get_theme_mod( 'waicam_team_spotlight_title', 'UNE LEADERSHIP FÉMININ ENGAGÉ POUR L’IA INCLUSIVE' );
+$team_spotlight_text   = get_theme_mod( 'waicam_team_spotlight_text', "WAI-CAM est portée par une présidence engagée qui agit pour réduire les inégalités d’accès au numérique, renforcer les compétences des femmes et promouvoir une intelligence artificielle éthique au Cameroun." );
+$team_spotlight_cta_text = get_theme_mod( 'waicam_team_spotlight_cta_text', 'Découvrir notre gouvernance' );
+$team_spotlight_cta_url  = get_theme_mod( 'waicam_team_spotlight_cta_url', home_url( '/a-propos/' ) );
+$team_spotlight_image_id = (int) get_theme_mod( 'waicam_team_spotlight_image_id', 0 );
+$team_spotlight_image = $team_spotlight_image_id ? wp_get_attachment_image_url( $team_spotlight_image_id, 'large' ) : '';
+?>
+<section class="team-spotlight-gwc">
+	<div class="team-spotlight-gwc__shape" aria-hidden="true"></div>
+	<div class="team-spotlight-gwc__inner">
+		<div class="team-spotlight-gwc__content">
+			<h2 class="team-spotlight-gwc__title"><?php echo esc_html( $team_spotlight_kicker ); ?></h2>
+			<svg class="team-spotlight-gwc__wave" viewBox="0 0 320 16" role="presentation" aria-hidden="true" focusable="false">
+				<path d="M0,8 C6,2 14,14 22,8 C30,2 38,14 46,8 C54,2 62,14 70,8 C78,2 86,14 94,8 C102,2 110,14 118,8 C126,2 134,14 142,8 C150,2 158,14 166,8 C174,2 182,14 190,8 C198,2 206,14 214,8 C222,2 230,14 238,8 C246,2 254,14 262,8 C270,2 278,14 286,8 C294,2 302,14 310,8 C314,6 317,8 320,8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+			</svg>
+			<p class="team-spotlight-gwc__intro"><?php echo esc_html( $team_spotlight_title ); ?></p>
+			<p class="team-spotlight-gwc__text"><?php echo esc_html( $team_spotlight_text ); ?></p>
+			<a class="team-spotlight-gwc__cta" href="<?php echo esc_url( $team_spotlight_cta_url ); ?>">
+				<?php echo esc_html( $team_spotlight_cta_text ); ?>
+				<span class="arrow-anim" aria-hidden="true">
+					<span class="arrow-plain">→</span>
+					<svg class="arrow-wave" viewBox="0 0 30 12" focusable="false" aria-hidden="true">
+						<path d="M1 6 C6 2,10 10,14 6 C18 2,22 10,26 6 M22 3 L28 6 L22 9"/>
+					</svg>
+				</span>
+			</a>
+		</div>
+		<div class="team-spotlight-gwc__media<?php echo $team_spotlight_image ? ' has-image' : ''; ?>">
+			<?php if ( $team_spotlight_image ) : ?>
+				<img src="<?php echo esc_url( $team_spotlight_image ); ?>" alt="" loading="lazy" />
+			<?php else : ?>
+				<span><?php esc_html_e( 'Image présidence', 'waicam' ); ?></span>
+			<?php endif; ?>
+		</div>
+	</div>
+</section>
+
 <?php
 $equipe = waicam_get_temoignages( -1 );
 

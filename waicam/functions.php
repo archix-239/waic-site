@@ -666,6 +666,48 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
+	// ────────── Page Équipe — Présidence spotlight ──────────
+	$wp_customize->add_section( 'waicam_team_spotlight', array(
+		'title'       => __( 'Équipe — Présidence', 'waicam' ),
+		'description' => __( 'Section texte + image après le hero.', 'waicam' ),
+		'panel'       => 'waicam_about_panel',
+	) );
+	$team_spotlight_fields = array(
+		'waicam_team_spotlight_kicker'   => array( __( 'Titre court', 'waicam' ), 'NOTRE PRÉSIDENCE', 'text' ),
+		'waicam_team_spotlight_title'    => array( __( 'Titre principal', 'waicam' ), 'UNE LEADERSHIP FÉMININ ENGAGÉ POUR L’IA INCLUSIVE', 'text' ),
+		'waicam_team_spotlight_text'     => array( __( 'Texte', 'waicam' ), "WAI-CAM est portée par une présidence engagée qui agit pour réduire les inégalités d’accès au numérique, renforcer les compétences des femmes et promouvoir une intelligence artificielle éthique au Cameroun.", 'textarea' ),
+		'waicam_team_spotlight_cta_text' => array( __( 'Texte CTA', 'waicam' ), 'Découvrir notre gouvernance', 'text' ),
+		'waicam_team_spotlight_cta_url'  => array( __( 'URL CTA', 'waicam' ), home_url( '/a-propos/' ), 'url' ),
+	);
+	foreach ( $team_spotlight_fields as $key => $cfg ) {
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_team_spotlight',
+			'type'    => $cfg[2],
+		) );
+	}
+	$wp_customize->add_setting( 'waicam_team_spotlight_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_team_spotlight_image_id', array(
+		'label'     => __( 'Image section', 'waicam' ),
+		'section'   => 'waicam_team_spotlight',
+		'mime_type' => 'image',
+	) ) );
+
+
 
 	// ────────── Page About — Hero ──────────
 	$wp_customize->add_section( 'waicam_about_hero', array(
