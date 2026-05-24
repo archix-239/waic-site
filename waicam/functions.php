@@ -263,6 +263,17 @@ function waicam_customize_register( $wp_customize ) {
 		'priority' => 30,
 	) );
 
+
+	$wp_customize->add_panel( 'waicam_home_panel', array(
+		'title'    => __( 'WAI-CAM — Accueil', 'waicam' ),
+		'priority' => 31,
+	) );
+
+	$wp_customize->add_panel( 'waicam_about_panel', array(
+		'title'    => __( 'WAI-CAM — À propos', 'waicam' ),
+		'priority' => 32,
+	) );
+
 	// ────────── Section Formulaires (IDs Fluent Forms) ──────────
 	$wp_customize->add_section( 'waicam_forms', array(
 		'title' => __( 'Formulaires Fluent Forms', 'waicam' ),
@@ -371,7 +382,7 @@ function waicam_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'waicam_home_posthero', array(
 		'title'       => __( 'Accueil — Section post-hero', 'waicam' ),
 		'description' => __( 'Contenus du bloc immédiatement après le hero de la page d’accueil.', 'waicam' ),
-		'panel'       => 'waicam_panel',
+		'panel'       => 'waicam_home_panel',
 	) );
 
 	$home_posthero_fields = array(
@@ -404,7 +415,7 @@ function waicam_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'waicam_home_impact', array(
 		'title'       => __( 'Accueil — Section impact', 'waicam' ),
 		'description' => __( 'Bloc texte + statistiques après la section post-hero.', 'waicam' ),
-		'panel'       => 'waicam_panel',
+		'panel'       => 'waicam_home_panel',
 	) );
 
 		$impact_fields = array(
@@ -441,7 +452,7 @@ function waicam_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'waicam_home_video', array(
 		'title'       => __( 'Accueil — Section vidéo', 'waicam' ),
 		'description' => __( 'Vidéo mise en avant après la section impact (URL YouTube/Vimeo).', 'waicam' ),
-		'panel'       => 'waicam_panel',
+		'panel'       => 'waicam_home_panel',
 	) );
 
 	$home_video_fields = array(
@@ -481,7 +492,7 @@ function waicam_customize_register( $wp_customize ) {
 		$wp_customize->add_section( 'waicam_home_featured', array(
 			'title'       => __( 'Accueil — Initiative phare', 'waicam' ),
 			'description' => __( 'Bloc éditorial image/texte orienté actualités et actions WAI-CAM.', 'waicam' ),
-			'panel'       => 'waicam_panel',
+			'panel'       => 'waicam_home_panel',
 		) );
 		$featured_fields = array(
 			'waicam_home_featured_kicker'   => array( __( 'Sur-titre', 'waicam' ), 'INITIATIVE PHARE WAI-CAM', 'text' ),
@@ -521,7 +532,7 @@ function waicam_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'waicam_home_newsletter', array(
 		'title'       => __( 'Accueil — Newsletter', 'waicam' ),
 		'description' => __( 'Bloc newsletter après la section initiative phare.', 'waicam' ),
-		'panel'       => 'waicam_panel',
+		'panel'       => 'waicam_home_panel',
 	) );
 	$newsletter_fields = array(
 		'waicam_home_newsletter_title' => array( __( 'Titre', 'waicam' ), 'Restez informé(e) de nos actualités', 'text' ),
@@ -544,7 +555,7 @@ function waicam_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'waicam_home_quote', array(
 		'title'       => __( 'Accueil — Témoignage cadré', 'waicam' ),
 		'description' => __( 'Bloc témoignage avec visuel et motif de cadre inspiré de la référence.', 'waicam' ),
-		'panel'       => 'waicam_panel',
+		'panel'       => 'waicam_home_panel',
 	) );
 	$quote_fields = array(
 		'waicam_home_quote_text'   => array( __( 'Texte du témoignage', 'waicam' ), 'Women in AI Cameroon a changé ma trajectoire professionnelle en me donnant les outils, la confiance et la communauté nécessaires pour agir concrètement.', 'textarea' ),
@@ -581,7 +592,7 @@ function waicam_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'waicam_home_bigstat', array(
 		'title'       => __( 'Accueil — Grand chiffre', 'waicam' ),
 		'description' => __( 'Bloc grand chiffre avec texte et CTA après le témoignage.', 'waicam' ),
-		'panel'       => 'waicam_panel',
+		'panel'       => 'waicam_home_panel',
 	) );
 	$bigstat_fields = array(
 		'waicam_home_bigstat_title'   => array( __( 'Titre principal', 'waicam' ), '860 000 femmes et jeunes touchées par nos actions au Cameroun', 'text' ),
@@ -607,7 +618,7 @@ function waicam_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'waicam_home_news', array(
 		'title'       => __( 'Accueil — Actualités (grille)', 'waicam' ),
 		'description' => __( 'Bloc actualités avec cartes après le grand chiffre.', 'waicam' ),
-		'panel'       => 'waicam_panel',
+		'panel'       => 'waicam_home_panel',
 	) );
 	$news_fields = array(
 		'waicam_home_news_kicker'   => array( __( 'Sur-titre', 'waicam' ), 'ACTUALITÉS', 'text' ),
@@ -633,7 +644,7 @@ function waicam_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'waicam_about_hero', array(
 		'title'       => __( 'À propos — Hero', 'waicam' ),
 		'description' => __( 'Section hero de la page Qui sommes-nous.', 'waicam' ),
-		'panel'       => 'waicam_panel',
+		'panel'       => 'waicam_about_panel',
 	) );
 
 	$wp_customize->add_setting( 'waicam_about_hero_title', array(
@@ -660,7 +671,7 @@ function waicam_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),
 		'description' => __( 'Bloc partenaires de fin de page.', 'waicam' ),
-		'panel'       => 'waicam_panel',
+		'panel'       => 'waicam_home_panel',
 	) );
 	$partner_fields = array(
 		'waicam_home_partners_title'    => array( __( 'Titre', 'waicam' ), 'Devenez partenaire Women in AI Cameroon', 'text' ),

@@ -5057,3 +5057,11 @@ footer ul li {
   .about-hero-gwc__inner { padding: 20px 0 26px; }
   .about-hero-gwc__inner h1 { max-width: 96%; font-size: clamp(1.2rem, 7.4vw, 2.3rem); line-height: 1.03; }
 }
+
+/* Wave lines: replay animation each time section enters viewport */
+.waicam-wave-replay path {
+  animation: none !important;
+}
+.waicam-wave-replay.is-visible path {
+  animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4 !important;
+}
