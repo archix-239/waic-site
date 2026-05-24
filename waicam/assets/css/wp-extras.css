@@ -4791,13 +4791,18 @@ section .testimonials-grid .testimonial-card {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+  justify-items: center;
 }
 
 .home-news-grid-gwc__card {
   background: #cfeeed;
-  min-height: 430px;
+  width: 100%;
+  max-width: 360px;
+  min-height: 384px;
+  height: 384px;
   display: grid;
   grid-template-rows: auto 1fr;
+  overflow: hidden;
 }
 
 .home-news-grid-gwc__card h3 {
@@ -4834,6 +4839,12 @@ section .testimonials-grid .testimonial-card {
   min-height: 250px;
   object-fit: cover;
   display: block;
+  transition: transform .38s ease;
+}
+
+.home-news-grid-gwc__card:hover .home-news-grid-gwc__card-media img,
+.home-news-grid-gwc__card:focus-within .home-news-grid-gwc__card-media img {
+  transform: scale(1.06);
 }
 
 .home-news-grid-gwc__cta {
@@ -4863,6 +4874,8 @@ section .testimonials-grid .testimonial-card {
   }
 
   .home-news-grid-gwc__card {
-    min-height: 360px;
+    max-width: 360px;
+    min-height: 384px;
+    height: 384px;
   }
 }
