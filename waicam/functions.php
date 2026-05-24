@@ -602,6 +602,31 @@ function waicam_customize_register( $wp_customize ) {
 			'type'    => $cfg[2],
 		) );
 	}
+
+	// ────────── Section Home actualités (cartes) ──────────
+	$wp_customize->add_section( 'waicam_home_news', array(
+		'title'       => __( 'Accueil — Actualités (grille)', 'waicam' ),
+		'description' => __( 'Bloc actualités avec cartes après le grand chiffre.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$news_fields = array(
+		'waicam_home_news_kicker'   => array( __( 'Sur-titre', 'waicam' ), 'ACTUALITÉS', 'text' ),
+		'waicam_home_news_title'    => array( __( 'Titre', 'waicam' ), 'Restez connectés à nos actions', 'text' ),
+		'waicam_home_news_cta_text' => array( __( 'Texte lien bas', 'waicam' ), 'Voir toutes nos actualités', 'text' ),
+		'waicam_home_news_cta_url'  => array( __( 'URL lien bas', 'waicam' ), home_url( '/blog' ), 'url' ),
+	);
+	foreach ( $news_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_news',
+			'type'    => $cfg[2],
+		) );
+	}
 	}
 	add_action( 'customize_register', 'waicam_customize_register' );
 

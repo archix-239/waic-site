@@ -325,6 +325,62 @@ get_header(); ?>
 	</svg>
 </section>
 
+<!-- ========== HOME — ACTUALITÉS (RÉFÉRENCE GWC) ========== -->
+<section class="home-news-grid-gwc">
+	<div class="home-news-grid-gwc__inner">
+		<div class="home-news-grid-gwc__kicker"><?php echo esc_html( get_theme_mod( 'waicam_home_news_kicker', 'ACTUALITÉS' ) ); ?></div>
+		<h2><?php echo esc_html( get_theme_mod( 'waicam_home_news_title', 'Restez connectés à nos actions' ) ); ?></h2>
+		<svg class="home-news-grid-gwc__title-wave" viewBox="0 0 320 16" role="presentation" aria-hidden="true" focusable="false">
+			<path d="M0 8 Q8 0 16 8 T32 8 T48 8 T64 8 T80 8 T96 8 T112 8 T128 8 T144 8 T160 8 T176 8 T192 8 T208 8 T224 8 T240 8 T256 8 T272 8 T288 8 T304 8 T320 8"></path>
+		</svg>
+
+		<div class="home-news-grid-gwc__cards">
+			<?php
+			$news_query = new WP_Query( array(
+				'post_type'      => array( 'post', 'evenement' ),
+				'posts_per_page' => 3,
+				'post_status'    => 'publish',
+			) );
+			if ( $news_query->have_posts() ) :
+				while ( $news_query->have_posts() ) :
+					$news_query->the_post();
+					$thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+					?>
+					<article class="home-news-grid-gwc__card">
+						<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+						<div class="home-news-grid-gwc__card-media<?php echo $thumb_url ? ' has-image' : ''; ?>">
+							<?php if ( $thumb_url ) : ?>
+								<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy" />
+							<?php endif; ?>
+						</div>
+					</article>
+				<?php
+				endwhile;
+				wp_reset_postdata();
+			else :
+				for ( $i = 0; $i < 3; $i++ ) : ?>
+					<article class="home-news-grid-gwc__card">
+						<h3><?php esc_html_e( 'Titre actualité à venir', 'waicam' ); ?></h3>
+						<div class="home-news-grid-gwc__card-media"></div>
+					</article>
+				<?php endfor;
+			endif;
+			?>
+		</div>
+
+		<a href="<?php echo esc_url( get_theme_mod( 'waicam_home_news_cta_url', home_url( '/blog' ) ) ); ?>" class="home-news-grid-gwc__cta">
+			<?php echo esc_html( get_theme_mod( 'waicam_home_news_cta_text', 'Voir toutes nos actualités' ) ); ?>
+			<span class="arrow-anim" aria-hidden="true">
+				<span class="arrow-plain">→</span>
+				<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
+					<path d="M1 8 Q7 2 13 8 T25 8 T37 8 T49 8 T61 8 T73 8"></path>
+					<path d="M69 4 L77 8 L69 12"></path>
+				</svg>
+			</span>
+		</a>
+	</div>
+</section>
+
 <!-- Icônes réseaux sociaux — fixes au scroll -->
 <div class="social-float" id="social-float">
 	<a href="<?php echo esc_url( get_theme_mod( 'waicam_social_linkedin', '#' ) ); ?>"
