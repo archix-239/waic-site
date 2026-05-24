@@ -8,12 +8,20 @@
 get_header(); ?>
 
 <?php
-get_template_part( 'template-parts/page-hero', null, array(
-	'title'    => __( 'À propos de WAI-CAM', 'waicam' ),
-	'subtitle' => __( "Un mouvement citoyen pour démocratiser l'intelligence artificielle au service de toutes les femmes camerounaises.", 'waicam' ),
-	'crumb'    => __( 'À propos', 'waicam' ),
-) );
+$about_hero_title = get_theme_mod( 'waicam_about_hero_title', __( "NOUS SOMMES EN MISSION POUR RENDRE L'IA ACCESSIBLE AUX FEMMES ET AUX JEUNES DU CAMEROUN.", 'waicam' ) );
+$about_hero_image_id = (int) get_theme_mod( 'waicam_about_hero_image_id', 0 );
+$about_hero_image = $about_hero_image_id ? wp_get_attachment_image_url( $about_hero_image_id, 'full' ) : '';
+if ( ! $about_hero_image ) {
+	$about_hero_image = waicam_img( 'african-women-ai.webp' );
+}
 ?>
+
+<section class="about-hero-gwc" style="--about-hero-bg:url('<?php echo esc_url( $about_hero_image ); ?>');"> 
+	<div class="about-hero-gwc__overlay"></div>
+	<div class="about-hero-gwc__inner">
+		<h1><?php echo esc_html( $about_hero_title ); ?></h1>
+	</div>
+</section>
 
 <!-- PRÉSENTATION -->
 <section>

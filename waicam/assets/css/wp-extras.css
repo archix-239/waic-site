@@ -5019,3 +5019,40 @@ footer ul li {
     text-align: center;
   }
 }
+
+/* About page - GWC inspired hero */
+.about-hero-gwc {
+  position: relative;
+  min-height: clamp(380px, 64vh, 620px);
+  background-image: var(--about-hero-bg);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+}
+.about-hero-gwc__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.56) 0%, rgba(0,0,0,.42) 38%, rgba(0,0,0,.20) 72%, rgba(0,0,0,.12) 100%);
+}
+.about-hero-gwc__inner {
+  position: relative;
+  z-index: 1;
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  padding: clamp(44px, 8vw, 84px) 0;
+}
+.about-hero-gwc__inner h1 {
+  margin: 0;
+  max-width: 860px;
+  color: #fff;
+  font-size: clamp(2rem, 5.6vw, 4.6rem);
+  line-height: .98;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  font-weight: 800;
+}
+@media (max-width: 768px) {
+  .about-hero-gwc { min-height: 360px; }
+  .about-hero-gwc__inner h1 { max-width: 96%; }
+}

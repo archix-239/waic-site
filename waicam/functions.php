@@ -628,6 +628,34 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
+
+	// ────────── Page About — Hero ──────────
+	$wp_customize->add_section( 'waicam_about_hero', array(
+		'title'       => __( 'À propos — Hero', 'waicam' ),
+		'description' => __( 'Section hero de la page Qui sommes-nous.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+
+	$wp_customize->add_setting( 'waicam_about_hero_title', array(
+		'default'           => __( "NOUS SOMMES EN MISSION POUR RENDRE L'IA ACCESSIBLE AUX FEMMES ET AUX JEUNES DU CAMEROUN.", 'waicam' ),
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'waicam_about_hero_title', array(
+		'label'   => __( 'Titre hero', 'waicam' ),
+		'section' => 'waicam_about_hero',
+		'type'    => 'text',
+	) );
+
+	$wp_customize->add_setting( 'waicam_about_hero_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_about_hero_image_id', array(
+		'label'      => __( 'Image hero', 'waicam' ),
+		'section'    => 'waicam_about_hero',
+		'mime_type'  => 'image',
+	) ) );
+
 	// ────────── Section Home partenaires ──────────
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),
