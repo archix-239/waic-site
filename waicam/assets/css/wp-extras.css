@@ -5097,6 +5097,14 @@ footer ul li {
   width: min(620px, 96%);
   color: #15c7af;
 }
+.about-intro-gwc__wave path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 380;
+  stroke-dashoffset: 380;
+}
 .about-intro-gwc__text {
   margin: 0;
   max-width: 760px;
