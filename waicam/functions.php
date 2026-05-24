@@ -847,6 +847,16 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_about_statement_cta_text' => array( __( 'Texte lien', 'waicam' ), 'Lire notre déclaration d’inclusion', 'text' ),
 		'waicam_about_statement_cta_url'  => array( __( 'URL lien', 'waicam' ), home_url( '/a-propos/' ), 'url' ),
 	);
+
+	$wp_customize->add_setting( 'waicam_about_reports_title', array(
+		'default'           => 'ACTUALITÉS & ÉVÉNEMENTS',
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'waicam_about_reports_title', array(
+		'label'   => __( 'Titre section Actualités/Événements', 'waicam' ),
+		'section' => 'waicam_about_statement',
+		'type'    => 'text',
+	) );
 	foreach ( $about_statement_fields as $key => $cfg ) {
 		if ( 'textarea' === $cfg[2] ) {
 			$sanitize = 'sanitize_textarea_field';

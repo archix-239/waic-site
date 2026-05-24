@@ -335,4 +335,43 @@ $about_statement_cta_url  = get_theme_mod( 'waicam_about_statement_cta_url', hom
 	</div>
 </section>
 
+
+
+<?php
+$about_reports_title = get_theme_mod( 'waicam_about_reports_title', 'ACTUALITÉS & ÉVÉNEMENTS' );
+$reports_q = new WP_Query( array(
+	'post_type'           => array( 'post', 'evenement' ),
+	'posts_per_page'      => 3,
+	'ignore_sticky_posts' => true,
+) );
+?>
+<section class="about-reports-gwc">
+	<div class="about-reports-gwc__inner">
+		<h2 class="about-reports-gwc__title"><?php echo esc_html( $about_reports_title ); ?></h2>
+		<svg class="about-reports-gwc__wave" viewBox="0 0 320 16" role="presentation" aria-hidden="true" focusable="false">
+			<path d="M0,8 C6,2 14,14 22,8 C30,2 38,14 46,8 C54,2 62,14 70,8 C78,2 86,14 94,8 C102,2 110,14 118,8 C126,2 134,14 142,8 C150,2 158,14 166,8 C174,2 182,14 190,8 C198,2 206,14 214,8 C222,2 230,14 238,8 C246,2 254,14 262,8 C270,2 278,14 286,8 C294,2 302,14 310,8 C314,6 317,8 320,8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+		</svg>
+
+		<div class="about-reports-gwc__grid">
+			<?php if ( $reports_q->have_posts() ) : ?>
+				<?php while ( $reports_q->have_posts() ) : $reports_q->the_post(); ?>
+					<article class="about-reports-gwc__card">
+						<a class="about-reports-gwc__thumb" href="<?php the_permalink(); ?>">
+							<?php if ( has_post_thumbnail() ) : ?>
+								<?php the_post_thumbnail( 'large', array( 'loading' => 'lazy' ) ); ?>
+							<?php else : ?>
+								<span class="about-reports-gwc__ph"><?php esc_html_e( 'Image', 'waicam' ); ?></span>
+							<?php endif; ?>
+							<span class="about-reports-gwc__wavecut" aria-hidden="true"></span>
+						</a>
+						<div class="about-reports-gwc__year"><?php echo esc_html( get_the_date( 'Y' ) ); ?></div>
+					</article>
+				<?php endwhile; wp_reset_postdata(); ?>
+			<?php else : ?>
+				<p><?php esc_html_e( 'Publiez des articles ou événements pour alimenter cette section.', 'waicam' ); ?></p>
+			<?php endif; ?>
+		</div>
+	</div>
+</section>
+
 <?php get_footer();
