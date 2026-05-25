@@ -150,6 +150,10 @@ foreach ( $autres_ids as $member_id ) {
 				$role   = waicam_field( 'role__fonction', $member_id );
 				$profil = waicam_field( 'profil_professionnel', $member_id );
 				$photo  = waicam_image_url( 'photo', $member_id, 'large', '' );
+				$linkedin = waicam_field( 'linkedin', $member_id );
+				if ( ! $linkedin ) {
+					$linkedin = waicam_field( 'lien_linkedin', $member_id );
+				}
 				$initiale = mb_strtoupper( mb_substr( $nom, 0, 1 ) );
 			?>
 			<div class="team-card team-card--gwc">
@@ -157,6 +161,11 @@ foreach ( $autres_ids as $member_id ) {
 					<div class="team-photo"><img src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $nom ); ?>" loading="lazy" /></div>
 				<?php else : ?>
 					<div class="team-avatar"><?php echo esc_html( $initiale ); ?></div>
+				<?php endif; ?>
+				<?php if ( $linkedin ) : ?>
+					<a class="team-card--gwc__linkedin" href="<?php echo esc_url( $linkedin ); ?>" target="_blank" rel="noopener" aria-label="LinkedIn <?php echo esc_attr( $nom ); ?>">
+						<i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+					</a>
 				<?php endif; ?>
 				<h3><?php echo esc_html( $nom ); ?></h3>
 				<?php if ( $role ) : ?><div class="role"><?php echo esc_html( $role ); ?></div><?php endif; ?>
