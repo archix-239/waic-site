@@ -118,4 +118,53 @@ $partners_quote_image = $partners_quote_image_id ? wp_get_attachment_image_url( 
   </div>
 </section>
 
+
+<?php
+$partners_stats_title = get_theme_mod( 'waicam_partners_stats_title', 'CONNECTEZ-VOUS À NOTRE COMMUNAUTÉ' );
+$partners_stats_text = get_theme_mod( 'waicam_partners_stats_text', "Nos membres sont engagés dans la tech, l'innovation et l'impact social au Cameroun et au-delà." );
+$partners_stats_image_id = (int) get_theme_mod( 'waicam_partners_stats_image_id', 0 );
+$partners_stats_image = $partners_stats_image_id ? wp_get_attachment_image_url( $partners_stats_image_id, 'large' ) : '';
+$partners_stats = array(
+  array(
+    'number' => get_theme_mod( 'waicam_partners_stats_1_number', '12,800' ),
+    'label'  => get_theme_mod( 'waicam_partners_stats_1_label', 'MEMBRES ET COMMUNAUTÉ' ),
+  ),
+  array(
+    'number' => get_theme_mod( 'waicam_partners_stats_2_number', '25-45' ),
+    'label'  => get_theme_mod( 'waicam_partners_stats_2_label', 'ÂGE MAJORITAIRE' ),
+  ),
+  array(
+    'number' => get_theme_mod( 'waicam_partners_stats_3_number', '42%' ),
+    'label'  => get_theme_mod( 'waicam_partners_stats_3_label', 'DIPLÔMÉES SUPÉRIEUR' ),
+  ),
+  array(
+    'number' => get_theme_mod( 'waicam_partners_stats_4_number', '40%' ),
+    'label'  => get_theme_mod( 'waicam_partners_stats_4_label', 'PROFILS SENIORS' ),
+  ),
+);
+?>
+<section class="partners-stats-gwc">
+  <div class="partners-stats-gwc__inner">
+    <h2><?php echo esc_html( $partners_stats_title ); ?></h2>
+    <p><?php echo esc_html( $partners_stats_text ); ?></p>
+
+    <div class="partners-stats-gwc__media<?php echo $partners_stats_image ? ' has-image' : ''; ?>">
+      <?php if ( $partners_stats_image ) : ?>
+        <img src="<?php echo esc_url( $partners_stats_image ); ?>" alt="" loading="lazy" />
+      <?php else : ?>
+        <span><?php esc_html_e( 'Image communauté', 'waicam' ); ?></span>
+      <?php endif; ?>
+      <div class="partners-stats-gwc__overlay">
+        <?php foreach ( $partners_stats as $item ) : ?>
+          <article class="partners-stats-gwc__item">
+            <h3><?php echo esc_html( $item['number'] ); ?></h3>
+            <i aria-hidden="true"></i>
+            <p><?php echo esc_html( $item['label'] ); ?></p>
+          </article>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+</section>
+
 <?php get_footer();

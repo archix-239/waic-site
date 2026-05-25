@@ -1077,6 +1077,46 @@ function waicam_customize_register( $wp_customize ) {
 		'mime_type' => 'image',
 	) ) );
 
+
+	$wp_customize->add_section( 'waicam_partners_stats', array(
+		'title'       => __( 'Partenaires — Communauté', 'waicam' ),
+		'description' => __( 'Bloc communauté avec statistiques sur image.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$partners_stats_fields = array(
+		'waicam_partners_stats_title' => array( __( 'Titre section', 'waicam' ), 'CONNECTEZ-VOUS À NOTRE COMMUNAUTÉ', 'text' ),
+		'waicam_partners_stats_text'  => array( __( 'Texte intro', 'waicam' ), "Nos membres sont engagés dans la tech, l'innovation et l'impact social au Cameroun et au-delà.", 'textarea' ),
+		'waicam_partners_stats_1_number' => array( __( 'Stat 1 — Chiffre', 'waicam' ), '12,800', 'text' ),
+		'waicam_partners_stats_1_label'  => array( __( 'Stat 1 — Libellé', 'waicam' ), 'MEMBRES ET COMMUNAUTÉ', 'text' ),
+		'waicam_partners_stats_2_number' => array( __( 'Stat 2 — Chiffre', 'waicam' ), '25-45', 'text' ),
+		'waicam_partners_stats_2_label'  => array( __( 'Stat 2 — Libellé', 'waicam' ), 'ÂGE MAJORITAIRE', 'text' ),
+		'waicam_partners_stats_3_number' => array( __( 'Stat 3 — Chiffre', 'waicam' ), '42%', 'text' ),
+		'waicam_partners_stats_3_label'  => array( __( 'Stat 3 — Libellé', 'waicam' ), 'DIPLÔMÉES SUPÉRIEUR', 'text' ),
+		'waicam_partners_stats_4_number' => array( __( 'Stat 4 — Chiffre', 'waicam' ), '40%', 'text' ),
+		'waicam_partners_stats_4_label'  => array( __( 'Stat 4 — Libellé', 'waicam' ), 'PROFILS SENIORS', 'text' ),
+	);
+	foreach ( $partners_stats_fields as $key => $cfg ) {
+		$sanitize = 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_partners_stats',
+			'type'    => $cfg[2],
+		) );
+	}
+	$wp_customize->add_setting( 'waicam_partners_stats_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_partners_stats_image_id', array(
+		'label'     => __( 'Image de fond stats', 'waicam' ),
+		'section'   => 'waicam_partners_stats',
+		'mime_type' => 'image',
+	) ) );
+
 	// ────────── Section Home partenaires ──────────
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),
