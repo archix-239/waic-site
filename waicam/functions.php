@@ -969,6 +969,47 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
+
+	// ────────── Page Partenaires — Sections 1 & 2 ──────────
+	$wp_customize->add_section( 'waicam_partners_page', array(
+		'title'       => __( 'Partenaires — Intro & CTA', 'waicam' ),
+		'description' => __( 'Deux premières sections de la page partenaires.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$partners_fields = array(
+		'waicam_partners_hero_title' => array( __( 'Titre hero', 'waicam' ), 'DEVENEZ PARTENAIRE', 'text' ),
+		'waicam_partners_hero_text_1' => array( __( 'Texte hero 1', 'waicam' ), "Women in AI Cameroon (WAI-CAM) est un mouvement citoyen qui promeut une IA inclusive, utile et accessible aux femmes et aux jeunes à travers le Cameroun.", 'textarea' ),
+		'waicam_partners_hero_text_2' => array( __( 'Texte hero 2', 'waicam' ), "En soutenant nos initiatives, vous contribuez au renforcement des compétences, à l'innovation locale et à une meilleure représentation des femmes dans les métiers du numérique et de l'IA.", 'textarea' ),
+		'waicam_partners_cta_title' => array( __( 'Titre bloc CTA', 'waicam' ), 'REJOIGNEZ NOTRE MISSION', 'text' ),
+		'waicam_partners_cta_text_1' => array( __( 'Texte CTA 1', 'waicam' ), 'Nous développons des opportunités de partenariat institutionnel, éducatif, média et entreprise.', 'textarea' ),
+		'waicam_partners_cta_text_2' => array( __( 'Texte CTA 2', 'waicam' ), 'Soumettez votre demande de partenariat dès aujourd’hui.', 'textarea' ),
+		'waicam_partners_cta_btn' => array( __( 'Texte bouton', 'waicam' ), 'FAIRE UNE DEMANDE DE PARTENARIAT', 'text' ),
+		'waicam_partners_cta_url' => array( __( 'URL bouton', 'waicam' ), '#form-partenariat', 'url' ),
+	);
+	foreach ( $partners_fields as $key => $cfg ) {
+		if ( 'textarea' === $cfg[2] ) $sanitize = 'sanitize_textarea_field';
+		elseif ( 'url' === $cfg[2] ) $sanitize = 'esc_url_raw';
+		else $sanitize = 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_partners_page',
+			'type'    => $cfg[2],
+		) );
+	}
+	$wp_customize->add_setting( 'waicam_partners_cta_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_partners_cta_image_id', array(
+		'label'     => __( 'Image bloc CTA', 'waicam' ),
+		'section'   => 'waicam_partners_page',
+		'mime_type' => 'image',
+	) ) );
+
 	// ────────── Section Home partenaires ──────────
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),
