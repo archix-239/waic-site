@@ -197,7 +197,6 @@ foreach ( $autres_ids as $member_id ) {
 				<?php endif; ?>
 				<h3><?php echo esc_html( $nom ); ?></h3>
 				<?php if ( $role ) : ?><div class="role"><?php echo esc_html( $role ); ?></div><?php endif; ?>
-				<?php if ( $profil ) : ?><p class="profil"><?php echo esc_html( $profil ); ?></p><?php endif; ?>
 			</div>
 			<?php endforeach; ?>
 		</div>
@@ -215,34 +214,5 @@ foreach ( $autres_ids as $member_id ) {
 </section>
 <?php endif; ?>
 
-<!-- HOMMAGE NELLY -->
-<section class="tribute-section">
-	<div class="section-header">
-		<div class="section-tag"><?php esc_html_e( 'In Memoriam', 'waicam' ); ?></div>
-		<h2 class="section-title"><?php esc_html_e( 'Hommage à Nelly Chatue-Diop', 'waicam' ); ?></h2>
-	</div>
-	<div class="tribute-card" style="max-width:780px;margin:0 auto;">
-		<div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
-		<blockquote>
-			<?php esc_html_e( '"Toutes les grandes révolutions technologiques nous sont passées sous le nez. Pas question, cette fois, que les Africains ratent le train !"', 'waicam' ); ?>
-		</blockquote>
-		<div class="author">Nelly Chatue-Diop</div>
-		<div class="author-role"><?php esc_html_e( 'Responsable Antenne Littoral / Sud-Ouest · Visionnaire en fintech & blockchain · (†8 janvier 2026)', 'waicam' ); ?></div>
-	</div>
-</section>
-
-<!-- CTA REJOINDRE -->
-<section style="background:var(--light);">
-	<div style="max-width:780px;margin:0 auto;text-align:center;">
-		<div class="section-tag"><?php esc_html_e( 'Rejoindre', 'waicam' ); ?></div>
-		<h2 class="section-title" style="margin-bottom:16px;"><?php echo wp_kses_post( __( 'Vous aussi, faites partie du <span>mouvement</span>', 'waicam' ) ); ?></h2>
-		<p style="color:var(--gray);margin-bottom:32px;">
-			<?php esc_html_e( "Membre actif, ambassadrice régionale, bénévole ou mentor : il y a une place pour vous au sein de WAI-CAM.", 'waicam' ); ?>
-		</p>
-		<a href="<?php echo esc_url( home_url( '/rejoindre' ) ); ?>" class="btn-primary" style="background:linear-gradient(135deg,var(--primary),var(--accent));color:white;">
-			<?php esc_html_e( 'Rejoindre le mouvement', 'waicam' ); ?>
-		</a>
-	</div>
-</section>
 
 <?php get_footer();

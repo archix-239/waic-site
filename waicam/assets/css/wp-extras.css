@@ -5339,3 +5339,15 @@ footer ul li {
 @media (max-width:1100px){ .team-grid--gwc{grid-template-columns:repeat(3,minmax(0,1fr));} }
 @media (max-width:840px){ .team-grid--gwc{grid-template-columns:repeat(2,minmax(0,1fr));} }
 @media (max-width:560px){ .team-grid--gwc{grid-template-columns:1fr;} }
+
+
+/* Team page refinements per review */
+.team-group-gwc--neutral { background:#efefef; }
+.team-group-gwc--cream { background:rgba(14,106,46,.10); }
+.team-group-gwc:nth-of-type(odd) { background:#efefef; }
+.team-group-gwc:nth-of-type(even) { background:rgba(14,106,46,.10); }
+.team-group-gwc__title { font-size:clamp(1.6rem,3.4vw,2.9rem); }
+.team-card--gwc { border:2px solid #E41D44; }
+.team-card--gwc h3 { font-size:clamp(0.95rem,1.7vw,1.85rem); letter-spacing:.01em; }
+.team-card--gwc .role { margin-top:4px; font-size:clamp(0.95rem,1.3vw,1.55rem); line-height:1.28; }
+.team-card--gwc .profil { display:none; }
