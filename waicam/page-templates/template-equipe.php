@@ -155,48 +155,57 @@ if ( $equipe ) {
 <?php endif; ?>
 
 <?php if ( ! empty( $autres_ids ) ) : ?>
-<!-- ============================================
-     RESTE DE L'ÉQUIPE
-     ============================================ -->
-<section style="background:var(--gray-light);">
-	<div style="max-width:1100px;margin:0 auto;">
-		<div class="section-header">
-			<div class="section-tag"><?php esc_html_e( 'Bureau & équipes', 'waicam' ); ?></div>
-			<h2 class="section-title"><?php echo wp_kses_post( __( 'Les visages du <span>mouvement</span>', 'waicam' ) ); ?></h2>
-		</div>
-
-		<div class="team-grid">
-			<?php foreach ( $autres_ids as $member_id ) :
+<?php
+$groups = array(
+	'presidence' => array( 'label' => 'PRÉSIDENCE', 'color' => 'neutral', 'items' => array() ),
+	'projet_jeune' => array( 'label' => 'RESPONSABLE PROJET JEUNE', 'color' => 'cream', 'items' => array() ),
+	'regionaux' => array( 'label' => 'RESPONSABLES RÉGIONAUX', 'color' => 'neutral', 'items' => array() ),
+	'antenne' => array( 'label' => 'RESPONSABLES ANTENNE', 'color' => 'cream', 'items' => array() ),
+	'leadership' => array( 'label' => 'LEADERSHIP & FONCTIONS SUPPORT', 'color' => 'neutral', 'items' => array() ),
+);
+foreach ( $autres_ids as $member_id ) {
+	$role_raw = (string) waicam_field( 'role__fonction', $member_id );
+	$role = strtolower( remove_accents( $role_raw ) );
+	$key = 'leadership';
+	if ( strpos( $role, 'presiden' ) !== false ) { $key = 'presidence'; }
+	elseif ( strpos( $role, 'projet jeune' ) !== false ) { $key = 'projet_jeune'; }
+	elseif ( strpos( $role, 'regional' ) !== false || strpos( $role, 'region' ) !== false ) { $key = 'regionaux'; }
+	elseif ( strpos( $role, 'antenne' ) !== false ) { $key = 'antenne'; }
+	$groups[$key]['items'][] = $member_id;
+}
+?>
+<?php foreach ( $groups as $group_key => $group_cfg ) : if ( empty( $group_cfg['items'] ) ) { continue; } ?>
+<section class="team-group-gwc team-group-gwc--<?php echo esc_attr( $group_cfg['color'] ); ?>">
+	<div class="team-group-gwc__inner">
+		<h2 class="team-group-gwc__title"><?php echo esc_html( $group_cfg['label'] ); ?></h2>
+		<svg class="team-group-gwc__wave" viewBox="0 0 320 16" role="presentation" aria-hidden="true" focusable="false">
+			<path d="M0,8 C6,2 14,14 22,8 C30,2 38,14 46,8 C54,2 62,14 70,8 C78,2 86,14 94,8 C102,2 110,14 118,8 C126,2 134,14 142,8 C150,2 158,14 166,8 C174,2 182,14 190,8 C198,2 206,14 214,8 C222,2 230,14 238,8 C246,2 254,14 262,8 C270,2 278,14 286,8 C294,2 302,14 310,8 C314,6 317,8 320,8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+		</svg>
+		<div class="team-grid team-grid--gwc">
+			<?php foreach ( $group_cfg['items'] as $member_id ) :
 				$nom    = waicam_field( 'nom_complet', $member_id, get_the_title( $member_id ) );
 				$role   = waicam_field( 'role__fonction', $member_id );
 				$profil = waicam_field( 'profil_professionnel', $member_id );
-				$photo  = waicam_image_url( 'photo', $member_id, 'medium', '' );
+				$photo  = waicam_image_url( 'photo', $member_id, 'large', '' );
 				$initiale = mb_strtoupper( mb_substr( $nom, 0, 1 ) );
 			?>
-				<div class="team-card">
-					<?php if ( $photo ) : ?>
-						<div class="team-photo">
-							<img src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $nom ); ?>" loading="lazy" />
-						</div>
-					<?php else : ?>
-						<div class="team-avatar"><?php echo esc_html( $initiale ); ?></div>
-					<?php endif; ?>
-
-					<h3><?php echo esc_html( $nom ); ?></h3>
-
-					<?php if ( $role ) : ?>
-						<div class="role"><?php echo esc_html( $role ); ?></div>
-					<?php endif; ?>
-
-					<?php if ( $profil ) : ?>
-						<p class="profil"><?php echo esc_html( $profil ); ?></p>
-					<?php endif; ?>
-				</div>
+			<div class="team-card team-card--gwc">
+				<?php if ( $photo ) : ?>
+					<div class="team-photo"><img src="<?php echo esc_url( $photo ); ?>" alt="<?php echo esc_attr( $nom ); ?>" loading="lazy" /></div>
+				<?php else : ?>
+					<div class="team-avatar"><?php echo esc_html( $initiale ); ?></div>
+				<?php endif; ?>
+				<h3><?php echo esc_html( $nom ); ?></h3>
+				<?php if ( $role ) : ?><div class="role"><?php echo esc_html( $role ); ?></div><?php endif; ?>
+				<?php if ( $profil ) : ?><p class="profil"><?php echo esc_html( $profil ); ?></p><?php endif; ?>
+			</div>
 			<?php endforeach; ?>
 		</div>
 	</div>
 </section>
+<?php endforeach; ?>
 <?php endif; ?>
+
 
 <?php if ( ! $presidente_id && empty( $autres_ids ) ) : ?>
 <section>

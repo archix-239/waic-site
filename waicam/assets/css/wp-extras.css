@@ -5320,3 +5320,22 @@ footer ul li {
 .team-quote-gwc__text { margin:0; max-width:980px; color:#00314A; font-size:clamp(2rem,4.8vw,4.1rem); line-height:1.14; font-weight:500; }
 .team-quote-gwc__author { margin:34px 0 0; display:flex; align-items:center; gap:14px; color:#00314A; text-transform:uppercase; font-size:clamp(1rem,1.6vw,2rem); }
 .team-quote-gwc__author-wave { width:52px; height:12px; display:inline-block; background:#E41D44; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M1 6 C5 2 9 10 13 6 C17 2 21 10 25 6 C29 2 33 10 37 6 C41 2 45 10 49 6' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 12'%3E%3Cpath d='M1 6 C5 2 9 10 13 6 C17 2 21 10 25 6 C29 2 33 10 37 6 C41 2 45 10 49 6' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat; }
+
+/* Team page — grouped members */
+.team-group-gwc { padding:clamp(34px,5vw,70px) 0; }
+.team-group-gwc--neutral { background:#efefef; }
+.team-group-gwc--cream { background:rgba(14,106,46,.10); }
+.team-group-gwc__inner { width:min(1120px,92%); margin:0 auto; }
+.team-group-gwc__title { margin:0; color:#00314A; text-transform:uppercase; font-size:clamp(2rem,4.8vw,4rem); line-height:1; }
+.team-group-gwc__wave { width:min(520px,95%); margin:8px 0 24px; color:#0E6A2E; }
+.team-group-gwc__wave path { fill:none; stroke:currentColor; stroke-width:2.5; stroke-linecap:round; stroke-dasharray:380; stroke-dashoffset:380; }
+.team-grid--gwc { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; }
+.team-card--gwc { border:2px solid #0E6A2E; background:transparent; padding:18px; }
+.team-card--gwc h3 { color:#00314A; text-transform:uppercase; font-size:clamp(1.2rem,2.3vw,2rem); margin-top:16px; }
+.team-card--gwc .role,
+.team-card--gwc .profil { color:#00314A; }
+.team-card--gwc .team-photo { border-radius:0; }
+.team-card--gwc .team-photo img { aspect-ratio:4/4; object-fit:cover; }
+@media (max-width:1100px){ .team-grid--gwc{grid-template-columns:repeat(3,minmax(0,1fr));} }
+@media (max-width:840px){ .team-grid--gwc{grid-template-columns:repeat(2,minmax(0,1fr));} }
+@media (max-width:560px){ .team-grid--gwc{grid-template-columns:1fr;} }
