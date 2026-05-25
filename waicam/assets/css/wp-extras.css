@@ -5351,3 +5351,12 @@ footer ul li {
 .team-card--gwc h3 { font-size:clamp(0.95rem,1.7vw,1.85rem); letter-spacing:.01em; }
 .team-card--gwc .role { margin-top:4px; font-size:clamp(0.95rem,1.3vw,1.55rem); line-height:1.28; }
 .team-card--gwc .profil { display:none; }
+
+
+/* Team cards final polish — match provided reference */
+.team-card--gwc { border-radius:0 !important; background:transparent !important; }
+.team-card--gwc .team-photo,
+.team-card--gwc .team-photo img,
+.team-card--gwc .team-avatar { border-radius:0 !important; }
+.team-card--gwc h3 { font-size:clamp(0.88rem,1.5vw,1.05rem) !important; font-weight:700; line-height:1.18; margin:14px 0 8px; }
+.team-card--gwc .role { font-size:clamp(0.82rem,1.25vw,0.98rem) !important; line-height:1.34; background:transparent !important; border:0 !important; padding:0 !important; border-radius:0 !important; box-shadow:none !important; display:block; }
