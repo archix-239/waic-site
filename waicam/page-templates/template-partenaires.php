@@ -8,190 +8,85 @@
 get_header(); ?>
 
 <?php
-get_template_part( 'template-parts/page-hero', null, array(
-	'title'    => __( 'Partenariats & Collaboration', 'waicam' ),
-	'subtitle' => __( "Rejoignez le mouvement et contribuez à une IA inclusive et accessible pour toutes les femmes camerounaises.", 'waicam' ),
-	'crumb'    => __( 'Partenaires', 'waicam' ),
-) );
+$partners_hero_title = get_theme_mod( 'waicam_partners_hero_title', 'DEVENEZ PARTENAIRE' );
+$partners_hero_text_1 = get_theme_mod( 'waicam_partners_hero_text_1', "Women in AI Cameroon (WAI-CAM) est un mouvement citoyen qui promeut une IA inclusive, utile et accessible aux femmes et aux jeunes à travers le Cameroun." );
+$partners_hero_text_2 = get_theme_mod( 'waicam_partners_hero_text_2', "En soutenant nos initiatives, vous contribuez au renforcement des compétences, à l'innovation locale et à une meilleure représentation des femmes dans les métiers du numérique et de l'IA." );
+
+$partners_cta_title = get_theme_mod( 'waicam_partners_cta_title', 'REJOIGNEZ NOTRE MISSION' );
+$partners_cta_text_1 = get_theme_mod( 'waicam_partners_cta_text_1', 'Nous développons des opportunités de partenariat institutionnel, éducatif, média et entreprise.' );
+$partners_cta_text_2 = get_theme_mod( 'waicam_partners_cta_text_2', 'Soumettez votre demande de partenariat dès aujourd’hui.' );
+$partners_cta_btn = get_theme_mod( 'waicam_partners_cta_btn', 'FAIRE UNE DEMANDE DE PARTENARIAT' );
+$partners_cta_url = get_theme_mod( 'waicam_partners_cta_url', '#form-partenariat' );
+$partners_cta_image_id = (int) get_theme_mod( 'waicam_partners_cta_image_id', 0 );
+$partners_cta_image = $partners_cta_image_id ? wp_get_attachment_image_url( $partners_cta_image_id, 'large' ) : '';
 ?>
 
-<!-- APPEL À PARTENARIAT -->
-<section>
-	<div style="max-width:1100px;margin:0 auto;">
-		<div class="partner-intro">
-			<div>
-				<div class="section-tag" style="text-align:left;"><?php esc_html_e( 'Appel à partenariats', 'waicam' ); ?></div>
-				<h2 class="section-title" style="text-align:left;margin-bottom:20px;"><?php echo wp_kses_post( __( "Ensemble, <span>construisons l'avenir</span>", 'waicam' ) ); ?></h2>
-				<p><?php esc_html_e( "Women in AI Cameroon invite les institutions publiques et privées, les entreprises, les organisations de la société civile, les médias et les partenaires techniques à rejoindre le mouvement en faveur d'une intelligence artificielle inclusive et accessible.", 'waicam' ); ?></p>
-				<p><?php esc_html_e( "Rejoindre Women in AI Cameroon, c'est participer à une dynamique collective qui place l'innovation au service de l'inclusion, de l'autonomisation et de l'avenir du Cameroun.", 'waicam' ); ?></p>
-				<a href="#form-partenariat" class="btn-primary"><?php esc_html_e( 'Devenir partenaire', 'waicam' ); ?></a>
-			</div>
-			<div>
-				<img src="<?php echo esc_url( waicam_img( 'ai-africa.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Partenariat IA Afrique', 'waicam' ); ?>" loading="lazy" />
-			</div>
-		</div>
-	</div>
+<section class="partners-page-hero-gwc">
+  <div class="partners-page-hero-gwc__inner">
+    <h1><?php echo esc_html( $partners_hero_title ); ?></h1>
+    <p><?php echo esc_html( $partners_hero_text_1 ); ?></p>
+    <p><?php echo esc_html( $partners_hero_text_2 ); ?></p>
+  </div>
 </section>
 
-<!-- CONTRIBUTIONS -->
-<section style="background:var(--gray-light);">
-	<div style="max-width:1100px;margin:0 auto;">
-		<div class="section-header">
-			<div class="section-tag"><?php esc_html_e( 'Impact', 'waicam' ); ?></div>
-			<h2 class="section-title"><?php esc_html_e( 'En devenant partenaire, vous contribuez à…', 'waicam' ); ?></h2>
-		</div>
-		<div class="partner-benefits">
-			<?php
-			$benefits = array(
-				array( '<i class="fa-solid fa-graduation-cap"></i>', __( 'Formation des femmes', 'waicam' ),         __( "La formation et l'autonomisation de milliers de femmes à travers le Cameroun.", 'waicam' ) ),
-				array( '<i class="fa-solid fa-globe"></i>',          __( 'Réduction du fossé numérique', 'waicam' ), __( "La réduction de la fracture numérique de genre dans les zones urbaines et rurales.", 'waicam' ) ),
-				array( '<i class="fa-solid fa-scale-balanced"></i>', __( 'IA éthique & africaine', 'waicam' ),       __( "La promotion d'une IA éthique, responsable et au service des valeurs africaines.", 'waicam' ) ),
-				array( '<i class="fa-solid fa-rocket"></i>',         __( 'Innovation locale', 'waicam' ),            __( "Le développement de solutions IA adaptées aux réalités et besoins locaux.", 'waicam' ) ),
-			);
-			foreach ( $benefits as $b ) :
-			?>
-				<div class="benefit-card">
-					<div class="b-icon"><?php echo wp_kses_post( $b[0] ); ?></div>
-					<h3><?php echo esc_html( $b[1] ); ?></h3>
-					<p><?php echo esc_html( $b[2] ); ?></p>
-				</div>
-			<?php endforeach; ?>
-		</div>
-	</div>
+<section class="partners-page-cta-gwc">
+  <div class="partners-page-cta-gwc__inner">
+    <div class="partners-page-cta-gwc__media<?php echo $partners_cta_image ? ' has-image' : ''; ?>">
+      <?php if ( $partners_cta_image ) : ?>
+        <img src="<?php echo esc_url( $partners_cta_image ); ?>" alt="" loading="lazy" />
+      <?php else : ?>
+        <span><?php esc_html_e( 'Image partenariat', 'waicam' ); ?></span>
+      <?php endif; ?>
+    </div>
+    <div class="partners-page-cta-gwc__content">
+      <h2><?php echo esc_html( $partners_cta_title ); ?></h2>
+      <p><?php echo esc_html( $partners_cta_text_1 ); ?></p>
+      <p><?php echo esc_html( $partners_cta_text_2 ); ?></p>
+      <a href="<?php echo esc_url( $partners_cta_url ); ?>"><?php echo esc_html( $partners_cta_btn ); ?></a>
+    </div>
+  </div>
 </section>
 
-<!-- LOGOS PARTENAIRES (CPT) -->
+
 <?php
-$partenaires = waicam_get_partenaires( -1 );
-if ( $partenaires ) :
+$partners_impact_title = get_theme_mod( 'waicam_partners_impact_title', 'CRÉER DE L’IMPACT' );
+$partners_impact_text = get_theme_mod( 'waicam_partners_impact_text', "Nos actions ne seraient pas possibles sans nos partenaires institutionnels, entreprises et acteurs publics. Ensemble, nous accélérons l'inclusion des femmes dans les métiers du numérique et de l'IA." );
+$partners_impact_cards = array(
+  array(
+    'title' => get_theme_mod( 'waicam_partners_impact_1_title', 'INSTITUTIONS' ),
+    'text'  => get_theme_mod( 'waicam_partners_impact_1_text', 'Universités, centres de recherche et institutions académiques engagées à nos côtés.' ),
+    'tone'  => 'dark',
+  ),
+  array(
+    'title' => get_theme_mod( 'waicam_partners_impact_2_title', 'ENTREPRISES' ),
+    'text'  => get_theme_mod( 'waicam_partners_impact_2_text', 'Entreprises qui soutiennent nos programmes de formation, mentorat et insertion.' ),
+    'tone'  => 'red',
+  ),
+  array(
+    'title' => get_theme_mod( 'waicam_partners_impact_3_title', 'RÉSEAUX' ),
+    'text'  => get_theme_mod( 'waicam_partners_impact_3_text', 'Réseaux professionnels et communautés mobilisées pour amplifier l’impact.' ),
+    'tone'  => 'dark',
+  ),
+  array(
+    'title' => get_theme_mod( 'waicam_partners_impact_4_title', 'INSTITUTIONS PUBLIQUES' ),
+    'text'  => get_theme_mod( 'waicam_partners_impact_4_text', 'Institutions publiques partenaires pour porter une IA responsable et inclusive.' ),
+    'tone'  => 'red',
+  ),
+);
 ?>
-<section>
-	<div style="max-width:1100px;margin:0 auto;">
-		<div class="section-header">
-			<div class="section-tag"><?php esc_html_e( 'Nos partenaires', 'waicam' ); ?></div>
-			<h2 class="section-title"><?php echo wp_kses_post( __( 'Ils nous <span>soutiennent</span>', 'waicam' ) ); ?></h2>
-		</div>
-		<div class="partners-logo-grid">
-			<?php while ( $partenaires->have_posts() ) : $partenaires->the_post();
-				$nom         = waicam_field( 'nom_du_partenaire', get_the_ID(), get_the_title() );
-				$type        = waicam_field( 'type_de_partenariat' );
-				$lien        = waicam_field( 'site_web', get_the_ID(), '#' );
-				$description = waicam_field( 'description_du_partenariat' );
-			?>
-				<a href="<?php echo esc_url( $lien ); ?>" target="_blank" rel="noopener" class="partner-logo-item" title="<?php echo esc_attr( $description ); ?>">
-					<?php
-					$logo_url = waicam_image_url( 'logo', get_the_ID(), 'medium', 'logo-waicam.png' );
-					?>
-					<img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( $nom ); ?>" loading="lazy" />
-					<span><?php echo esc_html( $nom ); ?></span>
-					<?php if ( $type ) : ?>
-						<small class="partner-type"><?php echo esc_html( $type ); ?></small>
-					<?php endif; ?>
-				</a>
-			<?php endwhile; wp_reset_postdata(); ?>
-		</div>
-	</div>
-</section>
-<?php endif; ?>
-
-<!-- BÉNÉFICES PARTENAIRES -->
-<section>
-	<div style="max-width:1100px;margin:0 auto;">
-		<div class="section-header">
-			<div class="section-tag"><?php esc_html_e( 'Avantages', 'waicam' ); ?></div>
-			<h2 class="section-title"><?php echo wp_kses_post( __( 'Ce que vous <span>gagnez</span>', 'waicam' ) ); ?></h2>
-		</div>
-		<div class="partner-perks">
-			<div class="perk-card perk-card--violet">
-				<div class="perk-icon"><i class="fa-solid fa-earth-africa"></i></div>
-				<h3><?php esc_html_e( 'Visibilité nationale & internationale', 'waicam' ); ?></h3>
-				<p><?php esc_html_e( 'Votre marque associée à un mouvement citoyen reconnu au Cameroun et dans la diaspora africaine mondiale.', 'waicam' ); ?></p>
-			</div>
-			<div class="perk-card perk-card--orange">
-				<div class="perk-icon"><i class="fa-solid fa-users"></i></div>
-				<h3><?php esc_html_e( 'Réseau de femmes leaders', 'waicam' ); ?></h3>
-				<p><?php esc_html_e( "Accès privilégié à un réseau de femmes leaders du numérique, ambassadrices et professionnelles engagées.", 'waicam' ); ?></p>
-			</div>
-			<div class="perk-card perk-card--green">
-				<div class="perk-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
-				<h3><?php esc_html_e( 'Impact social mesurable', 'waicam' ); ?></h3>
-				<p><?php esc_html_e( "Contribution directe à l'impact social de l'IA inclusive avec des rapports d'impact réguliers.", 'waicam' ); ?></p>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- NIVEAUX DE PARTENARIAT -->
-<section style="background:var(--gray-light);">
-	<div style="max-width:1000px;margin:0 auto;">
-		<div class="section-header">
-			<div class="section-tag"><?php esc_html_e( 'Niveaux de partenariat', 'waicam' ); ?></div>
-			<h2 class="section-title"><?php echo wp_kses_post( __( 'Choisissez votre <span>engagement</span>', 'waicam' ) ); ?></h2>
-		</div>
-		<div class="tier-grid">
-			<div class="tier-card tier-card--bronze">
-				<div class="tier-icon"><i class="fa-solid fa-medal" style="color:#CD7F32"></i></div>
-				<h3><?php esc_html_e( 'Partenaire Bronze', 'waicam' ); ?></h3>
-				<div class="tier-level"><?php esc_html_e( 'Soutien', 'waicam' ); ?></div>
-				<p class="tier-desc"><?php esc_html_e( 'Contribution de base', 'waicam' ); ?></p>
-				<ul>
-					<li><?php esc_html_e( 'Logo sur le site web', 'waicam' ); ?></li>
-					<li><?php esc_html_e( 'Mention dans les rapports', 'waicam' ); ?></li>
-					<li><?php esc_html_e( 'Invitation aux événements', 'waicam' ); ?></li>
-				</ul>
-				<a href="#form-partenariat" class="tier-cta"><?php esc_html_e( 'Choisir ce niveau', 'waicam' ); ?></a>
-			</div>
-			<div class="tier-card tier-card--silver tier-card--featured">
-				<div class="tier-badge"><?php esc_html_e( 'POPULAIRE', 'waicam' ); ?></div>
-				<div class="tier-icon"><i class="fa-solid fa-medal" style="color:#C0C0C0"></i></div>
-				<h3><?php esc_html_e( 'Partenaire Silver', 'waicam' ); ?></h3>
-				<div class="tier-level"><?php esc_html_e( 'Engagement', 'waicam' ); ?></div>
-				<p class="tier-desc"><?php esc_html_e( 'Partenariat actif', 'waicam' ); ?></p>
-				<ul>
-					<li><?php esc_html_e( 'Tout le niveau Bronze', 'waicam' ); ?></li>
-					<li><?php esc_html_e( 'Co-branding sur les formations', 'waicam' ); ?></li>
-					<li><?php esc_html_e( "Accès au réseau d'ambassadrices", 'waicam' ); ?></li>
-					<li><?php esc_html_e( "Rapport d'impact semestriel", 'waicam' ); ?></li>
-				</ul>
-				<a href="#form-partenariat" class="tier-cta tier-cta--primary"><?php esc_html_e( 'Choisir ce niveau', 'waicam' ); ?></a>
-			</div>
-			<div class="tier-card tier-card--gold">
-				<div class="tier-icon"><i class="fa-solid fa-medal" style="color:#FFD700"></i></div>
-				<h3><?php esc_html_e( 'Partenaire Gold', 'waicam' ); ?></h3>
-				<div class="tier-level"><?php esc_html_e( 'Stratégique', 'waicam' ); ?></div>
-				<p class="tier-desc"><?php esc_html_e( 'Partenariat premium', 'waicam' ); ?></p>
-				<ul>
-					<li><?php esc_html_e( 'Tout le niveau Silver', 'waicam' ); ?></li>
-					<li><?php esc_html_e( 'Siège au comité consultatif', 'waicam' ); ?></li>
-					<li><?php esc_html_e( 'Co-création de programmes', 'waicam' ); ?></li>
-					<li><?php esc_html_e( 'Communications dédiées', 'waicam' ); ?></li>
-				</ul>
-				<a href="#form-partenariat" class="tier-cta"><?php esc_html_e( 'Choisir ce niveau', 'waicam' ); ?></a>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- FORMULAIRE PARTENARIAT -->
-<section id="form-partenariat">
-	<div style="max-width:700px;margin:0 auto;">
-		<div class="section-header">
-			<div class="section-tag"><?php esc_html_e( 'Devenir partenaire', 'waicam' ); ?></div>
-			<h2 class="section-title"><?php echo wp_kses_post( __( "Demande de <span>partenariat</span>", 'waicam' ) ); ?></h2>
-		</div>
-		<div class="form-card">
-			<?php
-			$ff_id = get_theme_mod( 'waicam_form_partenariat', '' );
-			if ( $ff_id ) {
-				echo do_shortcode( '[fluentform id="' . esc_attr( $ff_id ) . '"]' );
-			} else {
-				echo '<p style="text-align:center;color:var(--gray);padding:24px;">';
-				esc_html_e( 'Formulaire à connecter dans Apparence → Personnaliser → WAI-CAM → ID du formulaire partenariat', 'waicam' );
-				echo '</p>';
-			}
-			?>
-		</div>
-	</div>
+<section class="partners-impact-gwc">
+  <div class="partners-impact-gwc__inner">
+    <h2><?php echo esc_html( $partners_impact_title ); ?></h2>
+    <p><?php echo esc_html( $partners_impact_text ); ?></p>
+    <div class="partners-impact-gwc__grid">
+      <?php foreach ( $partners_impact_cards as $card ) : ?>
+        <article class="partners-impact-gwc__card partners-impact-gwc__card--<?php echo esc_attr( $card['tone'] ); ?>">
+          <h3><?php echo esc_html( $card['title'] ); ?></h3>
+          <p><?php echo esc_html( $card['text'] ); ?></p>
+        </article>
+      <?php endforeach; ?>
+    </div>
+  </div>
 </section>
 
 <?php get_footer();
