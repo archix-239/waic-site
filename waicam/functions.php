@@ -1117,6 +1117,29 @@ function waicam_customize_register( $wp_customize ) {
 		'mime_type' => 'image',
 	) ) );
 
+
+	$wp_customize->add_section( 'waicam_partners_logos', array(
+		'title'       => __( 'Partenaires — Mur de logos', 'waicam' ),
+		'description' => __( 'Titre et texte du mur de logos partenaires.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$partners_logos_fields = array(
+		'waicam_partners_logos_title' => array( __( 'Titre section', 'waicam' ), 'NOS PARTENAIRES', 'text' ),
+		'waicam_partners_logos_text'  => array( __( 'Texte intro', 'waicam' ), 'Nous remercions nos partenaires pour leur confiance et leur soutien.', 'textarea' ),
+	);
+	foreach ( $partners_logos_fields as $key => $cfg ) {
+		$sanitize = 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_partners_logos',
+			'type'    => $cfg[2],
+		) );
+	}
+
 	// ────────── Section Home partenaires ──────────
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),

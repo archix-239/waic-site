@@ -150,9 +150,23 @@ foreach ( $autres_ids as $member_id ) {
 				$role   = waicam_field( 'role__fonction', $member_id );
 				$profil = waicam_field( 'profil_professionnel', $member_id );
 				$photo  = waicam_image_url( 'photo', $member_id, 'large', '' );
-				$linkedin = waicam_field( 'linkedin', $member_id );
+				$linkedin = '';
+				$linkedin_candidates = array( 'linkedin', 'lien_linkedin', 'profil_linkedin', 'linkedin_url', 'linkedin_profile' );
+				foreach ( $linkedin_candidates as $lk_key ) {
+					$lk_val = waicam_field( $lk_key, $member_id );
+					if ( $lk_val ) {
+						$linkedin = (string) $lk_val;
+						break;
+					}
+				}
 				if ( ! $linkedin ) {
-					$linkedin = waicam_field( 'lien_linkedin', $member_id );
+					$all_meta = get_post_meta( $member_id );
+					foreach ( $all_meta as $meta_key => $meta_values ) {
+						if ( false !== stripos( (string) $meta_key, 'linkedin' ) && ! empty( $meta_values[0] ) ) {
+							$linkedin = (string) $meta_values[0];
+							break;
+						}
+					}
 				}
 				$initiale = mb_strtoupper( mb_substr( $nom, 0, 1 ) );
 			?>

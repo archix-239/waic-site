@@ -167,4 +167,39 @@ $partners_stats = array(
   </div>
 </section>
 
+
+<?php
+$partners_logos_title = get_theme_mod( 'waicam_partners_logos_title', 'NOS PARTENAIRES' );
+$partners_logos_text = get_theme_mod( 'waicam_partners_logos_text', 'Nous remercions nos partenaires pour leur confiance et leur soutien.' );
+$partners_loop = waicam_get_partenaires( -1 );
+?>
+<section class="partners-logos-gwc">
+  <div class="partners-logos-gwc__inner">
+    <h2><?php echo esc_html( $partners_logos_title ); ?></h2>
+    <p><?php echo esc_html( $partners_logos_text ); ?></p>
+    <div class="partners-logos-gwc__grid">
+      <?php if ( $partners_loop ) : while ( $partners_loop->have_posts() ) : $partners_loop->the_post();
+        $nom = waicam_field( 'nom_du_partenaire', get_the_ID(), get_the_title() );
+        $url = waicam_field( 'site_web', get_the_ID(), '' );
+        $logo = waicam_image_url( 'logo', get_the_ID(), 'medium', '' );
+        if ( ! $logo ) {
+          $logo = get_the_post_thumbnail_url( get_the_ID(), 'medium' );
+        }
+      ?>
+      <div class="partners-logos-gwc__item">
+        <?php if ( $url ) : ?><a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener"><?php endif; ?>
+          <?php if ( $logo ) : ?>
+            <img src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr( $nom ); ?>" loading="lazy" />
+          <?php else : ?>
+            <span><?php echo esc_html( $nom ); ?></span>
+          <?php endif; ?>
+        <?php if ( $url ) : ?></a><?php endif; ?>
+      </div>
+      <?php endwhile; wp_reset_postdata(); else : ?>
+      <p><?php esc_html_e( 'Ajoutez des partenaires pour afficher leurs logos ici.', 'waicam' ); ?></p>
+      <?php endif; ?>
+    </div>
+  </div>
+</section>
+
 <?php get_footer();
