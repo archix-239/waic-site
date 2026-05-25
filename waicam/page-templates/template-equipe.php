@@ -116,43 +116,6 @@ if ( $equipe ) {
 }
 ?>
 
-<?php if ( $presidente_id ) :
-	$p_nom      = waicam_field( 'nom_complet', $presidente_id, get_the_title( $presidente_id ) );
-	$p_role     = waicam_field( 'role__fonction', $presidente_id );
-	$p_profil   = waicam_field( 'profil_professionnel', $presidente_id );
-	$p_photo    = waicam_image_url( 'photo', $presidente_id, 'large', '' );
-	$p_initiale = mb_strtoupper( mb_substr( $p_nom, 0, 1 ) );
-?>
-<!-- ============================================
-     CARTE PRÉSIDENTE (HERO)
-     ============================================ -->
-<section class="presidente-section">
-	<div class="section-header">
-		<div class="section-tag"><?php esc_html_e( 'Présidence', 'waicam' ); ?></div>
-		<h2 class="section-title"><?php echo wp_kses_post( __( 'À la tête du <span>mouvement</span>', 'waicam' ) ); ?></h2>
-	</div>
-
-	<article class="presidente-card">
-		<div class="presidente-card-photo">
-			<?php if ( $p_photo ) : ?>
-				<img src="<?php echo esc_url( $p_photo ); ?>" alt="<?php echo esc_attr( $p_nom ); ?>" loading="lazy" />
-			<?php else : ?>
-				<div class="presidente-card-avatar"><?php echo esc_html( $p_initiale ); ?></div>
-			<?php endif; ?>
-			<div class="presidente-card-badge">
-				<i class="fa-solid fa-crown"></i> <?php echo esc_html( $p_role ?: __( 'Présidente', 'waicam' ) ); ?>
-			</div>
-		</div>
-		<div class="presidente-card-body">
-			<h3 class="presidente-card-name"><?php echo esc_html( $p_nom ); ?></h3>
-
-			<?php if ( $p_profil ) : ?>
-				<p class="presidente-card-profil"><?php echo esc_html( $p_profil ); ?></p>
-			<?php endif; ?>
-		</div>
-	</article>
-</section>
-<?php endif; ?>
 
 <?php if ( ! empty( $autres_ids ) ) : ?>
 <?php
