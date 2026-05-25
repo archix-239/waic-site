@@ -47,4 +47,46 @@ $partners_cta_image = $partners_cta_image_id ? wp_get_attachment_image_url( $par
   </div>
 </section>
 
+
+<?php
+$partners_impact_title = get_theme_mod( 'waicam_partners_impact_title', 'CRÉER DE L’IMPACT' );
+$partners_impact_text = get_theme_mod( 'waicam_partners_impact_text', "Nos actions ne seraient pas possibles sans nos partenaires institutionnels, entreprises et acteurs publics. Ensemble, nous accélérons l'inclusion des femmes dans les métiers du numérique et de l'IA." );
+$partners_impact_cards = array(
+  array(
+    'title' => get_theme_mod( 'waicam_partners_impact_1_title', 'INSTITUTIONS' ),
+    'text'  => get_theme_mod( 'waicam_partners_impact_1_text', 'Universités, centres de recherche et institutions académiques engagées à nos côtés.' ),
+    'tone'  => 'dark',
+  ),
+  array(
+    'title' => get_theme_mod( 'waicam_partners_impact_2_title', 'ENTREPRISES' ),
+    'text'  => get_theme_mod( 'waicam_partners_impact_2_text', 'Entreprises qui soutiennent nos programmes de formation, mentorat et insertion.' ),
+    'tone'  => 'red',
+  ),
+  array(
+    'title' => get_theme_mod( 'waicam_partners_impact_3_title', 'RÉSEAUX' ),
+    'text'  => get_theme_mod( 'waicam_partners_impact_3_text', 'Réseaux professionnels et communautés mobilisées pour amplifier l’impact.' ),
+    'tone'  => 'dark',
+  ),
+  array(
+    'title' => get_theme_mod( 'waicam_partners_impact_4_title', 'INSTITUTIONS PUBLIQUES' ),
+    'text'  => get_theme_mod( 'waicam_partners_impact_4_text', 'Institutions publiques partenaires pour porter une IA responsable et inclusive.' ),
+    'tone'  => 'red',
+  ),
+);
+?>
+<section class="partners-impact-gwc">
+  <div class="partners-impact-gwc__inner">
+    <h2><?php echo esc_html( $partners_impact_title ); ?></h2>
+    <p><?php echo esc_html( $partners_impact_text ); ?></p>
+    <div class="partners-impact-gwc__grid">
+      <?php foreach ( $partners_impact_cards as $card ) : ?>
+        <article class="partners-impact-gwc__card partners-impact-gwc__card--<?php echo esc_attr( $card['tone'] ); ?>">
+          <h3><?php echo esc_html( $card['title'] ); ?></h3>
+          <p><?php echo esc_html( $card['text'] ); ?></p>
+        </article>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
 <?php get_footer();

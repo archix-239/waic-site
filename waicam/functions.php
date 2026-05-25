@@ -1010,6 +1010,37 @@ function waicam_customize_register( $wp_customize ) {
 		'mime_type' => 'image',
 	) ) );
 
+
+	$wp_customize->add_section( 'waicam_partners_impact', array(
+		'title'       => __( 'Partenaires — Impact', 'waicam' ),
+		'description' => __( 'Section impact et 4 blocs partenaires.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$partners_impact_fields = array(
+		'waicam_partners_impact_title' => array( __( 'Titre section', 'waicam' ), 'CRÉER DE L’IMPACT', 'text' ),
+		'waicam_partners_impact_text'  => array( __( 'Texte intro', 'waicam' ), "Nos actions ne seraient pas possibles sans nos partenaires institutionnels, entreprises et acteurs publics. Ensemble, nous accélérons l'inclusion des femmes dans les métiers du numérique et de l'IA.", 'textarea' ),
+		'waicam_partners_impact_1_title' => array( __( 'Bloc 1 — Titre', 'waicam' ), 'INSTITUTIONS', 'text' ),
+		'waicam_partners_impact_1_text'  => array( __( 'Bloc 1 — Texte', 'waicam' ), 'Universités, centres de recherche et institutions académiques engagées à nos côtés.', 'textarea' ),
+		'waicam_partners_impact_2_title' => array( __( 'Bloc 2 — Titre', 'waicam' ), 'ENTREPRISES', 'text' ),
+		'waicam_partners_impact_2_text'  => array( __( 'Bloc 2 — Texte', 'waicam' ), 'Entreprises qui soutiennent nos programmes de formation, mentorat et insertion.', 'textarea' ),
+		'waicam_partners_impact_3_title' => array( __( 'Bloc 3 — Titre', 'waicam' ), 'RÉSEAUX', 'text' ),
+		'waicam_partners_impact_3_text'  => array( __( 'Bloc 3 — Texte', 'waicam' ), 'Réseaux professionnels et communautés mobilisées pour amplifier l’impact.', 'textarea' ),
+		'waicam_partners_impact_4_title' => array( __( 'Bloc 4 — Titre', 'waicam' ), 'INSTITUTIONS PUBLIQUES', 'text' ),
+		'waicam_partners_impact_4_text'  => array( __( 'Bloc 4 — Texte', 'waicam' ), 'Institutions publiques partenaires pour porter une IA responsable et inclusive.', 'textarea' ),
+	);
+	foreach ( $partners_impact_fields as $key => $cfg ) {
+		$sanitize = 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_partners_impact',
+			'type'    => $cfg[2],
+		) );
+	}
+
 	// ────────── Section Home partenaires ──────────
 	$wp_customize->add_section( 'waicam_home_partners', array(
 		'title'       => __( 'Accueil — Partenaires', 'waicam' ),

@@ -5378,3 +5378,17 @@ footer ul li {
 .partners-page-cta-gwc__content a { margin-top:12px; display:inline-block; background:#fff; color:#1E1B4B; text-decoration:none; padding:14px 24px; font-weight:700; border:2px solid #fff; }
 .partners-page-cta-gwc__content a:hover,.partners-page-cta-gwc__content a:focus-visible { background:transparent; color:#fff; border-color:#E41D44; }
 @media (max-width:980px){ .partners-page-cta-gwc__inner{grid-template-columns:1fr;} }
+
+/* Partners page — impact blocks section */
+.partners-impact-gwc { background:#efefef; padding:clamp(48px,7vw,100px) 0; }
+.partners-impact-gwc__inner { width:min(1120px,92%); margin:0 auto; text-align:center; }
+.partners-impact-gwc__inner h2 { margin:0 0 18px; color:#1E1B4B; text-transform:uppercase; font-size:clamp(2rem,4.2vw,4rem); }
+.partners-impact-gwc__inner > p { margin:0 auto clamp(24px,3.5vw,40px); color:#00314A; max-width:1020px; font-size:clamp(1rem,1.7vw,1.7rem); line-height:1.4; }
+.partners-impact-gwc__grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; }
+.partners-impact-gwc__card { padding:clamp(24px,2.7vw,34px) 18px; min-height:240px; display:flex; flex-direction:column; justify-content:center; }
+.partners-impact-gwc__card h3 { margin:0 0 16px; text-transform:uppercase; font-size:clamp(1.2rem,2vw,2rem); }
+.partners-impact-gwc__card p { margin:0; font-size:clamp(0.98rem,1.2vw,1.2rem); line-height:1.35; }
+.partners-impact-gwc__card--dark { background:#1E1B4B; color:#fff; }
+.partners-impact-gwc__card--red { background:#E41D44; color:#fff; }
+@media (max-width:980px){ .partners-impact-gwc__grid{grid-template-columns:1fr 1fr;} }
+@media (max-width:640px){ .partners-impact-gwc__grid{grid-template-columns:1fr;} }
