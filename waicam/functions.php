@@ -1165,6 +1165,73 @@ function waicam_customize_register( $wp_customize ) {
 			'type'    => $cfg[2],
 		) );
 	}
+
+	// ────────── Panneau Rejoindre (Get Involved) ──────────
+	$wp_customize->add_panel( 'waicam_rejoindre_panel', array(
+		'title'    => __( 'WAI-CAM — Rejoindre', 'waicam' ),
+		'priority' => 33,
+	) );
+
+	// Section Hero
+	$wp_customize->add_section( 'waicam_rejoindre_hero', array(
+		'title' => __( 'Rejoindre — Hero', 'waicam' ),
+		'panel' => 'waicam_rejoindre_panel',
+	) );
+
+	$rejoindre_hero_fields = array(
+		'waicam_rejoindre_hero_badge' => array( __( 'Badge', 'waicam' ), 'GET INVOLVED', 'text' ),
+		'waicam_rejoindre_hero_title' => array( __( 'Titre', 'waicam' ), 'WAI-CAM A BESOIN DE VOTRE SOUTIEN', 'text' ),
+		'waicam_rejoindre_hero_text'  => array( __( 'Texte', 'waicam' ), "Les femmes ont besoin de votre soutien pour s'épanouir dans la tech, et il existe de nombreuses façons de nous aider.", 'textarea' ),
+	);
+
+	foreach ( $rejoindre_hero_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_rejoindre_hero',
+			'type'    => $cfg[2],
+		) );
+	}
+
+	// Section Cartes (Involvement Cards)
+	$wp_customize->add_section( 'waicam_rejoindre_cards', array(
+		'title' => __( 'Rejoindre — Cartes d’engagement', 'waicam' ),
+		'panel' => 'waicam_rejoindre_panel',
+	) );
+
+	for ( $i = 1; $i <= 4; $i++ ) {
+		$defaults = array(
+			1 => array( 'DEVENIR MEMBRE', "Rejoignez notre communauté active pour échanger, apprendre et participer à nos ateliers.", "Engagement libre", 'En savoir plus', home_url('/rejoindre') ),
+			2 => array( 'DEVENIR VOLONTAIRE', "Donnez de votre temps pour encadrer nos sessions de formation ou aider à l'organisation.", "Selon vos disponibilités", 'En savoir plus', home_url('/contact') ),
+			3 => array( 'PARTENARIATS', "Associez votre entreprise ou institution à nos programmes d'inclusion numérique.", "Sur mesure", 'En savoir plus', home_url('/partenaires') ),
+			4 => array( 'AMBASSADRICE', "Représentez WAI-CAM dans votre localité ou établissement pour porter notre mission.", "Continu", 'En savoir plus', home_url('/contact') ),
+		);
+
+		$card_fields = array(
+			"waicam_rejoindre_card_{$i}_title" => array( sprintf( __( 'Carte %d — Titre', 'waicam' ), $i ), $defaults[$i][0], 'text' ),
+			"waicam_rejoindre_card_{$i}_text"  => array( sprintf( __( 'Carte %d — Description', 'waicam' ), $i ), $defaults[$i][1], 'textarea' ),
+			"waicam_rejoindre_card_{$i}_commit"=> array( sprintf( __( 'Carte %d — Engagement', 'waicam' ), $i ), $defaults[$i][2], 'text' ),
+			"waicam_rejoindre_card_{$i}_btn"   => array( sprintf( __( 'Carte %d — Texte bouton', 'waicam' ), $i ), $defaults[$i][3], 'text' ),
+			"waicam_rejoindre_card_{$i}_url"   => array( sprintf( __( 'Carte %d — URL bouton', 'waicam' ), $i ), $defaults[$i][4], 'url' ),
+		);
+
+		foreach ( $card_fields as $key => $cfg ) {
+			$sanitize = $cfg[2] === 'url' ? 'esc_url_raw' : ( $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field' );
+			$wp_customize->add_setting( $key, array(
+				'default'           => $cfg[1],
+				'sanitize_callback' => $sanitize,
+			) );
+			$wp_customize->add_control( $key, array(
+				'label'   => $cfg[0],
+				'section' => 'waicam_rejoindre_cards',
+				'type'    => $cfg[2],
+			) );
+		}
+	}
 	}
 	add_action( 'customize_register', 'waicam_customize_register' );
 
