@@ -1232,6 +1232,54 @@ function waicam_customize_register( $wp_customize ) {
 			) );
 		}
 	}
+
+	// Section Newsletter
+	$wp_customize->add_section( 'waicam_rejoindre_newsletter', array(
+		'title' => __( 'Rejoindre — Newsletter', 'waicam' ),
+		'panel' => 'waicam_rejoindre_panel',
+	) );
+
+	$rejoindre_news_fields = array(
+		'waicam_rejoindre_newsletter_title' => array( __( 'Titre', 'waicam' ), 'STAY IN THE LOOP', 'text' ),
+		'waicam_rejoindre_newsletter_text'  => array( __( 'Texte', 'waicam' ), "Abonnez-vous à notre newsletter pour ne rien manquer de nos actions.", 'textarea' ),
+	);
+
+	foreach ( $rejoindre_news_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_rejoindre_newsletter',
+			'type'    => $cfg[2],
+		) );
+	}
+
+	// Section Ways to Give
+	$wp_customize->add_section( 'waicam_rejoindre_give', array(
+		'title' => __( 'Rejoindre — Ways to Give', 'waicam' ),
+		'panel' => 'waicam_rejoindre_panel',
+	) );
+
+	$rejoindre_give_fields = array(
+		'waicam_rejoindre_give_title' => array( __( 'Titre', 'waicam' ), 'WAYS TO GIVE', 'text' ),
+		'waicam_rejoindre_give_text'  => array( __( 'Texte', 'waicam' ), "Votre don finance directement la formation des femmes au Cameroun.", 'textarea' ),
+	);
+
+	foreach ( $rejoindre_give_fields as $key => $cfg ) {
+		$sanitize = $cfg[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_rejoindre_give',
+			'type'    => $cfg[2],
+		) );
+	}
 	}
 	add_action( 'customize_register', 'waicam_customize_register' );
 
