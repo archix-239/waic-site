@@ -5589,7 +5589,7 @@ footer ul li {
 }
 .join-support-card .card-badge {
     display: inline-block;
-    background: #f20d42; /* WAI-CAM Red */
+    background: #f20d42; /* WAI-CAM Strawberry Red */
     color: #fff;
     font-weight: 700;
     font-size: 0.8rem;
@@ -5616,7 +5616,7 @@ footer ul li {
     line-height: 1.5;
 }
 .join-support-card.card-shop {
-    background-color: #096A09; /* WAI-CAM Green */
+    background-color: #096A09; /* WAI-CAM Bottle Green */
     color: #fff;
     justify-content: center;
 }
