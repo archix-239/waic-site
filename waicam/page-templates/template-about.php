@@ -8,7 +8,7 @@
 get_header(); ?>
 
 <?php
-$about_hero_title = get_theme_mod( 'waicam_about_hero_title', __( "NOUS SOMMES EN MISSION POUR RENDRE L'IA ACCESSIBLE AUX FEMMES ET AUX JEUNES DU CAMEROUN.", 'waicam' ) );
+$about_hero_title = get_theme_mod( 'waicam_about_hero_title', __( "Women in AI Cameroon démocratise l'intelligence artificielle : comprendre, décider et innover.", 'waicam' ) );
 $about_hero_image_id = (int) get_theme_mod( 'waicam_about_hero_image_id', 0 );
 $about_hero_image = $about_hero_image_id ? wp_get_attachment_image_url( $about_hero_image_id, 'full' ) : '';
 if ( ! $about_hero_image ) {
@@ -27,7 +27,7 @@ if ( ! $about_hero_image ) {
 <?php
 $about_intro_kicker = get_theme_mod( 'waicam_about_intro_kicker', __( 'IA ET TECHNOLOGIES ÉMERGENTES', 'waicam' ) );
 $about_intro_title = get_theme_mod( 'waicam_about_intro_title', __( "BRISER LES BARRIÈRES À L'IA ET AUX TECHNOLOGIES ÉMERGENTES.", 'waicam' ) );
-$about_intro_text = get_theme_mod( 'waicam_about_intro_text', __( "Nous développons des parcours d'apprentissage en IA qui rendent les compétences numériques accessibles aux femmes et aux jeunes, grâce à des programmes concrets, des ateliers terrain et un accompagnement durable.", 'waicam' ) );
+$about_intro_text = get_theme_mod( 'waicam_about_intro_text', __( "Nous menons des programmes de sensibilisation, de formation pratique et d'accompagnement pour que chaque femme comprenne, utilise et bénéficie des opportunités offertes par l'IA : emploi, entrepreneuriat et innovation locale.", 'waicam' ) );
 ?>
 
 <section class="about-intro-gwc">
@@ -45,19 +45,19 @@ $about_intro_text = get_theme_mod( 'waicam_about_intro_text', __( "Nous dévelop
 <?php
 $about_stats = array(
 	array(
-		'number' => get_theme_mod( 'waicam_about_stat_1_number', '860 000' ),
-		'label'  => get_theme_mod( 'waicam_about_stat_1_label', 'PERSONNES TOUCHÉES' ),
-		'text'   => get_theme_mod( 'waicam_about_stat_1_text', "WAI-CAM a déjà sensibilisé et accompagné des milliers de femmes et de jeunes à travers ses actions communautaires, éducatives et citoyennes." ),
+		'number' => get_theme_mod( 'waicam_about_stat_1_number', '500' ),
+		'label'  => get_theme_mod( 'waicam_about_stat_1_label', 'FORMATRICES RÉGIONALES' ),
+		'text'   => get_theme_mod( 'waicam_about_stat_1_text', "Former 500 formatrices régionales pour multiplier l'impact local.", 'waicam' ),
 	),
 	array(
-		'number' => get_theme_mod( 'waicam_about_stat_2_number', '425 000' ),
-		'label'  => get_theme_mod( 'waicam_about_stat_2_label', 'ALUMNI & COMMUNAUTÉ' ),
-		'text'   => get_theme_mod( 'waicam_about_stat_2_text', "Une communauté active d'apprenantes, d'enseignantes, d'ambassadrices et de partenaires qui relaient l'adoption responsable de l'IA." ),
+		'number' => get_theme_mod( 'waicam_about_stat_2_number', '50 000' ),
+		'label'  => get_theme_mod( 'waicam_about_stat_2_label', 'FEMMES SENSIBILISÉES' ),
+		'text'   => get_theme_mod( 'waicam_about_stat_2_text', "Sensibiliser 50 000 femmes aux usages et opportunités de l'IA d'ici 2030.", 'waicam' ),
 	),
 	array(
-		'number' => get_theme_mod( 'waicam_about_stat_3_number', '10 000' ),
-		'label'  => get_theme_mod( 'waicam_about_stat_3_label', 'APPRENANTES IA' ),
-		'text'   => get_theme_mod( 'waicam_about_stat_3_text', "Des participantes formées aux bases de l'IA, de la culture numérique et des usages concrets dans l'éducation, l'entrepreneuriat et la vie quotidienne." ),
+		'number' => get_theme_mod( 'waicam_about_stat_3_number', '1 M' ),
+		'label'  => get_theme_mod( 'waicam_about_stat_3_label', 'BÉNÉFICIAIRES INDIRECTS' ),
+		'text'   => get_theme_mod( 'waicam_about_stat_3_text', "Bénéficiaires directs et indirects à travers programmes et projets communautaires.", 'waicam' ),
 	),
 );
 ?>
@@ -79,7 +79,7 @@ $about_stats = array(
 
 <?php
 $about_gap_title = get_theme_mod( 'waicam_about_gap_title', 'LA FRACTURE GENRE EN NUMÉRIQUE RESTE UN DÉFI MAJEUR.' );
-$about_gap_text  = get_theme_mod( 'waicam_about_gap_text', "Au Cameroun comme ailleurs, les femmes restent sous-représentées dans les filières technologiques. WAI-CAM agit en priorité auprès des adolescentes et jeunes femmes pour renforcer l'accès, la confiance et les compétences en intelligence artificielle." );
+$about_gap_text  = get_theme_mod( 'waicam_about_gap_text', "Au Cameroun, l'accès aux outils numériques et à l'IA est encore inégalitaire. WAI-CAM agit pour réduire cette fracture entre zones urbaines et rurales, femmes et jeunes filles.");
 $about_gap_p1 = get_theme_mod( 'waicam_about_gap_p1', '37%' );
 $about_gap_p2 = get_theme_mod( 'waicam_about_gap_p2', '24%' );
 $about_gap_p3 = get_theme_mod( 'waicam_about_gap_p3', '22%' );
@@ -114,7 +114,7 @@ $about_gap_y3 = get_theme_mod( 'waicam_about_gap_y3', '2022' );
 
 <?php
 $about_change_title = get_theme_mod( 'waicam_about_change_title', 'WAI-CAM TRANSFORME LA DONNE' );
-$about_change_text  = get_theme_mod( 'waicam_about_change_text', "Nous mobilisons les femmes et les jeunes à travers des formations, du mentorat et des actions communautaires pour accélérer une adoption inclusive de l'intelligence artificielle au Cameroun." );
+$about_change_text  = get_theme_mod( 'waicam_about_change_text', "Nous accompagnons des actions concrètes : masterclasses, ateliers, mentorat et projets communautaires pour une IA éthique et inclusive.");
 $about_change_cta_title = get_theme_mod( 'waicam_about_change_cta_title', 'SOUTENEZ WAI-CAM' );
 $about_change_cta_text  = get_theme_mod( 'waicam_about_change_cta_text', "Votre contribution nous aide à former, outiller et accompagner davantage de femmes et de jeunes dans les métiers du numérique et de l'IA." );
 $about_change_cta_link_label = get_theme_mod( 'waicam_about_change_cta_link_label', 'Faire un don' );

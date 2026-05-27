@@ -14,7 +14,7 @@ get_header(); ?>
 <?php
 get_template_part( 'template-parts/page-hero', null, array(
 	'title'    => __( 'Nos Formations', 'waicam' ),
-	'subtitle' => __( "Apprends, monte en compétence et rejoins le mouvement WAI-CAM. Découvre notre catalogue de formations IA accessibles à toutes.", 'waicam' ),
+	'subtitle' => __( "Apprenez l'IA avec des parcours concrets, solidaires et accessibles à toutes les femmes et jeunes filles du Cameroun.", 'waicam' ),
 	'crumb'    => __( 'Formations', 'waicam' ),
 ) );
 ?>
@@ -25,17 +25,17 @@ get_template_part( 'template-parts/page-hero', null, array(
 		<div class="formation-stat">
 			<div class="num"><i class="fa-solid fa-graduation-cap"></i></div>
 			<h3><?php esc_html_e( 'Formations pratiques', 'waicam' ); ?></h3>
-			<p><?php esc_html_e( "Du concret, sans jargon technique. L'IA expliquée pour devenir actrice de ton avenir.", 'waicam' ); ?></p>
+			<p><?php esc_html_e( "Du concret, sans jargon. L'IA expliquée pour que toutes les femmes comprennent, décident et innovent.", 'waicam' ); ?></p>
 		</div>
 		<div class="formation-stat">
 			<div class="num"><i class="fa-solid fa-earth-africa"></i></div>
 			<h3><?php esc_html_e( 'En présentiel & en ligne', 'waicam' ); ?></h3>
-			<p><?php esc_html_e( "Yaoundé, Douala, Dargala, ou en ligne via Zoom — choisis le format qui te convient.", 'waicam' ); ?></p>
+			<p><?php esc_html_e( "Partout au Cameroun : en présentiel ou en ligne, pour rapprocher l'IA des territoires et des réalités locales.", 'waicam' ); ?></p>
 		</div>
 		<div class="formation-stat">
 			<div class="num"><i class="fa-solid fa-heart" style="color:var(--primary)"></i></div>
 			<h3><?php esc_html_e( 'Accompagnement humain', 'waicam' ); ?></h3>
-			<p><?php esc_html_e( "Des formatrices expérimentées, un mentorat individuel, une communauté soudée.", 'waicam' ); ?></p>
+			<p><?php esc_html_e( "Des formatrices et mentors engagés pour accompagner chaque participante vers plus d’autonomie numérique.", 'waicam' ); ?></p>
 		</div>
 	</div>
 </section>

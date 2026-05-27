@@ -5526,9 +5526,10 @@ footer ul li {
 .join-gwc-card__link { color: #0E6A2E; font-weight: 700; text-decoration: none; }
 .join-gwc-card__link:hover { color: #E41D44; }
 
-.join-gwc-image { background: #fff; }
+.join-gwc-image { background: #fff; padding: 0 0 80px; }
 .join-gwc-image__media {
-	max-width: 1360px;
+	max-width: 100%;
+	width: 100%;
 	height: clamp(360px, 62vw, 760px);
 	margin: 0 auto;
 	background-size: cover;

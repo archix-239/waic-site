@@ -487,3 +487,23 @@ function waicam_events_archive_url() {
 	}
 	return home_url( '/evenements/' );
 }
+
+/**
+ * Récupère intelligemment l'URL LinkedIn d'un membre.
+ */
+function waicam_get_linkedin_url( $post_id ) {
+	$candidates = array( 'linkedin', 'lien_linkedin', 'profil_linkedin', 'linkedin_url', 'linkedin_profile' );
+	foreach ( $candidates as $key ) {
+		$val = waicam_field( $key, $post_id );
+		if ( $val ) return (string) $val;
+	}
+	
+	// Fallback sur recherche brute dans la meta (moins performant)
+	$all_meta = get_post_meta( $post_id );
+	foreach ( $all_meta as $meta_key => $meta_values ) {
+		if ( false !== stripos( (string) $meta_key, 'linkedin' ) && ! empty( $meta_values[0] ) ) {
+			return (string) $meta_values[0];
+		}
+	}
+	return '';
+}

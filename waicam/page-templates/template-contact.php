@@ -10,7 +10,7 @@ get_header(); ?>
 <?php
 get_template_part( 'template-parts/page-hero', null, array(
 	'title'    => __( 'Contactez-nous', 'waicam' ),
-	'subtitle' => __( "Une question, une idée, un projet ? Notre équipe est à votre écoute.", 'waicam' ),
+	'subtitle' => __( "Contactez-nous pour vos questions sur les programmes, les partenariats, la presse ou le bénévolat.", 'waicam' ),
 	'crumb'    => __( 'Contact', 'waicam' ),
 ) );
 ?>
@@ -22,7 +22,7 @@ get_template_part( 'template-parts/page-hero', null, array(
 		<div class="contact-info">
 			<div class="section-tag" style="text-align:left;"><?php esc_html_e( 'Coordonnées', 'waicam' ); ?></div>
 			<h2 class="section-title" style="text-align:left;margin-bottom:16px;"><?php esc_html_e( 'Parlons-nous', 'waicam' ); ?></h2>
-			<p><?php esc_html_e( 'N\'hésitez pas à nous contacter pour toute question concernant nos programmes, partenariats ou pour rejoindre le mouvement WAI-CAM.', 'waicam' ); ?></p>
+			<p><?php esc_html_e( 'Pour toute demande de partenariat, presse, formation ou soutien terrain, notre équipe répond avec réactivité et professionnalisme.', 'waicam' ); ?></p>
 
 			<div class="contact-items">
 				<div class="contact-item">

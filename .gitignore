@@ -1,15 +1,20 @@
 # ============================================================
 #  WAI-CAM — .gitignore
 # ============================================================
-
+# dossier d'environnement Python (si utilisé pour scripts d'analyse)
+venv/
+.venv/
 # Documents de travail — exclusions sélectives
 # (les PDF/DOCX du projet sont versionnés car le repo est privé)
 *.xlsx
 *.xls
 *.pptx
+*.docx
+*.txt
 
 # Photos terrain (dossier lourd, géré séparément)
 PHOTOS ACTIVITES WAIC/
+Image-Extraite-Nouveau-DocPresse/
 
 # OS
 .DS_Store
@@ -35,3 +40,7 @@ wp-config-local.php
 
 # Logs
 *.log
+
+#dossier de scripts python
+scripts/
+

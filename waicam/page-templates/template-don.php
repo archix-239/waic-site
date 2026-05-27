@@ -27,7 +27,7 @@ $add_to_cart_url = function( $amount ) use ( $donation_product_id ) {
 <?php
 get_template_part( 'template-parts/page-hero', null, array(
 	'title'    => __( 'Soutenez le mouvement', 'waicam' ),
-	'subtitle' => __( "Votre don finance directement la formation, l'accompagnement et l'autonomisation des femmes camerounaises dans le numérique. Chaque contribution, même modeste, change une vie.", 'waicam' ),
+	'subtitle' => __( "Chaque don soutient les programmes de formation, les ateliers terrain et l'accompagnement des femmes vers l'autonomie numérique.", 'waicam' ),
 	'crumb'    => __( 'Faire un don', 'waicam' ),
 ) );
 ?>
@@ -40,7 +40,7 @@ get_template_part( 'template-parts/page-hero', null, array(
 		<div class="don-form-intro">
 			<div class="section-tag"><?php esc_html_e( 'Faire un don', 'waicam' ); ?></div>
 			<h2 class="section-title"><?php echo wp_kses_post( __( 'Choisissez le montant de <span>votre soutien</span>', 'waicam' ) ); ?></h2>
-			<p><?php esc_html_e( "Don ponctuel, sécurisé. Vous serez redirigé·e vers une page de paiement sécurisée. Mobile Money, carte bancaire et virement acceptés.", 'waicam' ); ?></p>
+			<p><?php esc_html_e( "Don ponctuel et sécurisé. Votre soutien est directement investi dans la formation, l'équipement et l'inclusion des femmes camerounaises.", 'waicam' ); ?></p>
 
 			<ul class="don-form-features">
 				<li><i class="fa-solid fa-circle-check" style="color:var(--green)"></i> <?php esc_html_e( 'Paiement sécurisé', 'waicam' ); ?></li>
@@ -165,7 +165,7 @@ get_template_part( 'template-parts/page-hero', null, array(
 	<div class="don-trust-inner">
 		<div class="don-trust-icon"><i class="fa-solid fa-shield-heart"></i></div>
 		<h3><?php esc_html_e( 'Transparence et impact mesurable', 'waicam' ); ?></h3>
-		<p><?php esc_html_e( "Women in AI Cameroon publie chaque année un rapport détaillé sur l'utilisation des fonds reçus. Vous pouvez suivre l'impact concret de votre don à travers nos publications, nos évènements et nos programmes.", 'waicam' ); ?></p>
+		<p><?php esc_html_e( "WAI-CAM assure transparence et suivi : chaque fonds est documenté dans nos actions de formation, de mentorat et d’impact communautaire.", 'waicam' ); ?></p>
 		<div class="don-trust-stats">
 			<div>
 				<strong>100 %</strong>

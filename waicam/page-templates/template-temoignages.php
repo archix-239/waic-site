@@ -22,7 +22,7 @@ get_template_part( 'template-parts/page-hero', null, array(
 <section style="padding-bottom:0;">
 	<div style="max-width:780px;margin:0 auto;text-align:center;">
 		<p style="color:var(--gray);font-size:1.05rem;line-height:1.7;">
-			<?php esc_html_e( "Découvrez comment l'intelligence artificielle transforme la vie professionnelle et personnelle des membres et des sympathisant·es de Women in AI Cameroon.", 'waicam' ); ?>
+			<?php esc_html_e( "Découvrez les parcours, les engagements et les retours d'expérience des femmes et des leaders qui font vivre WAI-CAM.", 'waicam' ); ?>
 		</p>
 	</div>
 </section>
@@ -83,7 +83,7 @@ if ( $temoignages ) :
 		<div class="section-tag"><?php esc_html_e( 'Vous aussi', 'waicam' ); ?></div>
 		<h2 class="section-title" style="margin-bottom:16px;"><?php echo wp_kses_post( __( 'Partagez votre <span>histoire</span>', 'waicam' ) ); ?></h2>
 		<p style="color:var(--gray);margin-bottom:32px;">
-			<?php esc_html_e( "Vous utilisez l'IA dans votre quotidien et souhaitez inspirer d'autres femmes ? Rejoignez-nous et contribuez à diffuser des récits inspirants.", 'waicam' ); ?>
+			<?php esc_html_e( "Partagez votre histoire pour encourager d'autres femmes à prendre part à la transformation numérique et à l'IA responsable.", 'waicam' ); ?>
 		</p>
 		<a href="<?php echo esc_url( home_url( '/rejoindre' ) ); ?>" class="btn-primary"><?php esc_html_e( 'Rejoindre WAI-CAM', 'waicam' ); ?></a>
 	</div>

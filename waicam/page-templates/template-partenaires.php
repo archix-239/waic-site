@@ -8,13 +8,13 @@
 get_header(); ?>
 
 <?php
-$partners_hero_title = get_theme_mod( 'waicam_partners_hero_title', 'DEVENEZ PARTENAIRE' );
-$partners_hero_text_1 = get_theme_mod( 'waicam_partners_hero_text_1', "Women in AI Cameroon (WAI-CAM) est un mouvement citoyen qui promeut une IA inclusive, utile et accessible aux femmes et aux jeunes à travers le Cameroun." );
-$partners_hero_text_2 = get_theme_mod( 'waicam_partners_hero_text_2', "En soutenant nos initiatives, vous contribuez au renforcement des compétences, à l'innovation locale et à une meilleure représentation des femmes dans les métiers du numérique et de l'IA." );
+$partners_hero_title = get_theme_mod( 'waicam_partners_hero_title', 'DEVENEZ PARTENAIRE DE L’IA INCLUSIVE' );
+$partners_hero_text_1 = get_theme_mod( 'waicam_partners_hero_text_1', "WAI-CAM réunit institutions publiques, entreprises et acteurs locaux pour porter une IA utile, éthique et accessible aux femmes et aux jeunes du Cameroun.");
+$partners_hero_text_2 = get_theme_mod( 'waicam_partners_hero_text_2', "En soutenant nos initiatives, vous renforcez la formation, le mentorat et les projets locaux qui donnent aux femmes les moyens d'innover.");
 
 $partners_cta_title = get_theme_mod( 'waicam_partners_cta_title', 'REJOIGNEZ NOTRE MISSION' );
-$partners_cta_text_1 = get_theme_mod( 'waicam_partners_cta_text_1', 'Nous développons des opportunités de partenariat institutionnel, éducatif, média et entreprise.' );
-$partners_cta_text_2 = get_theme_mod( 'waicam_partners_cta_text_2', 'Soumettez votre demande de partenariat dès aujourd’hui.' );
+$partners_cta_text_1 = get_theme_mod( 'waicam_partners_cta_text_1', 'Construisons ensemble un partenariat concret autour de la formation, du recrutement et de l’innovation sociale.' );
+$partners_cta_text_2 = get_theme_mod( 'waicam_partners_cta_text_2', 'Contactez-nous pour élaborer une collaboration à impact, terrain et transition digitale.' );
 $partners_cta_btn = get_theme_mod( 'waicam_partners_cta_btn', 'FAIRE UNE DEMANDE DE PARTENARIAT' );
 $partners_cta_url = get_theme_mod( 'waicam_partners_cta_url', '#form-partenariat' );
 $partners_cta_image_id = (int) get_theme_mod( 'waicam_partners_cta_image_id', 0 );
@@ -50,7 +50,7 @@ $partners_cta_image = $partners_cta_image_id ? wp_get_attachment_image_url( $par
 
 <?php
 $partners_impact_title = get_theme_mod( 'waicam_partners_impact_title', 'CRÉER DE L’IMPACT' );
-$partners_impact_text = get_theme_mod( 'waicam_partners_impact_text', "Nos actions ne seraient pas possibles sans nos partenaires institutionnels, entreprises et acteurs publics. Ensemble, nous accélérons l'inclusion des femmes dans les métiers du numérique et de l'IA." );
+$partners_impact_text = get_theme_mod( 'waicam_partners_impact_text', "En devenant partenaire, vous réduisez la fracture numérique de genre et soutenez l’IA au service de l'éducation, de la santé et du développement durable.");
 $partners_impact_cards = array(
   array(
     'title' => get_theme_mod( 'waicam_partners_impact_1_title', 'INSTITUTIONS' ),
