@@ -112,62 +112,20 @@ $fullwidth_image_id = get_theme_mod( 'waicam_join_fullwidth_image_id', 0 );
 	</div>
 </section>
 
-<section class="join-support-gwc">
-	<div class="join-support-inner">
-		<?php
-		$c1_badge = get_theme_mod( 'waicam_join_support_c1_badge', 'SUPPORT' );
-		$c1_title = get_theme_mod( 'waicam_join_support_c1_title', 'FAIRE UN DON' );
-		$c1_text  = get_theme_mod( 'waicam_join_support_c1_text', 'Soutenez nos programmes de formation et d’inclusion numérique.' );
-		$c1_ltext = get_theme_mod( 'waicam_join_support_c1_link_text', 'Faire un don' );
-		$c1_url   = get_theme_mod( 'waicam_join_support_c1_url', home_url( '/faire-un-don' ) );
-		$c1_bg_id = get_theme_mod( 'waicam_join_support_c1_bg_id', 0 );
-
-		$c2_badge = get_theme_mod( 'waicam_join_support_c2_badge', 'SHOP' );
-		$c2_title = get_theme_mod( 'waicam_join_support_c2_title', 'WAI-CAM SHOP' );
-		$c2_text  = get_theme_mod( 'waicam_join_support_c2_text', 'Découvrez nos produits dérivés et soutenez le mouvement.' );
-		$c2_ltext = get_theme_mod( 'waicam_join_support_c2_link_text', 'Voir la boutique' );
-		$c2_url   = get_theme_mod( 'waicam_join_support_c2_url', '#' );
-		$c2_bg_id = get_theme_mod( 'waicam_join_support_c2_bg_id', 0 );
-		?>
-
-		<a href="<?php echo esc_url( $c1_url ); ?>" class="join-support-card card-donate" <?php if ( $c1_bg_id ) : ?>style="background-image: url('<?php echo esc_url( wp_get_attachment_image_url( $c1_bg_id, 'large' ) ); ?>');"<?php endif; ?>>
-			<div class="card-overlay"></div>
-			<div class="card-content">
-				<div class="card-badge badge-red"><?php echo esc_html( $c1_badge ); ?></div>
-				<h3><?php echo esc_html( $c1_title ); ?></h3>
-				<p><?php echo esc_html( $c1_text ); ?></p>
-				<div class="home-posthero-link">
-					<?php echo esc_html( $c1_ltext ); ?>
-					<span class="arrow-anim" aria-hidden="true">
-						<span class="arrow-plain">→</span>
-						<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
-							<path d="M1 8 Q7 2 13 8 T25 8 T37 8 T49 8 T61 8 T73 8"></path>
-							<path d="M69 4 L77 8 L69 12"></path>
-						</svg>
-					</span>
-				</div>
-			</div>
-		</a>
-
-		<a href="<?php echo esc_url( $c2_url ); ?>" class="join-support-card card-shop" <?php if ( $c2_bg_id ) : ?>style="background-image: url('<?php echo esc_url( wp_get_attachment_image_url( $c2_bg_id, 'large' ) ); ?>');"<?php endif; ?>>
-			<div class="card-overlay"></div>
-			<div class="card-content">
-				<div class="card-badge badge-green"><?php echo esc_html( $c2_badge ); ?></div>
-				<h3><?php echo esc_html( $c2_title ); ?></h3>
-				<p><?php echo esc_html( $c2_text ); ?></p>
-				<div class="home-posthero-link">
-					<?php echo esc_html( $c2_ltext ); ?>
-					<span class="arrow-anim" aria-hidden="true">
-						<span class="arrow-plain">→</span>
-						<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
-							<path d="M1 8 Q7 2 13 8 T25 8 T37 8 T49 8 T61 8 T73 8"></path>
-							<path d="M69 4 L77 8 L69 12"></path>
-						</svg>
-					</span>
-				</div>
-			</div>
-		</a>
+<!-- ========== REJOINDRE — GRAND CHIFFRE + CTA (STYLE GWC) ========== -->
+<section class="home-bigstat-gwc">
+	<div class="home-bigstat-gwc__inner">
+		<h2><?php echo esc_html( waicam_field( 'join_bigstat_title', null, '1 Million de femmes bénéficiaires de l’IA d’ici 2030' ) ); ?></h2>
+		<div class="home-bigstat-gwc__bottom">
+			<p><?php echo esc_html( waicam_field( 'join_bigstat_text', null, 'WAI-CAM inverse la tendance en formant des ambassadrices régionales pour un impact durable sur tout le territoire camerounais.' ) ); ?></p>
+			<a href="<?php echo esc_url( waicam_field( 'join_bigstat_cta_url', null, home_url( '/faire-un-don' ) ) ); ?>" class="home-bigstat-gwc__cta">
+				<?php echo esc_html( waicam_field( 'join_bigstat_cta_text', null, 'Soutenir nos actions' ) ); ?>
+			</a>
+		</div>
 	</div>
+	<svg class="home-bigstat-gwc__wave-divider" viewBox="0 0 1440 28" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+		<path d="M0 14 Q10 2 20 14 T40 14 T60 14 T80 14 T100 14 T120 14 T140 14 T160 14 T180 14 T200 14 T220 14 T240 14 T260 14 T280 14 T300 14 T320 14 T340 14 T360 14 T380 14 T400 14 T420 14 T440 14 T460 14 T480 14 T500 14 T520 14 T540 14 T560 14 T580 14 T600 14 T620 14 T640 14 T660 14 T680 14 T700 14 T720 14 T740 14 T760 14 T780 14 T800 14 T820 14 T840 14 T860 14 T880 14 T900 14 T920 14 T940 14 T960 14 T980 14 T1000 14 T1020 14 T1040 14 T1060 14 T1080 14 T1100 14 T1120 14 T1140 14 T1160 14 T1180 14 T1200 14 T1220 14 T1240 14 T1260 14 T1280 14 T1300 14 T1320 14 T1340 14 T1360 14 T1380 14 T1400 14 T1420 14 T1440 14"></path>
+	</svg>
 </section>
 
 <section id="form-adhesion">
