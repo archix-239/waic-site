@@ -846,7 +846,7 @@
 	border-radius: 20px;
 	padding: 32px;
 }
-.perk-card--violet { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
+.perk-card--red    { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
 .perk-card--orange { background: linear-gradient(135deg, var(--accent), var(--accent-light)); }
 .perk-card--green  { background: linear-gradient(135deg, var(--green), var(--green-light)); }
 .perk-icon { font-size: 2.5rem; margin-bottom: 16px; }
@@ -1147,7 +1147,7 @@
 	font-size: .8rem;
 	font-weight: 600;
 }
-.mt-tag--violet { color: var(--primary); }
+.mt-tag--red    { color: var(--primary); }
 .mt-tag--green  { color: var(--green); }
 .mt-tag--orange { color: var(--accent); }
 .mt-tag--white {
@@ -1746,9 +1746,6 @@ nav.pagination span.page-numbers {
 		padding: 90px 4% 48px;
 	}
 
-	/* Tribute card */
-	.tribute-card blockquote {
-		font-size: 1rem;
 	}
 
 	/* Footer : logos sociaux plus compacts */
@@ -5545,3 +5542,6 @@ footer ul li {
 	.join-gwc-card { border-right: none; border-bottom: 1px solid rgba(14,106,46,.35); }
 	.join-gwc-card:last-child { border-bottom: none; }
 }
+
+/* Tribute card (Legacy) */
+.tribute-card blockquote { font-family: 'Poppins', sans-serif; }
