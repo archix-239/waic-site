@@ -112,6 +112,64 @@ $fullwidth_image_id = get_theme_mod( 'waicam_join_fullwidth_image_id', 0 );
 	</div>
 </section>
 
+<section class="join-support-gwc">
+	<div class="join-support-inner">
+		<?php
+		$c1_badge = get_theme_mod( 'waicam_join_support_c1_badge', 'SUPPORT' );
+		$c1_title = get_theme_mod( 'waicam_join_support_c1_title', 'FAIRE UN DON' );
+		$c1_text  = get_theme_mod( 'waicam_join_support_c1_text', 'Soutenez nos programmes de formation et d’inclusion numérique.' );
+		$c1_ltext = get_theme_mod( 'waicam_join_support_c1_link_text', 'Faire un don' );
+		$c1_url   = get_theme_mod( 'waicam_join_support_c1_url', home_url( '/faire-un-don' ) );
+		$c1_bg_id = get_theme_mod( 'waicam_join_support_c1_bg_id', 0 );
+
+		$c2_badge = get_theme_mod( 'waicam_join_support_c2_badge', 'SHOP' );
+		$c2_title = get_theme_mod( 'waicam_join_support_c2_title', 'WAI-CAM SHOP' );
+		$c2_text  = get_theme_mod( 'waicam_join_support_c2_text', 'Découvrez nos produits dérivés et soutenez le mouvement.' );
+		$c2_ltext = get_theme_mod( 'waicam_join_support_c2_link_text', 'Voir la boutique' );
+		$c2_url   = get_theme_mod( 'waicam_join_support_c2_url', '#' );
+		$c2_bg_id = get_theme_mod( 'waicam_join_support_c2_bg_id', 0 );
+		?>
+
+		<a href="<?php echo esc_url( $c1_url ); ?>" class="join-support-card card-donate" <?php if ( $c1_bg_id ) : ?>style="background-image: url('<?php echo esc_url( wp_get_attachment_image_url( $c1_bg_id, 'large' ) ); ?>');"<?php endif; ?>>
+			<div class="card-overlay"></div>
+			<div class="card-content">
+				<div class="card-badge badge-red"><?php echo esc_html( $c1_badge ); ?></div>
+				<h3><?php echo esc_html( $c1_title ); ?></h3>
+				<p><?php echo esc_html( $c1_text ); ?></p>
+				<div class="home-posthero-link">
+					<?php echo esc_html( $c1_ltext ); ?>
+					<span class="arrow-anim" aria-hidden="true">
+						<span class="arrow-plain">→</span>
+						<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
+							<path d="M1 8 Q7 2 13 8 T25 8 T37 8 T49 8 T61 8 T73 8"></path>
+							<path d="M69 4 L77 8 L69 12"></path>
+						</svg>
+					</span>
+				</div>
+			</div>
+		</a>
+
+		<a href="<?php echo esc_url( $c2_url ); ?>" class="join-support-card card-shop" <?php if ( $c2_bg_id ) : ?>style="background-image: url('<?php echo esc_url( wp_get_attachment_image_url( $c2_bg_id, 'large' ) ); ?>');"<?php endif; ?>>
+			<div class="card-overlay"></div>
+			<div class="card-content">
+				<div class="card-badge badge-green"><?php echo esc_html( $c2_badge ); ?></div>
+				<h3><?php echo esc_html( $c2_title ); ?></h3>
+				<p><?php echo esc_html( $c2_text ); ?></p>
+				<div class="home-posthero-link">
+					<?php echo esc_html( $c2_ltext ); ?>
+					<span class="arrow-anim" aria-hidden="true">
+						<span class="arrow-plain">→</span>
+						<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
+							<path d="M1 8 Q7 2 13 8 T25 8 T37 8 T49 8 T61 8 T73 8"></path>
+							<path d="M69 4 L77 8 L69 12"></path>
+						</svg>
+					</span>
+				</div>
+			</div>
+		</a>
+	</div>
+</section>
+
 <section id="form-adhesion">
 	<div style="max-width:800px;margin:0 auto;">
 		<div class="section-header">
@@ -129,56 +187,6 @@ $fullwidth_image_id = get_theme_mod( 'waicam_join_fullwidth_image_id', 0 );
 			}
 			?>
 		</div>
-	</div>
-</section>
-
-<section class="join-support-gwc">
-	<div class="join-support-inner">
-		<?php
-		$c1_bg_id = get_theme_mod( 'waicam_join_support_c1_bg_id', 0 );
-		$c1_title = get_theme_mod( 'waicam_join_support_c1_title', 'FAIRE UN DON' );
-		$c1_text  = get_theme_mod( 'waicam_join_support_c1_text', 'Soutenez nos programmes de formation et d’inclusion numérique.' );
-		$c1_url   = get_theme_mod( 'waicam_join_support_c1_url', home_url( '/faire-un-don' ) );
-
-		$c2_title = get_theme_mod( 'waicam_join_support_c2_title', 'ACHETER NOS PRODUITS' );
-		$c2_url   = get_theme_mod( 'waicam_join_support_c2_url', '#' );
-		?>
-
-		<a href="<?php echo esc_url( $c1_url ); ?>" class="join-support-card card-donate" <?php if ( $c1_bg_id ) : ?>style="background-image: url('<?php echo esc_url( wp_get_attachment_image_url( $c1_bg_id, 'large' ) ); ?>');"<?php endif; ?>>
-			<div class="card-overlay"></div>
-			<div class="card-content">
-				<div class="card-badge"><?php esc_html_e( 'SUPPORT', 'waicam' ); ?></div>
-				<h3><?php echo esc_html( $c1_title ); ?></h3>
-				<p><?php echo esc_html( $c1_text ); ?></p>
-				<div class="home-posthero-link">
-					<?php esc_html_e( 'Faire un don', 'waicam' ); ?>
-					<span class="arrow-anim" aria-hidden="true">
-						<span class="arrow-plain">→</span>
-						<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
-							<path d="M1 8 Q7 2 13 8 T25 8 T37 8 T49 8 T61 8 T73 8"></path>
-							<path d="M69 4 L77 8 L69 12"></path>
-						</svg>
-					</span>
-				</div>
-			</div>
-		</a>
-
-		<a href="<?php echo esc_url( $c2_url ); ?>" class="join-support-card card-shop">
-			<div class="card-content">
-				<div class="card-badge"><?php esc_html_e( 'BOUTIQUE', 'waicam' ); ?></div>
-				<h3><?php echo esc_html( $c2_title ); ?></h3>
-				<div class="home-posthero-link">
-					<?php esc_html_e( 'Découvrir la boutique', 'waicam' ); ?>
-					<span class="arrow-anim" aria-hidden="true">
-						<span class="arrow-plain">→</span>
-						<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
-							<path d="M1 8 Q7 2 13 8 T25 8 T37 8 T49 8 T61 8 T73 8"></path>
-							<path d="M69 4 L77 8 L69 12"></path>
-						</svg>
-					</span>
-				</div>
-			</div>
-		</a>
 	</div>
 </section>
 

@@ -5546,6 +5546,7 @@ footer ul li {
 	.join-gwc-card:last-child { border-bottom: none; }
 }
 
+
 /* ─── Rejoindre : Ways to Support (GWC-inspired) ─── */
 .join-support-gwc {
     background: #fff;
@@ -5565,19 +5566,15 @@ footer ul li {
     flex-direction: column;
     justify-content: flex-end;
     padding: 48px;
-    text-decoration: none;
+    text-decoration: none !important;
     overflow: hidden;
     transition: transform 0.3s ease;
+    background-color: #1E1B4B; /* Fallback Navy */
 }
 .join-support-card:hover {
     transform: translateY(-5px);
 }
-.join-support-card.card-donate {
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-}
-.card-donate .card-overlay {
+.join-support-card .card-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
@@ -5589,24 +5586,27 @@ footer ul li {
 }
 .join-support-card .card-badge {
     display: inline-block;
-    background: #f20d42; /* WAI-CAM Strawberry Red */
     color: #fff;
     font-weight: 700;
     font-size: 0.8rem;
     padding: 8px 16px;
     margin-bottom: 20px;
     text-transform: uppercase;
+    border-radius: 4px;
+}
+.join-support-card .badge-red {
+    background-color: #f20d42; /* WAI-CAM Strawberry Red */
+}
+.join-support-card .badge-green {
+    background-color: #096A09; /* WAI-CAM Bottle Green */
 }
 .join-support-card h3 {
     font-family: 'Poppins', sans-serif;
     font-size: clamp(1.8rem, 3.5vw, 2.8rem);
     line-height: 1.1;
     margin-bottom: 16px;
-    color: inherit;
-    font-weight: 800;
-}
-.join-support-card.card-shop h3 {
     color: #fff;
+    font-weight: 800;
 }
 .join-support-card p {
     font-family: 'Helvetica', Arial, sans-serif;
@@ -5614,18 +5614,15 @@ footer ul li {
     margin-bottom: 24px;
     max-width: 90%;
     line-height: 1.5;
-}
-.join-support-card.card-shop {
-    background-color: #096A09; /* WAI-CAM Bottle Green */
-    color: #fff;
-    justify-content: center;
+    color: rgba(255,255,255,0.9);
 }
 .join-support-card .home-posthero-link {
-    color: #fff;
+    color: #fff !important;
     font-size: clamp(1.2rem, 2vw, 1.8rem);
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    font-weight: 600;
 }
 .join-support-card .home-posthero-link .arrow-wave path {
     stroke: #fff;
@@ -5638,8 +5635,5 @@ footer ul li {
     .join-support-card {
         min-height: 380px;
         padding: 32px;
-    }
-    .join-support-card h3 {
-        font-size: 2.2rem;
     }
 }
