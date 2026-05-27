@@ -51,7 +51,7 @@ function waicam_enqueue_assets() {
 	// Google Fonts
 	wp_enqueue_style(
 		'waicam-fonts',
-		'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap',
+		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&family=Poppins:wght@500;600;700;800&display=swap',
 		array(),
 		null
 	);
@@ -1230,6 +1230,37 @@ function waicam_customize_register( $wp_customize ) {
 		'section'   => 'waicam_join_featured',
 		'mime_type' => 'image',
 	) ) );
+
+	// ────────── Page Rejoindre — Section "Ways to Support" (GWC) ──────────
+	$wp_customize->add_section( 'waicam_join_support', array(
+		'title'       => __( 'Rejoindre — Soutien (GWC)', 'waicam' ),
+		'description' => __( 'Section avec les deux grandes cartes (Donner / Boutique) en bas de page.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+
+	// Card 1: Donate
+	$wp_customize->add_setting( 'waicam_join_support_c1_title', array( 'default' => 'FAIRE UN DON', 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_control( 'waicam_join_support_c1_title', array( 'label' => 'Carte 1 : Titre', 'section' => 'waicam_join_support' ) );
+
+	$wp_customize->add_setting( 'waicam_join_support_c1_text', array( 'default' => 'Soutenez nos programmes de formation et d’inclusion numérique.', 'sanitize_callback' => 'sanitize_textarea_field' ) );
+	$wp_customize->add_control( 'waicam_join_support_c1_text', array( 'label' => 'Carte 1 : Texte', 'section' => 'waicam_join_support', 'type' => 'textarea' ) );
+
+	$wp_customize->add_setting( 'waicam_join_support_c1_url', array( 'default' => home_url('/faire-un-don'), 'sanitize_callback' => 'esc_url_raw' ) );
+	$wp_customize->add_control( 'waicam_join_support_c1_url', array( 'label' => 'Carte 1 : URL du lien', 'section' => 'waicam_join_support' ) );
+
+	$wp_customize->add_setting( 'waicam_join_support_c1_bg_id', array( 'default' => 0, 'sanitize_callback' => 'absint' ) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_join_support_c1_bg_id', array(
+		'label'    => 'Carte 1 : Image de fond',
+		'section'  => 'waicam_join_support',
+		'mime_type'=> 'image',
+	) ) );
+
+	// Card 2: Shop
+	$wp_customize->add_setting( 'waicam_join_support_c2_title', array( 'default' => 'ACHETER NOS PRODUITS', 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_control( 'waicam_join_support_c2_title', array( 'label' => 'Carte 2 : Titre', 'section' => 'waicam_join_support' ) );
+
+	$wp_customize->add_setting( 'waicam_join_support_c2_url', array( 'default' => '#', 'sanitize_callback' => 'esc_url_raw' ) );
+	$wp_customize->add_control( 'waicam_join_support_c2_url', array( 'label' => 'Carte 2 : URL du lien', 'section' => 'waicam_join_support' ) );
 
 	}
 	add_action( 'customize_register', 'waicam_customize_register' );
