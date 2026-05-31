@@ -15,21 +15,15 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<?php $waicam_is_gwc_blog = is_home(); ?>
 
 <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Aller au contenu', 'waicam' ); ?></a>
 
 <!-- ========== NAVBAR ========== -->
-<nav class="navbar<?php echo $waicam_is_gwc_blog ? ' navbar--gwc-blog' : ''; ?>" id="navbar" role="navigation" aria-label="<?php esc_attr_e( 'Navigation principale', 'waicam' ); ?>">
+<nav class="navbar" id="navbar" role="navigation" aria-label="<?php esc_attr_e( 'Navigation principale', 'waicam' ); ?>">
 
 	<!-- Logo -->
 	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo" aria-label="<?php bloginfo( 'name' ); ?> — <?php esc_attr_e( 'Accueil', 'waicam' ); ?>">
-		<?php if ( $waicam_is_gwc_blog ) : ?>
-			<span class="gwc-logo" aria-label="Girls Who Code">
-				<span class="gwc-logo__script">girls who</span>
-				<span class="gwc-logo__code">code</span>
-			</span>
-		<?php elseif ( has_custom_logo() ) : ?>
+		<?php if ( has_custom_logo() ) : ?>
 			<?php the_custom_logo(); ?>
 		<?php else : ?>
 			<img src="<?php echo esc_url( waicam_img( 'logo-waicam.png' ) ); ?>"
@@ -40,26 +34,19 @@
 
 	<!-- Menu principal (desktop) -->
 	<div class="nav-links" id="nav-links" role="menubar">
-		<?php if ( $waicam_is_gwc_blog ) : ?>
-			<a href="#" role="menuitem"><?php esc_html_e( 'Programs', 'waicam' ); ?></a>
-			<a href="#" role="menuitem"><?php esc_html_e( 'Get Involved', 'waicam' ); ?></a>
-			<a href="#" role="menuitem"><?php esc_html_e( 'About Us', 'waicam' ); ?></a>
-			<a href="#" role="menuitem"><?php esc_html_e( 'Donate', 'waicam' ); ?></a>
-		<?php else : ?>
-			<?php
-			if ( has_nav_menu( 'primary' ) ) {
-				wp_nav_menu( array(
-					'theme_location' => 'primary',
-					'container'      => false,
-					'items_wrap'     => '%3$s',
-					'walker'         => new WAICAM_Nav_Walker(),
-					'fallback_cb'    => 'waicam_default_menu',
-				) );
-			} else {
-				waicam_default_menu();
-			}
-			?>
-		<?php endif; ?>
+		<?php
+		if ( has_nav_menu( 'primary' ) ) {
+			wp_nav_menu( array(
+				'theme_location' => 'primary',
+				'container'      => false,
+				'items_wrap'     => '%3$s',
+				'walker'         => new WAICAM_Nav_Walker(),
+				'fallback_cb'    => 'waicam_default_menu',
+			) );
+		} else {
+			waicam_default_menu();
+		}
+		?>
 	</div>
 
 	<!-- CTA Rejoindre + Hamburger (colonne droite) -->
@@ -69,7 +56,7 @@
 		$href_rejoindre = $rejoindre ? get_permalink( $rejoindre ) : home_url( '/rejoindre' );
 		?>
 		<a href="<?php echo esc_url( $href_rejoindre ); ?>" class="btn-nav nav-cta">
-			<?php echo esc_html( $waicam_is_gwc_blog ? __( 'Get Updates', 'waicam' ) : __( 'Rejoindre', 'waicam' ) ); ?>
+			<?php esc_html_e( 'Rejoindre', 'waicam' ); ?>
 		</a>
 
 		<button class="hamburger"
