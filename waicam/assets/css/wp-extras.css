@@ -3190,7 +3190,7 @@ section .testimonials-grid .testimonial-card {
 }
 .don-gwc-options__grid {
 	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: clamp(22px, 3vw, 56px);
 	width: min(1800px, 100%);
 	margin: 0 auto;
