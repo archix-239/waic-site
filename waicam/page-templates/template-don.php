@@ -22,6 +22,34 @@ $don_hero_highlight_2 = get_theme_mod( 'waicam_don_hero_highlight_2', 'Privilég
 $don_hero_closing     = get_theme_mod( 'waicam_don_hero_closing', 'pour donner à l’association une capacité d’action régulière et durable.' );
 $don_card_title       = get_theme_mod( 'waicam_don_card_title', 'Aidez-nous à agir — faites un don' );
 $don_card_note        = get_theme_mod( 'waicam_don_card_note', "Votre don peut ouvrir droit à une déduction fiscale selon les dispositions applicables de la Loi de finances 2022. Un reçu pourra être transmis après validation du paiement." );
+$don_form_action      = function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : home_url( '/panier/' );
+
+$don_option_defaults = array(
+	1 => array(
+		'title'  => __( 'Soutenir une apprenante', 'waicam' ),
+		'text'   => __( 'Financez une participation à une formation, un atelier ou une activité terrain WAI-CAM.', 'waicam' ),
+		'amount' => 2000,
+	),
+	2 => array(
+		'title'  => __( 'Financer un atelier', 'waicam' ),
+		'text'   => __( 'Aidez-nous à couvrir les ressources pédagogiques, la logistique et l’accompagnement des participantes.', 'waicam' ),
+		'amount' => 25000,
+	),
+	3 => array(
+		'title'  => __( 'Accélérer l’impact', 'waicam' ),
+		'text'   => __( 'Contribuez au déploiement de programmes inclusifs dans les communautés et les régions du Cameroun.', 'waicam' ),
+		'amount' => 50000,
+	),
+);
+$don_option_cards = array();
+foreach ( $don_option_defaults as $index => $defaults ) {
+	$don_option_cards[] = array(
+		'title'    => get_theme_mod( "waicam_don_option_{$index}_title", $defaults['title'] ),
+		'text'     => get_theme_mod( "waicam_don_option_{$index}_text", $defaults['text'] ),
+		'amount'   => (int) get_theme_mod( "waicam_don_option_{$index}_amount", $defaults['amount'] ),
+		'image_id' => (int) get_theme_mod( "waicam_don_option_{$index}_image_id", 0 ),
+	);
+}
 ?>
 
 <!-- ============================================
@@ -137,6 +165,54 @@ $don_card_note        = get_theme_mod( 'waicam_don_card_note', "Votre don peut o
 			<p><strong><?php echo esc_html( $don_hero_highlight_1 ); ?></strong> <?php echo esc_html( $don_hero_body ); ?></p>
 			<p><strong><?php echo esc_html( $don_hero_highlight_2 ); ?></strong> <?php echo esc_html( $don_hero_closing ); ?></p>
 		</div>
+	</div>
+</section>
+
+
+<!-- ============================================
+     OPTIONS DE DON — cartes d'impact
+     ============================================ -->
+<section class="don-gwc-options" aria-label="<?php esc_attr_e( 'Choisir un impact à financer', 'waicam' ); ?>">
+	<div class="don-gwc-options__grid">
+		<?php foreach ( $don_option_cards as $card ) :
+			$amount    = max( 500, (int) $card['amount'] );
+			$image_url = $card['image_id'] ? wp_get_attachment_image_url( $card['image_id'], 'large' ) : '';
+		?>
+			<form class="don-gwc-option-card" method="GET" action="<?php echo esc_url( $don_form_action ); ?>">
+				<?php if ( $donation_product_id ) : ?>
+					<input type="hidden" name="add-to-cart" value="<?php echo esc_attr( $donation_product_id ); ?>" />
+				<?php endif; ?>
+				<input type="hidden" name="nyp" value="<?php echo esc_attr( $amount ); ?>" />
+
+				<div class="don-gwc-option-card__media">
+					<?php if ( $image_url ) : ?>
+						<img src="<?php echo esc_url( $image_url ); ?>" alt="" loading="lazy" />
+					<?php else : ?>
+						<div class="don-gwc-option-card__placeholder" aria-hidden="true"></div>
+					<?php endif; ?>
+				</div>
+
+				<div class="don-gwc-option-card__body">
+					<h2><?php echo esc_html( $card['title'] ); ?></h2>
+					<p><?php echo esc_html( $card['text'] ); ?></p>
+
+					<div class="don-gwc-option-card__price" aria-label="<?php echo esc_attr( sprintf( __( 'Montant %s XAF', 'waicam' ), number_format_i18n( $amount ) ) ); ?>">
+						<span>XAF</span>
+						<strong><?php echo esc_html( number_format_i18n( $amount ) ); ?></strong>
+					</div>
+
+					<label class="don-gwc-option-card__frequency">
+						<span><?php esc_html_e( 'Fréquence', 'waicam' ); ?></span>
+						<select name="don_frequency">
+							<option value="monthly"><?php esc_html_e( 'Mensuel', 'waicam' ); ?></option>
+							<option value="once"><?php esc_html_e( 'Une fois', 'waicam' ); ?></option>
+						</select>
+					</label>
+
+					<button type="submit" class="don-gwc-option-card__button" <?php disabled( ! $donation_product_id ); ?>><?php esc_html_e( 'Faire un don', 'waicam' ); ?></button>
+				</div>
+			</form>
+		<?php endforeach; ?>
 	</div>
 </section>
 

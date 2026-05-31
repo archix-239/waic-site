@@ -3181,6 +3181,137 @@ section .testimonials-grid .testimonial-card {
 	.don-gwc-frequency span { min-height: 58px; }
 }
 
+
+
+/* ─── Don page — impact donation cards ───────────────────────────────── */
+.don-gwc-options {
+	background: #0E6A2E;
+	padding: clamp(48px, 6vw, 86px) 2.6% clamp(70px, 8vw, 120px);
+}
+.don-gwc-options__grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(28px, 5vw, 96px);
+	width: min(1800px, 100%);
+	margin: 0 auto;
+}
+.don-gwc-option-card {
+	display: grid;
+	grid-template-rows: 300px 1fr;
+	min-height: 100%;
+	margin: 0;
+	background: #fff;
+	border: 0;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 20px 52px rgba(0, 0, 0, .16);
+}
+.don-gwc-option-card__media,
+.don-gwc-option-card__placeholder {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+.don-gwc-option-card__media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.don-gwc-option-card__placeholder {
+	border: 2px dashed rgba(30, 27, 75, .22);
+	background:
+		linear-gradient(135deg, rgba(30, 27, 75, .06), rgba(14, 106, 46, .08)),
+		#fff;
+}
+.don-gwc-option-card__body {
+	display: grid;
+	grid-template-rows: auto auto 1fr auto auto;
+	gap: 22px;
+	padding: clamp(28px, 3vw, 42px);
+	color: #111;
+}
+.don-gwc-option-card__body h2 {
+	margin: 0;
+	color: #111;
+	font-size: clamp(1.8rem, 2vw, 2.45rem);
+	font-weight: 900;
+	line-height: 1.12;
+	letter-spacing: -.02em;
+}
+.don-gwc-option-card__body p {
+	margin: 0;
+	color: #333;
+	font-size: clamp(1.08rem, 1.25vw, 1.42rem);
+	line-height: 1.45;
+}
+.don-gwc-option-card__price {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	margin-top: clamp(18px, 3vw, 48px);
+	color: #000;
+}
+.don-gwc-option-card__price span {
+	font-size: clamp(1.35rem, 2vw, 2.45rem);
+	font-weight: 500;
+}
+.don-gwc-option-card__price strong {
+	font-size: clamp(3.7rem, 5vw, 6.1rem);
+	font-weight: 400;
+	line-height: .95;
+	letter-spacing: -.055em;
+}
+.don-gwc-option-card__frequency {
+	display: grid;
+	gap: 8px;
+	margin: 0;
+	color: #111;
+	font-size: 1rem;
+	font-weight: 600;
+}
+.don-gwc-option-card__frequency select {
+	width: 100%;
+	min-height: 58px;
+	padding: 0 18px;
+	border: 1px solid rgba(17, 17, 17, .38);
+	border-radius: 10px;
+	background: #fff;
+	color: #111;
+	font-size: 1.08rem;
+}
+.don-gwc-option-card__button {
+	width: 100%;
+	min-height: 70px;
+	border: 0;
+	border-radius: 10px;
+	background: #111;
+	color: #fff;
+	font-size: clamp(1.1rem, 1.3vw, 1.45rem);
+	font-weight: 900;
+	cursor: pointer;
+	transition: background .24s ease, transform .24s ease, box-shadow .24s ease;
+}
+.don-gwc-option-card__button:hover,
+.don-gwc-option-card__button:focus-visible {
+	background: #E41D44;
+	transform: translateY(-2px);
+	box-shadow: 0 16px 34px rgba(228, 29, 68, .24);
+}
+.don-gwc-option-card__button:disabled {
+	cursor: not-allowed;
+	opacity: .55;
+}
+@media (max-width: 1180px) {
+	.don-gwc-options__grid { grid-template-columns: 1fr; width: min(720px, 100%); }
+	.don-gwc-option-card { grid-template-rows: minmax(260px, 42vw) 1fr; }
+}
+@media (max-width: 640px) {
+	.don-gwc-options { padding-left: 4%; padding-right: 4%; }
+	.don-gwc-option-card__body { padding: 24px 20px; }
+	.don-gwc-option-card__price strong { font-size: 3.4rem; }
+}
+
 /* ── Section FORMULAIRE de don ── */
 .don-form-section {
 	padding: 70px 5%;

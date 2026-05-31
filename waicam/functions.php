@@ -1286,17 +1286,44 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_don_hero_closing'     => array( __( 'Hero don — Texte 2', 'waicam' ), 'pour donner à l’association une capacité d’action régulière et durable.', 'textarea' ),
 		'waicam_don_card_title'       => array( __( 'Carte don — Titre', 'waicam' ), 'Aidez-nous à agir — faites un don', 'text' ),
 		'waicam_don_card_note'        => array( __( 'Carte don — Note fiscale', 'waicam' ), 'Votre don peut ouvrir droit à une déduction fiscale selon les dispositions applicables de la Loi de finances 2022. Un reçu pourra être transmis après validation du paiement.', 'textarea' ),
+		'waicam_don_option_1_title'    => array( __( 'Carte impact 1 — Titre', 'waicam' ), 'Soutenir une apprenante', 'text' ),
+		'waicam_don_option_1_text'     => array( __( 'Carte impact 1 — Texte', 'waicam' ), 'Financez une participation à une formation, un atelier ou une activité terrain WAI-CAM.', 'textarea' ),
+		'waicam_don_option_1_amount'   => array( __( 'Carte impact 1 — Montant XAF', 'waicam' ), '2000', 'number' ),
+		'waicam_don_option_2_title'    => array( __( 'Carte impact 2 — Titre', 'waicam' ), 'Financer un atelier', 'text' ),
+		'waicam_don_option_2_text'     => array( __( 'Carte impact 2 — Texte', 'waicam' ), 'Aidez-nous à couvrir les ressources pédagogiques, la logistique et l’accompagnement des participantes.', 'textarea' ),
+		'waicam_don_option_2_amount'   => array( __( 'Carte impact 2 — Montant XAF', 'waicam' ), '25000', 'number' ),
+		'waicam_don_option_3_title'    => array( __( 'Carte impact 3 — Titre', 'waicam' ), 'Accélérer l’impact', 'text' ),
+		'waicam_don_option_3_text'     => array( __( 'Carte impact 3 — Texte', 'waicam' ), 'Contribuez au déploiement de programmes inclusifs dans les communautés et les régions du Cameroun.', 'textarea' ),
+		'waicam_don_option_3_amount'   => array( __( 'Carte impact 3 — Montant XAF', 'waicam' ), '50000', 'number' ),
 	);
 	foreach ( $don_fields as $key => $cfg ) {
+		$sanitize_callback = 'sanitize_text_field';
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize_callback = 'sanitize_textarea_field';
+		} elseif ( 'number' === $cfg[2] ) {
+			$sanitize_callback = 'absint';
+		}
 		$wp_customize->add_setting( $key, array(
 			'default'           => $cfg[1],
-			'sanitize_callback' => 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field',
+			'sanitize_callback' => $sanitize_callback,
 		) );
 		$wp_customize->add_control( $key, array(
 			'label'   => $cfg[0],
 			'section' => 'waicam_don_page',
 			'type'    => $cfg[2],
 		) );
+	}
+
+	for ( $i = 1; $i <= 3; $i++ ) {
+		$wp_customize->add_setting( "waicam_don_option_{$i}_image_id", array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		) );
+		$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, "waicam_don_option_{$i}_image_id", array(
+			'label'     => sprintf( __( 'Carte impact %d — Image', 'waicam' ), $i ),
+			'section'   => 'waicam_don_page',
+			'mime_type' => 'image',
+		) ) );
 	}
 
 	}
