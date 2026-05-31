@@ -719,7 +719,13 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_team_quote_author' => array( __( 'Auteur / signature', 'waicam' ), 'WAI-CAM — Leadership & Gouvernance', 'text' ),
 	);
 	foreach ( $team_quote_fields as $key => $cfg ) {
-		$sanitize = 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
 		$wp_customize->add_setting( $key, array(
 			'default'           => $cfg[1],
 			'sanitize_callback' => $sanitize,
@@ -903,7 +909,13 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_about_value_3_text'        => array( __( 'Carte 3 — Texte', 'waicam' ), "Nous préparons les femmes et les jeunes à transformer durablement leur environnement.", 'textarea' ),
 	);
 	foreach ( $about_values_fields as $key => $cfg ) {
-		$sanitize = 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
 		$wp_customize->add_setting( $key, array(
 			'default'           => $cfg[1],
 			'sanitize_callback' => $sanitize,
@@ -1029,7 +1041,13 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_partners_impact_4_text'  => array( __( 'Bloc 4 — Texte', 'waicam' ), 'Institutions publiques partenaires pour porter une IA responsable et inclusive.', 'textarea' ),
 	);
 	foreach ( $partners_impact_fields as $key => $cfg ) {
-		$sanitize = 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
 		$wp_customize->add_setting( $key, array(
 			'default'           => $cfg[1],
 			'sanitize_callback' => $sanitize,
@@ -1096,7 +1114,13 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_partners_stats_4_label'  => array( __( 'Stat 4 — Libellé', 'waicam' ), 'PROFILS SENIORS', 'text' ),
 	);
 	foreach ( $partners_stats_fields as $key => $cfg ) {
-		$sanitize = 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
 		$wp_customize->add_setting( $key, array(
 			'default'           => $cfg[1],
 			'sanitize_callback' => $sanitize,
@@ -1128,7 +1152,13 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_partners_logos_text'  => array( __( 'Texte intro', 'waicam' ), 'Nous remercions nos partenaires pour leur confiance et leur soutien.', 'textarea' ),
 	);
 	foreach ( $partners_logos_fields as $key => $cfg ) {
-		$sanitize = 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
 		$wp_customize->add_setting( $key, array(
 			'default'           => $cfg[1],
 			'sanitize_callback' => $sanitize,
@@ -1195,6 +1225,7 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_join_bigstat_title'      => array( __( 'Grand chiffre — Titre', 'waicam' ), '5 millions de filles et de femmes formées, sensibilisées et accompagnées d’ici 2030.', 'textarea' ),
 		'waicam_join_bigstat_text'       => array( __( 'Grand chiffre — Texte', 'waicam' ), 'Nous agissons pour réduire durablement les écarts d’accès aux compétences numériques et à l’intelligence artificielle.', 'textarea' ),
 		'waicam_join_bigstat_cta_text'   => array( __( 'Grand chiffre — Texte bouton', 'waicam' ), 'Soutenir maintenant', 'text' ),
+		'waicam_join_bigstat_cta_url'    => array( __( 'Grand chiffre — URL bouton', 'waicam' ), home_url( '/faire-un-don/' ), 'url' ),
 		'waicam_join_pillars_title'      => array( __( 'Contribution — Titre', 'waicam' ), 'COMMENT CONTRIBUER', 'text' ),
 		'waicam_join_pillar_1_title'     => array( __( 'Contribution 1 — Titre', 'waicam' ), 'FORMATION', 'text' ),
 		'waicam_join_pillar_1_text'      => array( __( 'Contribution 1 — Texte', 'waicam' ), 'Animez, facilitez ou accompagnez des ateliers d’initiation à l’IA et au numérique pour les jeunes filles et les femmes.', 'textarea' ),
@@ -1208,7 +1239,13 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_join_form_text'          => array( __( 'Formulaire — Texte', 'waicam' ), 'Remplissez le formulaire d’adhésion. Notre équipe vous contactera sous 48 heures pour confirmer votre parcours d’engagement.', 'textarea' ),
 	);
 	foreach ( $join_fields as $key => $cfg ) {
-		$sanitize = 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field';
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
 		$wp_customize->add_setting( $key, array(
 			'default'           => $cfg[1],
 			'sanitize_callback' => $sanitize,

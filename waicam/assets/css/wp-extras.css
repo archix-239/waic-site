@@ -5650,45 +5650,47 @@ footer ul li {
 
 .join-gwc-bigstat {
 	background: #fff;
-	padding: clamp(72px, 9vw, 130px) 5%;
+	padding: clamp(82px, 8vw, 128px) 5% clamp(76px, 8vw, 120px);
 }
 .join-gwc-bigstat__inner {
-	width: min(800px, 92%);
+	width: min(1180px, 74vw);
 	margin: 0 auto;
 }
 .join-gwc-bigstat h2 {
-	margin: 0 0 48px;
-	color: #00314A;
-	font-family: monospace;
+	margin: 0 0 clamp(56px, 6vw, 92px);
+	color: #1E1B4B;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 	font-weight: 400;
-	font-size: clamp(2.4rem, 5.8vw, 6rem);
-	line-height: 1.08;
+	font-size: clamp(4.2rem, 7.05vw, 9rem);
+	line-height: .98;
 	letter-spacing: .02em;
 }
 .join-gwc-bigstat__bottom {
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
-	gap: 40px;
+	grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+	gap: clamp(40px, 9vw, 132px);
 	align-items: center;
 }
 .join-gwc-bigstat__bottom p {
 	margin: 0;
-	color: #00314A;
-	font-size: clamp(1rem, 1.3vw, 1.35rem);
+	color: #111;
+	font-size: clamp(1.05rem, 1.35vw, 1.45rem);
 	line-height: 1.45;
+	max-width: 540px;
 }
 .join-gwc-bigstat__button {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 58px;
-	padding: 14px 28px;
+	width: 100%;
+	min-height: 76px;
+	padding: 16px 32px;
 	border: 2px solid #0E6A2E;
 	color: #1E1B4B;
 	background: #fff;
 	font-weight: 800;
 	text-transform: uppercase;
-	letter-spacing: .06em;
+	letter-spacing: .1em;
 	text-decoration: none;
 	transition: border-color .24s ease, color .24s ease, box-shadow .24s ease;
 }
@@ -5716,7 +5718,9 @@ footer ul li {
 @media (max-width: 640px) {
 	.join-gwc-campaign { padding-top: 72px; }
 	.join-gwc-campaign__content h2 { font-size: clamp(2.15rem, 13vw, 3.4rem); }
+	.join-gwc-bigstat { padding-inline: 6%; }
 	.join-gwc-bigstat__inner { width: 100%; }
+	.join-gwc-bigstat h2 { font-size: clamp(3.1rem, 16vw, 5.2rem); }
 }
 
 /* ─── Rejoindre — contribution pillars and Fluent Forms styling ─────────── */

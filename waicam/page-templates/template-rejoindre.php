@@ -93,7 +93,7 @@ $join_form_image = $join_form_image_id ? wp_get_attachment_image_url( $join_form
 		<h2><?php echo esc_html( get_theme_mod( 'waicam_join_bigstat_title', '5 millions de filles et de femmes formées, sensibilisées et accompagnées d’ici 2030.' ) ); ?></h2>
 		<div class="join-gwc-bigstat__bottom">
 			<p><?php echo esc_html( get_theme_mod( 'waicam_join_bigstat_text', 'Nous agissons pour réduire durablement les écarts d’accès aux compétences numériques et à l’intelligence artificielle.' ) ); ?></p>
-			<a href="<?php echo esc_url( home_url( '/faire-un-don/' ) ); ?>" class="join-gwc-bigstat__button"><?php echo esc_html( get_theme_mod( 'waicam_join_bigstat_cta_text', 'Soutenir maintenant' ) ); ?></a>
+			<a href="<?php echo esc_url( get_theme_mod( 'waicam_join_bigstat_cta_url', home_url( '/faire-un-don/' ) ) ); ?>" class="join-gwc-bigstat__button"><?php echo esc_html( get_theme_mod( 'waicam_join_bigstat_cta_text', 'Soutenir maintenant' ) ); ?></a>
 		</div>
 	</div>
 </section>
