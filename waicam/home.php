@@ -1,6 +1,6 @@
 <?php
 /**
- * Blog index — liste des articles.
+ * Page des articles WordPress — Blog.
  *
  * @package WAICAM
  */

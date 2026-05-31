@@ -81,13 +81,13 @@ get_header(); ?>
 				array(
 					'badge' => 'AXE 01',
 					'title' => get_theme_mod( 'waicam_home_axis_1_title', 'Former' ),
-					'text'  => get_theme_mod( 'waicam_home_axis_1_text', 'Former les jeunes filles et femmes à l’IA et au numérique pour construire un avenir autonome et responsable.' ),
+					'text'  => get_theme_mod( 'waicam_home_axis_1_text', 'Former les jeunes filles et femmes aux compétences numériques et à l’IA appliquée.' ),
 					'url'   => get_theme_mod( 'waicam_home_axis_1_url', home_url( '/formations' ) ),
 				),
 				array(
 					'badge' => 'AXE 02',
 					'title' => get_theme_mod( 'waicam_home_axis_2_title', 'Accompagner' ),
-					'text'  => get_theme_mod( 'waicam_home_axis_2_text', 'Accompagner les femmes, les leaders et les partenaires vers des projets concrets d’innovation et d’impact social.' ),
+					'text'  => get_theme_mod( 'waicam_home_axis_2_text', 'Accompagner les femmes vers des parcours concrets : leadership, entrepreneuriat et innovation.' ),
 					'url'   => get_theme_mod( 'waicam_home_axis_2_url', home_url( '/programmes' ) ),
 				),
 			);
@@ -121,7 +121,7 @@ get_header(); ?>
 			<svg class="home-impact-wave" viewBox="0 0 320 16" role="presentation" aria-hidden="true" focusable="false">
 				<path d="M0 8 Q8 0 16 8 T32 8 T48 8 T64 8 T80 8 T96 8 T112 8 T128 8 T144 8 T160 8 T176 8 T192 8 T208 8 T224 8 T240 8 T256 8 T272 8 T288 8 T304 8 T320 8"></path>
 			</svg>
-			<p><?php echo esc_html( get_theme_mod( 'waicam_home_impact_text', 'Nous portons des programmes de formation, de mentorat et d’action citoyenne pour rendre l’intelligence artificielle accessible et utile aux femmes camerounaises.' ) ); ?></p>
+			<p><?php echo esc_html( get_theme_mod( 'waicam_home_impact_text', 'Women in AI Cameroon développe des parcours de formation, de sensibilisation et d’accompagnement pour permettre aux femmes et aux jeunes filles de participer pleinement à la révolution de l’intelligence artificielle.' ) ); ?></p>
 				<a href="<?php echo esc_url( get_theme_mod( 'waicam_home_impact_cta_url', waicam_events_archive_url() ) ); ?>" class="home-impact-link">
 					<?php echo esc_html( get_theme_mod( 'waicam_home_impact_cta_text', 'Découvrir nos actions' ) ); ?>
 				<span class="arrow-anim" aria-hidden="true">

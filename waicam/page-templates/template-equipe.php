@@ -13,8 +13,8 @@ get_header(); ?>
 
 <?php
 $team_hero_kicker = get_theme_mod( 'waicam_team_hero_kicker', 'NOTRE ÉQUIPE' );
-$team_hero_title  = get_theme_mod( 'waicam_team_hero_title', "Des voix engagées pour une IA inclusive au Cameroun" );
-$team_hero_cta_text = get_theme_mod( 'waicam_team_hero_cta_text', 'Envie de rejoindre l’équipe ? Découvrez les opportunités' );
+$team_hero_title  = get_theme_mod( 'waicam_team_hero_title', "RENCONTREZ L'ÉQUIPE QUI FAIT AVANCER WAI-CAM" );
+$team_hero_cta_text = get_theme_mod( 'waicam_team_hero_cta_text', 'Envie de rejoindre l’équipe ? Découvrir les opportunités' );
 $team_hero_cta_url  = get_theme_mod( 'waicam_team_hero_cta_url', home_url( '/rejoindre/' ) );
 ?>
 <section class="team-hero-gwc">
@@ -38,8 +38,8 @@ $team_hero_cta_url  = get_theme_mod( 'waicam_team_hero_cta_url', home_url( '/rej
 
 <?php
 $team_spotlight_kicker = get_theme_mod( 'waicam_team_spotlight_kicker', 'NOTRE PRÉSIDENCE' );
-$team_spotlight_title  = get_theme_mod( 'waicam_team_spotlight_title', 'Leadership féminin pour une IA inclusive' );
-$team_spotlight_text   = get_theme_mod( 'waicam_team_spotlight_text', "Portée par une présidence engagée, WAI‑CAM agit pour réduire les inégalités d'accès au numérique, renforcer les compétences des femmes et promouvoir une IA éthique au service du développement local.", 'waicam' );
+$team_spotlight_title  = get_theme_mod( 'waicam_team_spotlight_title', 'UNE LEADERSHIP FÉMININ ENGAGÉ POUR L’IA INCLUSIVE' );
+$team_spotlight_text   = get_theme_mod( 'waicam_team_spotlight_text', "WAI-CAM est portée par une présidence engagée qui agit pour réduire les inégalités d’accès au numérique, renforcer les compétences des femmes et promouvoir une intelligence artificielle éthique au Cameroun." );
 $team_spotlight_cta_text = get_theme_mod( 'waicam_team_spotlight_cta_text', 'Découvrir notre gouvernance' );
 $team_spotlight_cta_url  = get_theme_mod( 'waicam_team_spotlight_cta_url', home_url( '/about/' ) );
 $team_spotlight_image_id = (int) get_theme_mod( 'waicam_team_spotlight_image_id', 0 );
@@ -78,8 +78,8 @@ $team_spotlight_image = $team_spotlight_image_id ? wp_get_attachment_image_url( 
 
 
 <?php
-$team_quote_text   = get_theme_mod( 'waicam_team_quote_text', "L’intelligence artificielle n’est pas qu’une affaire de technologie. C’est une aventure humaine et sociale." );
-$team_quote_author = get_theme_mod( 'waicam_team_quote_author', 'Armelle Fosso — Présidente' );
+$team_quote_text   = get_theme_mod( 'waicam_team_quote_text', "WAI-CAM est plus qu'une organisation : c'est un mouvement citoyen qui agit pour l'inclusion numérique des femmes." );
+$team_quote_author = get_theme_mod( 'waicam_team_quote_author', 'WAI-CAM — Leadership & Gouvernance' );
 ?>
 <section class="team-quote-gwc">
 	<div class="team-quote-gwc__shape" aria-hidden="true"></div>
@@ -151,9 +151,23 @@ foreach ( $autres_ids as $member_id ) {
 				$profil = waicam_field( 'profil_professionnel', $member_id );
 				$photo  = waicam_image_url( 'photo', $member_id, 'large', '' );
 				$linkedin = '';
-				// Utilisation d'une fonction helper dédiée pour LinkedIn
-				$linkedin = waicam_get_linkedin_url( $member_id );
-
+				$linkedin_candidates = array( 'linkedin', 'lien_linkedin', 'profil_linkedin', 'linkedin_url', 'linkedin_profile' );
+				foreach ( $linkedin_candidates as $lk_key ) {
+					$lk_val = waicam_field( $lk_key, $member_id );
+					if ( $lk_val ) {
+						$linkedin = (string) $lk_val;
+						break;
+					}
+				}
+				if ( ! $linkedin ) {
+					$all_meta = get_post_meta( $member_id );
+					foreach ( $all_meta as $meta_key => $meta_values ) {
+						if ( false !== stripos( (string) $meta_key, 'linkedin' ) && ! empty( $meta_values[0] ) ) {
+							$linkedin = (string) $meta_values[0];
+							break;
+						}
+					}
+				}
 				$initiale = mb_strtoupper( mb_substr( $nom, 0, 1 ) );
 			?>
 			<div class="team-card team-card--gwc">
