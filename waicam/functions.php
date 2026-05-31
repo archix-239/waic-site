@@ -274,6 +274,28 @@ function waicam_customize_register( $wp_customize ) {
 		'priority' => 32,
 	) );
 
+	// ────────── Page Blog ──────────
+	$wp_customize->add_section( 'waicam_blog_page', array(
+		'title'       => __( 'Blog — Page des articles', 'waicam' ),
+		'description' => __( 'Textes du haut de la page Blog / Actualités.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$blog_fields = array(
+		'waicam_blog_kicker' => array( __( 'Sur-titre', 'waicam' ), __( 'News and Blog', 'waicam' ) ),
+		'waicam_blog_title'  => array( __( 'Titre principal', 'waicam' ), __( 'Keep up with us', 'waicam' ) ),
+	);
+	foreach ( $blog_fields as $key => $cfg ) {
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => 'sanitize_text_field',
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_blog_page',
+			'type'    => 'text',
+		) );
+	}
+
 	// ────────── Section Formulaires (IDs Fluent Forms) ──────────
 	$wp_customize->add_section( 'waicam_forms', array(
 		'title' => __( 'Formulaires Fluent Forms', 'waicam' ),
