@@ -6340,3 +6340,144 @@ footer ul li {
 	object-fit: cover;
 	display: block;
 }
+
+/* =========================================================
+   BLOG — Grille articles type GWC
+   ========================================================= */
+.blog-gwc {
+	background: #fff;
+	padding: clamp(72px, 9vw, 132px) 0 clamp(80px, 10vw, 150px);
+}
+.blog-gwc__inner {
+	width: min(1668px, 88%);
+	margin: 0 auto;
+}
+.blog-gwc__kicker {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 54px;
+	padding: 0 34px;
+	background: #0E6A2E;
+	color: #fff;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: clamp(1rem, 1.25vw, 1.45rem);
+	font-weight: 800;
+	letter-spacing: .05em;
+	text-transform: uppercase;
+}
+.blog-gwc h1 {
+	margin: 26px 0 0;
+	color: #1E1B4B;
+	font-size: clamp(3rem, 5vw, 5.8rem);
+	font-weight: 900;
+	line-height: .95;
+	letter-spacing: -.04em;
+	text-transform: uppercase;
+}
+.blog-gwc__wave {
+	display: block;
+	width: min(520px, 100%);
+	height: 18px;
+	margin: 14px 0 clamp(54px, 6vw, 88px);
+}
+.blog-gwc__wave path {
+	fill: none;
+	stroke: #0E6A2E;
+	stroke-width: 2.8;
+	stroke-linecap: round;
+	stroke-dasharray: 330;
+	stroke-dashoffset: 330;
+	animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4;
+}
+.blog-gwc__grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(24px, 2vw, 32px);
+}
+.blog-gwc-card {
+	min-width: 0;
+	background: #fff;
+	overflow: hidden;
+	border: 0;
+}
+.blog-gwc-card__link {
+	display: grid;
+	grid-template-rows: minmax(210px, 31%) minmax(420px, 69%);
+	min-height: clamp(560px, 48vw, 710px);
+	color: inherit;
+	text-decoration: none;
+	background: #fff;
+	overflow: hidden;
+}
+.blog-gwc-card__title {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	align-items: flex-start;
+	background: #fff;
+	padding: clamp(28px, 3vw, 44px) clamp(24px, 3vw, 42px) clamp(64px, 7vw, 108px);
+}
+.blog-gwc-card__title::after {
+	content: "";
+	position: absolute;
+	left: -5%;
+	right: -5%;
+	bottom: -58px;
+	height: 118px;
+	background: #fff;
+	clip-path: ellipse(62% 44% at 50% 0%);
+	pointer-events: none;
+}
+.blog-gwc-card__title h2 {
+	position: relative;
+	z-index: 1;
+	margin: 0;
+	color: #00314A;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: clamp(1.35rem, 2vw, 2.25rem);
+	font-weight: 500;
+	line-height: 1.22;
+	letter-spacing: .01em;
+}
+.blog-gwc-card__media {
+	position: relative;
+	overflow: hidden;
+	background: #fff;
+}
+.blog-gwc-card__media.has-image img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	object-fit: cover;
+	object-position: center center;
+	transform: scale(1);
+	transform-origin: center center;
+	transition: transform .55s cubic-bezier(.22, .61, .36, 1);
+	will-change: transform;
+}
+.blog-gwc-card:hover .blog-gwc-card__media img,
+.blog-gwc-card:focus-within .blog-gwc-card__media img {
+	transform: scale(1.08);
+}
+.blog-gwc__pagination {
+	margin-top: clamp(42px, 6vw, 84px);
+	text-align: center;
+}
+.blog-gwc__empty {
+	margin: 0;
+	padding: 60px 0;
+	color: #00314A;
+	font-size: 1.2rem;
+	text-align: center;
+}
+@media (max-width: 1100px) {
+	.blog-gwc__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+	.blog-gwc__inner { width: min(92%, 560px); }
+	.blog-gwc__grid { grid-template-columns: 1fr; }
+	.blog-gwc-card__link { min-height: 540px; grid-template-rows: minmax(190px, auto) 350px; }
+	.blog-gwc-card__title { padding: 28px 24px 76px; }
+}

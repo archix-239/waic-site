@@ -1,48 +1,54 @@
 <?php
 /**
- * Fallback générique (requis par WordPress).
- * Si aucun template plus spécifique ne match, ce fichier est utilisé.
+ * Blog index — liste des articles.
  *
  * @package WAICAM
  */
 
-get_header(); ?>
+get_header();
 
-<?php
-get_template_part( 'template-parts/page-hero', null, array(
-	'title'    => is_home() ? __( 'Blog', 'waicam' ) : get_the_archive_title(),
-	'subtitle' => is_home() ? '' : get_the_archive_description(),
-) );
+$blog_page_id = (int) get_option( 'page_for_posts' );
+$blog_title   = $blog_page_id ? get_the_title( $blog_page_id ) : __( 'Blog', 'waicam' );
 ?>
 
-<section>
-	<div style="max-width:1100px;margin:0 auto;">
-		<?php if ( have_posts() ) : ?>
+<section class="blog-gwc">
+	<div class="blog-gwc__inner">
+		<div class="blog-gwc__kicker"><?php esc_html_e( 'News and Blog', 'waicam' ); ?></div>
+		<h1><?php echo esc_html( $blog_title ?: __( 'Blog', 'waicam' ) ); ?></h1>
+		<svg class="blog-gwc__wave" viewBox="0 0 320 16" role="presentation" aria-hidden="true" focusable="false">
+			<path d="M0 8 C10 0, 22 0, 32 8 S54 16, 64 8 S86 0, 96 8 S118 16, 128 8 S150 0, 160 8 S182 16, 192 8 S214 0, 224 8 S246 16, 256 8 S278 0, 288 8 S310 16, 320 8" />
+		</svg>
 
-			<div class="news-grid">
-				<?php while ( have_posts() ) : the_post(); ?>
-					<div class="news-card">
-						<a href="<?php the_permalink(); ?>"><?php waicam_thumbnail( get_the_ID(), 'medium_large', 'training-1.jpg' ); ?></a>
-						<div class="news-card-body">
-							<div class="news-date"><?php echo esc_html( waicam_date_fr() ); ?></div>
-							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-							<p><?php echo esc_html( waicam_excerpt( get_the_excerpt(), 160 ) ); ?></p>
-							<a href="<?php the_permalink(); ?>" class="read-more"><?php esc_html_e( 'Lire la suite →', 'waicam' ); ?></a>
-						</div>
-					</div>
+		<?php if ( have_posts() ) : ?>
+			<div class="blog-gwc__grid">
+				<?php while ( have_posts() ) : the_post();
+					$thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+					$thumb_alt = get_post_meta( get_post_thumbnail_id( get_the_ID() ), '_wp_attachment_image_alt', true );
+				?>
+					<article class="blog-gwc-card">
+						<a href="<?php the_permalink(); ?>" class="blog-gwc-card__link" aria-label="<?php echo esc_attr( sprintf( __( 'Lire : %s', 'waicam' ), get_the_title() ) ); ?>">
+							<div class="blog-gwc-card__title">
+								<h2><?php the_title(); ?></h2>
+							</div>
+							<div class="blog-gwc-card__media<?php echo $thumb_url ? ' has-image' : ''; ?>">
+								<?php if ( $thumb_url ) : ?>
+									<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( $thumb_alt ?: get_the_title() ); ?>" loading="lazy" />
+								<?php endif; ?>
+							</div>
+						</a>
+					</article>
 				<?php endwhile; ?>
 			</div>
 
-			<div style="text-align:center;margin-top:48px;">
+			<div class="blog-gwc__pagination">
 				<?php the_posts_pagination( array(
 					'mid_size'  => 1,
 					'prev_text' => __( '← Précédent', 'waicam' ),
 					'next_text' => __( 'Suivant →', 'waicam' ),
 				) ); ?>
 			</div>
-
 		<?php else : ?>
-			<p style="text-align:center;color:var(--gray);"><?php esc_html_e( 'Aucun contenu pour le moment.', 'waicam' ); ?></p>
+			<p class="blog-gwc__empty"><?php esc_html_e( 'Aucun article publié pour le moment.', 'waicam' ); ?></p>
 		<?php endif; ?>
 	</div>
 </section>
