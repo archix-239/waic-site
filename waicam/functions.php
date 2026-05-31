@@ -1295,6 +1295,10 @@ function waicam_customize_register( $wp_customize ) {
 		'waicam_don_option_3_title'    => array( __( 'Carte impact 3 — Titre', 'waicam' ), 'Accélérer l’impact', 'text' ),
 		'waicam_don_option_3_text'     => array( __( 'Carte impact 3 — Texte', 'waicam' ), 'Contribuez au déploiement de programmes inclusifs dans les communautés et les régions du Cameroun.', 'textarea' ),
 		'waicam_don_option_3_amount'   => array( __( 'Carte impact 3 — Montant XAF', 'waicam' ), '50000', 'number' ),
+		'waicam_don_option_4_title'    => array( __( 'Carte impact 4 — Titre', 'waicam' ), 'Partenaire grand impact', 'text' ),
+		'waicam_don_option_4_text'     => array( __( 'Carte impact 4 — Texte', 'waicam' ), 'Soutenez durablement les programmes, les antennes et les actions nationales de Women in AI Cameroon.', 'textarea' ),
+		'waicam_don_option_4_amount'   => array( __( 'Carte impact 4 — Montant XAF', 'waicam' ), '1000000', 'number' ),
+		'waicam_don_faq_title'         => array( __( 'FAQ — Titre', 'waicam' ), 'Questions fréquentes', 'text' ),
 	);
 	foreach ( $don_fields as $key => $cfg ) {
 		$sanitize_callback = 'sanitize_text_field';
@@ -1314,7 +1318,7 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
-	for ( $i = 1; $i <= 3; $i++ ) {
+	for ( $i = 1; $i <= 4; $i++ ) {
 		$wp_customize->add_setting( "waicam_don_option_{$i}_image_id", array(
 			'default'           => 0,
 			'sanitize_callback' => 'absint',
@@ -1324,6 +1328,27 @@ function waicam_customize_register( $wp_customize ) {
 			'section'   => 'waicam_don_page',
 			'mime_type' => 'image',
 		) ) );
+	}
+
+	for ( $i = 1; $i <= 4; $i++ ) {
+		$wp_customize->add_setting( "waicam_don_faq_{$i}_question", array(
+			'default'           => '',
+			'sanitize_callback' => 'sanitize_text_field',
+		) );
+		$wp_customize->add_control( "waicam_don_faq_{$i}_question", array(
+			'label'   => sprintf( __( 'FAQ %d — Question', 'waicam' ), $i ),
+			'section' => 'waicam_don_page',
+			'type'    => 'text',
+		) );
+		$wp_customize->add_setting( "waicam_don_faq_{$i}_answer", array(
+			'default'           => '',
+			'sanitize_callback' => 'sanitize_textarea_field',
+		) );
+		$wp_customize->add_control( "waicam_don_faq_{$i}_answer", array(
+			'label'   => sprintf( __( 'FAQ %d — Réponse', 'waicam' ), $i ),
+			'section' => 'waicam_don_page',
+			'type'    => 'textarea',
+		) );
 	}
 
 	}

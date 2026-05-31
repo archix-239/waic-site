@@ -40,6 +40,11 @@ $don_option_defaults = array(
 		'text'   => __( 'Contribuez au déploiement de programmes inclusifs dans les communautés et les régions du Cameroun.', 'waicam' ),
 		'amount' => 50000,
 	),
+	4 => array(
+		'title'  => __( 'Partenaire grand impact', 'waicam' ),
+		'text'   => __( 'Soutenez durablement les programmes, les antennes et les actions nationales de Women in AI Cameroon.', 'waicam' ),
+		'amount' => 1000000,
+	),
 );
 $don_option_cards = array();
 foreach ( $don_option_defaults as $index => $defaults ) {
@@ -48,6 +53,33 @@ foreach ( $don_option_defaults as $index => $defaults ) {
 		'text'     => get_theme_mod( "waicam_don_option_{$index}_text", $defaults['text'] ),
 		'amount'   => (int) get_theme_mod( "waicam_don_option_{$index}_amount", $defaults['amount'] ),
 		'image_id' => (int) get_theme_mod( "waicam_don_option_{$index}_image_id", 0 ),
+	);
+}
+
+$don_faq_title = get_theme_mod( 'waicam_don_faq_title', __( 'Questions fréquentes', 'waicam' ) );
+$don_faq_defaults = array(
+	1 => array(
+		'question' => __( 'À quoi sert mon don à WAI-CAM ?', 'waicam' ),
+		'answer'   => __( 'Votre don contribue aux formations, ateliers, actions communautaires, ressources pédagogiques et programmes de mentorat portés par Women in AI Cameroon.', 'waicam' ),
+	),
+	2 => array(
+		'question' => __( 'Puis-je faire un don mensuel ?', 'waicam' ),
+		'answer'   => __( 'Oui. Nous encourageons les dons mensuels, car ils permettent de planifier les actions terrain et d’accompagner les bénéficiaires sur la durée.', 'waicam' ),
+	),
+	3 => array(
+		'question' => __( 'Une entreprise peut-elle soutenir WAI-CAM ?', 'waicam' ),
+		'answer'   => __( 'Oui. Les organisations peuvent soutenir WAI-CAM par un don, un partenariat stratégique, un appui en nature ou un accompagnement de programmes.', 'waicam' ),
+	),
+	4 => array(
+		'question' => __( 'Comment obtenir un reçu ou une information fiscale ?', 'waicam' ),
+		'answer'   => __( 'Après validation du paiement, l’équipe peut transmettre un reçu et les informations disponibles relatives aux dispositions fiscales applicables.', 'waicam' ),
+	),
+);
+$don_faq_items = array();
+foreach ( $don_faq_defaults as $index => $defaults ) {
+	$don_faq_items[] = array(
+		'question' => get_theme_mod( "waicam_don_faq_{$index}_question", $defaults['question'] ),
+		'answer'   => get_theme_mod( "waicam_don_faq_{$index}_answer", $defaults['answer'] ),
 	);
 }
 ?>
@@ -217,72 +249,23 @@ foreach ( $don_option_defaults as $index => $defaults ) {
 </section>
 
 <!-- ============================================
-     TRANSPARENCE
+     FAQ DON
      ============================================ -->
-<section class="don-trust">
-	<div class="don-trust-inner">
-		<div class="don-trust-icon"><i class="fa-solid fa-shield-heart"></i></div>
-		<h3><?php esc_html_e( 'Transparence et impact mesurable', 'waicam' ); ?></h3>
-		<p><?php esc_html_e( "Women in AI Cameroon publie chaque année un rapport détaillé sur l'utilisation des fonds reçus. Vous pouvez suivre l'impact concret de votre don à travers nos publications, nos évènements et nos programmes.", 'waicam' ); ?></p>
-		<div class="don-trust-stats">
-			<div>
-				<strong>100 %</strong>
-				<span><?php esc_html_e( 'des fonds vont à l\'action terrain', 'waicam' ); ?></span>
-			</div>
-			<div>
-				<strong>4</strong>
-				<span><?php esc_html_e( 'programmes phares financés', 'waicam' ); ?></span>
-			</div>
-			<div>
-				<strong>10</strong>
-				<span><?php esc_html_e( 'régions du Cameroun couvertes', 'waicam' ); ?></span>
-			</div>
-		</div>
-		<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn-outline">
-			<?php esc_html_e( 'Demander un rapport détaillé', 'waicam' ); ?>
-		</a>
-	</div>
-</section>
-
-<!-- ============================================
-     AUTRES MOYENS DE SOUTIEN
-     ============================================ -->
-<section class="don-other-ways">
-	<div class="section-header">
-		<div class="section-tag"><?php esc_html_e( 'Autres moyens de soutenir', 'waicam' ); ?></div>
-		<h2 class="section-title"><?php echo wp_kses_post( __( 'Vous pouvez aussi <span>nous aider</span> autrement', 'waicam' ) ); ?></h2>
-	</div>
-
-	<div class="don-other-grid">
-		<div class="don-other-card">
-			<div class="don-other-icon"><i class="fa-solid fa-handshake"></i></div>
-			<h3><?php esc_html_e( 'Devenir partenaire', 'waicam' ); ?></h3>
-			<p><?php esc_html_e( "Votre organisation peut nous accompagner via un partenariat stratégique, financier ou en nature.", 'waicam' ); ?></p>
-			<a href="<?php echo esc_url( home_url( '/partenaires' ) ); ?>" class="btn-outline btn-sm"><?php esc_html_e( 'En savoir plus', 'waicam' ); ?></a>
-		</div>
-		<div class="don-other-card">
-			<div class="don-other-icon"><i class="fa-solid fa-user-plus"></i></div>
-			<h3><?php esc_html_e( 'Rejoindre comme bénévole', 'waicam' ); ?></h3>
-			<p><?php esc_html_e( "Donnez de votre temps et de vos compétences pour porter le mouvement sur le terrain.", 'waicam' ); ?></p>
-			<a href="<?php echo esc_url( home_url( '/rejoindre' ) ); ?>" class="btn-outline btn-sm"><?php esc_html_e( 'Rejoindre', 'waicam' ); ?></a>
-		</div>
-		<div class="don-other-card">
-			<div class="don-other-icon"><i class="fa-solid fa-share-nodes"></i></div>
-			<h3><?php esc_html_e( 'Faire connaître WAI-CAM', 'waicam' ); ?></h3>
-			<p><?php esc_html_e( "Partagez nos publications, parlez de nous autour de vous, suivez-nous sur les réseaux sociaux.", 'waicam' ); ?></p>
-			<div class="don-other-socials">
-				<?php
-				$socials = array(
-					'facebook'  => array( get_theme_mod( 'waicam_social_facebook',  '#' ), '<i class="fa-brands fa-facebook-f"></i>' ),
-					'twitter'   => array( get_theme_mod( 'waicam_social_twitter',   '#' ), '<i class="fa-brands fa-x-twitter"></i>' ),
-					'linkedin'  => array( get_theme_mod( 'waicam_social_linkedin',  '#' ), '<i class="fa-brands fa-linkedin-in"></i>' ),
-					'instagram' => array( get_theme_mod( 'waicam_social_instagram', '#' ), '<i class="fa-brands fa-instagram"></i>' ),
-				);
-				foreach ( $socials as $key => $s ) :
-				?>
-					<a href="<?php echo esc_url( $s[0] ); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr( ucfirst( $key ) ); ?>"><?php echo wp_kses_post( $s[1] ); ?></a>
-				<?php endforeach; ?>
-			</div>
+<section class="don-gwc-faq">
+	<div class="don-gwc-faq__panel">
+		<h2><?php echo esc_html( $don_faq_title ); ?></h2>
+		<div class="don-gwc-faq__items">
+			<?php foreach ( $don_faq_items as $index => $item ) : ?>
+				<details class="don-gwc-faq__item" <?php echo 0 === $index ? 'open' : ''; ?>>
+					<summary>
+						<span><?php echo esc_html( $item['question'] ); ?></span>
+						<i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+					</summary>
+					<div class="don-gwc-faq__answer">
+						<p><?php echo esc_html( $item['answer'] ); ?></p>
+					</div>
+				</details>
+			<?php endforeach; ?>
 		</div>
 	</div>
 </section>
