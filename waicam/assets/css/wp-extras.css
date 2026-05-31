@@ -5576,6 +5576,8 @@ footer ul li {
 	stroke: currentColor;
 	stroke-width: 3;
 	stroke-linecap: round;
+	stroke-dasharray: 1800;
+	stroke-dashoffset: 1800;
 }
 .join-gwc-campaign__inner {
 	display: grid;
@@ -5650,18 +5652,18 @@ footer ul li {
 
 .join-gwc-bigstat {
 	background: #fff;
-	padding: clamp(82px, 8vw, 128px) 5% clamp(76px, 8vw, 120px);
+	padding: clamp(56px, 6vw, 92px) 5% clamp(52px, 6vw, 86px);
 }
 .join-gwc-bigstat__inner {
 	width: min(1180px, 74vw);
 	margin: 0 auto;
 }
 .join-gwc-bigstat h2 {
-	margin: 0 0 clamp(56px, 6vw, 92px);
+	margin: 0 0 clamp(42px, 4.8vw, 72px);
 	color: #1E1B4B;
 	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 	font-weight: 400;
-	font-size: clamp(4.2rem, 7.05vw, 9rem);
+	font-size: clamp(3.8rem, 6.45vw, 8rem);
 	line-height: .98;
 	letter-spacing: .02em;
 }
@@ -5720,7 +5722,8 @@ footer ul li {
 	.join-gwc-campaign__content h2 { font-size: clamp(2.15rem, 13vw, 3.4rem); }
 	.join-gwc-bigstat { padding-inline: 6%; }
 	.join-gwc-bigstat__inner { width: 100%; }
-	.join-gwc-bigstat h2 { font-size: clamp(3.1rem, 16vw, 5.2rem); }
+	.join-gwc-bigstat h2 { font-size: clamp(2.75rem, 14vw, 4.8rem); }
+	.join-gwc-form-section__media { min-height: clamp(320px, 68vw, 520px); }
 }
 
 /* ─── Rejoindre — contribution pillars and Fluent Forms styling ─────────── */
@@ -5753,6 +5756,8 @@ footer ul li {
 	stroke: #0E6A2E;
 	stroke-width: 4;
 	stroke-linecap: round;
+	stroke-dasharray: 380;
+	stroke-dashoffset: 380;
 }
 .join-gwc-pillars__grid {
 	display: grid;
@@ -5827,10 +5832,11 @@ footer ul li {
 	display: grid;
 	grid-template-columns: minmax(0, .95fr) minmax(360px, 1fr);
 	gap: clamp(28px, 5vw, 60px);
-	align-items: start;
+	align-items: stretch;
 }
 .join-gwc-form-section__media {
-	min-height: clamp(360px, 44vw, 640px);
+	height: 100%;
+	min-height: clamp(440px, 46vw, 720px);
 	background: #fff;
 	display: flex;
 	align-items: stretch;
