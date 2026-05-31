@@ -325,8 +325,9 @@
 	padding: 24px 0 40px;
 }
 .home-video-inner {
-	max-width: 1340px;
-	margin: 0 auto;
+	width: 100%;
+	max-width: none;
+	margin: 0;
 }
 .home-video-head {
 	max-width: 1100px;
@@ -344,6 +345,8 @@
 }
 .home-video-frame-wrap {
 	width: 100%;
+	max-width: none;
+	margin: 0;
 }
 .home-video-embed {
 	position: relative;
@@ -5528,9 +5531,10 @@ footer ul li {
 
 .join-gwc-image { background: #fff; }
 .join-gwc-image__media {
-	max-width: 1360px;
+	width: 100%;
+	max-width: none;
 	height: clamp(360px, 62vw, 760px);
-	margin: 0 auto;
+	margin: 0;
 	background-size: cover;
 	background-position: center;
 }
