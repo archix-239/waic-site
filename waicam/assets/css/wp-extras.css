@@ -6344,9 +6344,11 @@ footer ul li {
    BLOG — Grille articles type GWC
    ========================================================= */
 .blog-gwc {
-	--blog-card-bg: rgba(14, 106, 46, .16);
+	--blog-navy: #00314A;
+	--blog-teal: #41D6C3;
+	--blog-card-bg: #D5F7F1;
 	background: #fff;
-	padding: clamp(78px, 9vw, 118px) 0 clamp(88px, 10vw, 150px);
+	padding: clamp(96px, 10vw, 146px) 0 clamp(88px, 10vw, 150px);
 }
 .blog-gwc__inner {
 	width: min(1668px, 88%);
@@ -6359,9 +6361,9 @@ footer ul li {
 	min-width: 254px;
 	min-height: 54px;
 	padding: 0 32px;
-	background: #0E6A2E;
-	color: #fff;
-	font-family: "IBM Plex Mono", monospace;
+	background: var(--blog-teal);
+	color: var(--blog-navy);
+	font-family: "Courier New", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 	font-size: clamp(1rem, 1.2vw, 1.32rem);
 	font-weight: 800;
 	letter-spacing: .045em;
@@ -6370,7 +6372,7 @@ footer ul li {
 .blog-gwc h1 {
 	margin: 24px 0 0;
 	max-width: 880px;
-	color: #00314A;
+	color: var(--blog-navy);
 	font-size: clamp(3.4rem, 5vw, 5.95rem);
 	font-weight: 900;
 	line-height: .9;
@@ -6385,7 +6387,7 @@ footer ul li {
 }
 .blog-gwc__wave path {
 	fill: none;
-	stroke: #0E6A2E;
+	stroke: var(--blog-teal);
 	stroke-width: 2.8;
 	stroke-linecap: round;
 	stroke-dasharray: 330;
@@ -6425,8 +6427,8 @@ footer ul li {
 	position: relative;
 	z-index: 2;
 	margin: 0;
-	color: #00314A;
-	font-family: "IBM Plex Mono", monospace;
+	color: var(--blog-navy);
+	font-family: "Courier New", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 	font-size: clamp(1.45rem, 1.62vw, 2rem);
 	font-weight: 500;
 	line-height: 1.22;
@@ -6451,6 +6453,7 @@ footer ul li {
 	overflow: hidden;
 	background: var(--blog-card-bg);
 }
+.blog-gwc-card__image,
 .blog-gwc-card__media.has-image img {
 	display: block;
 	width: 100%;

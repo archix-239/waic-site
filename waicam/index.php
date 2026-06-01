@@ -22,8 +22,8 @@ $blog_title  = get_theme_mod( 'waicam_blog_title', __( 'Keep up with us', 'waica
 		<?php if ( have_posts() ) : ?>
 			<div class="blog-gwc__grid">
 				<?php while ( have_posts() ) : the_post();
-					$thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
-					$thumb_alt = get_post_meta( get_post_thumbnail_id( get_the_ID() ), '_wp_attachment_image_alt', true );
+					$thumb_id  = get_post_thumbnail_id( get_the_ID() );
+					$thumb_alt = $thumb_id ? get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) : '';
 				?>
 					<article class="blog-gwc-card">
 						<a href="<?php the_permalink(); ?>" class="blog-gwc-card__link" aria-label="<?php echo esc_attr( sprintf( __( 'Lire : %s', 'waicam' ), get_the_title() ) ); ?>">
@@ -33,10 +33,21 @@ $blog_title  = get_theme_mod( 'waicam_blog_title', __( 'Keep up with us', 'waica
 									<path d="M0 0 C95 0 132 36 260 36 C388 36 445 0 540 0 V92 H0 Z" />
 								</svg>
 							</div>
-							<div class="blog-gwc-card__media<?php echo $thumb_url ? ' has-image' : ''; ?>">
-								<?php if ( $thumb_url ) : ?>
-									<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( $thumb_alt ?: get_the_title() ); ?>" loading="lazy" />
-								<?php endif; ?>
+							<div class="blog-gwc-card__media has-image">
+								<?php
+								if ( has_post_thumbnail() ) {
+									the_post_thumbnail( 'large', array(
+										'class'    => 'blog-gwc-card__image',
+										'alt'      => $thumb_alt ?: get_the_title(),
+										'loading'  => 'lazy',
+										'decoding' => 'async',
+									) );
+								} else {
+									?>
+									<img class="blog-gwc-card__image" src="<?php echo esc_url( waicam_img( 'training-1.jpg' ) ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy" decoding="async" />
+									<?php
+								}
+								?>
 							</div>
 						</a>
 					</article>
