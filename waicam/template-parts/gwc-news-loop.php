@@ -5,8 +5,8 @@
  * @package WAICAM
  */
 
-$gwc_news_label = get_theme_mod( 'waicam_blog_kicker', __( 'News and Blog', 'waicam' ) );
-$gwc_news_title = get_theme_mod( 'waicam_blog_title', __( 'Keep up with us', 'waicam' ) );
+$gwc_news_label = get_theme_mod( 'waicam_blog_kicker', __( 'Actualités & Blog', 'waicam' ) );
+$gwc_news_title = get_theme_mod( 'waicam_blog_title', __( 'Suivez nos actions', 'waicam' ) );
 $gwc_news_query = new WP_Query( array(
 	'post_type'           => 'post',
 	'post_status'         => 'publish',

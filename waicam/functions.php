@@ -98,13 +98,6 @@ function waicam_enqueue_assets() {
 	);
 
 	if ( is_home() || is_page_template( 'page-news.php' ) ) {
-		wp_enqueue_style(
-			'waicam-gwc-news-fonts',
-			'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500;700&display=swap',
-			array(),
-			null
-		);
-
 		wp_enqueue_script(
 			'waicam-gwc-news',
 			WAICAM_URI . '/assets/js/gwc-news.js',
@@ -141,7 +134,12 @@ function waicam_gwc_render_news_item( $post_id = 0 ) {
 	?>
 	<li class="gwc-news-item">
 		<a class="gwc-news-card" href="<?php echo esc_url( $permalink ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Lire : %s', 'waicam' ), $title ) ); ?>">
-			<div class="gwc-news-item-title" title="<?php echo esc_attr( $title ); ?>"><?php echo esc_html( $display_title ); ?></div>
+			<div class="gwc-news-item-title" title="<?php echo esc_attr( $title ); ?>">
+				<?php echo esc_html( $display_title ); ?>
+				<svg class="gwc-news-card-wave" viewBox="0 0 420 70" preserveAspectRatio="none" role="presentation" aria-hidden="true" focusable="false">
+					<path d="M0 0 C70 0 92 34 164 34 C236 34 260 0 420 0 V70 H0 Z" />
+				</svg>
+			</div>
 			<div class="gwc-news-item-image<?php echo $thumb_id ? ' has-image' : ''; ?>">
 				<?php if ( $thumb_id ) : ?>
 					<picture><?php echo wp_get_attachment_image( $thumb_id, 'large', false, array( 'alt' => $thumb_alt ?: $title, 'loading' => 'lazy' ) ); ?></picture>
@@ -368,8 +366,8 @@ function waicam_customize_register( $wp_customize ) {
 		'panel'       => 'waicam_panel',
 	) );
 	$blog_fields = array(
-		'waicam_blog_kicker' => array( __( 'Label', 'waicam' ), __( 'News and Blog', 'waicam' ) ),
-		'waicam_blog_title'  => array( __( 'Titre principal', 'waicam' ), __( 'Keep up with us', 'waicam' ) ),
+		'waicam_blog_kicker' => array( __( 'Label', 'waicam' ), __( 'Actualités & Blog', 'waicam' ) ),
+		'waicam_blog_title'  => array( __( 'Titre principal', 'waicam' ), __( 'Suivez nos actions', 'waicam' ) ),
 	);
 	foreach ( $blog_fields as $key => $cfg ) {
 		$wp_customize->add_setting( $key, array(
