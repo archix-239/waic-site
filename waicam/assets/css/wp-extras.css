@@ -6426,8 +6426,8 @@ footer ul li {
 .gwc-news-item:nth-child(3n) { --waicam-card-bg: var(--waicam-news-bg-red); }
 .gwc-news-card {
   display: grid;
-  grid-template-rows: 112px 248px;
-  min-height: 360px;
+  grid-template-rows: 118px 272px;
+  min-height: 390px;
   color: inherit;
   text-decoration: none;
   background: transparent;
@@ -6439,6 +6439,8 @@ footer ul li {
   display: flex;
   align-items: flex-start;
   padding: 24px 24px 16px;
+  background: var(--waicam-card-bg);
+  overflow: visible;
   color: var(--waicam-news-blue);
   font-family: "Inter", "Poppins", Arial, sans-serif;
   font-size: clamp(15px, 1.2vw, 18px);
@@ -6446,14 +6448,18 @@ footer ul li {
   line-height: 1.3;
   letter-spacing: .01em;
 }
+.gwc-news-title-text {
+  position: relative;
+  z-index: 2;
+}
 .gwc-news-card-wave {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -68px;
-  z-index: -1;
+  bottom: -81px;
+  z-index: 1;
   width: 100%;
-  height: 70px;
+  height: 82px;
   display: block;
   pointer-events: none;
 }
@@ -6469,13 +6475,13 @@ footer ul li {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 248px;
+  min-height: 272px;
 }
 .gwc-news-item-image img {
   object-fit: cover;
-  object-position: center center;
+  object-position: center top;
   transform: scale(1);
-  transform-origin: 50% 50%;
+  transform-origin: 50% 0;
   transition: transform .65s cubic-bezier(.22, .61, .36, 1), filter .65s cubic-bezier(.22, .61, .36, 1);
 }
 .gwc-news-image-placeholder {
@@ -6548,9 +6554,9 @@ footer ul li {
   .gwc-news-landing { width: min(92vw, 560px); padding-top: 48px; }
   .gwc-news-label { width: 100%; }
   .gwc-news-heading { font-size: 36px; }
-  .gwc-news-card { grid-template-rows: 112px 250px; min-height: 362px; }
+  .gwc-news-card { grid-template-rows: 118px 280px; min-height: 398px; }
   .gwc-news-item-title { padding: 22px 20px 14px; font-size: 15px; }
   .gwc-news-item-image picture,
   .gwc-news-item-image img,
-  .gwc-news-image-placeholder { min-height: 250px; }
+  .gwc-news-image-placeholder { min-height: 280px; }
 }
