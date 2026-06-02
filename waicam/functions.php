@@ -96,8 +96,87 @@ function waicam_enqueue_assets() {
 		WAICAM_VERSION,
 		true
 	);
+
+	if ( is_home() || is_page_template( 'page-templates/template-news.php' ) ) {
+		wp_enqueue_script(
+			'waicam-news-load-more',
+			WAICAM_URI . '/assets/js/news-load-more.js',
+			array( 'jquery' ),
+			WAICAM_VERSION,
+			true
+		);
+		wp_localize_script( 'waicam-news-load-more', 'waicamNews', array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'nonce'    => wp_create_nonce( 'waicam_news_load_more' ),
+			'labels'   => array(
+				'load_more' => __( 'Load More', 'waicam' ),
+				'loading'   => __( 'Loading…', 'waicam' ),
+				'no_more'   => __( 'No more posts', 'waicam' ),
+				'error'     => __( 'Error', 'waicam' ),
+			),
+		) );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'waicam_enqueue_assets' );
+
+/**
+ * Render one news/blog card. Shared by the Blog page and AJAX callback.
+ */
+function waicam_render_news_card( $post_id = 0 ) {
+	$post_id       = $post_id ? absint( $post_id ) : get_the_ID();
+	$title         = get_the_title( $post_id );
+	$display_title = wp_html_excerpt( $title, 86, '…' );
+	$permalink     = get_permalink( $post_id );
+	$thumb_url     = get_the_post_thumbnail_url( $post_id, 'large' );
+	$thumb_alt     = get_post_meta( get_post_thumbnail_id( $post_id ), '_wp_attachment_image_alt', true );
+	?>
+	<article class="post-card">
+		<h3 class="post-title">
+			<a href="<?php echo esc_url( $permalink ); ?>" title="<?php echo esc_attr( $title ); ?>"><?php echo esc_html( $display_title ); ?></a>
+		</h3>
+		<a href="<?php echo esc_url( $permalink ); ?>" class="post-image-link<?php echo $thumb_url ? ' has-image' : ''; ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Lire : %s', 'waicam' ), $title ) ); ?>">
+			<?php if ( $thumb_url ) : ?>
+				<span class="post-image" style="background-image: url('<?php echo esc_url( $thumb_url ); ?>');" role="img" aria-label="<?php echo esc_attr( $thumb_alt ?: $title ); ?>"></span>
+			<?php else : ?>
+				<span class="post-image post-image--placeholder" aria-hidden="true"></span>
+			<?php endif; ?>
+		</a>
+		<a href="<?php echo esc_url( $permalink ); ?>" class="post-link"><?php esc_html_e( 'Read more', 'waicam' ); ?></a>
+	</article>
+	<?php
+}
+
+/**
+ * AJAX callback: load more posts for Blog/News grid.
+ */
+function waicam_load_more_posts_callback() {
+	check_ajax_referer( 'waicam_news_load_more', 'nonce' );
+
+	$paged = isset( $_POST['paged'] ) ? max( 1, absint( $_POST['paged'] ) ) : 2;
+	$query = new WP_Query( array(
+		'post_type'           => 'post',
+		'post_status'         => 'publish',
+		'posts_per_page'      => 9,
+		'paged'               => $paged,
+		'ignore_sticky_posts' => true,
+	) );
+
+	ob_start();
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			waicam_render_news_card();
+		}
+	}
+	wp_reset_postdata();
+
+	wp_send_json_success( array(
+		'html'     => ob_get_clean(),
+		'has_more' => $paged < (int) $query->max_num_pages,
+	) );
+}
+add_action( 'wp_ajax_load_more_posts', 'waicam_load_more_posts_callback' );
+add_action( 'wp_ajax_nopriv_load_more_posts', 'waicam_load_more_posts_callback' );
 
 /**
  * Custom Post Types & Custom Fields

@@ -1,6 +1,6 @@
 <?php
 /**
- * Page des articles WordPress — Blog / Actualités.
+ * Template Name: News / Blog
  *
  * @package WAICAM
  */
