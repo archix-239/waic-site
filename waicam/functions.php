@@ -97,8 +97,94 @@ function waicam_enqueue_assets() {
 		true
 	);
 
+	if ( is_home() || is_page_template( 'page-news.php' ) ) {
+		wp_enqueue_style(
+			'waicam-gwc-news-fonts',
+			'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500;700&display=swap',
+			array(),
+			null
+		);
+
+		wp_enqueue_script(
+			'waicam-gwc-news',
+			WAICAM_URI . '/assets/js/gwc-news.js',
+			array( 'jquery' ),
+			WAICAM_VERSION,
+			true
+		);
+
+		wp_localize_script( 'waicam-gwc-news', 'gwcNewsVars', array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'nonce'    => wp_create_nonce( 'gwc_load_more_posts' ),
+			'labels'   => array(
+				'load_more' => __( 'Load More', 'waicam' ),
+				'loading'   => __( 'Loading…', 'waicam' ),
+				'no_more'   => __( 'No more posts', 'waicam' ),
+				'error'     => __( 'Error', 'waicam' ),
+			),
+		) );
+	}
+
 }
 add_action( 'wp_enqueue_scripts', 'waicam_enqueue_assets' );
+
+/**
+ * Render one article card for the GWC-style News grid.
+ */
+function waicam_gwc_render_news_item( $post_id = 0 ) {
+	$post_id       = $post_id ? absint( $post_id ) : get_the_ID();
+	$title         = get_the_title( $post_id );
+	$display_title = wp_html_excerpt( $title, 92, '…' );
+	$permalink     = get_permalink( $post_id );
+	$thumb_id      = get_post_thumbnail_id( $post_id );
+	$thumb_alt     = $thumb_id ? get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) : '';
+	?>
+	<li class="gwc-news-item">
+		<a class="gwc-news-card" href="<?php echo esc_url( $permalink ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Lire : %s', 'waicam' ), $title ) ); ?>">
+			<div class="gwc-news-item-title" title="<?php echo esc_attr( $title ); ?>"><?php echo esc_html( $display_title ); ?></div>
+			<div class="gwc-news-item-image<?php echo $thumb_id ? ' has-image' : ''; ?>">
+				<?php if ( $thumb_id ) : ?>
+					<picture><?php echo wp_get_attachment_image( $thumb_id, 'large', false, array( 'alt' => $thumb_alt ?: $title, 'loading' => 'lazy' ) ); ?></picture>
+				<?php else : ?>
+					<span class="gwc-news-image-placeholder" aria-hidden="true"></span>
+				<?php endif; ?>
+			</div>
+		</a>
+	</li>
+	<?php
+}
+
+/**
+ * AJAX callback for the GWC-style Load More button.
+ */
+function waicam_gwc_load_more_posts_callback() {
+	check_ajax_referer( 'gwc_load_more_posts', 'nonce' );
+
+	$paged = isset( $_POST['paged'] ) ? max( 1, absint( $_POST['paged'] ) ) : 2;
+	$query = new WP_Query( array(
+		'post_type'           => 'post',
+		'post_status'         => 'publish',
+		'posts_per_page'      => 9,
+		'paged'               => $paged,
+		'ignore_sticky_posts' => true,
+	) );
+
+	ob_start();
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			waicam_gwc_render_news_item();
+		}
+	}
+	wp_reset_postdata();
+
+	wp_send_json_success( array(
+		'html'     => ob_get_clean(),
+		'has_more' => $paged < (int) $query->max_num_pages,
+	) );
+}
+add_action( 'wp_ajax_gwc_load_more_posts', 'waicam_gwc_load_more_posts_callback' );
+add_action( 'wp_ajax_nopriv_gwc_load_more_posts', 'waicam_gwc_load_more_posts_callback' );
 
 /**
  * Custom Post Types & Custom Fields
@@ -274,6 +360,28 @@ function waicam_customize_register( $wp_customize ) {
 		'title'    => __( 'WAI-CAM — À propos', 'waicam' ),
 		'priority' => 32,
 	) );
+
+	// ────────── Page News / Blog ──────────
+	$wp_customize->add_section( 'waicam_blog_page', array(
+		'title'       => __( 'Blog — Page News', 'waicam' ),
+		'description' => __( 'Textes du haut de la page News / Blog.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$blog_fields = array(
+		'waicam_blog_kicker' => array( __( 'Label', 'waicam' ), __( 'News and Blog', 'waicam' ) ),
+		'waicam_blog_title'  => array( __( 'Titre principal', 'waicam' ), __( 'Keep up with us', 'waicam' ) ),
+	);
+	foreach ( $blog_fields as $key => $cfg ) {
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => 'sanitize_text_field',
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_blog_page',
+			'type'    => 'text',
+		) );
+	}
 
 	// ────────── Section Formulaires (IDs Fluent Forms) ──────────
 	$wp_customize->add_section( 'waicam_forms', array(
