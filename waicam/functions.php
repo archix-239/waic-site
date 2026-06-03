@@ -133,6 +133,46 @@ function waicam_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'waicam_enqueue_assets' );
 
 /**
+ * Remove the first duplicated featured image from post content.
+ *
+ * WordPress editors sometimes insert the same image at the beginning of the
+ * article body even when it is already configured as the featured image. The
+ * single article template renders the featured image as a designed visual card,
+ * so this helper prevents the same media from being displayed twice.
+ *
+ * @param string $content       Filtered post content.
+ * @param int    $attachment_id Featured image attachment ID.
+ * @return string
+ */
+function waicam_remove_duplicate_featured_image_from_content( $content, $attachment_id ) {
+	$attachment_id = absint( $attachment_id );
+
+	if ( ! $content || ! $attachment_id ) {
+		return $content;
+	}
+
+	$attachment_class = 'wp-image-' . $attachment_id;
+	if ( false === strpos( $content, $attachment_class ) ) {
+		return $content;
+	}
+
+	$patterns = array(
+		'/<figure\b[^>]*>\s*(?:<a\b[^>]*>)?\s*<img\b[^>]*' . preg_quote( $attachment_class, '/' ) . '[^>]*>\s*(?:<\/a>)?\s*(?:<figcaption\b[^>]*>.*?<\/figcaption>)?\s*<\/figure>/is',
+		'/<p\b[^>]*>\s*(?:<a\b[^>]*>)?\s*<img\b[^>]*' . preg_quote( $attachment_class, '/' ) . '[^>]*>\s*(?:<\/a>)?\s*<\/p>/is',
+		'/(?:<a\b[^>]*>)?\s*<img\b[^>]*' . preg_quote( $attachment_class, '/' ) . '[^>]*>\s*(?:<\/a>)?/is',
+	);
+
+	foreach ( $patterns as $pattern ) {
+		$updated_content = preg_replace( $pattern, '', $content, 1 );
+		if ( null !== $updated_content && $updated_content !== $content ) {
+			return $updated_content;
+		}
+	}
+
+	return $content;
+}
+
+/**
  * Render one article card for the GWC-style News grid.
  */
 function waicam_gwc_render_news_item( $post_id = 0 ) {

@@ -22,25 +22,27 @@ get_header();
 			<div class="gwc-article-header__inner">
 				<h1 class="gwc-article-heading"><?php the_title(); ?></h1>
 			</div>
-			<svg class="gwc-article-header-wave" viewBox="0 0 1000 120" preserveAspectRatio="none" role="presentation" aria-hidden="true" focusable="false">
-				<path d="M0 0 H1000 V78 C780 78 680 116 506 116 C318 116 212 78 0 78 Z" />
-			</svg>
 		</header>
 
 		<?php if ( $featured_id ) : ?>
 			<figure class="gwc-article-featured">
 				<div class="gwc-article-featured__media">
+					<span class="gwc-article-featured__brand" aria-hidden="true"><?php esc_html_e( 'WAI-CAM', 'waicam' ); ?></span>
 					<?php echo wp_get_attachment_image( $featured_id, 'large', false, array( 'alt' => $featured_alt ?: get_the_title(), 'loading' => 'eager' ) ); ?>
+					<figcaption class="gwc-article-featured__caption">
+						<?php echo esc_html( $featured_alt ?: get_the_title() ); ?>
+					</figcaption>
 				</div>
-				<?php if ( $featured_alt ) : ?>
-					<figcaption><?php echo esc_html( $featured_alt ); ?></figcaption>
-				<?php endif; ?>
 			</figure>
 		<?php endif; ?>
 
 		<div class="gwc-article-body">
 			<?php
-			the_content();
+			$article_content = apply_filters( 'the_content', get_the_content() );
+			if ( $featured_id && function_exists( 'waicam_remove_duplicate_featured_image_from_content' ) ) {
+				$article_content = waicam_remove_duplicate_featured_image_from_content( $article_content, $featured_id );
+			}
+			echo $article_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- The content has already passed through the_content filters.
 
 			wp_link_pages( array(
 				'before' => '<div class="post-pages">' . esc_html__( 'Pages :', 'waicam' ),
