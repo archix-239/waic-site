@@ -6756,11 +6756,20 @@ footer ul li {
   text-align: center;
 }
 .gwc-more-articles {
+  --waicam-news-bg: rgba(14, 106, 46, .10);
+  --waicam-news-bg-blue: rgba(30, 27, 75, .08);
+  --waicam-news-bg-red: rgba(228, 29, 68, .08);
+  --waicam-news-blue: #1E1B4B;
+  --waicam-news-red: #E41D44;
+  --waicam-news-green: #0E6A2E;
+  --waicam-news-text: #111111;
   padding: clamp(70px, 9vw, 124px) 0 clamp(86px, 10vw, 140px);
   background: #fff;
+  color: var(--waicam-news-text);
+  font-family: "Inter", "Poppins", Arial, sans-serif;
 }
 .gwc-more-articles__inner {
-  width: min(1680px, 88vw);
+  width: min(1180px, 88vw);
   margin: 0 auto;
 }
 .gwc-more-articles__title {
