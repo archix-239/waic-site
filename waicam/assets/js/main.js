@@ -188,6 +188,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.counter-num').forEach(el => counterObserver.observe(el));
 
+
+  /* ---------- Wave line replay on visibility ---------- */
+  const waveReplaySelector = '.home-posthero-wave, .home-impact-wave, .home-newsletter-gwc__wave-divider, .home-bigstat-gwc__wave-divider, .home-news-grid-gwc__title-wave, .about-intro-gwc__wave, .about-gap-gwc__wave, .about-change-gwc__wave, .about-values-gwc__wave, .about-reports-gwc__wave, .team-spotlight-gwc__wave, .team-group-gwc__wave, .join-gwc-campaign__wave, .join-gwc-pillars__wave, .gwc-wave-svg';
+  const waveReplayEls = document.querySelectorAll(waveReplaySelector);
+  if (waveReplayEls.length) {
+    waveReplayEls.forEach(el => el.classList.add('waicam-wave-replay'));
+
+    const waveObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('is-visible');
+          void entry.target.getBoundingClientRect();
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.55 });
+
+    waveReplayEls.forEach(el => waveObserver.observe(el));
+  }
+
   function animateCounter(el) {
     const target = parseInt(el.dataset.target, 10);
     const suffix = el.dataset.suffix || '';

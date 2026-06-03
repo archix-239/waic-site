@@ -1,149 +1,100 @@
 <?php
 /**
- * Single — Article de blog WAI-CAM
+ * Single — Article individuel style GWC adapté WAI-CAM.
  *
  * @package WAICAM
  */
 
-get_header(); ?>
-
-<?php while ( have_posts() ) : the_post();
-	$categories = get_the_category();
-	$primary_cat = ! empty( $categories ) ? $categories[0] : null;
+get_header();
 ?>
 
-	<?php
-	get_template_part( 'template-parts/page-hero', null, array(
-		'title'    => get_the_title(),
-		'subtitle' => sprintf(
-			/* translators: 1: date, 2: auteur */
-			esc_html__( 'Publié le %1$s par %2$s', 'waicam' ),
-			esc_html( waicam_date_fr() ),
-			esc_html( get_the_author() )
-		),
-		'crumb'    => __( 'Blog', 'waicam' ),
-	) );
-	?>
+<div class="gwc-reading-progress" aria-hidden="true"><span></span></div>
 
-	<article class="single-actu single-post">
-		<div style="max-width:860px;margin:0 auto;">
+<?php while ( have_posts() ) : the_post();
+	$categories   = get_the_category();
+	$primary_cat  = ! empty( $categories ) ? $categories[0] : null;
+	$featured_id  = get_post_thumbnail_id( get_the_ID() );
+	$featured_alt = $featured_id ? get_post_meta( $featured_id, '_wp_attachment_image_alt', true ) : '';
+?>
 
-			<!-- Métas article -->
-			<div class="single-meta">
-				<span class="actu-tag actu-tag--date"><i class="fa-regular fa-calendar"></i> <?php echo esc_html( waicam_date_fr() ); ?></span>
-				<span class="actu-tag actu-tag--auteur"><i class="fa-regular fa-user"></i> <?php echo esc_html( get_the_author() ); ?></span>
-				<?php if ( $categories ) : ?>
-					<?php foreach ( $categories as $cat ) : ?>
-						<a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>" class="actu-tag actu-tag--cat">
-							<i class="fa-regular fa-folder"></i> <?php echo esc_html( $cat->name ); ?>
-						</a>
-					<?php endforeach; ?>
-				<?php endif; ?>
-				<span class="actu-tag actu-tag--reading"><i class="fa-regular fa-clock"></i>
-					<?php
-					$word_count = str_word_count( wp_strip_all_tags( get_the_content() ) );
-					$min        = max( 1, ceil( $word_count / 200 ) );
-					/* translators: %d minutes de lecture */
-					printf( esc_html__( '%d min de lecture', 'waicam' ), (int) $min );
-					?>
-				</span>
+	<article <?php post_class( 'gwc-article' ); ?>>
+		<header class="gwc-article-header">
+			<div class="gwc-article-header__inner">
+				<h1 class="gwc-article-heading"><?php the_title(); ?></h1>
 			</div>
+			<svg class="gwc-article-header-wave" viewBox="0 0 1000 120" preserveAspectRatio="none" role="presentation" aria-hidden="true" focusable="false">
+				<path d="M0 0 H1000 V78 C780 78 680 116 506 116 C318 116 212 78 0 78 Z" />
+			</svg>
+		</header>
 
-			<!-- Contenu de l'article (style magazine — l'image mise en avant ne sert
-			     que pour la vignette de la liste blog, jamais répétée ici) -->
-			<div class="single-content post-content post-content--magazine">
-				<?php
-				the_content();
-
-				wp_link_pages( array(
-					'before' => '<div class="post-pages">' . esc_html__( 'Pages :', 'waicam' ),
-					'after'  => '</div>',
-				) );
-				?>
-			</div>
-
-			<!-- Tags -->
-			<?php $tags = get_the_tags(); if ( $tags ) : ?>
-				<div class="single-tags">
-					<strong><?php esc_html_e( 'Mots-clés :', 'waicam' ); ?></strong>
-					<?php foreach ( $tags as $tag ) : ?>
-						<a href="<?php echo esc_url( get_tag_link( $tag->term_id ) ); ?>" class="actu-tag actu-tag--tag">#<?php echo esc_html( $tag->name ); ?></a>
-					<?php endforeach; ?>
+		<?php if ( $featured_id ) : ?>
+			<figure class="gwc-article-featured">
+				<div class="gwc-article-featured__media">
+					<?php echo wp_get_attachment_image( $featured_id, 'large', false, array( 'alt' => $featured_alt ?: get_the_title(), 'loading' => 'eager' ) ); ?>
 				</div>
-			<?php endif; ?>
-
-			<!-- Partage social -->
-			<div class="single-share">
-				<strong><?php esc_html_e( 'Partager :', 'waicam' ); ?></strong>
-				<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_url( urlencode( get_permalink() ) ); ?>" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-				<a href="https://twitter.com/intent/tweet?url=<?php echo esc_url( urlencode( get_permalink() ) ); ?>&text=<?php echo esc_attr( urlencode( get_the_title() ) ); ?>" target="_blank" rel="noopener" aria-label="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
-				<a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo esc_url( urlencode( get_permalink() ) ); ?>" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-				<a href="mailto:?subject=<?php echo esc_attr( urlencode( get_the_title() ) ); ?>&body=<?php echo esc_attr( urlencode( get_permalink() ) ); ?>" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-			</div>
-
-			<!-- Navigation prev / next -->
-			<nav class="single-nav">
-				<?php
-				$prev_post = get_previous_post();
-				$next_post = get_next_post();
-				?>
-				<?php if ( $prev_post ) : ?>
-					<a href="<?php echo esc_url( get_permalink( $prev_post ) ); ?>" class="single-nav-prev">
-						<span><?php esc_html_e( '← Article précédent', 'waicam' ); ?></span>
-						<strong><?php echo esc_html( get_the_title( $prev_post ) ); ?></strong>
-					</a>
+				<?php if ( $featured_alt ) : ?>
+					<figcaption><?php echo esc_html( $featured_alt ); ?></figcaption>
 				<?php endif; ?>
-				<?php if ( $next_post ) : ?>
-					<a href="<?php echo esc_url( get_permalink( $next_post ) ); ?>" class="single-nav-next">
-						<span><?php esc_html_e( 'Article suivant →', 'waicam' ); ?></span>
-						<strong><?php echo esc_html( get_the_title( $next_post ) ); ?></strong>
-					</a>
-				<?php endif; ?>
-			</nav>
+			</figure>
+		<?php endif; ?>
 
-			<!-- Articles liés (même catégorie) -->
-			<?php if ( $primary_cat ) :
-				$related = new WP_Query( array(
-					'posts_per_page' => 3,
-					'category__in'   => array( $primary_cat->term_id ),
-					'post__not_in'   => array( get_the_ID() ),
-					'orderby'        => 'rand',
-				) );
-			if ( $related->have_posts() ) : ?>
-				<section class="single-related">
-					<h3><?php esc_html_e( 'Articles liés', 'waicam' ); ?></h3>
-					<div class="news-grid">
-						<?php while ( $related->have_posts() ) : $related->the_post(); ?>
-							<div class="news-card">
-								<a href="<?php the_permalink(); ?>"><?php waicam_thumbnail( get_the_ID(), 'medium_large', 'training-1.jpg' ); ?></a>
-								<div class="news-card-body">
-									<div class="news-date"><?php echo esc_html( waicam_date_fr() ); ?></div>
-									<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-									<p><?php echo esc_html( waicam_excerpt( get_the_excerpt(), 120 ) ); ?></p>
-									<a href="<?php the_permalink(); ?>" class="read-more"><?php esc_html_e( 'Lire la suite →', 'waicam' ); ?></a>
-								</div>
-							</div>
-						<?php endwhile; wp_reset_postdata(); ?>
-					</div>
-				</section>
-			<?php endif; endif; ?>
+		<div class="gwc-article-body">
+			<?php
+			the_content();
 
-			<!-- Commentaires -->
-			<?php if ( comments_open() || get_comments_number() ) : ?>
-				<div class="single-comments">
-					<?php comments_template(); ?>
-				</div>
-			<?php endif; ?>
-
-			<!-- Retour blog -->
-			<div class="single-back">
-				<?php $blog_url = get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/blog' ); ?>
-				<a href="<?php echo esc_url( $blog_url ); ?>" class="btn-outline">
-					← <?php esc_html_e( 'Tous les articles', 'waicam' ); ?>
-				</a>
-			</div>
+			wp_link_pages( array(
+				'before' => '<div class="post-pages">' . esc_html__( 'Pages :', 'waicam' ),
+				'after'  => '</div>',
+			) );
+			?>
 		</div>
 	</article>
+
+	<?php
+	$related_args = array(
+		'post_type'           => 'post',
+		'post_status'         => 'publish',
+		'posts_per_page'      => 3,
+		'post__not_in'        => array( get_the_ID() ),
+		'ignore_sticky_posts' => true,
+	);
+
+	if ( $primary_cat ) {
+		$related_args['category__in'] = array( $primary_cat->term_id );
+	}
+
+	$related = new WP_Query( $related_args );
+	if ( ! $related->have_posts() && $primary_cat ) {
+		wp_reset_postdata();
+		unset( $related_args['category__in'] );
+		$related = new WP_Query( $related_args );
+	}
+	?>
+
+	<?php if ( $related->have_posts() ) : ?>
+		<section class="gwc-more-articles" aria-labelledby="gwc-more-articles-title">
+			<div class="gwc-more-articles__inner">
+				<h2 id="gwc-more-articles-title" class="gwc-more-articles__title">
+					<span class="gwc-wave-underline">
+						<?php esc_html_e( 'À lire aussi', 'waicam' ); ?>
+						<svg class="gwc-wave-svg" viewBox="0 0 512 24" role="presentation" aria-hidden="true" focusable="false">
+							<path d="M0 12 C16 1 32 1 48 12 S80 23 96 12 S128 1 144 12 S176 23 192 12 S224 1 240 12 S272 23 288 12 S320 1 336 12 S368 23 384 12 S416 1 432 12 S464 23 480 12 S496 1 512 12" />
+						</svg>
+					</span>
+				</h2>
+
+				<ul class="gwc-news-list">
+					<?php
+					while ( $related->have_posts() ) :
+						$related->the_post();
+						waicam_gwc_render_news_item();
+					endwhile;
+					wp_reset_postdata();
+					?>
+				</ul>
+			</div>
+		</section>
+	<?php endif; ?>
 
 <?php endwhile; ?>
 
