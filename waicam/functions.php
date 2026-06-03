@@ -187,9 +187,6 @@ function waicam_gwc_render_news_item( $post_id = 0 ) {
 		<a class="gwc-news-card" href="<?php echo esc_url( $permalink ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Lire : %s', 'waicam' ), $title ) ); ?>">
 			<div class="gwc-news-item-title" title="<?php echo esc_attr( $title ); ?>">
 				<span class="gwc-news-title-text"><?php echo esc_html( $display_title ); ?></span>
-				<svg class="gwc-news-card-wave" viewBox="0 0 420 82" preserveAspectRatio="none" role="presentation" aria-hidden="true" focusable="false">
-					<path d="M0 0 H420 V50 C350 50 318 74 232 74 C146 74 105 50 0 50 Z" />
-				</svg>
 			</div>
 			<div class="gwc-news-item-image<?php echo $thumb_id ? ' has-image' : ''; ?>">
 				<?php if ( $thumb_id ) : ?>
