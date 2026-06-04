@@ -78,7 +78,7 @@ $hero_year = get_theme_mod( 'waicam_events_hero_year', gmdate( 'Y' ) );
 		$feature_title = $feature_id ? get_the_title( $feature_id ) : __( 'Prochain rendez-vous WAI-CAM', 'waicam' );
 	}
 	if ( ! $feature_text ) {
-		$feature_text = $feature_id ? waicam_event_excerpt( $feature_id, 210 ) : __( "Découvrez les prochains temps forts de Women in AI Cameroon : ateliers, rencontres institutionnelles, formations terrain et moments de communauté autour d'une IA inclusive.", 'waicam' );
+		$feature_text = $feature_id ? waicam_event_excerpt( $feature_id, 150 ) : __( "Découvrez les prochains temps forts de Women in AI Cameroon : ateliers, rencontres institutionnelles, formations terrain et moments de communauté autour d'une IA inclusive.", 'waicam' );
 	}
 	if ( ! $feature_url ) {
 		$feature_url = $feature_id ? get_permalink( $feature_id ) : '#events-upcoming';
