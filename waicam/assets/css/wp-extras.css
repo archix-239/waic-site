@@ -7731,3 +7731,141 @@ footer ul li {
     text-align: left;
   }
 }
+
+/* Events calendar refinements — responsive, date filter, arrows, subscription */
+.events-calendar-date-filter {
+  margin: 0;
+}
+.events-calendar-controls__today {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  cursor: pointer;
+}
+.events-calendar-controls__today span {
+  white-space: nowrap;
+}
+.events-calendar-controls__today input[type="date"] {
+  width: 148px;
+  min-height: 34px;
+  border: 0;
+  color: #1E1B4B;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+.events-calendar-item__media img,
+.events-campaign-feature__image {
+  object-position: center 28%;
+}
+.events-calendar-footer__next {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #1E1B4B;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+.events-calendar-footer__next .arrow-wave path {
+  stroke: #1E1B4B;
+}
+.events-calendar-footer__next:hover,
+.events-calendar-footer__next:focus-visible {
+  color: #E41D44;
+}
+.events-calendar-footer__next:hover .arrow-plain,
+.events-calendar-footer__next:focus-visible .arrow-plain {
+  opacity: 0;
+  transform: translateX(2px);
+}
+.events-calendar-footer__next:hover .arrow-wave,
+.events-calendar-footer__next:focus-visible .arrow-wave {
+  opacity: 1;
+  transform: translateX(2px);
+  animation: waicam-arrow-wave-reveal .42s cubic-bezier(.22,.61,.36,1) forwards;
+}
+.events-calendar-footer__next:hover .arrow-wave path,
+.events-calendar-footer__next:focus-visible .arrow-wave path {
+  stroke: #E41D44;
+}
+.events-calendar-subscribe summary::after {
+  content: none;
+}
+@media (max-width: 1240px) {
+  .events-calendar-toolbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .events-calendar-toolbar__views {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+    min-height: 58px;
+    border-top: 1px solid rgba(17, 17, 17, .12);
+  }
+  .events-calendar-item {
+    grid-template-columns: 82px minmax(0, 1fr) minmax(230px, 360px);
+    gap: 28px;
+  }
+}
+@media (max-width: 900px) {
+  .events-campaign-feature,
+  .events-campaign-feature--image-left {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    grid-template-columns: 1fr;
+  }
+  .events-campaign-feature--image-left .events-campaign-feature__visual {
+    order: 0;
+  }
+  .events-campaign-feature__copy {
+    min-height: auto;
+    padding: 42px 24px;
+  }
+  .events-campaign-feature__copy h2 {
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+  }
+  .events-campaign-feature__copy p {
+    font-size: 1rem;
+  }
+  .events-calendar-toolbar__submit {
+    min-width: 0;
+  }
+  .events-calendar-item {
+    grid-template-columns: 76px minmax(0, 1fr);
+  }
+  .events-calendar-item__media {
+    grid-column: 1 / -1;
+    max-height: 360px;
+  }
+}
+@media (max-width: 620px) {
+  .events-calendar-toolbar__views {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+  .events-calendar-controls__nav {
+    flex-wrap: wrap;
+  }
+  .events-calendar-controls__today {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .events-calendar-controls__today input[type="date"] {
+    width: 160px;
+  }
+  .events-calendar-footer__next,
+  .events-calendar-footer__previous,
+  .events-calendar-subscribe {
+    width: 100%;
+  }
+  .events-calendar-footer__next {
+    justify-content: center;
+    min-height: 58px;
+    border: 2px solid #1E1B4B;
+  }
+  .events-calendar-item__media {
+    aspect-ratio: 4 / 3;
+  }
+}
