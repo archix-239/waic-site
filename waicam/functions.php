@@ -347,6 +347,7 @@ function waicam_default_menu() {
 		) ),
 		'inspire'     => array( __( 'Inspire', 'waicam' ), array(
 			home_url('/blog')        => __( 'Blog', 'waicam' ),
+			waicam_events_page_url()  => __( 'Évènements', 'waicam' ),
 			home_url('/temoignages') => __( 'Témoignages', 'waicam' ),
 			home_url('/galerie')     => __( 'Galerie', 'waicam' ),
 		) ),
