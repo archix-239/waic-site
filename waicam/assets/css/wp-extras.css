@@ -7315,3 +7315,45 @@ footer ul li {
     margin-right: 0;
   }
 }
+
+/* Events campaign cards — alternating full-bleed sequence */
+.events-campaign-page {
+  overflow-x: hidden;
+}
+.events-campaign-feature {
+  padding: 0;
+}
+.events-campaign-feature + .events-campaign-feature {
+  margin-top: 0;
+}
+.events-campaign-feature--image-left .events-campaign-feature__visual {
+  order: -1;
+}
+.events-campaign-feature--tone-green .events-campaign-feature__copy {
+  background: #0E6A2E;
+}
+.events-campaign-feature--tone-red .events-campaign-feature__copy {
+  background: #E41D44;
+}
+.events-campaign-feature--tone-blue .events-campaign-feature__copy {
+  background: #1E1B4B;
+}
+.events-campaign-feature--tone-red .events-campaign-feature__wave path {
+  stroke: #fff;
+}
+.events-campaign-feature--tone-red .events-campaign-feature__meta li {
+  border-left-color: #1E1B4B;
+}
+.events-campaign-feature--tone-red .events-campaign-feature__link:hover,
+.events-campaign-feature--tone-red .events-campaign-feature__link:focus-visible {
+  color: #1E1B4B;
+}
+.events-campaign-feature--tone-red .events-campaign-feature__link:hover .arrow-wave path,
+.events-campaign-feature--tone-red .events-campaign-feature__link:focus-visible .arrow-wave path {
+  stroke: #1E1B4B;
+}
+@media (max-width: 1100px) {
+  .events-campaign-feature--image-left .events-campaign-feature__visual {
+    order: 0;
+  }
+}
