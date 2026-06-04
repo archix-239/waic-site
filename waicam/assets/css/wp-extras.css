@@ -6825,3 +6825,114 @@ footer ul li {
     width: min(92vw, 560px);
   }
 }
+
+/* =========================================================
+   Events page — Campaign hero (WAICAM x GWC inspiration)
+   ========================================================= */
+.events-campaign-page {
+  background: #fff;
+  color: #111;
+  font-family: "Inter", "Poppins", Arial, sans-serif;
+}
+.events-campaign-hero {
+  position: relative;
+  min-height: clamp(520px, 72vh, 780px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(52px, 7vw, 96px) clamp(22px, 5vw, 72px);
+  background: #000;
+  overflow: visible;
+  isolation: isolate;
+}
+.events-campaign-hero__media {
+  width: min(980px, 82vw);
+  max-height: min(560px, 64vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.events-campaign-hero__image {
+  display: block;
+  width: 100%;
+  max-height: min(560px, 64vh);
+  object-fit: contain;
+  object-position: center center;
+}
+.events-campaign-hero__placeholder {
+  width: min(860px, 82vw);
+  min-height: clamp(260px, 38vw, 460px);
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  padding: clamp(32px, 6vw, 78px);
+  color: #fff;
+  border: 3px solid #0E6A2E;
+  text-align: center;
+}
+.events-campaign-hero__placeholder span {
+  color: #E41D44;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+.events-campaign-hero__placeholder strong {
+  color: #fff;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 900;
+  line-height: .9;
+  letter-spacing: -.055em;
+}
+.events-campaign-hero__sticker {
+  position: absolute;
+  left: clamp(26px, 7vw, 120px);
+  bottom: clamp(-58px, -5vw, -38px);
+  z-index: 3;
+  width: clamp(116px, 11vw, 168px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: #1E1B4B;
+  border: 5px solid #E41D44;
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px #fff, 0 0 0 12px #0E6A2E;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  font-weight: 900;
+  letter-spacing: -.03em;
+}
+.events-campaign-hero__sticker::before,
+.events-campaign-hero__sticker::after {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 2px dashed rgba(30, 27, 75, .28);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.events-campaign-hero__sticker::after {
+  inset: -13px;
+  border-color: rgba(228, 29, 68, .18);
+  transform: rotate(9deg);
+}
+.events-campaign-hero__sticker span {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 760px) {
+  .events-campaign-hero {
+    min-height: 480px;
+    padding: 44px 20px 72px;
+  }
+  .events-campaign-hero__media {
+    width: min(92vw, 620px);
+  }
+  .events-campaign-hero__sticker {
+    left: 24px;
+    width: 112px;
+    border-width: 4px;
+    box-shadow: 0 0 0 7px #fff, 0 0 0 10px #0E6A2E;
+  }
+}

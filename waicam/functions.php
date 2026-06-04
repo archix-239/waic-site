@@ -429,6 +429,34 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
+
+	// ────────── Page Évènements ──────────
+	$wp_customize->add_section( 'waicam_events_page', array(
+		'title'       => __( 'Évènements — Hero', 'waicam' ),
+		'description' => __( 'Image et badge de la première section de la page Évènements.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+
+	$wp_customize->add_setting( 'waicam_events_hero_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_events_hero_image_id', array(
+		'label'     => __( 'Image hero évènements', 'waicam' ),
+		'section'   => 'waicam_events_page',
+		'mime_type' => 'image',
+	) ) );
+
+	$wp_customize->add_setting( 'waicam_events_hero_year', array(
+		'default'           => gmdate( 'Y' ),
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'waicam_events_hero_year', array(
+		'label'   => __( 'Badge année', 'waicam' ),
+		'section' => 'waicam_events_page',
+		'type'    => 'text',
+	) );
+
 	// ────────── Section Formulaires (IDs Fluent Forms) ──────────
 	$wp_customize->add_section( 'waicam_forms', array(
 		'title' => __( 'Formulaires Fluent Forms', 'waicam' ),

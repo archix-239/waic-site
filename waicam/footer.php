@@ -57,7 +57,7 @@
 				<ul>
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Accueil', 'waicam' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/about' ) ); ?>"><?php esc_html_e( 'À propos', 'waicam' ); ?></a></li>
-					<li><a href="<?php echo esc_url( waicam_events_archive_url() ); ?>"><?php esc_html_e( 'Évènements', 'waicam' ); ?></a></li>
+					<li><a href="<?php echo esc_url( waicam_events_page_url() ); ?>"><?php esc_html_e( 'Évènements', 'waicam' ); ?></a></li>
 					<li><a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/blog' ) ); ?>"><?php esc_html_e( 'Blog', 'waicam' ); ?></a></li>
 				</ul>
 				<?php
