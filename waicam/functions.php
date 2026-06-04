@@ -457,6 +457,32 @@ function waicam_customize_register( $wp_customize ) {
 		'type'    => 'text',
 	) );
 
+
+	$events_intro_fields = array(
+		'waicam_events_intro_title'    => array( __( 'Intro — Titre', 'waicam' ), __( 'ÉVÈNEMENTS WAI-CAM', 'waicam' ), 'text' ),
+		'waicam_events_intro_text'     => array( __( 'Intro — Texte', 'waicam' ), __( "Participez aux rencontres, formations, ateliers et actions terrain de Women in AI Cameroon. Nos évènements créent des espaces d’apprentissage, de dialogue et d’engagement autour d’une intelligence artificielle inclusive au Cameroun.", 'waicam' ), 'textarea' ),
+		'waicam_events_intro_cta_text' => array( __( 'Intro — Texte lien', 'waicam' ), __( 'Voir les prochains évènements', 'waicam' ), 'text' ),
+		'waicam_events_intro_cta_url'  => array( __( 'Intro — URL lien', 'waicam' ), '#events-upcoming', 'url' ),
+	);
+	foreach ( $events_intro_fields as $key => $cfg ) {
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_events_page',
+			'type'    => $cfg[2],
+		) );
+	}
+
 	// ────────── Section Formulaires (IDs Fluent Forms) ──────────
 	$wp_customize->add_section( 'waicam_forms', array(
 		'title' => __( 'Formulaires Fluent Forms', 'waicam' ),
