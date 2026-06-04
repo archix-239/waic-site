@@ -483,6 +483,42 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
+
+	$events_feature_fields = array(
+		'waicam_events_feature_title'    => array( __( 'Bloc à la une — Titre', 'waicam' ), '', 'text' ),
+		'waicam_events_feature_text'     => array( __( 'Bloc à la une — Texte', 'waicam' ), '', 'textarea' ),
+		'waicam_events_feature_cta_text' => array( __( 'Bloc à la une — Texte lien', 'waicam' ), __( 'En savoir plus', 'waicam' ), 'text' ),
+		'waicam_events_feature_cta_url'  => array( __( 'Bloc à la une — URL lien', 'waicam' ), '', 'url' ),
+	);
+	foreach ( $events_feature_fields as $key => $cfg ) {
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_events_page',
+			'type'    => $cfg[2],
+		) );
+	}
+
+	$wp_customize->add_setting( 'waicam_events_feature_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_events_feature_image_id', array(
+		'label'     => __( 'Bloc à la une — Image', 'waicam' ),
+		'section'   => 'waicam_events_page',
+		'mime_type' => 'image',
+	) ) );
+
 	// ────────── Section Formulaires (IDs Fluent Forms) ──────────
 	$wp_customize->add_section( 'waicam_forms', array(
 		'title' => __( 'Formulaires Fluent Forms', 'waicam' ),

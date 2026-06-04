@@ -66,6 +66,68 @@ $hero_year = get_theme_mod( 'waicam_events_hero_year', gmdate( 'Y' ) );
 		</div>
 	</section>
 
+	<?php
+	$feature_event = waicam_get_evenements( 1, 'a-venir' );
+	$feature_id    = ( $feature_event && $feature_event->have_posts() ) ? $feature_event->posts[0]->ID : 0;
+	$feature_title = get_theme_mod( 'waicam_events_feature_title', '' );
+	$feature_text  = get_theme_mod( 'waicam_events_feature_text', '' );
+	$feature_url   = get_theme_mod( 'waicam_events_feature_cta_url', '' );
+	$feature_img   = absint( get_theme_mod( 'waicam_events_feature_image_id', 0 ) );
+
+	if ( ! $feature_title ) {
+		$feature_title = $feature_id ? get_the_title( $feature_id ) : __( 'Prochain rendez-vous WAI-CAM', 'waicam' );
+	}
+	if ( ! $feature_text ) {
+		$feature_text = $feature_id ? waicam_event_excerpt( $feature_id, 210 ) : __( "Découvrez les prochains temps forts de Women in AI Cameroon : ateliers, rencontres institutionnelles, formations terrain et moments de communauté autour d'une IA inclusive.", 'waicam' );
+	}
+	if ( ! $feature_url ) {
+		$feature_url = $feature_id ? get_permalink( $feature_id ) : '#events-upcoming';
+	}
+	if ( ! $feature_img && $feature_id && has_post_thumbnail( $feature_id ) ) {
+		$feature_img = get_post_thumbnail_id( $feature_id );
+	}
+	?>
+	<section class="events-campaign-feature" aria-labelledby="events-campaign-feature-title">
+		<div class="events-campaign-feature__copy">
+			<div class="events-campaign-feature__copy-inner">
+				<h2 id="events-campaign-feature-title"><?php echo esc_html( $feature_title ); ?></h2>
+				<svg class="events-campaign-feature__wave" viewBox="0 0 260 24" role="presentation" aria-hidden="true" focusable="false">
+					<path d="M0 12 C10 2 22 2 32 12 S54 22 64 12 S86 2 96 12 S118 22 128 12 S150 2 160 12 S182 22 192 12 S214 2 224 12 S246 22 260 12" />
+				</svg>
+				<p><?php echo esc_html( $feature_text ); ?></p>
+
+				<?php if ( $feature_id ) : ?>
+					<ul class="events-campaign-feature__meta" aria-label="<?php esc_attr_e( 'Informations évènement', 'waicam' ); ?>">
+						<li><?php echo esc_html( waicam_event_date( $feature_id ) ); ?></li>
+						<?php if ( waicam_event_venue( $feature_id ) ) : ?>
+							<li><?php echo esc_html( waicam_event_venue( $feature_id ) ); ?></li>
+						<?php endif; ?>
+					</ul>
+				<?php endif; ?>
+
+				<a class="events-campaign-feature__link" href="<?php echo esc_url( $feature_url ); ?>">
+					<span><?php echo esc_html( get_theme_mod( 'waicam_events_feature_cta_text', __( 'En savoir plus', 'waicam' ) ) ); ?></span>
+					<span class="arrow-plain">→</span>
+					<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
+						<path d="M1 8 C11 1 21 1 31 8 S51 15 61 8 S81 1 95 8" />
+					</svg>
+				</a>
+			</div>
+		</div>
+
+		<div class="events-campaign-feature__visual">
+			<?php if ( $feature_img ) : ?>
+				<?php echo wp_get_attachment_image( $feature_img, 'large', false, array( 'class' => 'events-campaign-feature__image', 'loading' => 'lazy' ) ); ?>
+			<?php else : ?>
+				<div class="events-campaign-feature__placeholder">
+					<span><?php esc_html_e( 'WAI-CAM', 'waicam' ); ?></span>
+					<strong><?php esc_html_e( 'ÉVÈNEMENT', 'waicam' ); ?></strong>
+				</div>
+			<?php endif; ?>
+		</div>
+	</section>
+	<?php wp_reset_postdata(); ?>
+
 </main>
 
 <?php

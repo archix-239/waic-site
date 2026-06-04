@@ -7026,3 +7026,179 @@ footer ul li {
     align-self: flex-start;
   }
 }
+.events-campaign-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: clamp(520px, 62vw, 720px);
+  background: #fff;
+  color: #fff;
+}
+.events-campaign-feature__copy {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: clamp(54px, 7vw, 104px) clamp(34px, 7vw, 88px);
+  background: #1E1B4B;
+}
+.events-campaign-feature__copy-inner {
+  width: min(560px, 100%);
+}
+.events-campaign-feature__copy h2 {
+  margin: 0;
+  color: #fff;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(2.55rem, 5vw, 4.35rem);
+  font-weight: 900;
+  line-height: .96;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+}
+.events-campaign-feature__wave {
+  display: block;
+  width: min(250px, 64%);
+  height: 22px;
+  margin: 10px 0 clamp(22px, 3vw, 34px);
+}
+.events-campaign-feature__wave path {
+  fill: none;
+  stroke: #E41D44;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 280;
+  stroke-dashoffset: 280;
+  animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4;
+}
+.events-campaign-feature__copy p {
+  margin: 0;
+  color: #fff;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: clamp(1.25rem, 2.15vw, 2rem);
+  line-height: 1.43;
+  letter-spacing: -.02em;
+}
+.events-campaign-feature__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: clamp(20px, 3vw, 34px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.events-campaign-feature__meta li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 8px 14px;
+  color: #1E1B4B;
+  background: #fff;
+  border-left: 5px solid #0E6A2E;
+  font-size: .9rem;
+  font-weight: 800;
+}
+.events-campaign-feature__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(28px, 4vw, 54px);
+  color: #fff;
+  font-family: "Inter", "Poppins", Arial, sans-serif;
+  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+  font-weight: 900;
+  line-height: 1;
+  text-decoration: none;
+}
+.events-campaign-feature__link .arrow-wave path {
+  stroke: #fff;
+}
+.events-campaign-feature__link:hover,
+.events-campaign-feature__link:focus-visible {
+  color: #E41D44;
+}
+.events-campaign-feature__link:hover .arrow-plain,
+.events-campaign-feature__link:focus-visible .arrow-plain {
+  opacity: 0;
+  transform: translateX(2px);
+}
+.events-campaign-feature__link:hover .arrow-wave,
+.events-campaign-feature__link:focus-visible .arrow-wave {
+  opacity: 1;
+  transform: translateX(2px);
+  animation: waicam-arrow-wave-reveal .42s cubic-bezier(.22,.61,.36,1) forwards;
+}
+.events-campaign-feature__link:hover .arrow-wave path,
+.events-campaign-feature__link:focus-visible .arrow-wave path {
+  stroke: #E41D44;
+}
+.events-campaign-feature__visual {
+  position: relative;
+  min-width: 0;
+  min-height: clamp(420px, 54vw, 720px);
+  display: grid;
+  place-items: center;
+  padding: clamp(30px, 5vw, 70px);
+  background: #0E6A2E;
+  overflow: hidden;
+}
+.events-campaign-feature__visual::before,
+.events-campaign-feature__visual::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 24px;
+  z-index: 2;
+  background: repeating-linear-gradient(90deg, #E41D44 0 76px, #0E6A2E 76px 152px, #1E1B4B 152px 228px);
+}
+.events-campaign-feature__visual::before { top: 0; }
+.events-campaign-feature__visual::after { bottom: 0; }
+.events-campaign-feature__image {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(760px, 88%);
+  max-height: min(560px, 78%);
+  object-fit: cover;
+  object-position: center center;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, .22);
+}
+.events-campaign-feature__placeholder {
+  position: relative;
+  z-index: 1;
+  width: min(640px, 88%);
+  min-height: 360px;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  padding: clamp(36px, 6vw, 74px);
+  background: #fff;
+  color: #1E1B4B;
+  text-align: left;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, .18);
+}
+.events-campaign-feature__placeholder span {
+  color: #E41D44;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+.events-campaign-feature__placeholder strong {
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 900;
+  line-height: .9;
+  letter-spacing: -.05em;
+}
+@media (max-width: 900px) {
+  .events-campaign-feature {
+    grid-template-columns: 1fr;
+  }
+  .events-campaign-feature__copy {
+    padding: 52px 24px;
+  }
+  .events-campaign-feature__copy-inner {
+    width: min(620px, 100%);
+    margin: 0 auto;
+  }
+  .events-campaign-feature__visual {
+    min-height: 420px;
+  }
+}
