@@ -192,6 +192,122 @@ $hero_year = get_theme_mod( 'waicam_events_hero_year', gmdate( 'Y' ) );
 	endif;
 	?>
 
+
+	<section id="events-calendar" class="events-calendar-system" aria-labelledby="events-calendar-title">
+		<div class="events-calendar-system__inner">
+			<div class="events-calendar-system__heading">
+				<span class="events-calendar-system__kicker"><?php esc_html_e( 'Calendrier', 'waicam' ); ?></span>
+				<h2 id="events-calendar-title"><?php esc_html_e( 'Tous les évènements', 'waicam' ); ?></h2>
+				<p><?php esc_html_e( 'Retrouvez le calendrier complet des formations, rencontres, conférences et actions terrain de Women in AI Cameroon.', 'waicam' ); ?></p>
+			</div>
+
+			<?php
+			$calendar_search = isset( $_GET['event_search'] ) ? sanitize_text_field( wp_unslash( $_GET['event_search'] ) ) : '';
+			$calendar_base   = function_exists( 'tribe_get_events_link' ) ? tribe_get_events_link() : waicam_events_page_url();
+			$calendar_feed   = function_exists( 'tribe_get_ical_link' ) ? tribe_get_ical_link() : add_query_arg( 'ical', '1', $calendar_base );
+			$calendar_webcal = set_url_scheme( $calendar_feed, 'webcal' );
+			$calendar_google = add_query_arg( 'cid', rawurlencode( $calendar_webcal ), 'https://calendar.google.com/calendar/r' );
+			$calendar_args   = array(
+				'posts_per_page' => 12,
+				'ends_after'     => current_time( 'Y-m-d H:i:s' ),
+				'order'          => 'ASC',
+			);
+			if ( $calendar_search ) {
+				$calendar_args['s'] = $calendar_search;
+			}
+			$calendar_events = function_exists( 'tribe_get_events' ) ? tribe_get_events( $calendar_args, true ) : null;
+			?>
+
+			<form class="events-calendar-toolbar" role="search" method="get" action="<?php echo esc_url( get_permalink() ); ?>">
+				<label class="events-calendar-toolbar__search" for="events-calendar-search">
+					<span class="screen-reader-text"><?php esc_html_e( 'Rechercher des évènements', 'waicam' ); ?></span>
+					<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.8 18.1a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Zm5.2-1.1 4.2 4.2" /></svg>
+					<input id="events-calendar-search" type="search" name="event_search" value="<?php echo esc_attr( $calendar_search ); ?>" placeholder="<?php esc_attr_e( 'Rechercher évènements', 'waicam' ); ?>" />
+				</label>
+				<button class="events-calendar-toolbar__submit" type="submit"><?php esc_html_e( 'Chercher', 'waicam' ); ?></button>
+				<nav class="events-calendar-toolbar__views" aria-label="<?php esc_attr_e( 'Vues du calendrier', 'waicam' ); ?>">
+					<a class="is-active" href="#events-calendar"><?php esc_html_e( 'Liste', 'waicam' ); ?></a>
+					<a href="<?php echo esc_url( add_query_arg( 'eventDisplay', 'month', $calendar_base ) ); ?>"><?php esc_html_e( 'Mois', 'waicam' ); ?></a>
+					<a href="<?php echo esc_url( add_query_arg( 'eventDisplay', 'day', $calendar_base ) ); ?>"><?php esc_html_e( 'Jour', 'waicam' ); ?></a>
+				</nav>
+			</form>
+
+			<div class="events-calendar-controls">
+				<div class="events-calendar-controls__nav" aria-label="<?php esc_attr_e( 'Navigation calendrier', 'waicam' ); ?>">
+					<a href="<?php echo esc_url( add_query_arg( 'eventDisplay', 'past', $calendar_base ) ); ?>" aria-label="<?php esc_attr_e( 'Évènements précédents', 'waicam' ); ?>">‹</a>
+					<a href="<?php echo esc_url( $calendar_base ); ?>" aria-label="<?php esc_attr_e( 'Évènements suivants', 'waicam' ); ?>">›</a>
+					<a class="events-calendar-controls__today" href="<?php echo esc_url( $calendar_base ); ?>"><?php esc_html_e( 'Aujourd’hui', 'waicam' ); ?></a>
+				</div>
+				<strong><?php esc_html_e( 'À venir', 'waicam' ); ?></strong>
+			</div>
+
+			<div class="events-calendar-list" role="list">
+				<?php if ( $calendar_events && $calendar_events->have_posts() ) : ?>
+					<?php
+					$current_month = '';
+					while ( $calendar_events->have_posts() ) :
+						$calendar_events->the_post();
+						$event_id    = get_the_ID();
+						$event_month = function_exists( 'tribe_get_start_date' ) ? tribe_get_start_date( $event_id, false, 'F Y' ) : get_the_date( 'F Y', $event_id );
+						$event_day   = function_exists( 'tribe_get_start_date' ) ? tribe_get_start_date( $event_id, false, 'd' ) : get_the_date( 'd', $event_id );
+						$event_dow   = function_exists( 'tribe_get_start_date' ) ? tribe_get_start_date( $event_id, false, 'D' ) : get_the_date( 'D', $event_id );
+						$event_venue = waicam_event_venue( $event_id );
+						$event_ical  = function_exists( 'tribe_get_single_ical_link' ) ? tribe_get_single_ical_link( $event_id ) : add_query_arg( 'ical', '1', get_permalink( $event_id ) );
+						$event_gcal  = function_exists( 'tribe_get_gcal_link' ) ? tribe_get_gcal_link( $event_id ) : '';
+						if ( $event_month !== $current_month ) :
+							$current_month = $event_month;
+							?>
+							<div class="events-calendar-list__month"><span><?php echo esc_html( $current_month ); ?></span></div>
+						<?php endif; ?>
+						<article class="events-calendar-item" role="listitem">
+							<div class="events-calendar-item__date" aria-label="<?php echo esc_attr( waicam_event_date( $event_id ) ); ?>">
+								<span><?php echo esc_html( $event_dow ); ?></span>
+								<strong><?php echo esc_html( $event_day ); ?></strong>
+							</div>
+							<div class="events-calendar-item__body">
+								<p class="events-calendar-item__time"><?php echo esc_html( waicam_event_date( $event_id ) ); ?></p>
+								<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+								<?php if ( $event_venue ) : ?>
+									<p class="events-calendar-item__venue"><?php echo esc_html( $event_venue ); ?></p>
+								<?php endif; ?>
+								<p><?php echo esc_html( waicam_event_excerpt( $event_id, 260 ) ); ?></p>
+								<div class="events-calendar-item__actions">
+									<a href="<?php echo esc_url( $event_ical ); ?>"><?php esc_html_e( 'Ajouter au calendrier', 'waicam' ); ?></a>
+									<?php if ( $event_gcal ) : ?>
+										<a href="<?php echo esc_url( $event_gcal ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Google Agenda', 'waicam' ); ?></a>
+									<?php endif; ?>
+								</div>
+							</div>
+							<?php if ( has_post_thumbnail( $event_id ) ) : ?>
+								<a class="events-calendar-item__media" href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr( get_the_title() ); ?>">
+									<?php echo get_the_post_thumbnail( $event_id, 'large', array( 'loading' => 'lazy' ) ); ?>
+								</a>
+							<?php endif; ?>
+						</article>
+					<?php endwhile; wp_reset_postdata(); ?>
+				<?php else : ?>
+					<div class="events-calendar-empty">
+						<p><?php esc_html_e( 'Aucun évènement ne correspond à votre recherche pour le moment.', 'waicam' ); ?></p>
+					</div>
+				<?php endif; ?>
+			</div>
+
+			<div class="events-calendar-footer">
+				<a class="events-calendar-footer__previous" href="<?php echo esc_url( add_query_arg( 'eventDisplay', 'past', $calendar_base ) ); ?>">‹ <?php esc_html_e( 'Évènements précédents', 'waicam' ); ?></a>
+				<details class="events-calendar-subscribe">
+					<summary><?php esc_html_e( 'S’abonner au calendrier', 'waicam' ); ?></summary>
+					<div class="events-calendar-subscribe__menu">
+						<a href="<?php echo esc_url( $calendar_google ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Google Agenda', 'waicam' ); ?></a>
+						<a href="<?php echo esc_url( $calendar_feed ); ?>"><?php esc_html_e( 'iCalendar', 'waicam' ); ?></a>
+						<a href="<?php echo esc_url( $calendar_webcal ); ?>"><?php esc_html_e( 'Outlook 365', 'waicam' ); ?></a>
+						<a href="<?php echo esc_url( $calendar_webcal ); ?>"><?php esc_html_e( 'Outlook Live', 'waicam' ); ?></a>
+						<a href="<?php echo esc_url( $calendar_feed ); ?>" download><?php esc_html_e( 'Exporter le fichier .ics', 'waicam' ); ?></a>
+					</div>
+				</details>
+			</div>
+		</div>
+	</section>
+
 </main>
 
 <?php
