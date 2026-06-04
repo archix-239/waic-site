@@ -492,9 +492,15 @@ function waicam_events_archive_url() {
  * URL de la page éditoriale Évènements si elle existe, sinon archive TEC.
  */
 function waicam_events_page_url() {
+	$page = get_page_by_path( 'agenda-evenements' );
+	if ( $page ) {
+		return get_permalink( $page );
+	}
+
 	$page = get_page_by_path( 'evenements' );
 	if ( $page ) {
 		return get_permalink( $page );
 	}
+
 	return waicam_events_archive_url();
 }
