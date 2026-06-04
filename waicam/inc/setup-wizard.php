@@ -45,35 +45,40 @@ function waicam_setup_pages_and_menu() {
 			'template' => 'page-templates/template-temoignages.php',
 			'order'    => 6,
 		),
+		'agenda-evenements' => array(
+			'title'    => __( 'Évènements', 'waicam' ),
+			'template' => 'page-templates/template-evenements.php',
+			'order'    => 7,
+		),
 		'partenaires' => array(
 			'title'    => __( 'Partenaires', 'waicam' ),
 			'template' => 'page-templates/template-partenaires.php',
-			'order'    => 7,
+			'order'    => 8,
 		),
 		'contact' => array(
 			'title'    => __( 'Contact', 'waicam' ),
 			'template' => 'page-templates/template-contact.php',
-			'order'    => 8,
+			'order'    => 9,
 		),
 		'rejoindre' => array(
 			'title'    => __( 'Rejoindre', 'waicam' ),
 			'template' => 'page-templates/template-rejoindre.php',
-			'order'    => 9,
+			'order'    => 10,
 		),
 		'faire-un-don' => array(
 			'title'    => __( 'Faire un don', 'waicam' ),
 			'template' => 'page-templates/template-don.php',
-			'order'    => 10,
+			'order'    => 11,
 		),
 		'blog' => array(
 			'title'    => __( 'Blog', 'waicam' ),
 			'template' => '', // index.php est utilisé automatiquement quand la page est définie comme "page des articles"
-			'order'    => 11,
+			'order'    => 12,
 		),
 		'galerie' => array(
 			'title'    => __( 'Galerie', 'waicam' ),
 			'template' => 'page-templates/template-galerie.php',
-			'order'    => 12,
+			'order'    => 13,
 		),
 	);
 
@@ -129,7 +134,7 @@ function waicam_setup_pages_and_menu() {
 			array( 'slug' => 'programmes',  'title' => __( 'Programmes', 'waicam' ),  'classes' => '' ),
 			array( 'slug' => 'formations',  'title' => __( 'Formations', 'waicam' ),  'classes' => '' ),
 			array( 'slug' => 'equipe',      'title' => __( 'Équipe', 'waicam' ),      'classes' => '' ),
-			array( 'slug' => 'evenement',   'title' => __( 'Évènements', 'waicam' ),  'classes' => '', 'is_archive' => true ),
+			array( 'slug' => 'agenda-evenements', 'title' => __( 'Évènements', 'waicam' ),  'classes' => '' ),
 			array( 'slug' => 'blog',        'title' => __( 'Blog', 'waicam' ),         'classes' => '' ),
 			array( 'slug' => 'galerie',     'title' => __( 'Galerie', 'waicam' ),      'classes' => '' ),
 			array( 'slug' => 'partenaires', 'title' => __( 'Partenaires', 'waicam' ), 'classes' => '' ),
@@ -203,7 +208,7 @@ function waicam_setup_admin_page() {
 	}
 
 	$pages_status = array(
-		'accueil', 'about', 'programmes', 'formations', 'equipe', 'temoignages', 'partenaires', 'contact', 'rejoindre', 'faire-un-don', 'blog', 'galerie',
+		'accueil', 'about', 'programmes', 'formations', 'equipe', 'temoignages', 'agenda-evenements', 'partenaires', 'contact', 'rejoindre', 'faire-un-don', 'blog', 'galerie',
 	);
 
 	$cpt_required = array(

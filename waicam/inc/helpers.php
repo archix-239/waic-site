@@ -489,21 +489,18 @@ function waicam_events_archive_url() {
 }
 
 /**
- * Récupère intelligemment l'URL LinkedIn d'un membre.
+ * URL de la page éditoriale Évènements si elle existe, sinon archive TEC.
  */
-function waicam_get_linkedin_url( $post_id ) {
-	$candidates = array( 'linkedin', 'lien_linkedin', 'profil_linkedin', 'linkedin_url', 'linkedin_profile' );
-	foreach ( $candidates as $key ) {
-		$val = waicam_field( $key, $post_id );
-		if ( $val ) return (string) $val;
+function waicam_events_page_url() {
+	$page = get_page_by_path( 'agenda-evenements' );
+	if ( $page ) {
+		return get_permalink( $page );
 	}
-	
-	// Fallback sur recherche brute dans la meta (moins performant)
-	$all_meta = get_post_meta( $post_id );
-	foreach ( $all_meta as $meta_key => $meta_values ) {
-		if ( false !== stripos( (string) $meta_key, 'linkedin' ) && ! empty( $meta_values[0] ) ) {
-			return (string) $meta_values[0];
-		}
+
+	$page = get_page_by_path( 'evenements' );
+	if ( $page ) {
+		return get_permalink( $page );
 	}
-	return '';
+
+	return waicam_events_archive_url();
 }

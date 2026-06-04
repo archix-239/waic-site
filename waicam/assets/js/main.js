@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ---------- Wave line replay on visibility ---------- */
-  const waveReplaySelector = '.home-posthero-wave, .home-impact-wave, .home-newsletter-gwc__wave-divider, .home-bigstat-gwc__wave-divider, .home-news-grid-gwc__title-wave, .about-intro-gwc__wave, .about-gap-gwc__wave, .about-change-gwc__wave, .about-values-gwc__wave, .about-reports-gwc__wave, .team-spotlight-gwc__wave, .team-group-gwc__wave, .join-gwc-campaign__wave, .join-gwc-pillars__wave, .blog-gwc__wave';
+  const waveReplaySelector = '.home-posthero-wave, .home-impact-wave, .home-newsletter-gwc__wave-divider, .home-bigstat-gwc__wave-divider, .home-news-grid-gwc__title-wave, .about-intro-gwc__wave, .about-gap-gwc__wave, .about-change-gwc__wave, .about-values-gwc__wave, .about-reports-gwc__wave, .team-spotlight-gwc__wave, .team-group-gwc__wave, .join-gwc-campaign__wave, .join-gwc-pillars__wave, .events-campaign-feature__wave, .gwc-wave-svg';
   const waveReplayEls = document.querySelectorAll(waveReplaySelector);
   if (waveReplayEls.length) {
     waveReplayEls.forEach(el => el.classList.add('waicam-wave-replay'));

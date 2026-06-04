@@ -1,6 +1,6 @@
 <?php
 /**
- * Page des articles WordPress — News/Blog GWC style.
+ * Template Name: News Blog - GWC Style
  *
  * @package WAICAM
  */

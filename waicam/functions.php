@@ -96,8 +96,141 @@ function waicam_enqueue_assets() {
 		WAICAM_VERSION,
 		true
 	);
+
+	if ( is_home() || is_page_template( 'page-news.php' ) ) {
+		wp_enqueue_script(
+			'waicam-gwc-news',
+			WAICAM_URI . '/assets/js/gwc-news.js',
+			array( 'jquery' ),
+			WAICAM_VERSION,
+			true
+		);
+
+		wp_localize_script( 'waicam-gwc-news', 'gwcNewsVars', array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'nonce'    => wp_create_nonce( 'gwc_load_more_posts' ),
+			'labels'   => array(
+				'load_more' => __( 'Load More', 'waicam' ),
+				'loading'   => __( 'Loading…', 'waicam' ),
+				'no_more'   => __( 'No more posts', 'waicam' ),
+				'error'     => __( 'Error', 'waicam' ),
+			),
+		) );
+	}
+
+
+	if ( is_single() ) {
+		wp_enqueue_script(
+			'waicam-gwc-single',
+			WAICAM_URI . '/assets/js/gwc-single.js',
+			array(),
+			WAICAM_VERSION,
+			true
+		);
+	}
+
 }
 add_action( 'wp_enqueue_scripts', 'waicam_enqueue_assets' );
+
+/**
+ * Remove the first duplicated featured image from post content.
+ *
+ * WordPress editors sometimes insert the same image at the beginning of the
+ * article body even when it is already configured as the featured image. The
+ * single article template renders the featured image as a designed visual card,
+ * so this helper prevents the same media from being displayed twice.
+ *
+ * @param string $content       Filtered post content.
+ * @param int    $attachment_id Featured image attachment ID.
+ * @return string
+ */
+function waicam_remove_duplicate_featured_image_from_content( $content, $attachment_id ) {
+	$attachment_id = absint( $attachment_id );
+
+	if ( ! $content || ! $attachment_id ) {
+		return $content;
+	}
+
+	$attachment_class = 'wp-image-' . $attachment_id;
+	if ( false === strpos( $content, $attachment_class ) ) {
+		return $content;
+	}
+
+	$patterns = array(
+		'/<figure\b[^>]*>\s*(?:<a\b[^>]*>)?\s*<img\b[^>]*' . preg_quote( $attachment_class, '/' ) . '[^>]*>\s*(?:<\/a>)?\s*(?:<figcaption\b[^>]*>.*?<\/figcaption>)?\s*<\/figure>/is',
+		'/<p\b[^>]*>\s*(?:<a\b[^>]*>)?\s*<img\b[^>]*' . preg_quote( $attachment_class, '/' ) . '[^>]*>\s*(?:<\/a>)?\s*<\/p>/is',
+		'/(?:<a\b[^>]*>)?\s*<img\b[^>]*' . preg_quote( $attachment_class, '/' ) . '[^>]*>\s*(?:<\/a>)?/is',
+	);
+
+	foreach ( $patterns as $pattern ) {
+		$updated_content = preg_replace( $pattern, '', $content, 1 );
+		if ( null !== $updated_content && $updated_content !== $content ) {
+			return $updated_content;
+		}
+	}
+
+	return $content;
+}
+
+/**
+ * Render one article card for the GWC-style News grid.
+ */
+function waicam_gwc_render_news_item( $post_id = 0 ) {
+	$post_id       = $post_id ? absint( $post_id ) : get_the_ID();
+	$title         = get_the_title( $post_id );
+	$display_title = wp_html_excerpt( $title, 92, '…' );
+	$permalink     = get_permalink( $post_id );
+	$thumb_id      = get_post_thumbnail_id( $post_id );
+	$thumb_alt     = $thumb_id ? get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) : '';
+	?>
+	<li class="gwc-news-item">
+		<a class="gwc-news-card" href="<?php echo esc_url( $permalink ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Lire : %s', 'waicam' ), $title ) ); ?>">
+			<div class="gwc-news-item-title" title="<?php echo esc_attr( $title ); ?>">
+				<span class="gwc-news-title-text"><?php echo esc_html( $display_title ); ?></span>
+			</div>
+			<div class="gwc-news-item-image<?php echo $thumb_id ? ' has-image' : ''; ?>">
+				<?php if ( $thumb_id ) : ?>
+					<picture><?php echo wp_get_attachment_image( $thumb_id, 'large', false, array( 'alt' => $thumb_alt ?: $title, 'loading' => 'lazy' ) ); ?></picture>
+				<?php else : ?>
+					<span class="gwc-news-image-placeholder" aria-hidden="true"></span>
+				<?php endif; ?>
+			</div>
+		</a>
+	</li>
+	<?php
+}
+
+/**
+ * AJAX callback for the GWC-style Load More button.
+ */
+function waicam_gwc_load_more_posts_callback() {
+	check_ajax_referer( 'gwc_load_more_posts', 'nonce' );
+
+	$paged = isset( $_POST['paged'] ) ? max( 1, absint( $_POST['paged'] ) ) : 2;
+	$query = new WP_Query( array(
+		'post_type'           => 'post',
+		'post_status'         => 'publish',
+		'posts_per_page'      => 9,
+		'paged'               => $paged,
+		'ignore_sticky_posts' => true,
+	) );
+
+	ob_start();
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			waicam_gwc_render_news_item();
+		}
+	}
+	wp_reset_postdata();
+
+	wp_send_json_success( array(
+		'html'     => ob_get_clean(),
+		'has_more' => $paged < (int) $query->max_num_pages,
+	) );
+}
+add_action( 'wp_ajax_gwc_load_more_posts', 'waicam_gwc_load_more_posts_callback' );
+add_action( 'wp_ajax_nopriv_gwc_load_more_posts', 'waicam_gwc_load_more_posts_callback' );
 
 /**
  * Custom Post Types & Custom Fields
@@ -289,15 +422,15 @@ function waicam_customize_register( $wp_customize ) {
 		'priority' => 32,
 	) );
 
-	// ────────── Page Blog ──────────
+	// ────────── Page News / Blog ──────────
 	$wp_customize->add_section( 'waicam_blog_page', array(
-		'title'       => __( 'Blog — Page des articles', 'waicam' ),
-		'description' => __( 'Textes du haut de la page Blog / Actualités.', 'waicam' ),
+		'title'       => __( 'Blog — Page News', 'waicam' ),
+		'description' => __( 'Textes du haut de la page News / Blog.', 'waicam' ),
 		'panel'       => 'waicam_panel',
 	) );
 	$blog_fields = array(
-		'waicam_blog_kicker' => array( __( 'Sur-titre', 'waicam' ), __( 'News and Blog', 'waicam' ) ),
-		'waicam_blog_title'  => array( __( 'Titre principal', 'waicam' ), __( 'Keep up with us', 'waicam' ) ),
+		'waicam_blog_kicker' => array( __( 'Label', 'waicam' ), __( 'Actualités & Blog', 'waicam' ) ),
+		'waicam_blog_title'  => array( __( 'Titre principal', 'waicam' ), __( 'Suivez nos actions', 'waicam' ) ),
 	);
 	foreach ( $blog_fields as $key => $cfg ) {
 		$wp_customize->add_setting( $key, array(
@@ -310,6 +443,96 @@ function waicam_customize_register( $wp_customize ) {
 			'type'    => 'text',
 		) );
 	}
+
+
+	// ────────── Page Évènements ──────────
+	$wp_customize->add_section( 'waicam_events_page', array(
+		'title'       => __( 'Évènements — Hero', 'waicam' ),
+		'description' => __( 'Image et badge de la première section de la page Évènements.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+
+	$wp_customize->add_setting( 'waicam_events_hero_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_events_hero_image_id', array(
+		'label'     => __( 'Image hero évènements', 'waicam' ),
+		'section'   => 'waicam_events_page',
+		'mime_type' => 'image',
+	) ) );
+
+	$wp_customize->add_setting( 'waicam_events_hero_year', array(
+		'default'           => gmdate( 'Y' ),
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'waicam_events_hero_year', array(
+		'label'   => __( 'Badge année', 'waicam' ),
+		'section' => 'waicam_events_page',
+		'type'    => 'text',
+	) );
+
+
+	$events_intro_fields = array(
+		'waicam_events_intro_title'    => array( __( 'Intro — Titre', 'waicam' ), __( 'ÉVÈNEMENTS WAI-CAM', 'waicam' ), 'text' ),
+		'waicam_events_intro_text'     => array( __( 'Intro — Texte', 'waicam' ), __( "Participez aux rencontres, formations, ateliers et actions terrain de Women in AI Cameroon. Nos évènements créent des espaces d’apprentissage, de dialogue et d’engagement autour d’une intelligence artificielle inclusive au Cameroun.", 'waicam' ), 'textarea' ),
+		'waicam_events_intro_cta_text' => array( __( 'Intro — Texte lien', 'waicam' ), __( 'Voir les prochains évènements', 'waicam' ), 'text' ),
+		'waicam_events_intro_cta_url'  => array( __( 'Intro — URL lien', 'waicam' ), '#events-upcoming', 'url' ),
+	);
+	foreach ( $events_intro_fields as $key => $cfg ) {
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_events_page',
+			'type'    => $cfg[2],
+		) );
+	}
+
+
+	$events_feature_fields = array(
+		'waicam_events_feature_title'    => array( __( 'Bloc à la une — Titre', 'waicam' ), '', 'text' ),
+		'waicam_events_feature_text'     => array( __( 'Bloc à la une — Texte', 'waicam' ), '', 'textarea' ),
+		'waicam_events_feature_cta_text' => array( __( 'Bloc à la une — Texte lien', 'waicam' ), __( 'En savoir plus', 'waicam' ), 'text' ),
+		'waicam_events_feature_cta_url'  => array( __( 'Bloc à la une — URL lien', 'waicam' ), '', 'url' ),
+	);
+	foreach ( $events_feature_fields as $key => $cfg ) {
+		if ( 'textarea' === $cfg[2] ) {
+			$sanitize = 'sanitize_textarea_field';
+		} elseif ( 'url' === $cfg[2] ) {
+			$sanitize = 'esc_url_raw';
+		} else {
+			$sanitize = 'sanitize_text_field';
+		}
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => $sanitize,
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_events_page',
+			'type'    => $cfg[2],
+		) );
+	}
+
+	$wp_customize->add_setting( 'waicam_events_feature_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_events_feature_image_id', array(
+		'label'     => __( 'Bloc à la une — Image', 'waicam' ),
+		'section'   => 'waicam_events_page',
+		'mime_type' => 'image',
+	) ) );
 
 	// ────────── Section Formulaires (IDs Fluent Forms) ──────────
 	$wp_customize->add_section( 'waicam_forms', array(
