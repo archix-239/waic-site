@@ -8,12 +8,79 @@
 get_header(); ?>
 
 <?php
-get_template_part( 'template-parts/page-hero', null, array(
-	'title'    => __( 'Nos Programmes Phares', 'waicam' ),
-	'subtitle' => __( "Quatre programmes structurants pour démocratiser l'IA auprès de toutes les femmes camerounaises.", 'waicam' ),
-	'crumb'    => __( 'Programmes', 'waicam' ),
-) );
+$programmes_hero_label    = get_theme_mod( 'waicam_programmes_hero_label', __( 'Programmes WAI-CAM', 'waicam' ) );
+$programmes_hero_title    = get_theme_mod( 'waicam_programmes_hero_title', __( 'Nos Programmes Phares', 'waicam' ) );
+$programmes_hero_text     = get_theme_mod( 'waicam_programmes_hero_text', __( "Quatre programmes structurants pour démocratiser l'IA auprès de toutes les femmes camerounaises.", 'waicam' ) );
+$programmes_hero_image_id = absint( get_theme_mod( 'waicam_programmes_hero_image_id', 0 ) );
+$programmes_intro_title    = get_theme_mod( 'waicam_programmes_intro_title', __( 'Quels sont nos programmes phares ?', 'waicam' ) );
+$programmes_intro_text     = get_theme_mod( 'waicam_programmes_intro_text', __( "WAI-CAM déploie des programmes conçus pour former, outiller et accompagner les femmes, les jeunes et les communautés dans l'appropriation de l'intelligence artificielle au Cameroun.", 'waicam' ) );
+$programmes_intro_image_id = absint( get_theme_mod( 'waicam_programmes_intro_image_id', 0 ) );
+$programmes_values         = array(
+	array(
+		'title' => get_theme_mod( 'waicam_programmes_value_1_title', __( 'Créer une communauté', 'waicam' ) ),
+		'text'  => get_theme_mod( 'waicam_programmes_value_1_text', __( "Connecter les femmes et les jeunes filles à une communauté solidaire qui les aide à apprendre, persévérer et réussir dans l'IA.", 'waicam' ) ),
+	),
+	array(
+		'title' => get_theme_mod( 'waicam_programmes_value_2_title', __( 'Développer le leadership', 'waicam' ) ),
+		'text'  => get_theme_mod( 'waicam_programmes_value_2_text', __( 'Renforcer les compétences, la confiance et le mentorat grâce à des parcours pratiques portés par des modèles féminins inspirants.', 'waicam' ) ),
+	),
+	array(
+		'title' => get_theme_mod( 'waicam_programmes_value_3_title', __( 'Construire des carrières IA', 'waicam' ) ),
+		'text'  => get_theme_mod( 'waicam_programmes_value_3_text', __( "Préparer les participantes à saisir les opportunités du numérique, de la recherche et de l'emploi dans l'écosystème IA camerounais.", 'waicam' ) ),
+	),
+);
 ?>
+
+<section class="programmes-career-hero" aria-labelledby="programmes-career-hero-title">
+	<div class="programmes-career-hero__inner">
+		<div class="programmes-career-hero__media">
+			<?php if ( $programmes_hero_image_id ) : ?>
+				<?php echo wp_get_attachment_image( $programmes_hero_image_id, 'large', false, array( 'class' => 'programmes-career-hero__image', 'loading' => 'eager' ) ); ?>
+			<?php else : ?>
+				<img class="programmes-career-hero__image" src="<?php echo esc_url( waicam_img( 'girls-ict.webp' ) ); ?>" alt="<?php esc_attr_e( 'Participantes WAI-CAM engagées dans un programme de formation', 'waicam' ); ?>" loading="eager" />
+			<?php endif; ?>
+		</div>
+
+		<div class="programmes-career-hero__copy">
+			<?php if ( $programmes_hero_label ) : ?>
+				<span class="programmes-career-hero__label"><?php echo esc_html( $programmes_hero_label ); ?></span>
+			<?php endif; ?>
+			<h1 id="programmes-career-hero-title"><?php echo esc_html( $programmes_hero_title ); ?></h1>
+			<p><?php echo esc_html( $programmes_hero_text ); ?></p>
+		</div>
+	</div>
+</section>
+
+<section class="programmes-career-intro" aria-labelledby="programmes-career-intro-title">
+	<div class="programmes-career-intro__inner">
+		<div class="programmes-career-intro__copy">
+			<h2 id="programmes-career-intro-title"><?php echo esc_html( $programmes_intro_title ); ?></h2>
+			<svg class="programmes-career-intro__wave" viewBox="0 0 360 24" role="presentation" aria-hidden="true" focusable="false">
+				<path d="M0 12 C10 2 22 2 32 12 S54 22 64 12 S86 2 96 12 S118 22 128 12 S150 2 160 12 S182 22 192 12 S214 2 224 12 S246 22 256 12 S278 2 288 12 S310 22 320 12 S342 2 360 12" />
+			</svg>
+			<p><?php echo esc_html( $programmes_intro_text ); ?></p>
+		</div>
+
+		<div class="programmes-career-intro__visual">
+			<?php if ( $programmes_intro_image_id ) : ?>
+				<?php echo wp_get_attachment_image( $programmes_intro_image_id, 'large', false, array( 'class' => 'programmes-career-intro__image', 'loading' => 'lazy' ) ); ?>
+			<?php else : ?>
+				<img class="programmes-career-intro__image" src="<?php echo esc_url( waicam_img( 'training-1.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Atelier Women in AI Cameroon', 'waicam' ); ?>" loading="lazy" />
+			<?php endif; ?>
+		</div>
+	</div>
+</section>
+
+<section class="programmes-career-values" aria-label="<?php esc_attr_e( 'Valeurs des programmes WAI-CAM', 'waicam' ); ?>">
+	<div class="programmes-career-values__inner">
+		<?php foreach ( $programmes_values as $programmes_value ) : ?>
+			<article class="programmes-career-values__item">
+				<h3><?php echo esc_html( $programmes_value['title'] ); ?></h3>
+				<p><?php echo esc_html( $programmes_value['text'] ); ?></p>
+			</article>
+		<?php endforeach; ?>
+	</div>
+</section>
 
 <?php
 $programmes_query = waicam_get_programmes( -1 );
