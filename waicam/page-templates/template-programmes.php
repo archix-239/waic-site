@@ -8,12 +8,31 @@
 get_header(); ?>
 
 <?php
-get_template_part( 'template-parts/page-hero', null, array(
-	'title'    => __( 'Nos Programmes Phares', 'waicam' ),
-	'subtitle' => __( "Quatre programmes structurants pour démocratiser l'IA auprès de toutes les femmes camerounaises.", 'waicam' ),
-	'crumb'    => __( 'Programmes', 'waicam' ),
-) );
+$programmes_hero_label    = get_theme_mod( 'waicam_programmes_hero_label', __( 'Programmes WAI-CAM', 'waicam' ) );
+$programmes_hero_title    = get_theme_mod( 'waicam_programmes_hero_title', __( 'Nos Programmes Phares', 'waicam' ) );
+$programmes_hero_text     = get_theme_mod( 'waicam_programmes_hero_text', __( "Quatre programmes structurants pour démocratiser l'IA auprès de toutes les femmes camerounaises.", 'waicam' ) );
+$programmes_hero_image_id = absint( get_theme_mod( 'waicam_programmes_hero_image_id', 0 ) );
 ?>
+
+<section class="programmes-career-hero" aria-labelledby="programmes-career-hero-title">
+	<div class="programmes-career-hero__inner">
+		<div class="programmes-career-hero__media">
+			<?php if ( $programmes_hero_image_id ) : ?>
+				<?php echo wp_get_attachment_image( $programmes_hero_image_id, 'large', false, array( 'class' => 'programmes-career-hero__image', 'loading' => 'eager' ) ); ?>
+			<?php else : ?>
+				<img class="programmes-career-hero__image" src="<?php echo esc_url( waicam_img( 'girls-ict.webp' ) ); ?>" alt="<?php esc_attr_e( 'Participantes WAI-CAM engagées dans un programme de formation', 'waicam' ); ?>" loading="eager" />
+			<?php endif; ?>
+		</div>
+
+		<div class="programmes-career-hero__copy">
+			<?php if ( $programmes_hero_label ) : ?>
+				<span class="programmes-career-hero__label"><?php echo esc_html( $programmes_hero_label ); ?></span>
+			<?php endif; ?>
+			<h1 id="programmes-career-hero-title"><?php echo esc_html( $programmes_hero_title ); ?></h1>
+			<p><?php echo esc_html( $programmes_hero_text ); ?></p>
+		</div>
+	</div>
+</section>
 
 <?php
 $programmes_query = waicam_get_programmes( -1 );
