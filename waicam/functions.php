@@ -463,6 +463,31 @@ function waicam_customize_register( $wp_customize ) {
 		'mime_type' => 'image',
 	) ) );
 
+	$programmes_intro_fields = array(
+		'waicam_programmes_intro_title' => array( __( 'Intro — Titre', 'waicam' ), __( 'Quels sont nos programmes phares ?', 'waicam' ), 'text' ),
+		'waicam_programmes_intro_text'  => array( __( 'Intro — Texte', 'waicam' ), __( "WAI-CAM déploie des programmes conçus pour former, outiller et accompagner les femmes, les jeunes et les communautés dans l'appropriation de l'intelligence artificielle au Cameroun.", 'waicam' ), 'textarea' ),
+	);
+	foreach ( $programmes_intro_fields as $key => $cfg ) {
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field',
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_programmes_page',
+			'type'    => $cfg[2],
+		) );
+	}
+	$wp_customize->add_setting( 'waicam_programmes_intro_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_programmes_intro_image_id', array(
+		'label'     => __( 'Intro — Image droite', 'waicam' ),
+		'section'   => 'waicam_programmes_page',
+		'mime_type' => 'image',
+	) ) );
+
 
 	// ────────── Page Évènements ──────────
 	$wp_customize->add_section( 'waicam_events_page', array(

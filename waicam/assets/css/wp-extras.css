@@ -7956,3 +7956,116 @@ footer ul li {
     font-size: 1rem;
   }
 }
+
+/* Programmes page — intro section with animated wave */
+.programmes-career-intro {
+  padding: clamp(64px, 8vw, 118px) clamp(24px, 6vw, 70px);
+  background: #fff;
+  color: #111;
+  overflow: hidden;
+}
+.programmes-career-intro__inner {
+  width: min(100%, 1320px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.88fr) minmax(360px, 1.12fr);
+  gap: clamp(44px, 8vw, 112px);
+  align-items: center;
+}
+.programmes-career-intro__copy h2 {
+  margin: 0;
+  color: #1E1B4B;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(2.55rem, 4.8vw, 4.8rem);
+  font-weight: 900;
+  line-height: .96;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+.programmes-career-intro__wave {
+  display: block;
+  width: min(340px, 90%);
+  height: 24px;
+  margin: 10px 0 clamp(22px, 3vw, 34px);
+  overflow: visible;
+}
+.programmes-career-intro__wave path {
+  fill: none;
+  stroke: #0E6A2E;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 380;
+  stroke-dashoffset: 380;
+  animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4;
+}
+.programmes-career-intro__copy p {
+  max-width: 560px;
+  margin: 0;
+  color: #111;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: clamp(1.15rem, 1.9vw, 1.55rem);
+  line-height: 1.48;
+}
+.programmes-career-intro__visual {
+  position: relative;
+  min-height: clamp(320px, 35vw, 470px);
+}
+.programmes-career-intro__image {
+  position: absolute;
+  top: 0;
+  right: calc(clamp(24px, 6vw, 70px) * -1);
+  width: min(600px, 88%);
+  height: clamp(230px, 25vw, 330px);
+  object-fit: cover;
+  object-position: center center;
+}
+.programmes-career-intro__icon {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: clamp(140px, 18vw, 220px);
+  color: #1E1B4B;
+}
+.programmes-career-intro__icon svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.programmes-career-intro__icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (max-width: 920px) {
+  .programmes-career-intro {
+    padding: 54px 22px;
+  }
+  .programmes-career-intro__inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .programmes-career-intro__visual {
+    min-height: 380px;
+  }
+  .programmes-career-intro__image {
+    right: 0;
+    width: min(680px, 100%);
+  }
+}
+@media (max-width: 560px) {
+  .programmes-career-intro__copy h2 {
+    font-size: clamp(2.1rem, 11vw, 3.1rem);
+  }
+  .programmes-career-intro__copy p {
+    font-size: 1rem;
+  }
+  .programmes-career-intro__visual {
+    min-height: 320px;
+  }
+  .programmes-career-intro__image {
+    height: 220px;
+  }
+}

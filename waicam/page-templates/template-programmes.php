@@ -12,6 +12,9 @@ $programmes_hero_label    = get_theme_mod( 'waicam_programmes_hero_label', __( '
 $programmes_hero_title    = get_theme_mod( 'waicam_programmes_hero_title', __( 'Nos Programmes Phares', 'waicam' ) );
 $programmes_hero_text     = get_theme_mod( 'waicam_programmes_hero_text', __( "Quatre programmes structurants pour démocratiser l'IA auprès de toutes les femmes camerounaises.", 'waicam' ) );
 $programmes_hero_image_id = absint( get_theme_mod( 'waicam_programmes_hero_image_id', 0 ) );
+$programmes_intro_title    = get_theme_mod( 'waicam_programmes_intro_title', __( 'Quels sont nos programmes phares ?', 'waicam' ) );
+$programmes_intro_text     = get_theme_mod( 'waicam_programmes_intro_text', __( "WAI-CAM déploie des programmes conçus pour former, outiller et accompagner les femmes, les jeunes et les communautés dans l'appropriation de l'intelligence artificielle au Cameroun.", 'waicam' ) );
+$programmes_intro_image_id = absint( get_theme_mod( 'waicam_programmes_intro_image_id', 0 ) );
 ?>
 
 <section class="programmes-career-hero" aria-labelledby="programmes-career-hero-title">
@@ -30,6 +33,32 @@ $programmes_hero_image_id = absint( get_theme_mod( 'waicam_programmes_hero_image
 			<?php endif; ?>
 			<h1 id="programmes-career-hero-title"><?php echo esc_html( $programmes_hero_title ); ?></h1>
 			<p><?php echo esc_html( $programmes_hero_text ); ?></p>
+		</div>
+	</div>
+</section>
+
+<section class="programmes-career-intro" aria-labelledby="programmes-career-intro-title">
+	<div class="programmes-career-intro__inner">
+		<div class="programmes-career-intro__copy">
+			<h2 id="programmes-career-intro-title"><?php echo esc_html( $programmes_intro_title ); ?></h2>
+			<svg class="programmes-career-intro__wave" viewBox="0 0 360 24" role="presentation" aria-hidden="true" focusable="false">
+				<path d="M0 12 C10 2 22 2 32 12 S54 22 64 12 S86 2 96 12 S118 22 128 12 S150 2 160 12 S182 22 192 12 S214 2 224 12 S246 22 256 12 S278 2 288 12 S310 22 320 12 S342 2 360 12" />
+			</svg>
+			<p><?php echo esc_html( $programmes_intro_text ); ?></p>
+		</div>
+
+		<div class="programmes-career-intro__visual">
+			<div class="programmes-career-intro__icon" aria-hidden="true">
+				<svg viewBox="0 0 190 150" focusable="false" role="presentation">
+					<path d="M31 25h96v78H31zM48 48c13-14 25-14 38 0s25 14 38 0M48 78l27-20 25 18 29-28" />
+					<path d="M18 103h123v20c0 9 7 16 16 16H48c-17 0-30-13-30-30v-6zM127 103h32v36M159 139h18M171 92v31" />
+				</svg>
+			</div>
+			<?php if ( $programmes_intro_image_id ) : ?>
+				<?php echo wp_get_attachment_image( $programmes_intro_image_id, 'large', false, array( 'class' => 'programmes-career-intro__image', 'loading' => 'lazy' ) ); ?>
+			<?php else : ?>
+				<img class="programmes-career-intro__image" src="<?php echo esc_url( waicam_img( 'training-1.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Atelier Women in AI Cameroon', 'waicam' ); ?>" loading="lazy" />
+			<?php endif; ?>
 		</div>
 	</div>
 </section>
