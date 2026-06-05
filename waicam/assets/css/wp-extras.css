@@ -8316,3 +8316,42 @@ footer ul li {
     font-size: 1.05rem;
   }
 }
+
+/* Programmes page — match Events feature card full-bleed sizing */
+.programmes-career-cpt {
+  overflow-x: hidden;
+}
+.programmes-career-feature {
+  width: 100vw;
+  min-height: clamp(520px, 62vw, 720px);
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.programmes-career-feature + .programmes-career-feature {
+  margin-top: 0;
+}
+.programmes-career-feature__copy {
+  padding: 40px clamp(44px, 6vw, 92px);
+}
+.programmes-career-feature__image,
+.programmes-career-feature__image img {
+  min-height: inherit;
+}
+@media (max-width: 900px) {
+  .programmes-career-feature,
+  .programmes-career-feature--reverse {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .programmes-career-feature__copy {
+    padding: 42px 24px;
+  }
+  .programmes-career-feature__image,
+  .programmes-career-feature__image img {
+    min-height: clamp(280px, 64vw, 460px);
+  }
+}
