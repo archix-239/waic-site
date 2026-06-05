@@ -8069,3 +8069,55 @@ footer ul li {
     height: 220px;
   }
 }
+
+/* Programmes page — tighter first sections alignment */
+.programmes-career-hero {
+  padding-bottom: clamp(18px, 2.5vw, 34px);
+}
+.programmes-career-hero__inner,
+.programmes-career-intro__inner {
+  width: min(100%, 1500px);
+  grid-template-columns: minmax(340px, 1.05fr) minmax(360px, .95fr);
+  gap: clamp(30px, 4.2vw, 58px);
+}
+.programmes-career-hero__media {
+  aspect-ratio: 1.24 / 1;
+}
+.programmes-career-hero__copy {
+  align-self: start;
+  padding-top: clamp(12px, 2.4vw, 30px);
+}
+.programmes-career-intro {
+  padding-top: clamp(10px, 1.6vw, 22px);
+}
+.programmes-career-intro__inner {
+  align-items: start;
+}
+.programmes-career-intro__visual {
+  min-height: clamp(230px, 25vw, 330px);
+}
+.programmes-career-intro__image {
+  position: static;
+  width: calc(100% + clamp(24px, 6vw, 70px));
+  height: clamp(230px, 25vw, 330px);
+  margin-right: calc(clamp(24px, 6vw, 70px) * -1);
+}
+.programmes-career-intro__icon {
+  display: none;
+}
+@media (max-width: 920px) {
+  .programmes-career-hero__inner,
+  .programmes-career-intro__inner {
+    grid-template-columns: 1fr;
+  }
+  .programmes-career-hero {
+    padding-bottom: 24px;
+  }
+  .programmes-career-intro {
+    padding-top: 24px;
+  }
+  .programmes-career-intro__image {
+    width: 100%;
+    margin-right: 0;
+  }
+}

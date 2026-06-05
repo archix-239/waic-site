@@ -48,12 +48,6 @@ $programmes_intro_image_id = absint( get_theme_mod( 'waicam_programmes_intro_ima
 		</div>
 
 		<div class="programmes-career-intro__visual">
-			<div class="programmes-career-intro__icon" aria-hidden="true">
-				<svg viewBox="0 0 190 150" focusable="false" role="presentation">
-					<path d="M31 25h96v78H31zM48 48c13-14 25-14 38 0s25 14 38 0M48 78l27-20 25 18 29-28" />
-					<path d="M18 103h123v20c0 9 7 16 16 16H48c-17 0-30-13-30-30v-6zM127 103h32v36M159 139h18M171 92v31" />
-				</svg>
-			</div>
 			<?php if ( $programmes_intro_image_id ) : ?>
 				<?php echo wp_get_attachment_image( $programmes_intro_image_id, 'large', false, array( 'class' => 'programmes-career-intro__image', 'loading' => 'lazy' ) ); ?>
 			<?php else : ?>
