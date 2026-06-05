@@ -159,21 +159,25 @@ else :
 <?php endif; ?>
 
 <!-- FORMULAIRE INSCRIPTION PROGRAMME -->
-<section>
-	<div style="max-width:700px;margin:0 auto;">
-		<div class="section-header">
-			<div class="section-tag"><?php esc_html_e( 'Inscription', 'waicam' ); ?></div>
-			<h2 class="section-title"><?php echo wp_kses_post( __( "S'inscrire à un <span>programme</span>", 'waicam' ) ); ?></h2>
-			<p class="section-desc"><?php esc_html_e( "Remplissez ce formulaire pour exprimer votre intérêt et rejoindre l'un de nos programmes.", 'waicam' ); ?></p>
+<section class="programmes-career-form" aria-labelledby="programmes-career-form-title">
+	<div class="programmes-career-form__inner">
+		<div class="programmes-career-form__copy">
+			<span class="programmes-career-form__label"><?php esc_html_e( 'Inscription', 'waicam' ); ?></span>
+			<h2 id="programmes-career-form-title"><?php esc_html_e( 'Rejoindre un programme WAI-CAM', 'waicam' ); ?></h2>
+			<svg class="programmes-career-form__wave" viewBox="0 0 360 24" role="presentation" aria-hidden="true" focusable="false">
+				<path d="M0 12 C10 2 22 2 32 12 S54 22 64 12 S86 2 96 12 S118 22 128 12 S150 2 160 12 S182 22 192 12 S214 2 224 12 S246 22 256 12 S278 2 288 12 S310 22 320 12 S342 2 360 12" />
+			</svg>
+			<p><?php esc_html_e( "Remplissez ce formulaire pour exprimer votre intérêt, être orientée vers le bon programme et rejoindre une communauté engagée autour de l'IA inclusive au Cameroun.", 'waicam' ); ?></p>
 		</div>
-		<div class="form-card">
+
+		<div class="programmes-career-form__card">
 			<?php
-			// Affiche un formulaire Fluent Forms via shortcode (configuré depuis le Customizer)
+			// Affiche un formulaire Fluent Forms via shortcode (configuré depuis le Customizer).
 			$ff_id = get_theme_mod( 'waicam_form_programme', '' );
 			if ( $ff_id ) {
 				echo do_shortcode( '[fluentform id="' . esc_attr( $ff_id ) . '"]' );
 			} else {
-				echo '<p style="text-align:center;color:var(--gray);padding:24px;">';
+				echo '<p class="programmes-career-form__empty">';
 				esc_html_e( 'Formulaire à connecter dans Apparence → Personnaliser → WAI-CAM → ID du formulaire programme', 'waicam' );
 				echo '</p>';
 			}

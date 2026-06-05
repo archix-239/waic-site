@@ -8355,3 +8355,146 @@ footer ul li {
     min-height: clamp(280px, 64vw, 460px);
   }
 }
+
+/* Programmes page — application form section */
+.programmes-career-form {
+  padding: clamp(82px, 9vw, 138px) clamp(24px, 6vw, 70px);
+  color: #fff;
+  background: #1E1B4B;
+  overflow: hidden;
+}
+.programmes-career-form__inner {
+  width: min(100%, 1380px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(280px, .92fr) minmax(320px, 1.08fr);
+  gap: clamp(42px, 7vw, 112px);
+  align-items: start;
+}
+.programmes-career-form__label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  margin-bottom: clamp(20px, 3vw, 30px);
+  padding: 8px 22px;
+  color: #fff;
+  background: #E41D44;
+  font-family: "Roboto Mono", "Courier New", monospace;
+  font-size: .9rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.programmes-career-form__copy h2 {
+  margin: 0;
+  color: #fff;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(2.3rem, 4.5vw, 4.75rem);
+  font-weight: 900;
+  line-height: .98;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+.programmes-career-form__wave {
+  display: block;
+  width: min(340px, 88%);
+  height: 24px;
+  margin: 12px 0 clamp(24px, 3vw, 36px);
+  overflow: visible;
+}
+.programmes-career-form__wave path {
+  fill: none;
+  stroke: #0E6A2E;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 380;
+  stroke-dashoffset: 380;
+  animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4;
+}
+.programmes-career-form__copy p {
+  max-width: 560px;
+  margin: 0;
+  color: rgba(255, 255, 255, .9);
+  font-family: "Inter", Arial, sans-serif;
+  font-size: clamp(1.05rem, 1.65vw, 1.35rem);
+  line-height: 1.55;
+}
+.programmes-career-form__card {
+  position: relative;
+  padding: clamp(24px, 4vw, 46px);
+  color: #111;
+  background: #fff;
+  border-top: 12px solid #0E6A2E;
+  box-shadow: 18px 18px 0 #E41D44;
+}
+.programmes-career-form__empty {
+  margin: 0;
+  padding: 24px;
+  color: #1E1B4B;
+  text-align: center;
+  font-weight: 800;
+}
+.programmes-career-form__card .ff-el-group,
+.programmes-career-form__card .fluentform .ff-el-group {
+  margin-bottom: 18px;
+}
+.programmes-career-form__card label,
+.programmes-career-form__card .ff-el-input--label label {
+  color: #1E1B4B;
+  font-weight: 900;
+}
+.programmes-career-form__card input,
+.programmes-career-form__card textarea,
+.programmes-career-form__card select {
+  border: 2px solid rgba(30, 27, 75, .18) !important;
+  border-radius: 0 !important;
+  min-height: 48px;
+}
+.programmes-career-form__card input:focus,
+.programmes-career-form__card textarea:focus,
+.programmes-career-form__card select:focus {
+  border-color: #0E6A2E !important;
+  box-shadow: 0 0 0 3px rgba(14, 106, 46, .14) !important;
+}
+.programmes-career-form__card button,
+.programmes-career-form__card input[type="submit"],
+.programmes-career-form__card .ff-btn-submit {
+  min-height: 52px;
+  padding: 14px 26px !important;
+  color: #fff !important;
+  background: #E41D44 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.programmes-career-form__card button:hover,
+.programmes-career-form__card input[type="submit"]:hover,
+.programmes-career-form__card .ff-btn-submit:hover {
+  background: #0E6A2E !important;
+}
+@media (max-width: 920px) {
+  .programmes-career-hero__copy {
+    order: -1;
+  }
+  .programmes-career-hero__media {
+    order: 2;
+  }
+  .programmes-career-form {
+    padding: 58px 22px 72px;
+  }
+  .programmes-career-form__inner {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .programmes-career-form__copy h2 {
+    font-size: clamp(2rem, 10vw, 3.25rem);
+  }
+  .programmes-career-form__copy p {
+    font-size: 1rem;
+  }
+  .programmes-career-form__card {
+    box-shadow: 10px 10px 0 #E41D44;
+  }
+}
