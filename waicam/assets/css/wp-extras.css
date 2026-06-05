@@ -8498,3 +8498,51 @@ footer ul li {
     box-shadow: 10px 10px 0 #E41D44;
   }
 }
+
+/* Programmes page — final spacing and readability refinements */
+.programmes-career-form {
+  background: #0E6A2E;
+}
+.programmes-career-form__wave path {
+  stroke: #fff;
+}
+.programmes-career-form__card {
+  border-top-color: #1E1B4B;
+}
+.programmes-career-feature__copy h2 {
+  font-size: clamp(2rem, 3.35vw, 3.45rem);
+  line-height: 1.02;
+}
+.programmes-career-feature__copy p {
+  font-size: clamp(1rem, 1.45vw, 1.35rem);
+  line-height: 1.46;
+}
+.programmes-career-feature__copy .programmes-career-feature__meta {
+  font-size: clamp(.92rem, 1.1vw, 1.05rem);
+}
+.programmes-career-feature__wave {
+  margin-bottom: clamp(20px, 2.5vw, 30px);
+}
+@media (min-width: 921px) {
+  .programmes-career-hero {
+    padding-bottom: 0;
+  }
+  .programmes-career-intro {
+    margin-top: clamp(-210px, -11vw, -110px);
+    padding-top: 0;
+  }
+  .programmes-career-intro__copy {
+    padding-top: clamp(220px, 14vw, 290px);
+  }
+  .programmes-career-intro__visual {
+    transform: translateY(clamp(-16px, -1.6vw, -8px));
+  }
+}
+@media (max-width: 920px) {
+  .programmes-career-feature__copy h2 {
+    font-size: clamp(1.85rem, 8vw, 2.75rem);
+  }
+  .programmes-career-feature__copy p {
+    font-size: 1rem;
+  }
+}
