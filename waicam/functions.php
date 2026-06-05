@@ -521,44 +521,6 @@ function waicam_customize_register( $wp_customize ) {
 	) ) );
 
 
-	// ────────── Page Programmes ──────────
-	$wp_customize->add_section( 'waicam_programmes_page', array(
-		'title'       => __( 'Programmes — Hero', 'waicam' ),
-		'description' => __( 'Contenu de la première section de la page Programmes.', 'waicam' ),
-		'panel'       => 'waicam_panel',
-	) );
-	$programmes_hero_fields = array(
-		'waicam_programmes_hero_label' => array( __( 'Hero — Label', 'waicam' ), __( 'Programmes WAI-CAM', 'waicam' ), 'text' ),
-		'waicam_programmes_hero_title' => array( __( 'Hero — Titre', 'waicam' ), __( 'Nos Programmes Phares', 'waicam' ), 'text' ),
-		'waicam_programmes_hero_text'  => array( __( 'Hero — Texte', 'waicam' ), __( "Quatre programmes structurants pour démocratiser l'IA auprès de toutes les femmes camerounaises.", 'waicam' ), 'textarea' ),
-	);
-	foreach ( $programmes_hero_fields as $key => $cfg ) {
-		$wp_customize->add_setting( $key, array(
-			'default'           => $cfg[1],
-			'sanitize_callback' => 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field',
-		) );
-		$wp_customize->add_control( $key, array(
-			'label'   => $cfg[0],
-			'section' => 'waicam_programmes_page',
-			'type'    => $cfg[2],
-		) );
-	}
-	$programmes_hero_images = array(
-		'waicam_programmes_hero_left_image_id'  => __( 'Hero — Image gauche', 'waicam' ),
-		'waicam_programmes_hero_right_image_id' => __( 'Hero — Image droite', 'waicam' ),
-	);
-	foreach ( $programmes_hero_images as $key => $label ) {
-		$wp_customize->add_setting( $key, array(
-			'default'           => 0,
-			'sanitize_callback' => 'absint',
-		) );
-		$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, $key, array(
-			'label'     => $label,
-			'section'   => 'waicam_programmes_page',
-			'mime_type' => 'image',
-		) ) );
-	}
-
 	// ────────── Section Formulaires (IDs Fluent Forms) ──────────
 	$wp_customize->add_section( 'waicam_forms', array(
 		'title' => __( 'Formulaires Fluent Forms', 'waicam' ),

@@ -8,40 +8,12 @@
 get_header(); ?>
 
 <?php
-$programmes_hero_label    = get_theme_mod( 'waicam_programmes_hero_label', __( 'Programmes WAI-CAM', 'waicam' ) );
-$programmes_hero_title    = get_theme_mod( 'waicam_programmes_hero_title', __( 'Nos Programmes Phares', 'waicam' ) );
-$programmes_hero_text     = get_theme_mod( 'waicam_programmes_hero_text', __( "Quatre programmes structurants pour démocratiser l'IA auprès de toutes les femmes camerounaises.", 'waicam' ) );
-$programmes_hero_left_id  = absint( get_theme_mod( 'waicam_programmes_hero_left_image_id', 0 ) );
-$programmes_hero_right_id = absint( get_theme_mod( 'waicam_programmes_hero_right_image_id', 0 ) );
+get_template_part( 'template-parts/page-hero', null, array(
+	'title'    => __( 'Nos Programmes Phares', 'waicam' ),
+	'subtitle' => __( "Quatre programmes structurants pour démocratiser l'IA auprès de toutes les femmes camerounaises.", 'waicam' ),
+	'crumb'    => __( 'Programmes', 'waicam' ),
+) );
 ?>
-
-<section class="programmes-cc-hero" aria-labelledby="programmes-cc-hero-title">
-	<div class="programmes-cc-hero__inner">
-		<div class="programmes-cc-hero__media programmes-cc-hero__media--left">
-			<?php if ( $programmes_hero_left_id ) : ?>
-				<?php echo wp_get_attachment_image( $programmes_hero_left_id, 'large', false, array( 'class' => 'programmes-cc-hero__image', 'loading' => 'eager' ) ); ?>
-			<?php else : ?>
-				<img class="programmes-cc-hero__image" src="<?php echo esc_url( waicam_img( 'girls-ict.webp' ) ); ?>" alt="<?php esc_attr_e( 'Participantes WAI-CAM engagées dans un programme de formation', 'waicam' ); ?>" loading="eager" />
-			<?php endif; ?>
-		</div>
-
-		<div class="programmes-cc-hero__copy">
-			<?php if ( $programmes_hero_label ) : ?>
-				<span class="programmes-cc-hero__label"><?php echo esc_html( $programmes_hero_label ); ?></span>
-			<?php endif; ?>
-			<h1 id="programmes-cc-hero-title"><?php echo esc_html( $programmes_hero_title ); ?></h1>
-			<p><?php echo esc_html( $programmes_hero_text ); ?></p>
-		</div>
-
-		<div class="programmes-cc-hero__media programmes-cc-hero__media--right">
-			<?php if ( $programmes_hero_right_id ) : ?>
-				<?php echo wp_get_attachment_image( $programmes_hero_right_id, 'large', false, array( 'class' => 'programmes-cc-hero__image', 'loading' => 'lazy' ) ); ?>
-			<?php else : ?>
-				<img class="programmes-cc-hero__image" src="<?php echo esc_url( waicam_img( 'training-1.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Atelier terrain Women in AI Cameroon', 'waicam' ); ?>" loading="lazy" />
-			<?php endif; ?>
-		</div>
-	</div>
-</section>
 
 <?php
 $programmes_query = waicam_get_programmes( -1 );
