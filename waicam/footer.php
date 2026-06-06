@@ -57,13 +57,8 @@
 				<ul>
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Accueil', 'waicam' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/about' ) ); ?>"><?php esc_html_e( 'À propos', 'waicam' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/programmes' ) ); ?>"><?php esc_html_e( 'Programmes', 'waicam' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/formations' ) ); ?>"><?php esc_html_e( 'Formations', 'waicam' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/equipe' ) ); ?>"><?php esc_html_e( 'Équipe', 'waicam' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/temoignages' ) ); ?>"><?php esc_html_e( 'Témoignages', 'waicam' ); ?></a></li>
-					<li><a href="<?php echo esc_url( waicam_events_archive_url() ); ?>"><?php esc_html_e( 'Évènements', 'waicam' ); ?></a></li>
+					<li><a href="<?php echo esc_url( waicam_events_page_url() ); ?>"><?php esc_html_e( 'Évènements', 'waicam' ); ?></a></li>
 					<li><a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/blog' ) ); ?>"><?php esc_html_e( 'Blog', 'waicam' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/galerie' ) ); ?>"><?php esc_html_e( 'Galerie', 'waicam' ); ?></a></li>
 				</ul>
 				<?php
 			}
@@ -105,12 +100,10 @@
 				$phone = get_theme_mod( 'waicam_phone', '+237682573699' );
 				?>
 				<ul>
-					<li><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>"><?php esc_html_e( 'Nous contacter', 'waicam' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/partenaires' ) ); ?>"><?php esc_html_e( 'Partenariats', 'waicam' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/rejoindre' ) ); ?>"><?php esc_html_e( 'Rejoindre', 'waicam' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>"><?php esc_html_e( 'Contact', 'waicam' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/faire-un-don' ) ); ?>"><i class="fa-solid fa-heart" style="color:#ef4444"></i> <?php esc_html_e( 'Faire un don', 'waicam' ); ?></a></li>
 					<li><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></li>
-					<li><a href="tel:<?php echo esc_attr( $phone ); ?>"><?php echo esc_html( get_theme_mod( 'waicam_phone_display', '(+237) 682 573 699' ) ); ?></a></li>
 				</ul>
 				<?php
 			}
