@@ -250,21 +250,21 @@ $hero_year = get_theme_mod( 'waicam_formations_hero_year', gmdate( 'Y' ) );
 			$calendar_next_url     = add_query_arg( array_merge( $calendar_url_args, array( 'formations_page' => $formations_page + 1 ) ), get_permalink() ) . '#formations-calendar';
 			?>
 
-			<form class="events-calendar-search" method="get" action="<?php echo esc_url( get_permalink() ); ?>">
-				<label class="screen-reader-text" for="formations-calendar-search"><?php esc_html_e( 'Rechercher des formations', 'waicam' ); ?></label>
-				<div class="events-calendar-search__field">
-					<span aria-hidden="true">⌕</span>
-					<input id="formations-calendar-search" type="search" name="formation_search" value="<?php echo esc_attr( $calendar_search ); ?>" placeholder="<?php esc_attr_e( 'Rechercher formations', 'waicam' ); ?>" />
-				</div>
+			<form class="events-calendar-toolbar" role="search" method="get" action="<?php echo esc_url( get_permalink() ); ?>">
 				<?php if ( $calendar_date ) : ?>
 					<input type="hidden" name="formation_date" value="<?php echo esc_attr( $calendar_date ); ?>" />
 				<?php endif; ?>
-				<button type="submit"><?php esc_html_e( 'Chercher', 'waicam' ); ?></button>
-				<div class="events-calendar-search__views" aria-label="<?php esc_attr_e( 'Modes d’affichage', 'waicam' ); ?>">
-					<a class="active" href="#formations-calendar"><?php esc_html_e( 'Liste', 'waicam' ); ?></a>
-					<a href="<?php echo esc_url( $calendar_base ); ?>"><?php esc_html_e( 'Mois', 'waicam' ); ?></a>
+				<label class="events-calendar-toolbar__search" for="formations-calendar-search">
+					<span class="screen-reader-text"><?php esc_html_e( 'Rechercher des formations', 'waicam' ); ?></span>
+					<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.8 18.1a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Zm5.2-1.1 4.2 4.2" /></svg>
+					<input id="formations-calendar-search" type="search" name="formation_search" value="<?php echo esc_attr( $calendar_search ); ?>" placeholder="<?php esc_attr_e( 'Rechercher formations', 'waicam' ); ?>" />
+				</label>
+				<button class="events-calendar-toolbar__submit" type="submit"><?php esc_html_e( 'Chercher', 'waicam' ); ?></button>
+				<nav class="events-calendar-toolbar__views" aria-label="<?php esc_attr_e( 'Vues du calendrier', 'waicam' ); ?>">
+					<a class="is-active" href="#formations-calendar"><?php esc_html_e( 'Liste', 'waicam' ); ?></a>
+					<a href="<?php echo esc_url( add_query_arg( 'eventDisplay', 'month', $calendar_base ) ); ?>"><?php esc_html_e( 'Mois', 'waicam' ); ?></a>
 					<a href="<?php echo esc_url( add_query_arg( 'eventDisplay', 'day', $calendar_base ) ); ?>"><?php esc_html_e( 'Jour', 'waicam' ); ?></a>
-				</div>
+				</nav>
 			</form>
 
 			<div class="events-calendar-controls">

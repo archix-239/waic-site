@@ -8853,3 +8853,61 @@ body.admin-bar .site-content {
     padding-top: var(--waicam-header-height);
   }
 }
+
+/* Formations page — hero/search/footer corrections */
+.formations-campaign-hero .events-campaign-hero__placeholder {
+  width: min(1000px, 74vw);
+  overflow: hidden;
+}
+.formations-campaign-hero .events-campaign-hero__placeholder strong {
+  max-width: 100%;
+  font-size: clamp(2.8rem, 7.4vw, 6.25rem);
+  letter-spacing: -.025em;
+  line-height: .92;
+  white-space: nowrap;
+}
+.formations-campaign-page .events-calendar-toolbar {
+  margin-top: clamp(34px, 5vw, 72px);
+}
+.formations-campaign-page .events-calendar-toolbar__submit {
+  background: #152247;
+  color: #fff;
+}
+.formations-campaign-page .events-calendar-toolbar__submit:hover,
+.formations-campaign-page .events-calendar-toolbar__submit:focus-visible {
+  background: #E41D44;
+}
+.formations-campaign-page .events-calendar-footer__next {
+  min-height: 58px;
+  padding: 0 28px;
+  justify-content: center;
+  color: #fff;
+  background: #152247;
+  border: 2px solid #152247;
+}
+.formations-campaign-page .events-calendar-footer__next .arrow-wave path {
+  stroke: #fff;
+}
+.formations-campaign-page .events-calendar-footer__next:hover,
+.formations-campaign-page .events-calendar-footer__next:focus-visible {
+  color: #fff;
+  background: #E41D44;
+  border-color: #E41D44;
+}
+.formations-campaign-page .events-calendar-footer__next:hover .arrow-wave path,
+.formations-campaign-page .events-calendar-footer__next:focus-visible .arrow-wave path {
+  stroke: #fff;
+}
+@media (max-width: 760px) {
+  .formations-campaign-hero .events-campaign-hero__placeholder {
+    width: min(92vw, 620px);
+  }
+  .formations-campaign-hero .events-campaign-hero__placeholder strong {
+    font-size: clamp(2.4rem, 13vw, 4.4rem);
+  }
+}
+@media (max-width: 420px) {
+  .formations-campaign-hero .events-campaign-hero__placeholder strong {
+    font-size: clamp(2rem, 12vw, 3.1rem);
+  }
+}
