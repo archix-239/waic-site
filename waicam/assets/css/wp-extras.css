@@ -7356,3 +7356,1214 @@ footer ul li {
     order: 0;
   }
 }
+
+/* Events page — custom calendar system inspired by The Events Calendar */
+.events-calendar-system {
+  padding: clamp(76px, 8vw, 126px) clamp(22px, 4vw, 74px) clamp(96px, 10vw, 150px);
+  background: #fff;
+  color: #111;
+}
+.events-calendar-system__inner {
+  width: min(1764px, 100%);
+  margin: 0 auto;
+}
+.events-calendar-system__heading {
+  max-width: 920px;
+  margin-bottom: clamp(34px, 5vw, 72px);
+}
+.events-calendar-system__kicker {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  color: #fff;
+  background: #0E6A2E;
+  font-family: "Roboto Mono", "Courier New", monospace;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.events-calendar-system__heading h2 {
+  margin: 18px 0 12px;
+  color: #1E1B4B;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(2.4rem, 5vw, 4.8rem);
+  font-weight: 900;
+  line-height: .95;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+.events-calendar-system__heading p {
+  max-width: 780px;
+  margin: 0;
+  color: #111;
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  line-height: 1.55;
+}
+.events-calendar-toolbar {
+  min-height: 96px;
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) auto auto;
+  align-items: stretch;
+  border: 1px solid rgba(17, 17, 17, .16);
+  background: #fff;
+}
+.events-calendar-toolbar__search {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 clamp(18px, 2vw, 28px);
+}
+.events-calendar-toolbar__search svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: #111;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.events-calendar-toolbar__search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: #111;
+  background: transparent;
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+}
+.events-calendar-toolbar__submit {
+  align-self: center;
+  min-width: 152px;
+  min-height: 68px;
+  margin-right: 18px;
+  border: 0;
+  color: #fff;
+  background: #1E1B4B;
+  font-size: 1.05rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.events-calendar-toolbar__submit:hover,
+.events-calendar-toolbar__submit:focus-visible {
+  background: #E41D44;
+  transform: translateY(-1px);
+}
+.events-calendar-toolbar__views {
+  display: flex;
+  align-items: stretch;
+  padding-right: 22px;
+}
+.events-calendar-toolbar__views a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 18px;
+  color: #111;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+.events-calendar-toolbar__views a.is-active::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: -1px;
+  height: 4px;
+  background: #1E1B4B;
+}
+.events-calendar-controls {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: clamp(36px, 5vw, 58px) 0;
+}
+.events-calendar-controls__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.events-calendar-controls__nav a {
+  color: #111;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.events-calendar-controls__nav a:not(.events-calendar-controls__today) {
+  font-size: 2.35rem;
+  line-height: 1;
+}
+.events-calendar-controls__today {
+  padding: 12px 20px;
+  border: 1px solid rgba(17, 17, 17, .2);
+  border-radius: 4px;
+}
+.events-calendar-controls strong {
+  color: #111;
+  border: 2px solid #1E1B4B;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: clamp(1.5rem, 2.4vw, 2.45rem);
+  font-weight: 500;
+}
+.events-calendar-list__month {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 28px;
+  margin: 0 0 36px;
+  color: #111;
+  font-size: 1.35rem;
+  font-weight: 500;
+  text-transform: lowercase;
+}
+.events-calendar-list__month::after {
+  content: "";
+  height: 1px;
+  background: rgba(17, 17, 17, .22);
+}
+.events-calendar-item {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) minmax(280px, 540px);
+  gap: clamp(26px, 4vw, 64px);
+  align-items: start;
+  padding: 34px 0 52px;
+  border-bottom: 1px solid rgba(17, 17, 17, .13);
+}
+.events-calendar-item__date {
+  color: #1E1B4B;
+  text-align: center;
+  text-transform: uppercase;
+}
+.events-calendar-item__date span {
+  display: block;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.events-calendar-item__date strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 2.1rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.events-calendar-item__time {
+  margin: 0 0 16px;
+  color: #111;
+  font-size: 1.03rem;
+  font-weight: 500;
+}
+.events-calendar-item__body h3 {
+  margin: 0 0 22px;
+  color: #1E1B4B;
+  font-size: clamp(1.55rem, 2.6vw, 2.35rem);
+  font-weight: 900;
+  line-height: 1.14;
+  letter-spacing: -.025em;
+}
+.events-calendar-item__body h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.events-calendar-item__body h3 a:hover,
+.events-calendar-item__body h3 a:focus-visible {
+  color: #E41D44;
+}
+.events-calendar-item__venue {
+  margin: 0 0 22px;
+  color: #111;
+  font-weight: 900;
+}
+.events-calendar-item__body > p:not(.events-calendar-item__time):not(.events-calendar-item__venue) {
+  max-width: 800px;
+  margin: 0;
+  color: #111;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.52;
+}
+.events-calendar-item__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+}
+.events-calendar-item__actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 8px 14px;
+  border: 1px solid #1E1B4B;
+  color: #1E1B4B;
+  font-weight: 900;
+  text-decoration: none;
+}
+.events-calendar-item__actions a:hover,
+.events-calendar-item__actions a:focus-visible {
+  color: #fff;
+  background: #E41D44;
+  border-color: #E41D44;
+}
+.events-calendar-item__media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: rgba(14, 106, 46, .08);
+}
+.events-calendar-item__media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center center;
+}
+.events-calendar-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  padding-top: clamp(42px, 6vw, 78px);
+}
+.events-calendar-footer__previous {
+  color: #111;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+.events-calendar-subscribe {
+  position: relative;
+  width: min(360px, 100%);
+}
+.events-calendar-subscribe summary {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 24px;
+  border: 2px solid #1E1B4B;
+  color: #1E1B4B;
+  font-size: 1.05rem;
+  font-weight: 900;
+  cursor: pointer;
+  list-style: none;
+}
+.events-calendar-subscribe summary::-webkit-details-marker {
+  display: none;
+}
+.events-calendar-subscribe summary::after {
+  content: "⌄";
+  color: #E41D44;
+  font-size: 1.25rem;
+}
+.events-calendar-subscribe__menu {
+  position: absolute;
+  z-index: 4;
+  top: calc(100% + 12px);
+  left: 0;
+  right: 0;
+  display: grid;
+  gap: 0;
+  padding: 14px 0;
+  border: 1px solid rgba(17, 17, 17, .16);
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(30, 27, 75, .12);
+}
+.events-calendar-subscribe__menu a {
+  padding: 14px 28px;
+  color: #111;
+  font-size: 1rem;
+  text-decoration: none;
+}
+.events-calendar-subscribe__menu a:hover,
+.events-calendar-subscribe__menu a:focus-visible {
+  color: #fff;
+  background: #1E1B4B;
+}
+.events-calendar-empty {
+  padding: 38px;
+  border: 1px solid rgba(17, 17, 17, .14);
+  color: #111;
+  background: rgba(14, 106, 46, .06);
+}
+@media (max-width: 980px) {
+  .events-calendar-toolbar {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 14px;
+  }
+  .events-calendar-toolbar__search {
+    min-height: 62px;
+    padding: 0 8px;
+  }
+  .events-calendar-toolbar__submit {
+    width: 100%;
+    margin: 10px 0 0;
+  }
+  .events-calendar-toolbar__views {
+    min-height: 58px;
+    justify-content: center;
+    padding-right: 0;
+  }
+  .events-calendar-controls,
+  .events-calendar-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .events-calendar-item {
+    grid-template-columns: 78px minmax(0, 1fr);
+  }
+  .events-calendar-item__media {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 620px) {
+  .events-calendar-system {
+    padding-inline: 18px;
+  }
+  .events-calendar-item {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .events-calendar-item__date {
+    text-align: left;
+  }
+}
+
+/* Events calendar refinements — responsive, date filter, arrows, subscription */
+.events-calendar-date-filter {
+  margin: 0;
+}
+.events-calendar-controls__today {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  cursor: pointer;
+}
+.events-calendar-controls__today span {
+  white-space: nowrap;
+}
+.events-calendar-controls__today input[type="date"] {
+  width: 148px;
+  min-height: 34px;
+  border: 0;
+  color: #1E1B4B;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+.events-calendar-item__media img,
+.events-campaign-feature__image {
+  object-position: center 28%;
+}
+.events-calendar-footer__next {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #1E1B4B;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+.events-calendar-footer__next .arrow-wave path {
+  stroke: #1E1B4B;
+}
+.events-calendar-footer__next:hover,
+.events-calendar-footer__next:focus-visible {
+  color: #E41D44;
+}
+.events-calendar-footer__next:hover .arrow-plain,
+.events-calendar-footer__next:focus-visible .arrow-plain {
+  opacity: 0;
+  transform: translateX(2px);
+}
+.events-calendar-footer__next:hover .arrow-wave,
+.events-calendar-footer__next:focus-visible .arrow-wave {
+  opacity: 1;
+  transform: translateX(2px);
+  animation: waicam-arrow-wave-reveal .42s cubic-bezier(.22,.61,.36,1) forwards;
+}
+.events-calendar-footer__next:hover .arrow-wave path,
+.events-calendar-footer__next:focus-visible .arrow-wave path {
+  stroke: #E41D44;
+}
+.events-calendar-subscribe summary::after {
+  content: none;
+}
+@media (max-width: 1240px) {
+  .events-calendar-toolbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .events-calendar-toolbar__views {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+    min-height: 58px;
+    border-top: 1px solid rgba(17, 17, 17, .12);
+  }
+  .events-calendar-item {
+    grid-template-columns: 82px minmax(0, 1fr) minmax(230px, 360px);
+    gap: 28px;
+  }
+}
+@media (max-width: 900px) {
+  .events-campaign-feature,
+  .events-campaign-feature--image-left {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    grid-template-columns: 1fr;
+  }
+  .events-campaign-feature--image-left .events-campaign-feature__visual {
+    order: 0;
+  }
+  .events-campaign-feature__copy {
+    min-height: auto;
+    padding: 42px 24px;
+  }
+  .events-campaign-feature__copy h2 {
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+  }
+  .events-campaign-feature__copy p {
+    font-size: 1rem;
+  }
+  .events-calendar-toolbar__submit {
+    min-width: 0;
+  }
+  .events-calendar-item {
+    grid-template-columns: 76px minmax(0, 1fr);
+  }
+  .events-calendar-item__media {
+    grid-column: 1 / -1;
+    max-height: 360px;
+  }
+}
+@media (max-width: 620px) {
+  .events-calendar-toolbar__views {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+  .events-calendar-controls__nav {
+    flex-wrap: wrap;
+  }
+  .events-calendar-controls__today {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .events-calendar-controls__today input[type="date"] {
+    width: 160px;
+  }
+  .events-calendar-footer__next,
+  .events-calendar-footer__previous,
+  .events-calendar-subscribe {
+    width: 100%;
+  }
+  .events-calendar-footer__next {
+    justify-content: center;
+    min-height: 58px;
+    border: 2px solid #1E1B4B;
+  }
+  .events-calendar-item__media {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Programmes page — first College & Career inspired section */
+.programmes-career-hero {
+  padding: clamp(56px, 7vw, 96px) clamp(24px, 6vw, 70px) clamp(48px, 6vw, 86px);
+  background: #fff;
+  color: #111;
+}
+.programmes-career-hero__inner {
+  width: min(100%, 1320px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(300px, 0.9fr) minmax(360px, 1.1fr);
+  gap: clamp(32px, 6vw, 76px);
+  align-items: center;
+}
+.programmes-career-hero__media {
+  min-width: 0;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  background: rgba(14, 106, 46, .08);
+}
+.programmes-career-hero__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+.programmes-career-hero__copy {
+  max-width: 760px;
+}
+.programmes-career-hero__label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  margin-bottom: clamp(22px, 3vw, 32px);
+  padding: 10px clamp(18px, 2.3vw, 28px);
+  color: #fff;
+  background: #E41D44;
+  font-family: "Roboto Mono", "Courier New", monospace;
+  font-size: clamp(.86rem, 1.3vw, 1.02rem);
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.programmes-career-hero__copy h1 {
+  margin: 0;
+  color: #1E1B4B;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(3rem, 6vw, 5.65rem);
+  font-weight: 900;
+  line-height: .96;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+.programmes-career-hero__copy p {
+  max-width: 720px;
+  margin: clamp(24px, 3vw, 34px) 0 0;
+  color: #111;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: clamp(1.1rem, 1.85vw, 1.45rem);
+  line-height: 1.45;
+}
+@media (max-width: 920px) {
+  .programmes-career-hero {
+    padding: 42px 22px 58px;
+  }
+  .programmes-career-hero__inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .programmes-career-hero__copy {
+    max-width: none;
+  }
+}
+@media (max-width: 560px) {
+  .programmes-career-hero__copy h1 {
+    font-size: clamp(2.25rem, 12vw, 3.35rem);
+  }
+  .programmes-career-hero__label {
+    min-height: 42px;
+    font-size: .78rem;
+  }
+  .programmes-career-hero__copy p {
+    font-size: 1rem;
+  }
+}
+
+/* Programmes page — intro section with animated wave */
+.programmes-career-intro {
+  padding: clamp(64px, 8vw, 118px) clamp(24px, 6vw, 70px);
+  background: #fff;
+  color: #111;
+  overflow: hidden;
+}
+.programmes-career-intro__inner {
+  width: min(100%, 1320px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.88fr) minmax(360px, 1.12fr);
+  gap: clamp(44px, 8vw, 112px);
+  align-items: center;
+}
+.programmes-career-intro__copy h2 {
+  margin: 0;
+  color: #1E1B4B;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(2.55rem, 4.8vw, 4.8rem);
+  font-weight: 900;
+  line-height: .96;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+.programmes-career-intro__wave {
+  display: block;
+  width: min(340px, 90%);
+  height: 24px;
+  margin: 10px 0 clamp(22px, 3vw, 34px);
+  overflow: visible;
+}
+.programmes-career-intro__wave path {
+  fill: none;
+  stroke: #0E6A2E;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 380;
+  stroke-dashoffset: 380;
+  animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4;
+}
+.programmes-career-intro__copy p {
+  max-width: 560px;
+  margin: 0;
+  color: #111;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: clamp(1.15rem, 1.9vw, 1.55rem);
+  line-height: 1.48;
+}
+.programmes-career-intro__visual {
+  position: relative;
+  min-height: clamp(320px, 35vw, 470px);
+}
+.programmes-career-intro__image {
+  position: absolute;
+  top: 0;
+  right: calc(clamp(24px, 6vw, 70px) * -1);
+  width: min(600px, 88%);
+  height: clamp(230px, 25vw, 330px);
+  object-fit: cover;
+  object-position: center center;
+}
+.programmes-career-intro__icon {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: clamp(140px, 18vw, 220px);
+  color: #1E1B4B;
+}
+.programmes-career-intro__icon svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.programmes-career-intro__icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (max-width: 920px) {
+  .programmes-career-intro {
+    padding: 54px 22px;
+  }
+  .programmes-career-intro__inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .programmes-career-intro__visual {
+    min-height: 380px;
+  }
+  .programmes-career-intro__image {
+    right: 0;
+    width: min(680px, 100%);
+  }
+}
+@media (max-width: 560px) {
+  .programmes-career-intro__copy h2 {
+    font-size: clamp(2.1rem, 11vw, 3.1rem);
+  }
+  .programmes-career-intro__copy p {
+    font-size: 1rem;
+  }
+  .programmes-career-intro__visual {
+    min-height: 320px;
+  }
+  .programmes-career-intro__image {
+    height: 220px;
+  }
+}
+
+/* Programmes page — tighter first sections alignment */
+.programmes-career-hero {
+  padding-bottom: clamp(18px, 2.5vw, 34px);
+}
+.programmes-career-hero__inner,
+.programmes-career-intro__inner {
+  width: min(100%, 1500px);
+  grid-template-columns: minmax(340px, 1.05fr) minmax(360px, .95fr);
+  gap: clamp(30px, 4.2vw, 58px);
+}
+.programmes-career-hero__media {
+  aspect-ratio: 1.24 / 1;
+}
+.programmes-career-hero__copy {
+  align-self: start;
+  padding-top: clamp(12px, 2.4vw, 30px);
+}
+.programmes-career-intro {
+  padding-top: clamp(10px, 1.6vw, 22px);
+}
+.programmes-career-intro__inner {
+  align-items: start;
+}
+.programmes-career-intro__visual {
+  min-height: clamp(230px, 25vw, 330px);
+}
+.programmes-career-intro__image {
+  position: static;
+  width: calc(100% + clamp(24px, 6vw, 70px));
+  height: clamp(230px, 25vw, 330px);
+  margin-right: calc(clamp(24px, 6vw, 70px) * -1);
+}
+.programmes-career-intro__icon {
+  display: none;
+}
+@media (max-width: 920px) {
+  .programmes-career-hero__inner,
+  .programmes-career-intro__inner {
+    grid-template-columns: 1fr;
+  }
+  .programmes-career-hero {
+    padding-bottom: 24px;
+  }
+  .programmes-career-intro {
+    padding-top: 24px;
+  }
+  .programmes-career-intro__image {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+/* Programmes page — values section */
+.programmes-career-values {
+  padding: clamp(78px, 9vw, 132px) clamp(24px, 6vw, 70px);
+  background: rgba(14, 106, 46, .12);
+  color: #111;
+}
+.programmes-career-values__inner {
+  width: min(100%, 1500px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(42px, 7vw, 110px);
+}
+.programmes-career-values__item h3 {
+  margin: 0 0 clamp(26px, 3vw, 36px);
+  color: #1E1B4B;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(1.25rem, 1.8vw, 1.8rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+}
+.programmes-career-values__item p {
+  margin: 0;
+  color: #111;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: clamp(1.08rem, 1.7vw, 1.55rem);
+  line-height: 1.52;
+}
+@media (max-width: 920px) {
+  .programmes-career-values {
+    padding: 58px 22px;
+  }
+  .programmes-career-values__inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+/* Programmes page — CPTUI/ACF programme feature cards */
+.programmes-career-cpt {
+  background: #fff;
+  color: #111;
+}
+.programmes-career-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: clamp(520px, 44vw, 760px);
+  overflow: hidden;
+}
+.programmes-career-feature--reverse .programmes-career-feature__image {
+  order: 2;
+}
+.programmes-career-feature__image {
+  min-height: inherit;
+  background: #1E1B4B;
+}
+.programmes-career-feature__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center center;
+}
+.programmes-career-feature__copy {
+  display: flex;
+  min-height: inherit;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(54px, 6vw, 112px) clamp(38px, 7vw, 138px);
+  color: #fff;
+  background: #1E1B4B;
+}
+.programmes-career-feature--tone-1 .programmes-career-feature__copy {
+  background: #0E6A2E;
+}
+.programmes-career-feature--tone-2 .programmes-career-feature__copy {
+  background: #E41D44;
+}
+.programmes-career-feature__kicker {
+  margin: 0 0 14px;
+  font-family: "Roboto Mono", "Courier New", monospace;
+  font-size: clamp(.8rem, 1.1vw, 1rem);
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  opacity: .9;
+}
+.programmes-career-feature__copy h2 {
+  max-width: 760px;
+  margin: 0;
+  color: inherit;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(2.45rem, 4.2vw, 4.45rem);
+  font-weight: 900;
+  line-height: .98;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+}
+.programmes-career-feature__wave {
+  display: block;
+  width: min(480px, 92%);
+  height: 26px;
+  margin: 12px 0 clamp(26px, 3.3vw, 42px);
+  overflow: visible;
+}
+.programmes-career-feature__wave path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 450;
+  stroke-dashoffset: 450;
+  animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4;
+}
+.programmes-career-feature__copy p {
+  max-width: 760px;
+  margin: 0 0 clamp(22px, 3vw, 34px);
+  color: inherit;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: clamp(1.08rem, 2vw, 2rem);
+  line-height: 1.42;
+}
+.programmes-career-feature__copy .programmes-career-feature__meta {
+  margin-top: calc(clamp(10px, 1.6vw, 18px) * -1);
+  font-size: clamp(.98rem, 1.3vw, 1.18rem);
+  opacity: .92;
+}
+.programmes-career-feature__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  color: inherit;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  font-weight: 900;
+  text-decoration: none;
+}
+.programmes-career-feature__link span:last-child {
+  display: inline-block;
+  font-size: 1.45em;
+  line-height: 1;
+  transition: transform .22s ease;
+}
+.programmes-career-feature__link:hover span:last-child,
+.programmes-career-feature__link:focus-visible span:last-child {
+  transform: translateX(8px);
+}
+
+/* Programmes page — type scale and responsive refinements */
+.programmes-career-hero__copy h1 {
+  font-size: clamp(2.4rem, 4.8vw, 4.75rem);
+}
+.programmes-career-intro__copy h2 {
+  font-size: clamp(2.15rem, 4vw, 3.8rem);
+}
+@media (max-width: 1180px) {
+  .programmes-career-feature__copy {
+    padding: clamp(46px, 6vw, 84px) clamp(30px, 5vw, 78px);
+  }
+  .programmes-career-feature__copy h2 {
+    font-size: clamp(2.15rem, 4.1vw, 3.6rem);
+  }
+  .programmes-career-feature__copy p {
+    font-size: clamp(1.02rem, 1.8vw, 1.42rem);
+  }
+}
+@media (max-width: 860px) {
+  .programmes-career-feature,
+  .programmes-career-feature--reverse {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .programmes-career-feature--reverse .programmes-career-feature__image {
+    order: 0;
+  }
+  .programmes-career-feature__image,
+  .programmes-career-feature__image img {
+    min-height: clamp(280px, 64vw, 460px);
+  }
+  .programmes-career-feature__copy {
+    min-height: auto;
+    padding: 44px 22px 52px;
+  }
+  .programmes-career-feature__copy h2 {
+    font-size: clamp(2rem, 10vw, 3.05rem);
+  }
+  .programmes-career-feature__copy p {
+    font-size: 1.05rem;
+  }
+}
+
+/* Programmes page — match Events feature card full-bleed sizing */
+.programmes-career-cpt {
+  overflow-x: hidden;
+}
+.programmes-career-feature {
+  width: 100vw;
+  min-height: clamp(520px, 62vw, 720px);
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.programmes-career-feature + .programmes-career-feature {
+  margin-top: 0;
+}
+.programmes-career-feature__copy {
+  padding: 40px clamp(44px, 6vw, 92px);
+}
+.programmes-career-feature__image,
+.programmes-career-feature__image img {
+  min-height: inherit;
+}
+@media (max-width: 900px) {
+  .programmes-career-feature,
+  .programmes-career-feature--reverse {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .programmes-career-feature__copy {
+    padding: 42px 24px;
+  }
+  .programmes-career-feature__image,
+  .programmes-career-feature__image img {
+    min-height: clamp(280px, 64vw, 460px);
+  }
+}
+
+/* Programmes page — application form section */
+.programmes-career-form {
+  padding: clamp(82px, 9vw, 138px) clamp(24px, 6vw, 70px);
+  color: #fff;
+  background: #1E1B4B;
+  overflow: hidden;
+}
+.programmes-career-form__inner {
+  width: min(100%, 1380px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(280px, .92fr) minmax(320px, 1.08fr);
+  gap: clamp(42px, 7vw, 112px);
+  align-items: start;
+}
+.programmes-career-form__label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  margin-bottom: clamp(20px, 3vw, 30px);
+  padding: 8px 22px;
+  color: #fff;
+  background: #E41D44;
+  font-family: "Roboto Mono", "Courier New", monospace;
+  font-size: .9rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.programmes-career-form__copy h2 {
+  margin: 0;
+  color: #fff;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(2.3rem, 4.5vw, 4.75rem);
+  font-weight: 900;
+  line-height: .98;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+.programmes-career-form__wave {
+  display: block;
+  width: min(340px, 88%);
+  height: 24px;
+  margin: 12px 0 clamp(24px, 3vw, 36px);
+  overflow: visible;
+}
+.programmes-career-form__wave path {
+  fill: none;
+  stroke: #0E6A2E;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 380;
+  stroke-dashoffset: 380;
+  animation: waicam-wave-draw 1.2s ease-out forwards, waicam-wave-motion .28s ease-in-out 0s 4;
+}
+.programmes-career-form__copy p {
+  max-width: 560px;
+  margin: 0;
+  color: rgba(255, 255, 255, .9);
+  font-family: "Inter", Arial, sans-serif;
+  font-size: clamp(1.05rem, 1.65vw, 1.35rem);
+  line-height: 1.55;
+}
+.programmes-career-form__card {
+  position: relative;
+  padding: clamp(24px, 4vw, 46px);
+  color: #111;
+  background: #fff;
+  border-top: 12px solid #0E6A2E;
+  box-shadow: 18px 18px 0 #E41D44;
+}
+.programmes-career-form__empty {
+  margin: 0;
+  padding: 24px;
+  color: #1E1B4B;
+  text-align: center;
+  font-weight: 800;
+}
+.programmes-career-form__card .ff-el-group,
+.programmes-career-form__card .fluentform .ff-el-group {
+  margin-bottom: 18px;
+}
+.programmes-career-form__card label,
+.programmes-career-form__card .ff-el-input--label label {
+  color: #1E1B4B;
+  font-weight: 900;
+}
+.programmes-career-form__card input,
+.programmes-career-form__card textarea,
+.programmes-career-form__card select {
+  border: 2px solid rgba(30, 27, 75, .18) !important;
+  border-radius: 0 !important;
+  min-height: 48px;
+}
+.programmes-career-form__card input:focus,
+.programmes-career-form__card textarea:focus,
+.programmes-career-form__card select:focus {
+  border-color: #0E6A2E !important;
+  box-shadow: 0 0 0 3px rgba(14, 106, 46, .14) !important;
+}
+.programmes-career-form__card button,
+.programmes-career-form__card input[type="submit"],
+.programmes-career-form__card .ff-btn-submit {
+  min-height: 52px;
+  padding: 14px 26px !important;
+  color: #fff !important;
+  background: #E41D44 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.programmes-career-form__card button:hover,
+.programmes-career-form__card input[type="submit"]:hover,
+.programmes-career-form__card .ff-btn-submit:hover {
+  background: #0E6A2E !important;
+}
+@media (max-width: 920px) {
+  .programmes-career-hero__copy {
+    order: -1;
+  }
+  .programmes-career-hero__media {
+    order: 2;
+  }
+  .programmes-career-form {
+    padding: 58px 22px 72px;
+  }
+  .programmes-career-form__inner {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .programmes-career-form__copy h2 {
+    font-size: clamp(2rem, 10vw, 3.25rem);
+  }
+  .programmes-career-form__copy p {
+    font-size: 1rem;
+  }
+  .programmes-career-form__card {
+    box-shadow: 10px 10px 0 #E41D44;
+  }
+}
+
+/* Programmes page — final spacing and readability refinements */
+.programmes-career-form {
+  background: #0E6A2E;
+}
+.programmes-career-form__wave path {
+  stroke: #fff;
+}
+.programmes-career-form__card {
+  border-top-color: #1E1B4B;
+}
+.programmes-career-feature__copy h2 {
+  font-size: clamp(2rem, 3.35vw, 3.45rem);
+  line-height: 1.02;
+}
+.programmes-career-feature__copy p {
+  font-size: clamp(1rem, 1.45vw, 1.35rem);
+  line-height: 1.46;
+}
+.programmes-career-feature__copy .programmes-career-feature__meta {
+  font-size: clamp(.92rem, 1.1vw, 1.05rem);
+}
+.programmes-career-feature__wave {
+  margin-bottom: clamp(20px, 2.5vw, 30px);
+}
+@media (min-width: 921px) {
+  .programmes-career-hero {
+    padding-bottom: 0;
+  }
+  .programmes-career-intro {
+    margin-top: clamp(-210px, -11vw, -110px);
+    padding-top: 0;
+  }
+  .programmes-career-intro__copy {
+    padding-top: clamp(220px, 14vw, 290px);
+  }
+  .programmes-career-intro__visual {
+    transform: translateY(clamp(-16px, -1.6vw, -8px));
+  }
+}
+@media (max-width: 920px) {
+  .programmes-career-feature__copy h2 {
+    font-size: clamp(1.85rem, 8vw, 2.75rem);
+  }
+  .programmes-career-feature__copy p {
+    font-size: 1rem;
+  }
+}
+
+/* Programmes page — align intro title and match hero image ratio */
+@media (min-width: 921px) {
+  .programmes-career-intro {
+    margin-top: clamp(-250px, -13vw, -145px);
+    padding-top: 0;
+  }
+  .programmes-career-intro__copy {
+    padding-top: clamp(250px, 16vw, 340px);
+  }
+  .programmes-career-intro__visual {
+    aspect-ratio: 1.24 / 1;
+    min-height: 0;
+    transform: translateY(clamp(18px, 2.6vw, 44px));
+  }
+  .programmes-career-intro__image {
+    width: 100%;
+    height: 100%;
+    margin-right: 0;
+    object-fit: cover;
+  }
+}

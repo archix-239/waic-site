@@ -315,3 +315,58 @@ function waicam_admin_setup_notice() {
 	<?php
 }
 add_action( 'admin_notices', 'waicam_admin_setup_notice' );
+
+/**
+ * Ajoute la page Évènements au menu principal existant si elle manque.
+ *
+ * Le setup initial crée déjà la page, mais certains sites ont un menu
+ * configuré avant la refonte. Cette passe légère évite de forcer l'utilisateur
+ * à reconstruire son menu à la main.
+ */
+function waicam_ensure_events_menu_item() {
+	if ( get_option( 'waicam_events_menu_item_added' ) ) {
+		return;
+	}
+
+	$locations = get_theme_mod( 'nav_menu_locations', array() );
+	if ( empty( $locations['primary'] ) ) {
+		return;
+	}
+
+	$menu_id    = (int) $locations['primary'];
+	$events_url = waicam_events_page_url();
+	$items      = wp_get_nav_menu_items( $menu_id );
+	$parent_id  = 0;
+	$position   = 1;
+
+	if ( $items ) {
+		foreach ( $items as $item ) {
+			$position = max( $position, (int) $item->menu_order + 1 );
+
+			if ( untrailingslashit( $item->url ) === untrailingslashit( $events_url ) ) {
+				update_option( 'waicam_events_menu_item_added', '1' );
+				return;
+			}
+
+			if ( 0 === $parent_id && 'inspire' === waicam_slug( $item->title ) ) {
+				$parent_id = (int) $item->ID;
+			}
+		}
+	}
+
+	wp_update_nav_menu_item(
+		$menu_id,
+		0,
+		array(
+			'menu-item-title'     => __( 'Évènements', 'waicam' ),
+			'menu-item-url'       => $events_url,
+			'menu-item-status'    => 'publish',
+			'menu-item-type'      => 'custom',
+			'menu-item-parent-id' => $parent_id,
+			'menu-item-position'  => $position,
+		)
+	);
+
+	update_option( 'waicam_events_menu_item_added', '1' );
+}
+add_action( 'admin_init', 'waicam_ensure_events_menu_item' );

@@ -362,6 +362,7 @@ function waicam_default_menu() {
 		) ),
 		'inspire'     => array( __( 'Inspire', 'waicam' ), array(
 			home_url('/blog')        => __( 'Blog', 'waicam' ),
+			waicam_events_page_url()  => __( 'Évènements', 'waicam' ),
 			home_url('/temoignages') => __( 'Témoignages', 'waicam' ),
 			home_url('/galerie')     => __( 'Galerie', 'waicam' ),
 		) ),
@@ -444,6 +445,83 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
+
+	// ────────── Page Programmes ──────────
+	$wp_customize->add_section( 'waicam_programmes_page', array(
+		'title'       => __( 'Programmes — Hero', 'waicam' ),
+		'description' => __( 'Contenu de la première section de la page Programmes.', 'waicam' ),
+		'panel'       => 'waicam_panel',
+	) );
+	$programmes_hero_fields = array(
+		'waicam_programmes_hero_label' => array( __( 'Hero — Label', 'waicam' ), __( 'Programmes WAI-CAM', 'waicam' ), 'text' ),
+		'waicam_programmes_hero_title' => array( __( 'Hero — Titre', 'waicam' ), __( 'Nos Programmes Phares', 'waicam' ), 'text' ),
+		'waicam_programmes_hero_text'  => array( __( 'Hero — Texte', 'waicam' ), __( "Quatre programmes structurants pour démocratiser l'IA auprès de toutes les femmes camerounaises.", 'waicam' ), 'textarea' ),
+	);
+	foreach ( $programmes_hero_fields as $key => $cfg ) {
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field',
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_programmes_page',
+			'type'    => $cfg[2],
+		) );
+	}
+	$wp_customize->add_setting( 'waicam_programmes_hero_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_programmes_hero_image_id', array(
+		'label'     => __( 'Hero — Image principale', 'waicam' ),
+		'section'   => 'waicam_programmes_page',
+		'mime_type' => 'image',
+	) ) );
+
+	$programmes_intro_fields = array(
+		'waicam_programmes_intro_title' => array( __( 'Intro — Titre', 'waicam' ), __( 'Quels sont nos programmes phares ?', 'waicam' ), 'text' ),
+		'waicam_programmes_intro_text'  => array( __( 'Intro — Texte', 'waicam' ), __( "WAI-CAM déploie des programmes conçus pour former, outiller et accompagner les femmes, les jeunes et les communautés dans l'appropriation de l'intelligence artificielle au Cameroun.", 'waicam' ), 'textarea' ),
+	);
+	foreach ( $programmes_intro_fields as $key => $cfg ) {
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field',
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_programmes_page',
+			'type'    => $cfg[2],
+		) );
+	}
+	$wp_customize->add_setting( 'waicam_programmes_intro_image_id', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'waicam_programmes_intro_image_id', array(
+		'label'     => __( 'Intro — Image droite', 'waicam' ),
+		'section'   => 'waicam_programmes_page',
+		'mime_type' => 'image',
+	) ) );
+
+	$programmes_values_fields = array(
+		'waicam_programmes_value_1_title' => array( __( 'Valeur 1 — Titre', 'waicam' ), __( 'Créer une communauté', 'waicam' ), 'text' ),
+		'waicam_programmes_value_1_text'  => array( __( 'Valeur 1 — Texte', 'waicam' ), __( "Connecter les femmes et les jeunes filles à une communauté solidaire qui les aide à apprendre, persévérer et réussir dans l'IA.", 'waicam' ), 'textarea' ),
+		'waicam_programmes_value_2_title' => array( __( 'Valeur 2 — Titre', 'waicam' ), __( 'Développer le leadership', 'waicam' ), 'text' ),
+		'waicam_programmes_value_2_text'  => array( __( 'Valeur 2 — Texte', 'waicam' ), __( 'Renforcer les compétences, la confiance et le mentorat grâce à des parcours pratiques portés par des modèles féminins inspirants.', 'waicam' ), 'textarea' ),
+		'waicam_programmes_value_3_title' => array( __( 'Valeur 3 — Titre', 'waicam' ), __( 'Construire des carrières IA', 'waicam' ), 'text' ),
+		'waicam_programmes_value_3_text'  => array( __( 'Valeur 3 — Texte', 'waicam' ), __( "Préparer les participantes à saisir les opportunités du numérique, de la recherche et de l'emploi dans l'écosystème IA camerounais.", 'waicam' ), 'textarea' ),
+	);
+	foreach ( $programmes_values_fields as $key => $cfg ) {
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => 'textarea' === $cfg[2] ? 'sanitize_textarea_field' : 'sanitize_text_field',
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_programmes_page',
+			'type'    => $cfg[2],
+		) );
+	}
 
 	// ────────── Page Évènements ──────────
 	$wp_customize->add_section( 'waicam_events_page', array(
@@ -533,6 +611,7 @@ function waicam_customize_register( $wp_customize ) {
 		'section'   => 'waicam_events_page',
 		'mime_type' => 'image',
 	) ) );
+
 
 	// ────────── Section Formulaires (IDs Fluent Forms) ──────────
 	$wp_customize->add_section( 'waicam_forms', array(
