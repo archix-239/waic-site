@@ -36,8 +36,8 @@
   --border:         #E5E7EB;
 
   /* Bleu nuit — footer et fonds sombres */
-  --navy:           #1E1B4B;
-  --navy-light:     #2D2A6E;
+  --navy:           #152247;
+  --navy-light:     #223766;
 
   /* ── Alias sémantiques (compatibilité templates existants) ── */
   --accent:         #2C75FF;   /* = --blue  (éléments tech/CTA secondaires) */
