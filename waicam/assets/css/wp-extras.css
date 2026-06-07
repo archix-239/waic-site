@@ -9009,3 +9009,12 @@ body.admin-bar .site-content {
     margin-bottom: 36px;
   }
 }
+
+/* Gallery cards — centered portraits without title wave */
+.waicam-gallery-card .gwc-news-item-title::after {
+  content: none;
+}
+.waicam-gallery-card .gwc-news-item-image img {
+  object-position: center top;
+  transform-origin: 50% 18%;
+}
