@@ -8910,3 +8910,418 @@ body.admin-bar .site-content {
     font-size: clamp(2rem, 12vw, 3.1rem);
   }
 }
+
+/* Gallery page — Envira galleries in GWC/news layout */
+.waicam-gallery-page {
+  width: min(1180px, 88vw);
+}
+.waicam-gallery-header {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.waicam-gallery-intro {
+  max-width: 780px;
+  margin: 16px 0 0;
+  color: #111;
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  line-height: 1.6;
+}
+.waicam-gallery-toolbar {
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+.waicam-gallery-toolbar .events-calendar-toolbar__submit {
+  color: #fff;
+  background: #152247;
+}
+.waicam-gallery-toolbar .events-calendar-toolbar__submit:hover,
+.waicam-gallery-toolbar .events-calendar-toolbar__submit:focus-visible {
+  background: #E41D44;
+}
+.waicam-gallery-card {
+  cursor: pointer;
+}
+.waicam-gallery-card .gwc-news-item-title {
+  min-height: 136px;
+}
+.waicam-gallery-card .gwc-news-item-image img {
+  object-position: center center;
+}
+.waicam-gallery-placeholder {
+  position: relative;
+}
+.waicam-gallery-placeholder::after {
+  content: "WAI-CAM";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #152247;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+.waicam-gallery-event-list {
+  display: grid;
+  gap: clamp(44px, 6vw, 72px);
+  margin-top: clamp(56px, 7vw, 88px);
+}
+.waicam-gallery-event {
+  scroll-margin-top: calc(var(--waicam-header-height, 92px) + 28px);
+  padding-top: clamp(24px, 4vw, 42px);
+  border-top: 1px solid rgba(21, 34, 71, .18);
+}
+.waicam-gallery-event__header {
+  margin-bottom: clamp(22px, 3vw, 34px);
+}
+.waicam-gallery-event__header span {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 0 16px;
+  color: #fff;
+  background: #0E6A2E;
+  font-size: .82rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.waicam-gallery-event__header h2 {
+  margin: 14px 0 0;
+  color: #152247;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(1.7rem, 3.6vw, 3.3rem);
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: -.04em;
+}
+.waicam-gallery-event__body .envira-gallery-wrap,
+.waicam-gallery-event__body .envira-gallery-public {
+  margin-top: 0;
+}
+.waicam-gallery-empty {
+  padding: clamp(32px, 5vw, 56px);
+  background: rgba(21, 34, 71, .06);
+}
+@media (max-width: 620px) {
+  .waicam-gallery-page {
+    width: min(92vw, 560px);
+  }
+  .waicam-gallery-toolbar {
+    margin-bottom: 36px;
+  }
+}
+
+/* Gallery cards — centered portraits without title wave */
+.waicam-gallery-card .gwc-news-item-title::after {
+  content: none;
+}
+.waicam-gallery-card .gwc-news-item-image img {
+  object-position: center top;
+  transform-origin: 50% 18%;
+}
+
+/* Contact page — WAICAM editorial layout */
+.waicam-contact-page {
+  background: #fff;
+  color: #111;
+  font-family: "Inter", "Poppins", Arial, sans-serif;
+}
+.waicam-contact-hero {
+  padding: clamp(58px, 7vw, 98px) clamp(22px, 6vw, 92px);
+  background: linear-gradient(110deg, rgba(14, 106, 46, .12), rgba(44, 75, 232, .07) 48%, rgba(228, 29, 68, .08));
+}
+.waicam-contact-hero__inner {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: end;
+}
+.waicam-contact-kicker,
+.waicam-contact-section-label,
+.waicam-contact-form-card__header span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 16px;
+  color: #fff;
+  background: #0E6A2E;
+  font-size: .84rem;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.waicam-contact-hero h1 {
+  max-width: 900px;
+  margin: 22px 0 0;
+  color: #152247;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(2.35rem, 6vw, 5.65rem);
+  font-weight: 900;
+  line-height: .98;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+.waicam-contact-wave {
+  width: min(360px, 72vw);
+  height: 22px;
+  margin: 22px 0 0;
+}
+.waicam-contact-wave path {
+  fill: none;
+  stroke: #E41D44;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 420;
+  stroke-dashoffset: 420;
+  animation: waicam-wave-draw 1.2s ease-out forwards;
+}
+.waicam-contact-hero p {
+  max-width: 720px;
+  margin: 26px 0 0;
+  color: #111;
+  font-size: clamp(1.05rem, 1.8vw, 1.42rem);
+  line-height: 1.52;
+}
+.waicam-contact-hero__panel {
+  padding: clamp(24px, 3vw, 34px);
+  color: #fff;
+  background: #152247;
+  box-shadow: 14px 14px 0 #E41D44;
+}
+.waicam-contact-hero__panel strong,
+.waicam-contact-hero__panel span {
+  display: block;
+}
+.waicam-contact-hero__panel strong {
+  font-size: clamp(1.55rem, 2.4vw, 2.3rem);
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.waicam-contact-hero__panel span {
+  margin-top: 14px;
+  color: rgba(255,255,255,.84);
+  font-weight: 700;
+  line-height: 1.45;
+}
+.waicam-contact-main {
+  padding: clamp(58px, 7vw, 104px) clamp(22px, 6vw, 92px) clamp(74px, 8vw, 124px);
+}
+.waicam-contact-main__inner {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(280px, .92fr) minmax(360px, 1.08fr);
+  gap: clamp(30px, 5vw, 72px);
+  align-items: start;
+}
+.waicam-contact-info h2,
+.waicam-contact-form-card__header h2 {
+  margin: 18px 0 14px;
+  color: #152247;
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  font-size: clamp(2rem, 4vw, 3.9rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+}
+.waicam-contact-info > p,
+.waicam-contact-form-card__header p {
+  margin: 0;
+  color: #111;
+  font-size: clamp(1rem, 1.35vw, 1.16rem);
+  line-height: 1.58;
+}
+.waicam-contact-cards {
+  display: grid;
+  gap: 16px;
+  margin-top: 30px;
+}
+.waicam-contact-card {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  padding: 18px;
+  background: rgba(21, 34, 71, .055);
+  border-left: 6px solid #0E6A2E;
+}
+.waicam-contact-card__icon {
+  width: 54px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: #E41D44;
+  border-radius: 50%;
+}
+.waicam-contact-card span {
+  display: block;
+  margin-bottom: 4px;
+  color: rgba(21, 34, 71, .68);
+  font-size: .76rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.waicam-contact-card strong {
+  display: block;
+  color: #152247;
+  font-size: .98rem;
+  line-height: 1.42;
+}
+.waicam-contact-card a {
+  color: inherit;
+  text-decoration: none;
+}
+.waicam-contact-card a:hover,
+.waicam-contact-card a:focus-visible {
+  color: #E41D44;
+}
+.waicam-contact-social {
+  margin-top: 32px;
+  padding-top: 26px;
+  border-top: 1px solid rgba(21, 34, 71, .16);
+}
+.waicam-contact-social h3 {
+  margin: 0 0 14px;
+  color: #152247;
+  font-size: 1.05rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.waicam-contact-social__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.waicam-contact-social__links a {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  padding: 0 14px;
+  color: #152247;
+  border: 2px solid rgba(21, 34, 71, .22);
+  font-weight: 900;
+  text-decoration: none;
+}
+.waicam-contact-social__links a:hover,
+.waicam-contact-social__links a:focus-visible {
+  color: #fff;
+  background: #152247;
+  border-color: #152247;
+}
+.waicam-contact-form-card {
+  padding: clamp(24px, 4vw, 44px);
+  background: #fff;
+  border: 2px solid rgba(21, 34, 71, .16);
+  box-shadow: 18px 18px 0 rgba(14, 106, 46, .14);
+}
+.waicam-contact-form-embed,
+.waicam-contact-fallback-form {
+  margin-top: 28px;
+}
+.waicam-contact-fallback-form {
+  display: grid;
+  gap: 18px;
+}
+.waicam-contact-fallback-form .form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.waicam-contact-fallback-form label {
+  display: grid;
+  gap: 8px;
+  color: #152247;
+  font-weight: 900;
+}
+.waicam-contact-fallback-form label span {
+  color: #E41D44;
+}
+.waicam-contact-fallback-form input,
+.waicam-contact-fallback-form select,
+.waicam-contact-fallback-form textarea,
+.waicam-contact-form-embed input,
+.waicam-contact-form-embed select,
+.waicam-contact-form-embed textarea {
+  width: 100%;
+  min-height: 52px;
+  border: 2px solid rgba(21, 34, 71, .22);
+  border-radius: 0;
+  padding: 12px 14px;
+  color: #111;
+  background: #fff;
+  font: inherit;
+}
+.waicam-contact-fallback-form textarea,
+.waicam-contact-form-embed textarea {
+  min-height: 140px;
+}
+.waicam-contact-fallback-form input:focus,
+.waicam-contact-fallback-form select:focus,
+.waicam-contact-fallback-form textarea:focus,
+.waicam-contact-form-embed input:focus,
+.waicam-contact-form-embed select:focus,
+.waicam-contact-form-embed textarea:focus {
+  border-color: #E41D44;
+  outline: 3px solid rgba(228, 29, 68, .14);
+}
+.waicam-contact-consent {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  color: #111 !important;
+  font-weight: 600 !important;
+}
+.waicam-contact-consent input {
+  width: auto;
+  min-height: auto;
+  margin-top: 5px;
+}
+.waicam-contact-fallback-form button,
+.waicam-contact-form-embed button,
+.waicam-contact-form-embed input[type="submit"] {
+  min-height: 56px;
+  padding: 0 24px;
+  border: 0;
+  color: #fff;
+  background: #E41D44;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease;
+}
+.waicam-contact-fallback-form button:hover,
+.waicam-contact-fallback-form button:focus-visible,
+.waicam-contact-form-embed button:hover,
+.waicam-contact-form-embed button:focus-visible,
+.waicam-contact-form-embed input[type="submit"]:hover,
+.waicam-contact-form-embed input[type="submit"]:focus-visible {
+  background: #152247;
+  transform: translateY(-2px);
+}
+@media (max-width: 920px) {
+  .waicam-contact-hero__inner,
+  .waicam-contact-main__inner {
+    grid-template-columns: 1fr;
+  }
+  .waicam-contact-hero__panel {
+    max-width: 520px;
+  }
+}
+@media (max-width: 620px) {
+  .waicam-contact-hero,
+  .waicam-contact-main {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .waicam-contact-hero h1 {
+    font-size: clamp(2.05rem, 11vw, 3.2rem);
+  }
+  .waicam-contact-fallback-form .form-row {
+    grid-template-columns: 1fr;
+  }
+  .waicam-contact-form-card {
+    box-shadow: 10px 10px 0 rgba(14, 106, 46, .14);
+  }
+}

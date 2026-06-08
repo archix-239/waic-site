@@ -11,10 +11,29 @@ get_header(); ?>
 <section class="hero" id="hero">
 
 	<!-- Diaporama de fond (3 slides) -->
+	<?php
+	$hero_slides = array(
+		array(
+			'id'       => absint( get_theme_mod( 'waicam_home_hero_slide_1_id', 0 ) ),
+			'fallback' => waicam_img( 'hero-terrain.jpg' ),
+		),
+		array(
+			'id'       => absint( get_theme_mod( 'waicam_home_hero_slide_2_id', 0 ) ),
+			'fallback' => waicam_img( 'hero-musee.jpg' ),
+		),
+		array(
+			'id'       => absint( get_theme_mod( 'waicam_home_hero_slide_3_id', 0 ) ),
+			'fallback' => waicam_img( 'hero-dargala.jpg' ),
+		),
+	);
+	?>
 	<div class="hero-slides">
-		<div class="hero-slide active" style="background-image:url('<?php echo esc_url( waicam_img( 'hero-terrain.jpg' ) ); ?>')"></div>
-		<div class="hero-slide" style="background-image:url('<?php echo esc_url( waicam_img( 'hero-musee.jpg' ) ); ?>')"></div>
-		<div class="hero-slide" style="background-image:url('<?php echo esc_url( waicam_img( 'hero-dargala.jpg' ) ); ?>')"></div>
+		<?php foreach ( $hero_slides as $index => $slide ) :
+			$slide_url = $slide['id'] ? wp_get_attachment_image_url( $slide['id'], 'full' ) : '';
+			$slide_url = $slide_url ? $slide_url : $slide['fallback'];
+			?>
+			<div class="hero-slide<?php echo 0 === $index ? ' active' : ''; ?>" style="background-image:url('<?php echo esc_url( $slide_url ); ?>')"></div>
+		<?php endforeach; ?>
 	</div>
 
 	<!-- Overlay sombre -->

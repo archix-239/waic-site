@@ -717,6 +717,46 @@ function waicam_customize_register( $wp_customize ) {
 		) );
 	}
 
+	// ────────── Section Home hero ──────────
+	$wp_customize->add_section( 'waicam_home_hero', array(
+		'title'       => __( 'Accueil — Hero', 'waicam' ),
+		'description' => __( 'Titre, texte et images du diaporama de la section hero.', 'waicam' ),
+		'panel'       => 'waicam_home_panel',
+	) );
+
+	$home_hero_text_fields = array(
+		'waicam_hero_title' => array( __( 'Titre hero', 'waicam' ), __( "Nous sommes<br><span>Women in AI Cameroon</span>", 'waicam' ), 'textarea' ),
+		'waicam_hero_text'  => array( __( 'Texte hero', 'waicam' ), __( "Women in AI Cameroon autonomise, soutient et élève les femmes dans le domaine de l'intelligence artificielle. Un mouvement citoyen où chaque femme peut trouver des opportunités, partager ses idées et diriger sa communauté.", 'waicam' ), 'textarea' ),
+	);
+	foreach ( $home_hero_text_fields as $key => $cfg ) {
+		$wp_customize->add_setting( $key, array(
+			'default'           => $cfg[1],
+			'sanitize_callback' => 'wp_kses_post',
+		) );
+		$wp_customize->add_control( $key, array(
+			'label'   => $cfg[0],
+			'section' => 'waicam_home_hero',
+			'type'    => $cfg[2],
+		) );
+	}
+
+	for ( $i = 1; $i <= 3; $i++ ) {
+		$key = 'waicam_home_hero_slide_' . $i . '_id';
+		$wp_customize->add_setting( $key, array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		) );
+		$wp_customize->add_control( new WP_Customize_Media_Control(
+			$wp_customize,
+			$key,
+			array(
+				'label'     => sprintf( __( 'Image hero — Slide %d', 'waicam' ), $i ),
+				'section'   => 'waicam_home_hero',
+				'mime_type' => 'image',
+			)
+		) );
+	}
+
 	// ────────── Section Home post-hero (modèle institutionnel) ──────────
 	$wp_customize->add_section( 'waicam_home_posthero', array(
 		'title'       => __( 'Accueil — Section post-hero', 'waicam' ),
