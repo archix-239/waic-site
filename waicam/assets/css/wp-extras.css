@@ -10312,3 +10312,79 @@ body.admin-bar .site-content {
     width: 140px;
   }
 }
+
+/* Join page — adhesion form/image layout refinement */
+.join-gwc-form-section {
+  background: linear-gradient(135deg, rgba(21, 34, 71, .06), rgba(14, 106, 46, .10));
+}
+.join-gwc-form-section__inner {
+  width: min(1120px, 100%);
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+}
+.join-gwc-form-section__content {
+  order: 1;
+  min-width: 0;
+  padding: clamp(24px, 4vw, 42px);
+  background: #fff;
+  border: 2px solid rgba(21, 34, 71, .12);
+  box-shadow: 18px 18px 0 rgba(14, 106, 46, .12);
+}
+.join-gwc-form-section__media {
+  order: 2;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: 4 / 5;
+  align-self: start;
+  overflow: hidden;
+  background: #fff;
+  border: 2px solid rgba(21, 34, 71, .12);
+}
+.join-gwc-form-section__media img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  object-position: center top;
+}
+.join-gwc-form-section__placeholder {
+  min-height: 100%;
+}
+.join-gwc-form-section__content h2 {
+  font-size: clamp(1.9rem, 3.1vw, 3.35rem);
+}
+.join-gwc-form-section__content > p {
+  max-width: 680px;
+  font-size: clamp(1rem, 1.15vw, 1.18rem);
+}
+.join-gwc-fluent-form {
+  background: rgba(234, 248, 245, .62);
+  border: 2px solid rgba(21, 34, 71, .10);
+}
+@media (max-width: 980px) {
+  .join-gwc-form-section__inner {
+    grid-template-columns: 1fr;
+  }
+  .join-gwc-form-section__content {
+    order: 1;
+  }
+  .join-gwc-form-section__media {
+    order: 2;
+    aspect-ratio: 16 / 9;
+  }
+}
+@media (max-width: 640px) {
+  .join-gwc-form-section__content {
+    padding: 22px;
+    box-shadow: 10px 10px 0 rgba(14, 106, 46, .12);
+  }
+  .join-gwc-form-section__media,
+  .join-gwc-form-section__media img {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+}
