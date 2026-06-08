@@ -2,7 +2,7 @@
 
 Thème WordPress officiel converti depuis la maquette HTML/CSS validée par la cliente.
 
-**Version :** 1.1.0 — adapté à l'environnement Local by Flywheel + CPT UI + ACF + Fluent Forms
+**Version :** 3.0.0 — version indépendante du thème WAI-CAM v2, adaptée à Local by Flywheel + CPT UI + ACF + Fluent Forms
 **WordPress requis :** 6.0+
 **Testé jusqu'à :** 6.9.4
 **PHP requis :** 8.0+
@@ -51,13 +51,13 @@ Le thème **NE redéclare PAS** les CPT — il les utilise. Si tu désactives CP
 
 ### 1. Compresser le dossier en .zip
 
-Avant l'upload, le dossier `waicam/` doit être compressé en `waicam.zip`.
+Avant l'upload, copiez/renommez le dossier du thème en `waicam-v3/`, puis compressez ce dossier en `waicam-v3.zip`. Cette étape permet à WordPress d'installer cette version à côté du thème WAI-CAM v2 sans remplacer le dossier existant `waicam/`.
 
 ### 2. Uploader dans WordPress
 
 1. WP-Admin → **Apparence → Thèmes**
 2. Bouton **Ajouter** → **Téléverser un thème**
-3. Sélectionner `waicam.zip` → **Installer maintenant**
+3. Sélectionner `waicam-v3.zip` → **Installer maintenant**
 4. Cliquer **Activer**
 
 ### 3. Lancer l'installation automatique
