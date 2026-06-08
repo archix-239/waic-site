@@ -70,7 +70,7 @@ $testimonials_count   = count( $temoignages );
 					</div>
 					<div class="waicam-testimonials-featured__quote">
 						<span class="waicam-testimonials-quote-mark" aria-hidden="true">“</span>
-						<p><?php echo esc_html( $featured_testimonial['citation'] ? $featured_testimonial['citation'] : __( 'Un témoignage WAI-CAM sera bientôt disponible.', 'waicam' ) ); ?></p>
+						<p><?php echo esc_html( $featured_testimonial['citation'] ? wp_trim_words( $featured_testimonial['citation'], 38, '…' ) : __( 'Un témoignage WAI-CAM sera bientôt disponible.', 'waicam' ) ); ?></p>
 						<footer>
 							<strong><?php echo esc_html( $featured_testimonial['nom'] ); ?></strong>
 							<?php if ( $featured_testimonial['role'] || $featured_testimonial['profil'] ) : ?>

@@ -9687,3 +9687,69 @@ body.admin-bar .site-content {
     width: calc(100% - 36px);
   }
 }
+
+/* Testimonials / Join sizing fixes */
+.waicam-testimonials-hero {
+  padding-top: clamp(48px, 5.5vw, 86px);
+  padding-bottom: clamp(56px, 6.5vw, 96px);
+}
+.waicam-testimonials-hero h1 {
+  font-size: clamp(2.55rem, 5.6vw, 5.4rem);
+}
+.waicam-testimonials-featured {
+  min-height: 0;
+  height: auto;
+  max-width: 900px;
+  margin-left: auto;
+}
+.waicam-testimonials-featured__media img,
+.waicam-testimonials-avatar--large {
+  min-height: 0;
+  height: clamp(360px, 34vw, 520px);
+}
+.waicam-testimonials-featured__quote {
+  justify-content: space-between;
+  min-height: clamp(360px, 34vw, 520px);
+  padding: clamp(24px, 3.4vw, 44px);
+}
+.waicam-testimonials-featured__quote p {
+  margin: 10px 0 24px;
+  font-size: clamp(1.02rem, 1.42vw, 1.28rem);
+  line-height: 1.34;
+}
+.waicam-testimonials-quote-mark {
+  font-size: clamp(3.5rem, 7vw, 5.6rem);
+}
+.join-gwc-form-section__inner {
+  align-items: start;
+}
+.join-gwc-form-section__media {
+  height: auto;
+  min-height: clamp(300px, 29vw, 450px);
+  max-height: 500px;
+  align-self: start;
+}
+.join-gwc-form-section__media img {
+  height: clamp(300px, 29vw, 450px);
+  object-position: center;
+}
+@media (max-width: 900px) {
+  .waicam-testimonials-featured__media img,
+  .waicam-testimonials-avatar--large,
+  .waicam-testimonials-featured__quote {
+    min-height: 0;
+    height: auto;
+  }
+  .waicam-testimonials-featured__media img,
+  .waicam-testimonials-avatar--large {
+    height: clamp(280px, 58vw, 380px);
+  }
+}
+@media (max-width: 640px) {
+  .join-gwc-form-section__media,
+  .join-gwc-form-section__media img {
+    min-height: 260px;
+    height: 300px;
+    max-height: 340px;
+  }
+}
