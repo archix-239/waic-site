@@ -24,11 +24,22 @@
 	<!-- Logo -->
 	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo" aria-label="<?php bloginfo( 'name' ); ?> — <?php esc_attr_e( 'Accueil', 'waicam' ); ?>">
 		<?php if ( has_custom_logo() ) : ?>
-			<?php the_custom_logo(); ?>
+			<?php
+			$custom_logo_id = get_theme_mod( 'custom_logo' );
+			echo wp_get_attachment_image(
+				$custom_logo_id,
+				'full',
+				false,
+				array(
+					'class' => 'custom-logo',
+					'alt'   => get_bloginfo( 'name' ),
+				)
+			);
+			?>
 		<?php else : ?>
 			<img src="<?php echo esc_url( waicam_img( 'logo-waicam.png' ) ); ?>"
 				 alt="<?php bloginfo( 'name' ); ?>"
-				 width="auto" height="52" />
+				 width="220" height="86" />
 		<?php endif; ?>
 	</a>
 
