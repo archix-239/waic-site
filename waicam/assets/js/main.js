@@ -35,20 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Navbar scroll effect ---------- */
   const navbar = document.querySelector('.navbar');
-  const backTop = document.querySelector('.back-top');
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
       navbar?.classList.add('scrolled');
-      backTop?.classList.add('visible');
     } else {
       navbar?.classList.remove('scrolled');
-      backTop?.classList.remove('visible');
     }
   });
-
-  /* ---------- Back to top ---------- */
-  backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   /* ---------- Hamburger menu ---------- */
   /* IMPORTANT : on cible UNIQUEMENT le menu de la navbar (pas la pagination WP qui partage le nom .nav-links) */

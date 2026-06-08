@@ -10440,3 +10440,8 @@ body.admin-bar .site-content {
     font-size: 1.7rem;
   }
 }
+
+/* Back-to-top removed to leave room for the Jotform AI floating widget. */
+.back-top {
+  display: none !important;
+}

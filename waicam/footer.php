@@ -118,7 +118,6 @@
 	</div>
 </footer>
 
-<button class="back-top" title="<?php esc_attr_e( 'Retour en haut', 'waicam' ); ?>" aria-label="<?php esc_attr_e( 'Retour en haut', 'waicam' ); ?>">↑</button>
 <div class="toast" aria-live="polite"></div>
 
 <?php wp_footer(); ?>
