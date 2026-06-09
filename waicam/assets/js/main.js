@@ -35,20 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Navbar scroll effect ---------- */
   const navbar = document.querySelector('.navbar');
-  const backTop = document.querySelector('.back-top');
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
       navbar?.classList.add('scrolled');
-      backTop?.classList.add('visible');
     } else {
       navbar?.classList.remove('scrolled');
-      backTop?.classList.remove('visible');
     }
   });
-
-  /* ---------- Back to top ---------- */
-  backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   /* ---------- Hamburger menu ---------- */
   /* IMPORTANT : on cible UNIQUEMENT le menu de la navbar (pas la pagination WP qui partage le nom .nav-links) */
@@ -187,6 +181,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.5 });
 
   document.querySelectorAll('.counter-num').forEach(el => counterObserver.observe(el));
+
+
+  /* ---------- Wave line replay on visibility ---------- */
+  const waveReplaySelector = '.home-posthero-wave, .home-impact-wave, .home-newsletter-gwc__wave-divider, .home-bigstat-gwc__wave-divider, .home-news-grid-gwc__title-wave, .about-intro-gwc__wave, .about-gap-gwc__wave, .about-change-gwc__wave, .about-values-gwc__wave, .about-reports-gwc__wave, .team-spotlight-gwc__wave, .team-group-gwc__wave, .join-gwc-campaign__wave, .join-gwc-pillars__wave, .events-campaign-feature__wave, .programmes-career-intro__wave, .programmes-career-feature__wave, .programmes-career-form__wave, .gwc-wave-svg';
+  const waveReplayEls = document.querySelectorAll(waveReplaySelector);
+  if (waveReplayEls.length) {
+    waveReplayEls.forEach(el => el.classList.add('waicam-wave-replay'));
+
+    const waveObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('is-visible');
+          void entry.target.getBoundingClientRect();
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.55 });
+
+    waveReplayEls.forEach(el => waveObserver.observe(el));
+  }
 
   function animateCounter(el) {
     const target = parseInt(el.dataset.target, 10);
