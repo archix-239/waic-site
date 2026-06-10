@@ -2,302 +2,454 @@
 /**
  * Template Name: WAI-CAM — Formations
  *
- * Affiche le catalogue des formations WAIC.
- * Source : CPT "tribe_events" (The Events Calendar) filtré sur les
- * catégories Formation / Masterclass / Atelier / Bootcamp.
+ * Page dédiée aux formations WAI-CAM alimentée par The Events Calendar.
+ * Les formations sont des évènements catégorisés Formation / Masterclass /
+ * Atelier / Bootcamp dans The Events Calendar.
  *
  * @package WAICAM
  */
 
-get_header(); ?>
+get_header();
 
-<?php
-get_template_part( 'template-parts/page-hero', null, array(
-	'title'    => __( 'Nos Formations', 'waicam' ),
-	'subtitle' => __( "Apprends, monte en compétence et rejoins le mouvement WAI-CAM. Découvre notre catalogue de formations IA accessibles à toutes.", 'waicam' ),
-	'crumb'    => __( 'Formations', 'waicam' ),
-) );
+$hero_image_id = absint( get_theme_mod( 'waicam_formations_hero_image_id', 0 ) );
+if ( ! $hero_image_id && has_post_thumbnail() ) {
+	$hero_image_id = get_post_thumbnail_id();
+}
+$hero_year = get_theme_mod( 'waicam_formations_hero_year', gmdate( 'Y' ) );
 ?>
 
-<!-- INTRO + CHIFFRES -->
-<section class="formations-intro">
-	<div class="formations-intro-grid">
-		<div class="formation-stat">
-			<div class="num"><i class="fa-solid fa-graduation-cap"></i></div>
-			<h3><?php esc_html_e( 'Formations pratiques', 'waicam' ); ?></h3>
-			<p><?php esc_html_e( "Du concret, sans jargon technique. L'IA expliquée pour devenir actrice de ton avenir.", 'waicam' ); ?></p>
+<main id="primary" class="events-campaign-page formations-campaign-page">
+	<section class="events-campaign-hero formations-campaign-hero" aria-label="<?php esc_attr_e( 'Formations WAI-CAM', 'waicam' ); ?>">
+		<div class="events-campaign-hero__media">
+			<?php if ( $hero_image_id ) : ?>
+				<?php
+				echo wp_get_attachment_image(
+					$hero_image_id,
+					'full',
+					false,
+					array(
+						'class'    => 'events-campaign-hero__image',
+						'loading'  => 'eager',
+						'decoding' => 'async',
+					)
+				);
+				?>
+			<?php else : ?>
+				<div class="events-campaign-hero__placeholder" aria-hidden="true">
+					<span><?php esc_html_e( 'WAI-CAM', 'waicam' ); ?></span>
+					<strong><?php esc_html_e( 'FORMATIONS', 'waicam' ); ?></strong>
+				</div>
+			<?php endif; ?>
 		</div>
-		<div class="formation-stat">
-			<div class="num"><i class="fa-solid fa-earth-africa"></i></div>
-			<h3><?php esc_html_e( 'En présentiel & en ligne', 'waicam' ); ?></h3>
-			<p><?php esc_html_e( "Yaoundé, Douala, Dargala, ou en ligne via Zoom — choisis le format qui te convient.", 'waicam' ); ?></p>
-		</div>
-		<div class="formation-stat">
-			<div class="num"><i class="fa-solid fa-heart" style="color:var(--primary)"></i></div>
-			<h3><?php esc_html_e( 'Accompagnement humain', 'waicam' ); ?></h3>
-			<p><?php esc_html_e( "Des formatrices expérimentées, un mentorat individuel, une communauté soudée.", 'waicam' ); ?></p>
-		</div>
-	</div>
-</section>
 
-<!-- ===========================================
-     FORMATIONS À VENIR
-     =========================================== -->
-<section class="formations-section">
-	<div class="section-header">
-		<div class="section-tag"><?php esc_html_e( 'Calendrier', 'waicam' ); ?></div>
-		<h2 class="section-title"><?php echo wp_kses_post( __( 'Prochaines <span>formations</span>', 'waicam' ) ); ?></h2>
-		<p class="section-desc"><?php esc_html_e( "Toutes les formations à venir — inscris-toi avant que les places ne soient prises.", 'waicam' ); ?></p>
-	</div>
+		<?php if ( $hero_year ) : ?>
+			<div class="events-campaign-hero__sticker" aria-label="<?php echo esc_attr( sprintf( __( 'Année %s', 'waicam' ), $hero_year ) ); ?>">
+				<span><?php echo esc_html( $hero_year ); ?></span>
+			</div>
+		<?php endif; ?>
+	</section>
+
+	<section class="events-campaign-intro formations-campaign-intro" aria-labelledby="formations-campaign-intro-title">
+		<div class="events-campaign-intro__inner">
+			<h1 id="formations-campaign-intro-title" class="events-campaign-intro__title">
+				<?php echo esc_html( get_theme_mod( 'waicam_formations_intro_title', __( 'FORMATIONS WAI-CAM', 'waicam' ) ) ); ?>
+			</h1>
+
+			<div class="events-campaign-intro__copy">
+				<p><?php echo esc_html( get_theme_mod( 'waicam_formations_intro_text', __( "Développez vos compétences en intelligence artificielle, data, leadership numérique et innovation grâce aux formations, ateliers, bootcamps et masterclass de Women in AI Cameroon.", 'waicam' ) ) ); ?></p>
+				<a class="events-campaign-intro__link" href="<?php echo esc_url( get_theme_mod( 'waicam_formations_intro_cta_url', '#formations-calendar' ) ); ?>">
+					<span><?php echo esc_html( get_theme_mod( 'waicam_formations_intro_cta_text', __( 'Voir les prochaines formations', 'waicam' ) ) ); ?></span>
+					<span class="arrow-plain">→</span>
+					<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
+						<path d="M1 8 C11 1 21 1 31 8 S51 15 61 8 S81 1 95 8" />
+					</svg>
+				</a>
+			</div>
+		</div>
+	</section>
 
 	<?php
-	// Formations actives (à venir + en cours) — The Events Calendar gère
-	// nativement la séparation par date.
-	$formations_actives = waicam_get_formations( -1, 'a-venir' );
-	$formations_passees = waicam_get_formations( -1, 'passe' );
+	$feature_event = waicam_get_formations( 1, 'a-venir' );
+	$feature_id    = ( $feature_event && $feature_event->have_posts() ) ? $feature_event->posts[0]->ID : 0;
+	$feature_title = get_theme_mod( 'waicam_formations_feature_title', '' );
+	$feature_text  = get_theme_mod( 'waicam_formations_feature_text', '' );
+	$feature_url   = get_theme_mod( 'waicam_formations_feature_cta_url', '' );
+	$feature_img   = absint( get_theme_mod( 'waicam_formations_feature_image_id', 0 ) );
+
+	if ( ! $feature_title ) {
+		$feature_title = $feature_id ? get_the_title( $feature_id ) : __( 'Prochaine formation WAI-CAM', 'waicam' );
+	}
+	if ( ! $feature_text ) {
+		$feature_text = $feature_id ? waicam_event_excerpt( $feature_id, 150 ) : __( "Découvrez nos prochaines sessions : ateliers pratiques, masterclass, bootcamps et parcours d'initiation pour rendre l'IA accessible aux femmes et aux jeunes au Cameroun.", 'waicam' );
+	}
+	if ( ! $feature_url ) {
+		$feature_url = $feature_id ? get_permalink( $feature_id ) : '#formations-calendar';
+	}
+	if ( ! $feature_img && $feature_id && has_post_thumbnail( $feature_id ) ) {
+		$feature_img = get_post_thumbnail_id( $feature_id );
+	}
 	?>
+	<section class="events-campaign-feature formations-campaign-feature" aria-labelledby="formations-campaign-feature-title">
+		<div class="events-campaign-feature__copy">
+			<div class="events-campaign-feature__copy-inner">
+				<h2 id="formations-campaign-feature-title"><?php echo esc_html( $feature_title ); ?></h2>
+				<svg class="events-campaign-feature__wave" viewBox="0 0 260 24" role="presentation" aria-hidden="true" focusable="false">
+					<path d="M0 12 C10 2 22 2 32 12 S54 22 64 12 S86 2 96 12 S118 22 128 12 S150 2 160 12 S182 22 192 12 S214 2 224 12 S246 22 260 12" />
+				</svg>
+				<p><?php echo esc_html( $feature_text ); ?></p>
 
-	<?php if ( $formations_actives ) : ?>
-		<div class="formations-grid">
-			<?php while ( $formations_actives->have_posts() ) : $formations_actives->the_post();
-				$post_id   = get_the_ID();
-				$type      = waicam_event_type( $post_id );
-				$lieu      = waicam_event_venue( $post_id );
-				$heure     = waicam_event_time_range( $post_id );
-				$niveau    = waicam_format_select( get_post_meta( $post_id, 'niveau', true ) );
-				$formateur = get_post_meta( $post_id, 'formateur', true );
-				$lien_inscr = get_post_meta( $post_id, 'lien_inscription', true );
-				$img_url   = waicam_event_image_url( $post_id, 'medium_large' );
-				$permalink = get_permalink( $post_id );
+				<?php if ( $feature_id ) : ?>
+					<ul class="events-campaign-feature__meta" aria-label="<?php esc_attr_e( 'Informations formation', 'waicam' ); ?>">
+						<li><?php echo esc_html( waicam_event_date( $feature_id ) ); ?></li>
+						<?php if ( waicam_event_venue( $feature_id ) ) : ?>
+							<li><?php echo esc_html( waicam_event_venue( $feature_id ) ); ?></li>
+						<?php endif; ?>
+					</ul>
+				<?php endif; ?>
 
-				// URL de destination du bouton "S'inscrire" (lien externe si défini, sinon page détail)
-				$cta_url = $lien_inscr ? esc_url( $lien_inscr ) : esc_url( $permalink );
-				$cta_target = $lien_inscr ? ' target="_blank" rel="noopener"' : '';
+				<a class="events-campaign-feature__link" href="<?php echo esc_url( $feature_url ); ?>">
+					<span><?php echo esc_html( get_theme_mod( 'waicam_formations_feature_cta_text', __( 'Découvrir la formation', 'waicam' ) ) ); ?></span>
+					<span class="arrow-plain">→</span>
+					<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
+						<path d="M1 8 C11 1 21 1 31 8 S51 15 61 8 S81 1 95 8" />
+					</svg>
+				</a>
+			</div>
+		</div>
+
+		<div class="events-campaign-feature__visual">
+			<?php if ( $feature_img ) : ?>
+				<?php echo wp_get_attachment_image( $feature_img, 'large', false, array( 'class' => 'events-campaign-feature__image', 'loading' => 'lazy' ) ); ?>
+			<?php else : ?>
+				<div class="events-campaign-feature__placeholder">
+					<span><?php esc_html_e( 'WAI-CAM', 'waicam' ); ?></span>
+					<strong><?php esc_html_e( 'FORMATION', 'waicam' ); ?></strong>
+				</div>
+			<?php endif; ?>
+		</div>
+	</section>
+	<?php wp_reset_postdata(); ?>
+
+	<?php
+	$formation_cards = waicam_get_formations( -1, 'a-venir' );
+	if ( $formation_cards ) :
+		$card_index = 0;
+		while ( $formation_cards->have_posts() ) :
+			$formation_cards->the_post();
+			$card_id = get_the_ID();
+			if ( $feature_id && $card_id === $feature_id ) {
+				continue;
+			}
+
+			$card_classes = array( 'events-campaign-feature', 'events-campaign-feature--auto', 'formations-campaign-feature' );
+			if ( 0 === $card_index % 2 ) {
+				$card_classes[] = 'events-campaign-feature--image-left';
+			}
+			$card_classes[] = 'events-campaign-feature--tone-' . array( 'green', 'red', 'blue' )[ $card_index % 3 ];
+
+			$card_img   = has_post_thumbnail( $card_id ) ? get_post_thumbnail_id( $card_id ) : 0;
+			$card_venue = waicam_event_venue( $card_id );
 			?>
-				<article class="formation-card">
-					<a href="<?php echo esc_url( $permalink ); ?>" class="formation-card-img">
-						<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy" />
-						<?php if ( $type ) : ?>
-							<span class="formation-card-type"><?php echo esc_html( $type ); ?></span>
-						<?php endif; ?>
-						<?php if ( $niveau ) : ?>
-							<span class="formation-card-niveau"><?php echo esc_html( $niveau ); ?></span>
-						<?php endif; ?>
-					</a>
-					<div class="formation-card-body">
-						<h3>
-							<a href="<?php echo esc_url( $permalink ); ?>"><?php the_title(); ?></a>
-						</h3>
+			<section class="<?php echo esc_attr( implode( ' ', $card_classes ) ); ?>" aria-labelledby="formations-campaign-card-<?php echo esc_attr( $card_id ); ?>">
+				<div class="events-campaign-feature__copy">
+					<div class="events-campaign-feature__copy-inner">
+						<h2 id="formations-campaign-card-<?php echo esc_attr( $card_id ); ?>"><?php the_title(); ?></h2>
+						<svg class="events-campaign-feature__wave" viewBox="0 0 260 24" role="presentation" aria-hidden="true" focusable="false">
+							<path d="M0 12 C10 2 22 2 32 12 S54 22 64 12 S86 2 96 12 S118 22 128 12 S150 2 160 12 S182 22 192 12 S214 2 224 12 S246 22 260 12" />
+						</svg>
+						<p><?php echo esc_html( waicam_event_excerpt( $card_id, 150 ) ); ?></p>
 
-						<ul class="formation-card-meta">
-							<li><span class="ico"><i class="fa-regular fa-calendar"></i></span> <?php echo esc_html( waicam_event_date( $post_id ) ); ?></li>
-							<?php if ( $heure ) : ?>
-								<li><span class="ico"><i class="fa-regular fa-clock"></i></span> <?php echo esc_html( $heure ); ?></li>
-							<?php endif; ?>
-							<?php if ( $lieu ) : ?>
-								<li><span class="ico"><i class="fa-solid fa-location-dot"></i></span> <?php echo esc_html( $lieu ); ?></li>
-							<?php endif; ?>
-							<?php if ( $formateur ) : ?>
-								<li><span class="ico"><i class="fa-solid fa-chalkboard-user"></i></span> <?php echo esc_html( $formateur ); ?></li>
+						<ul class="events-campaign-feature__meta" aria-label="<?php esc_attr_e( 'Informations formation', 'waicam' ); ?>">
+							<li><?php echo esc_html( waicam_event_date( $card_id ) ); ?></li>
+							<?php if ( $card_venue ) : ?>
+								<li><?php echo esc_html( $card_venue ); ?></li>
 							<?php endif; ?>
 						</ul>
 
-						<p class="formation-card-desc"><?php echo esc_html( waicam_event_excerpt( $post_id, 160 ) ); ?></p>
+						<a class="events-campaign-feature__link" href="<?php the_permalink(); ?>">
+							<span><?php esc_html_e( 'Voir la formation', 'waicam' ); ?></span>
+							<span class="arrow-plain">→</span>
+							<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
+								<path d="M1 8 C11 1 21 1 31 8 S51 15 61 8 S81 1 95 8" />
+							</svg>
+						</a>
+					</div>
+				</div>
 
-						<div class="formation-card-actions">
-							<a href="<?php echo esc_url( $permalink ); ?>" class="btn-outline btn-sm">
-								<?php esc_html_e( 'Voir le détail', 'waicam' ); ?>
-							</a>
-							<a href="<?php echo $cta_url; ?>"<?php echo $cta_target; ?> class="btn-primary btn-sm">
-								<i class="fa-solid fa-graduation-cap"></i> <?php esc_html_e( "S'inscrire", 'waicam' ); ?>
+				<div class="events-campaign-feature__visual">
+					<?php if ( $card_img ) : ?>
+						<?php echo wp_get_attachment_image( $card_img, 'large', false, array( 'class' => 'events-campaign-feature__image', 'loading' => 'lazy' ) ); ?>
+					<?php else : ?>
+						<div class="events-campaign-feature__placeholder">
+							<span><?php esc_html_e( 'WAI-CAM', 'waicam' ); ?></span>
+							<strong><?php esc_html_e( 'FORMATION', 'waicam' ); ?></strong>
+						</div>
+					<?php endif; ?>
+				</div>
+			</section>
+			<?php
+			$card_index++;
+		endwhile;
+		wp_reset_postdata();
+	endif;
+	?>
+
+	<?php
+	$training_products = null;
+
+	if ( class_exists( 'WooCommerce' ) ) {
+		$training_product_terms = array();
+		$product_categories     = get_terms( array(
+			'taxonomy'   => 'product_cat',
+			'hide_empty' => true,
+		) );
+
+		if ( ! is_wp_error( $product_categories ) ) {
+			foreach ( $product_categories as $product_category ) {
+				$category_signature = strtolower( $product_category->slug . ' ' . $product_category->name );
+				if ( preg_match( '/formation|cours|training|atelier|masterclass/', $category_signature ) ) {
+					$training_product_terms[] = $product_category->slug;
+				}
+			}
+		}
+
+		if ( $training_product_terms ) {
+			$training_products = new WP_Query( array(
+				'post_type'           => 'product',
+				'post_status'         => 'publish',
+				'posts_per_page'      => 6,
+				'ignore_sticky_posts' => true,
+				'tax_query'           => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+					array(
+						'taxonomy' => 'product_cat',
+						'field'    => 'slug',
+						'terms'    => $training_product_terms,
+					),
+				),
+			) );
+		}
+	}
+	?>
+
+	<?php if ( $training_products && $training_products->have_posts() ) : ?>
+	<section class="formations-shop-section" aria-labelledby="formations-shop-title">
+		<div class="section-header">
+			<div class="section-tag"><?php esc_html_e( 'Formations en ligne', 'waicam' ); ?></div>
+			<h2 id="formations-shop-title" class="section-title"><?php echo wp_kses_post( __( 'Formations <span>à acheter</span>', 'waicam' ) ); ?></h2>
+			<p class="section-desc"><?php esc_html_e( 'Ces formations sont vendues comme produits WooCommerce : consulte le programme, ajoute la formation au panier, puis finalise ton achat en ligne.', 'waicam' ); ?></p>
+		</div>
+
+		<div class="formations-shop-grid">
+			<?php
+			while ( $training_products->have_posts() ) :
+				$training_products->the_post();
+				$product = wc_get_product( get_the_ID() );
+				if ( ! $product ) {
+					continue;
+				}
+				?>
+				<article <?php wc_product_class( 'formations-shop-card', $product ); ?>>
+					<a class="formations-shop-card__media" href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr( get_the_title() ); ?>">
+						<?php if ( has_post_thumbnail() ) : ?>
+							<?php the_post_thumbnail( 'large' ); ?>
+						<?php else : ?>
+							<div class="formations-shop-card__placeholder" aria-hidden="true"><?php esc_html_e( 'Formation WAI-CAM', 'waicam' ); ?></div>
+						<?php endif; ?>
+					</a>
+
+					<div class="formations-shop-card__body">
+						<p class="formations-shop-card__category"><?php echo wp_kses_post( wc_get_product_category_list( $product->get_id(), ', ' ) ); ?></p>
+						<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+						<p><?php echo esc_html( wp_trim_words( $product->get_short_description() ? wp_strip_all_tags( $product->get_short_description() ) : get_the_excerpt(), 22 ) ); ?></p>
+						<div class="formations-shop-card__footer">
+							<span class="formations-shop-card__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+							<a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>"
+							   data-quantity="1"
+							   data-product_id="<?php echo esc_attr( $product->get_id() ); ?>"
+							   data-product_sku="<?php echo esc_attr( $product->get_sku() ); ?>"
+							   class="formations-shop-card__button <?php echo esc_attr( implode( ' ', array_filter( array( 'button', 'product_type_' . $product->get_type(), $product->supports( 'ajax_add_to_cart' ) ? 'ajax_add_to_cart' : '' ) ) ) ); ?>">
+								<?php echo esc_html( $product->add_to_cart_text() ); ?>
 							</a>
 						</div>
 					</div>
 				</article>
-			<?php endwhile; wp_reset_postdata(); ?>
+			<?php endwhile; ?>
 		</div>
-	<?php else : ?>
-		<div class="formations-empty">
-			<p><?php esc_html_e( "Aucune formation programmée pour le moment. Reviens vite, le calendrier s'enrichit chaque mois.", 'waicam' ); ?></p>
-			<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn-outline">
-				<?php esc_html_e( 'Suggérer une formation', 'waicam' ); ?>
-			</a>
+
+		<div class="formations-shop-more">
+			<a class="btn-outline" href="<?php echo esc_url( home_url( '/produits/' ) ); ?>"><?php esc_html_e( 'Voir toutes les formations en vente', 'waicam' ); ?></a>
 		</div>
+	</section>
+	<?php wp_reset_postdata(); ?>
 	<?php endif; ?>
-</section>
 
-<!-- ===========================================
-     POURQUOI SE FORMER AVEC NOUS
-     =========================================== -->
-<section class="formations-why" style="background:var(--gray-light);">
-	<div class="section-header">
-		<div class="section-tag"><?php esc_html_e( 'Pourquoi WAI-CAM', 'waicam' ); ?></div>
-		<h2 class="section-title"><?php echo wp_kses_post( __( 'Une approche <span>concrète</span>', 'waicam' ) ); ?></h2>
-	</div>
-	<div class="formations-why-grid">
-		<div class="why-card">
-			<div class="why-icon"><i class="fa-solid fa-brain"></i></div>
-			<h4><?php esc_html_e( 'Sans jargon', 'waicam' ); ?></h4>
-			<p><?php esc_html_e( "L'IA expliquée avec des mots simples, des exemples concrets, des cas d'usage du quotidien.", 'waicam' ); ?></p>
-		</div>
-		<div class="why-card">
-			<div class="why-icon"><i class="fa-solid fa-briefcase"></i></div>
-			<h4><?php esc_html_e( 'Pratique & utile', 'waicam' ); ?></h4>
-			<p><?php esc_html_e( "Tu repars avec des outils que tu peux utiliser dès le lendemain dans ton activité.", 'waicam' ); ?></p>
-		</div>
-		<div class="why-card">
-			<div class="why-icon"><i class="fa-solid fa-handshake"></i></div>
-			<h4><?php esc_html_e( 'Communauté', 'waicam' ); ?></h4>
-			<p><?php esc_html_e( "Tu rejoins un réseau de femmes engagées qui se soutiennent et se mentorent.", 'waicam' ); ?></p>
-		</div>
-		<div class="why-card">
-			<div class="why-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-			<h4><?php esc_html_e( 'Certifiée', 'waicam' ); ?></h4>
-			<p><?php esc_html_e( "Une attestation WAI-CAM à l'issue de chaque formation pour valoriser ton parcours.", 'waicam' ); ?></p>
-		</div>
-	</div>
-</section>
+	<section id="formations-calendar" class="events-calendar-system formations-calendar-system" aria-labelledby="formations-calendar-title">
+		<div class="events-calendar-system__inner">
+			<div class="events-calendar-system__heading">
+				<span class="events-calendar-system__kicker"><?php esc_html_e( 'Calendrier', 'waicam' ); ?></span>
+				<h2 id="formations-calendar-title"><?php esc_html_e( 'Toutes les formations', 'waicam' ); ?></h2>
+				<p><?php esc_html_e( 'Retrouvez le calendrier complet des ateliers, masterclass, bootcamps et sessions de formation Women in AI Cameroon.', 'waicam' ); ?></p>
+			</div>
 
-<!-- ===========================================
-     FORMATIONS PASSÉES (référence)
-     =========================================== -->
-<?php if ( $formations_passees ) : ?>
-<section class="formations-section">
-	<div class="section-header">
-		<div class="section-tag"><?php esc_html_e( 'Archives', 'waicam' ); ?></div>
-		<h2 class="section-title"><?php echo wp_kses_post( __( 'Formations <span>passées</span>', 'waicam' ) ); ?></h2>
-		<p class="section-desc"><?php esc_html_e( "Retour sur nos sessions précédentes — pour voir notre impact sur le terrain.", 'waicam' ); ?></p>
-	</div>
-
-	<div class="formations-past-list">
-		<?php while ( $formations_passees->have_posts() ) : $formations_passees->the_post();
-			$post_id = get_the_ID();
-			$type    = waicam_event_type( $post_id );
-			$lieu    = waicam_event_venue( $post_id );
-			$nb      = get_post_meta( $post_id, 'nombre_de_participantes', true );
-		?>
-			<a href="<?php the_permalink(); ?>" class="formation-past-item">
-				<div class="formation-past-date"><?php echo esc_html( waicam_event_date( $post_id ) ); ?></div>
-				<div class="formation-past-body">
-					<h4><?php the_title(); ?></h4>
-					<div class="formation-past-meta">
-						<?php if ( $type ) : ?><span><?php echo esc_html( $type ); ?></span><?php endif; ?>
-						<?php if ( $lieu ) : ?><span><i class="fa-solid fa-location-dot"></i> <?php echo esc_html( $lieu ); ?></span><?php endif; ?>
-						<?php if ( $nb ) : ?><span><i class="fa-solid fa-users"></i> <?php echo esc_html( number_format_i18n( $nb ) ); ?> participantes</span><?php endif; ?>
-					</div>
-				</div>
-				<span class="formation-past-arrow">→</span>
-			</a>
-		<?php endwhile; wp_reset_postdata(); ?>
-	</div>
-</section>
-<?php endif; ?>
-
-
-<!-- ===========================================
-     FORMATIONS EN VENTE (WooCommerce)
-     =========================================== -->
-<?php
-$training_products = null;
-
-if ( class_exists( 'WooCommerce' ) ) {
-	$training_product_terms = array();
-	$product_categories     = get_terms( array(
-		'taxonomy'   => 'product_cat',
-		'hide_empty' => true,
-	) );
-
-	if ( ! is_wp_error( $product_categories ) ) {
-		foreach ( $product_categories as $product_category ) {
-			$category_signature = strtolower( $product_category->slug . ' ' . $product_category->name );
-			if ( preg_match( '/formation|cours|training|atelier|masterclass/', $category_signature ) ) {
-				$training_product_terms[] = $product_category->slug;
+			<?php
+			$calendar_search = isset( $_GET['formation_search'] ) ? sanitize_text_field( wp_unslash( $_GET['formation_search'] ) ) : '';
+			$calendar_date   = isset( $_GET['formation_date'] ) ? sanitize_text_field( wp_unslash( $_GET['formation_date'] ) ) : '';
+			if ( $calendar_date && ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $calendar_date ) ) {
+				$calendar_date = '';
 			}
-		}
-	}
-
-	if ( $training_product_terms ) {
-		$training_products = new WP_Query( array(
-			'post_type'           => 'product',
-			'post_status'         => 'publish',
-			'posts_per_page'      => 6,
-			'ignore_sticky_posts' => true,
-			'tax_query'           => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-				array(
-					'taxonomy' => 'product_cat',
-					'field'    => 'slug',
-					'terms'    => $training_product_terms,
+			$formations_page     = isset( $_GET['formations_page'] ) ? max( 1, absint( $_GET['formations_page'] ) ) : 1;
+			$formations_per_page = 6;
+			$calendar_base       = function_exists( 'tribe_get_events_link' ) ? tribe_get_events_link() : get_permalink();
+			$calendar_feed       = function_exists( 'tribe_get_ical_link' ) ? tribe_get_ical_link() : add_query_arg( 'ical', '1', $calendar_base );
+			$calendar_webcal     = set_url_scheme( $calendar_feed, 'webcal' );
+			$calendar_google     = add_query_arg( 'cid', rawurlencode( $calendar_webcal ), 'https://calendar.google.com/calendar/r' );
+			$calendar_args       = array(
+				'posts_per_page' => $formations_per_page,
+				'paged'          => $formations_page,
+				'order'          => 'ASC',
+				'tax_query'      => array(
+					array(
+						'taxonomy' => 'tribe_events_cat',
+						'field'    => 'slug',
+						'terms'    => array( 'formation', 'masterclass', 'atelier', 'bootcamp' ),
+					),
 				),
-			),
-		) );
-	}
-}
-?>
-
-<?php if ( $training_products && $training_products->have_posts() ) : ?>
-<section class="formations-shop-section" aria-labelledby="formations-shop-title">
-	<div class="section-header">
-		<div class="section-tag"><?php esc_html_e( 'Formations en ligne', 'waicam' ); ?></div>
-		<h2 id="formations-shop-title" class="section-title"><?php echo wp_kses_post( __( 'Formations <span>à acheter</span>', 'waicam' ) ); ?></h2>
-		<p class="section-desc"><?php esc_html_e( 'Ces formations sont vendues comme produits WooCommerce : consulte le programme, ajoute la formation au panier, puis finalise ton achat en ligne.', 'waicam' ); ?></p>
-	</div>
-
-	<div class="formations-shop-grid">
-		<?php
-		while ( $training_products->have_posts() ) :
-			$training_products->the_post();
-			$product = wc_get_product( get_the_ID() );
-			if ( ! $product ) {
-				continue;
+			);
+			if ( $calendar_date ) {
+				$calendar_args['starts_after']  = $calendar_date . ' 00:00:00';
+				$calendar_args['starts_before'] = $calendar_date . ' 23:59:59';
+			} else {
+				$calendar_args['ends_after'] = current_time( 'Y-m-d H:i:s' );
 			}
+			if ( $calendar_search ) {
+				$calendar_args['s'] = $calendar_search;
+			}
+			$calendar_formations  = function_exists( 'tribe_get_events' ) ? tribe_get_events( $calendar_args, true ) : null;
+			$calendar_total_pages = ( $calendar_formations && ! empty( $calendar_formations->max_num_pages ) ) ? (int) $calendar_formations->max_num_pages : 1;
+			$calendar_url_args    = array_filter(
+				array(
+					'formation_search' => $calendar_search,
+					'formation_date'   => $calendar_date,
+				),
+				static function( $value ) {
+					return '' !== $value;
+				}
+			);
+			$calendar_previous_url = add_query_arg( array_merge( $calendar_url_args, array( 'formations_page' => max( 1, $formations_page - 1 ) ) ), get_permalink() ) . '#formations-calendar';
+			$calendar_next_url     = add_query_arg( array_merge( $calendar_url_args, array( 'formations_page' => $formations_page + 1 ) ), get_permalink() ) . '#formations-calendar';
 			?>
-			<article <?php wc_product_class( 'formations-shop-card', $product ); ?>>
-				<a class="formations-shop-card__media" href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr( get_the_title() ); ?>">
-					<?php if ( has_post_thumbnail() ) : ?>
-						<?php the_post_thumbnail( 'large' ); ?>
-					<?php else : ?>
-						<div class="formations-shop-card__placeholder" aria-hidden="true"><?php esc_html_e( 'Formation WAI-CAM', 'waicam' ); ?></div>
-					<?php endif; ?>
-				</a>
 
-				<div class="formations-shop-card__body">
-					<p class="formations-shop-card__category"><?php echo wp_kses_post( wc_get_product_category_list( $product->get_id(), ', ' ) ); ?></p>
-					<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-					<p><?php echo esc_html( wp_trim_words( $product->get_short_description() ? wp_strip_all_tags( $product->get_short_description() ) : get_the_excerpt(), 22 ) ); ?></p>
-					<div class="formations-shop-card__footer">
-						<span class="formations-shop-card__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
-						<a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>"
-						   data-quantity="1"
-						   data-product_id="<?php echo esc_attr( $product->get_id() ); ?>"
-						   data-product_sku="<?php echo esc_attr( $product->get_sku() ); ?>"
-						   class="formations-shop-card__button <?php echo esc_attr( implode( ' ', array_filter( array( 'button', 'product_type_' . $product->get_type(), $product->supports( 'ajax_add_to_cart' ) ? 'ajax_add_to_cart' : '' ) ) ) ); ?>">
-							<?php echo esc_html( $product->add_to_cart_text() ); ?>
-						</a>
-					</div>
+			<form class="events-calendar-toolbar" role="search" method="get" action="<?php echo esc_url( get_permalink() ); ?>">
+				<?php if ( $calendar_date ) : ?>
+					<input type="hidden" name="formation_date" value="<?php echo esc_attr( $calendar_date ); ?>" />
+				<?php endif; ?>
+				<label class="events-calendar-toolbar__search" for="formations-calendar-search">
+					<span class="screen-reader-text"><?php esc_html_e( 'Rechercher des formations', 'waicam' ); ?></span>
+					<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.8 18.1a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Zm5.2-1.1 4.2 4.2" /></svg>
+					<input id="formations-calendar-search" type="search" name="formation_search" value="<?php echo esc_attr( $calendar_search ); ?>" placeholder="<?php esc_attr_e( 'Rechercher formations', 'waicam' ); ?>" />
+				</label>
+				<button class="events-calendar-toolbar__submit" type="submit"><?php esc_html_e( 'Chercher', 'waicam' ); ?></button>
+				<nav class="events-calendar-toolbar__views" aria-label="<?php esc_attr_e( 'Vues du calendrier', 'waicam' ); ?>">
+					<a class="is-active" href="#formations-calendar"><?php esc_html_e( 'Liste', 'waicam' ); ?></a>
+					<a href="<?php echo esc_url( add_query_arg( 'eventDisplay', 'month', $calendar_base ) ); ?>"><?php esc_html_e( 'Mois', 'waicam' ); ?></a>
+					<a href="<?php echo esc_url( add_query_arg( 'eventDisplay', 'day', $calendar_base ) ); ?>"><?php esc_html_e( 'Jour', 'waicam' ); ?></a>
+				</nav>
+			</form>
+
+			<div class="events-calendar-controls">
+				<div class="events-calendar-controls__nav">
+					<a href="<?php echo esc_url( $calendar_previous_url ); ?>" aria-label="<?php esc_attr_e( 'Formations précédentes', 'waicam' ); ?>">‹</a>
+					<a href="<?php echo esc_url( $calendar_next_url ); ?>" aria-label="<?php esc_attr_e( 'Formations suivantes', 'waicam' ); ?>">›</a>
+					<form class="events-calendar-date-filter" method="get" action="<?php echo esc_url( get_permalink() ); ?>">
+						<?php if ( $calendar_search ) : ?>
+							<input type="hidden" name="formation_search" value="<?php echo esc_attr( $calendar_search ); ?>" />
+						<?php endif; ?>
+						<label class="events-calendar-controls__today" for="formations-calendar-date">
+							<span><?php esc_html_e( 'Aujourd’hui', 'waicam' ); ?></span>
+							<input id="formations-calendar-date" type="date" name="formation_date" value="<?php echo esc_attr( $calendar_date ); ?>" onchange="this.form.submit()" />
+						</label>
+					</form>
 				</div>
-			</article>
-		<?php endwhile; ?>
-	</div>
+				<strong><?php echo esc_html( $calendar_date ? wp_date( 'j F Y', strtotime( $calendar_date ) ) : __( 'À venir', 'waicam' ) ); ?></strong>
+			</div>
 
-	<div class="formations-shop-more">
-		<a class="btn-outline" href="<?php echo esc_url( home_url( '/produits/' ) ); ?>"><?php esc_html_e( 'Voir toutes les formations en vente', 'waicam' ); ?></a>
-	</div>
-</section>
-<?php wp_reset_postdata(); ?>
-<?php endif; ?>
+			<div class="events-calendar-list" role="list">
+				<?php if ( $calendar_formations && $calendar_formations->have_posts() ) : ?>
+					<?php
+					$current_month = '';
+					while ( $calendar_formations->have_posts() ) :
+						$calendar_formations->the_post();
+						$formation_id    = get_the_ID();
+						$formation_month = function_exists( 'tribe_get_start_date' ) ? tribe_get_start_date( $formation_id, false, 'F Y' ) : get_the_date( 'F Y', $formation_id );
+						$formation_day   = function_exists( 'tribe_get_start_date' ) ? tribe_get_start_date( $formation_id, false, 'd' ) : get_the_date( 'd', $formation_id );
+						$formation_dow   = function_exists( 'tribe_get_start_date' ) ? tribe_get_start_date( $formation_id, false, 'D' ) : get_the_date( 'D', $formation_id );
+						$formation_venue = waicam_event_venue( $formation_id );
+						$formation_ical  = function_exists( 'tribe_get_single_ical_link' ) ? tribe_get_single_ical_link( $formation_id ) : add_query_arg( 'ical', '1', get_permalink( $formation_id ) );
+						$formation_gcal  = function_exists( 'tribe_get_gcal_link' ) ? tribe_get_gcal_link( $formation_id ) : '';
+						if ( $formation_month !== $current_month ) :
+							$current_month = $formation_month;
+							?>
+							<div class="events-calendar-list__month"><span><?php echo esc_html( $current_month ); ?></span></div>
+						<?php endif; ?>
+						<article class="events-calendar-item" role="listitem">
+							<div class="events-calendar-item__date" aria-label="<?php echo esc_attr( waicam_event_date( $formation_id ) ); ?>">
+								<span><?php echo esc_html( $formation_dow ); ?></span>
+								<strong><?php echo esc_html( $formation_day ); ?></strong>
+							</div>
+							<div class="events-calendar-item__body">
+								<p class="events-calendar-item__time"><?php echo esc_html( waicam_event_date( $formation_id ) ); ?></p>
+								<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+								<?php if ( $formation_venue ) : ?>
+									<p class="events-calendar-item__venue"><?php echo esc_html( $formation_venue ); ?></p>
+								<?php endif; ?>
+								<p><?php echo esc_html( waicam_event_excerpt( $formation_id, 260 ) ); ?></p>
+								<div class="events-calendar-item__actions">
+									<a href="<?php echo esc_url( $formation_ical ); ?>"><?php esc_html_e( 'Ajouter au calendrier', 'waicam' ); ?></a>
+									<?php if ( $formation_gcal ) : ?>
+										<a href="<?php echo esc_url( $formation_gcal ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Google Agenda', 'waicam' ); ?></a>
+									<?php endif; ?>
+								</div>
+							</div>
+							<?php if ( has_post_thumbnail( $formation_id ) ) : ?>
+								<a class="events-calendar-item__media" href="<?php the_permalink(); ?>" aria-label="<?php echo esc_attr( get_the_title() ); ?>">
+									<?php echo get_the_post_thumbnail( $formation_id, 'large', array( 'loading' => 'lazy' ) ); ?>
+								</a>
+							<?php endif; ?>
+						</article>
+					<?php endwhile; wp_reset_postdata(); ?>
+				<?php else : ?>
+					<div class="events-calendar-empty">
+						<p><?php esc_html_e( 'Aucune formation ne correspond à votre recherche pour le moment.', 'waicam' ); ?></p>
+					</div>
+				<?php endif; ?>
+			</div>
 
-<!-- ===========================================
-     CTA — SUGGÉRER UNE FORMATION
-     =========================================== -->
-<section class="formations-cta">
-	<div class="formations-cta-inner">
-		<div class="cta-icon"><i class="fa-regular fa-lightbulb"></i></div>
-		<h3><?php esc_html_e( "Tu cherches une formation qu'on ne propose pas encore ?", 'waicam' ); ?></h3>
-		<p><?php esc_html_e( "Dis-nous ce dont tu as besoin. Si plusieurs femmes le demandent, on l'organise.", 'waicam' ); ?></p>
-		<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn-primary">
-			<?php esc_html_e( 'Suggérer une formation', 'waicam' ); ?>
-		</a>
-	</div>
-</section>
+			<div class="events-calendar-footer">
+				<a class="events-calendar-footer__previous" href="<?php echo esc_url( 1 < $formations_page ? $calendar_previous_url : add_query_arg( 'eventDisplay', 'past', $calendar_base ) ); ?>">‹ <?php esc_html_e( 'Formations précédentes', 'waicam' ); ?></a>
+				<?php if ( $formations_page < $calendar_total_pages || $calendar_total_pages <= 1 ) : ?>
+					<a class="events-calendar-footer__next" href="<?php echo esc_url( $formations_page < $calendar_total_pages ? $calendar_next_url : add_query_arg( 'eventDisplay', 'list', $calendar_base ) ); ?>">
+						<span><?php esc_html_e( 'Formations suivantes', 'waicam' ); ?></span>
+						<span class="arrow-plain">→</span>
+						<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
+							<path d="M1 8 C11 1 21 1 31 8 S51 15 61 8 S81 1 95 8" />
+						</svg>
+					</a>
+				<?php endif; ?>
+				<details class="events-calendar-subscribe">
+					<summary><?php esc_html_e( 'S’abonner au calendrier', 'waicam' ); ?></summary>
+					<div class="events-calendar-subscribe__menu">
+						<a href="<?php echo esc_url( $calendar_base ); ?>"><?php esc_html_e( 'Calendrier The Events Calendar', 'waicam' ); ?></a>
+						<a href="<?php echo esc_url( $calendar_google ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Google Agenda', 'waicam' ); ?></a>
+						<a href="<?php echo esc_url( $calendar_feed ); ?>"><?php esc_html_e( 'iCalendar', 'waicam' ); ?></a>
+						<a href="<?php echo esc_url( $calendar_webcal ); ?>"><?php esc_html_e( 'Outlook 365', 'waicam' ); ?></a>
+						<a href="<?php echo esc_url( $calendar_webcal ); ?>"><?php esc_html_e( 'Outlook Live', 'waicam' ); ?></a>
+						<a href="<?php echo esc_url( $calendar_feed ); ?>" download><?php esc_html_e( 'Exporter le fichier .ics', 'waicam' ); ?></a>
+					</div>
+				</details>
+			</div>
+		</div>
+	</section>
+</main>
 
-<?php get_footer();
+<?php
+get_footer();
