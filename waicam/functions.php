@@ -7,7 +7,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'WAICAM_VERSION', '3.0.2' );
+define( 'WAICAM_VERSION', '3.0.3' );
 define( 'WAICAM_DIR', get_template_directory() );
 define( 'WAICAM_URI', get_template_directory_uri() );
 
@@ -132,6 +132,16 @@ function waicam_enqueue_assets() {
 			WAICAM_URI . '/assets/css/products.css',
 			array( 'waicam-theme' ),
 			file_exists( $products_css_path ) ? (string) filemtime( $products_css_path ) : WAICAM_VERSION
+		);
+	}
+
+	if ( is_page_template( 'page-templates/template-formations.php' ) || is_post_type_archive( 'lp_course' ) || is_singular( 'lp_course' ) ) {
+		$courses_css_path = WAICAM_DIR . '/assets/css/courses.css';
+		wp_enqueue_style(
+			'waicam-courses',
+			WAICAM_URI . '/assets/css/courses.css',
+			array( 'waicam-theme' ),
+			file_exists( $courses_css_path ) ? (string) filemtime( $courses_css_path ) : WAICAM_VERSION
 		);
 	}
 
@@ -1743,6 +1753,145 @@ function waicam_body_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'waicam_body_classes' );
+
+
+/**
+ * LearnPress helpers — graceful fallbacks so templates render even if a LP helper changes.
+ */
+function waicam_course_category_label( $course_id ) {
+	$terms = get_the_terms( $course_id, 'course_category' );
+	if ( empty( $terms ) || is_wp_error( $terms ) ) {
+		return '';
+	}
+	return $terms[0]->name;
+}
+
+function waicam_course_excerpt( $course_id, $words = 22 ) {
+	$excerpt = get_the_excerpt( $course_id );
+	if ( ! $excerpt ) {
+		$excerpt = wp_strip_all_tags( get_post_field( 'post_content', $course_id ) );
+	}
+	return wp_trim_words( $excerpt, $words );
+}
+
+function waicam_course_price_html( $course_id ) {
+	if ( function_exists( 'learn_press_get_course' ) ) {
+		$course = learn_press_get_course( $course_id );
+		if ( $course && is_object( $course ) ) {
+			if ( method_exists( $course, 'get_price_html' ) ) {
+				$price = $course->get_price_html();
+				if ( $price ) return $price;
+			}
+			if ( method_exists( $course, 'get_price' ) ) {
+				$raw_price = $course->get_price();
+				if ( '' !== $raw_price && null !== $raw_price ) {
+					return is_numeric( $raw_price ) && function_exists( 'wc_price' ) ? wc_price( (float) $raw_price ) : esc_html( $raw_price );
+				}
+			}
+		}
+	}
+
+	$price = get_post_meta( $course_id, '_lp_price', true );
+	if ( '' === $price || '0' === (string) $price ) {
+		return esc_html__( 'Gratuit', 'waicam' );
+	}
+	return is_numeric( $price ) && function_exists( 'wc_price' ) ? wc_price( (float) $price ) : esc_html( $price );
+}
+
+function waicam_course_duration( $course_id ) {
+	$keys = array( '_lp_duration', '_duration', 'duration' );
+	foreach ( $keys as $key ) {
+		$value = get_post_meta( $course_id, $key, true );
+		if ( $value ) return $value;
+	}
+	return '';
+}
+
+function waicam_course_level( $course_id ) {
+	$keys = array( '_lp_level', '_lp_course_level', 'level' );
+	foreach ( $keys as $key ) {
+		$value = get_post_meta( $course_id, $key, true );
+		if ( $value ) return $value;
+	}
+	return '';
+}
+
+function waicam_course_students_count( $course_id ) {
+	if ( function_exists( 'learn_press_get_course' ) ) {
+		$course = learn_press_get_course( $course_id );
+		if ( $course && is_object( $course ) && method_exists( $course, 'count_students' ) ) {
+			return (string) $course->count_students();
+		}
+	}
+	$value = get_post_meta( $course_id, '_lp_students', true );
+	return '' === $value ? '' : (string) $value;
+}
+
+function waicam_course_instructor_name( $course_id ) {
+	if ( function_exists( 'learn_press_get_course' ) ) {
+		$course = learn_press_get_course( $course_id );
+		if ( $course && is_object( $course ) && method_exists( $course, 'get_instructor' ) ) {
+			$instructor = $course->get_instructor();
+			if ( is_object( $instructor ) ) {
+				if ( method_exists( $instructor, 'get_display_name' ) ) return $instructor->get_display_name();
+				if ( isset( $instructor->display_name ) ) return $instructor->display_name;
+			}
+		}
+	}
+	$author_id = (int) get_post_field( 'post_author', $course_id );
+	return $author_id ? get_the_author_meta( 'display_name', $author_id ) : '';
+}
+
+function waicam_course_buttons( $course_id ) {
+	if ( function_exists( 'learn_press_get_template' ) ) {
+		learn_press_get_template( 'single-course/buttons.php' );
+		return;
+	}
+	?>
+	<a class="waicam-course-single__primary" href="<?php echo esc_url( get_permalink( $course_id ) ); ?>"><?php esc_html_e( 'Voir la formation', 'waicam' ); ?></a>
+	<?php
+}
+
+function waicam_course_learnpress_summary( $course_id ) {
+	if ( function_exists( 'learn_press_get_template' ) ) {
+		learn_press_get_template( 'single-course/tabs/tabs.php' );
+		return;
+	}
+	?>
+	<p><?php esc_html_e( 'Le contenu détaillé LearnPress sera affiché ici lorsque l’extension sera active.', 'waicam' ); ?></p>
+	<?php
+}
+
+function waicam_render_course_card( $course_id ) {
+	$category = waicam_course_category_label( $course_id );
+	$price    = waicam_course_price_html( $course_id );
+	$duration = waicam_course_duration( $course_id );
+	$level    = waicam_course_level( $course_id );
+	?>
+	<article class="waicam-course-card">
+		<a class="waicam-course-card__media" href="<?php echo esc_url( get_permalink( $course_id ) ); ?>" aria-label="<?php echo esc_attr( get_the_title( $course_id ) ); ?>">
+			<?php if ( has_post_thumbnail( $course_id ) ) : ?>
+				<?php echo get_the_post_thumbnail( $course_id, 'large' ); ?>
+			<?php else : ?>
+				<div class="waicam-course-card__placeholder" aria-hidden="true"><?php esc_html_e( 'WAI-CAM', 'waicam' ); ?></div>
+			<?php endif; ?>
+			<?php if ( $category ) : ?><span class="waicam-course-card__badge"><?php echo esc_html( $category ); ?></span><?php endif; ?>
+		</a>
+		<div class="waicam-course-card__body">
+			<h3><a href="<?php echo esc_url( get_permalink( $course_id ) ); ?>"><?php echo esc_html( get_the_title( $course_id ) ); ?></a></h3>
+			<p><?php echo esc_html( waicam_course_excerpt( $course_id ) ); ?></p>
+			<ul class="waicam-course-card__meta">
+				<?php if ( $duration ) : ?><li><i class="fa-regular fa-clock" aria-hidden="true"></i><?php echo esc_html( $duration ); ?></li><?php endif; ?>
+				<?php if ( $level ) : ?><li><i class="fa-solid fa-signal" aria-hidden="true"></i><?php echo esc_html( $level ); ?></li><?php endif; ?>
+			</ul>
+			<div class="waicam-course-card__footer">
+				<span><?php echo wp_kses_post( $price ); ?></span>
+				<a href="<?php echo esc_url( get_permalink( $course_id ) ); ?>"><?php esc_html_e( 'Voir la formation', 'waicam' ); ?></a>
+			</div>
+		</div>
+	</article>
+	<?php
+}
 
 /**
  * Largeur d'image par défaut
