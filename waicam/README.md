@@ -2,7 +2,7 @@
 
 Thème WordPress officiel converti depuis la maquette HTML/CSS validée par la cliente.
 
-**Version :** 1.1.0 — adapté à l'environnement Local by Flywheel + CPT UI + ACF + Fluent Forms
+**Version :** 3.0.2 — version indépendante du thème WAI-CAM v2, adaptée à Local by Flywheel + CPT UI + ACF + Fluent Forms
 **WordPress requis :** 6.0+
 **Testé jusqu'à :** 6.9.4
 **PHP requis :** 8.0+
@@ -51,14 +51,28 @@ Le thème **NE redéclare PAS** les CPT — il les utilise. Si tu désactives CP
 
 ### 1. Compresser le dossier en .zip
 
-Avant l'upload, le dossier `waicam/` doit être compressé en `waicam.zip`.
+Avant l'upload, copiez/renommez le dossier du thème en `waicam-v3/`, puis compressez ce dossier en `waicam-v3.zip`. Cette étape permet à WordPress d'installer cette version à côté du thème WAI-CAM v2 sans remplacer le dossier existant `waicam/`.
 
 ### 2. Uploader dans WordPress
 
 1. WP-Admin → **Apparence → Thèmes**
 2. Bouton **Ajouter** → **Téléverser un thème**
-3. Sélectionner `waicam.zip` → **Installer maintenant**
+3. Sélectionner `waicam-v3.zip` → **Installer maintenant**
 4. Cliquer **Activer**
+
+## 🔁 Mettre à jour le thème sans perdre la configuration
+
+Pour une correction ou une nouvelle page, gardez toujours le même dossier de thème `waicam-v3/` et incrémentez la version du thème (`style.css` + `WAICAM_VERSION` dans `functions.php`). Ne créez pas un dossier `waicam-v3-new/`, sinon WordPress considérera qu'il s'agit d'un autre thème.
+
+Procédure recommandée :
+
+1. Préparer le nouveau zip en gardant le dossier racine `waicam-v3/`.
+2. WP-Admin → **Apparence → Thèmes → Ajouter → Téléverser un thème**.
+3. Envoyer le zip et choisir **Remplacer le thème actuel par la version téléversée**.
+4. Purger les caches : plugin de cache, cache hébergeur/CDN et cache navigateur.
+5. Vérifier que `assets/css/wp-extras.css?ver=...` utilise bien le nouveau numéro de version.
+
+Le contenu WordPress (pages, médias, produits WooCommerce, galeries, CPT UI/ACF) reste en base de données. Les routines de mise à jour du thème ajoutent les nouvelles pages sans remplacer les pages existantes.
 
 ### 3. Lancer l'installation automatique
 
