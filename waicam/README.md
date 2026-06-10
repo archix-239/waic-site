@@ -2,7 +2,7 @@
 
 Thème WordPress officiel converti depuis la maquette HTML/CSS validée par la cliente.
 
-**Version :** 3.0.3 — version indépendante du thème WAI-CAM v2, adaptée à Local by Flywheel + CPT UI + ACF + Fluent Forms
+**Version :** 3.0.4 — version indépendante du thème WAI-CAM v2, adaptée à Local by Flywheel + CPT UI + ACF + Fluent Forms
 **WordPress requis :** 6.0+
 **Testé jusqu'à :** 6.9.4
 **PHP requis :** 8.0+
@@ -19,7 +19,7 @@ Ces extensions doivent être **déjà installées et actives** dans WordPress :
 | **Advanced Custom Fields** | Fournit les champs personnalisés des CPT |
 | **Fluent Forms** | Fournit les formulaires (contact, adhésion, partenariat) |
 | **WooCommerce** | E-commerce (boutique, adhésions, produits) |
-| **LearnPress** | Gestion des formations et cours en ligne |
+| **LearnPress** | Optionnel : affichage d’une page individuelle de cours si des cours LearnPress existent |
 
 Le thème **NE redéclare PAS** les CPT — il les utilise. Si tu désactives CPT UI, les contenus seront invisibles (mais pas perdus).
 

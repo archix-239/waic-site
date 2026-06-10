@@ -7,7 +7,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'WAICAM_VERSION', '3.0.3' );
+define( 'WAICAM_VERSION', '3.0.4' );
 define( 'WAICAM_DIR', get_template_directory() );
 define( 'WAICAM_URI', get_template_directory_uri() );
 
@@ -135,7 +135,7 @@ function waicam_enqueue_assets() {
 		);
 	}
 
-	if ( is_page_template( 'page-templates/template-formations.php' ) || is_post_type_archive( 'lp_course' ) || is_singular( 'lp_course' ) ) {
+	if ( is_page_template( 'page-templates/template-formations.php' ) || is_singular( 'lp_course' ) ) {
 		$courses_css_path = WAICAM_DIR . '/assets/css/courses.css';
 		wp_enqueue_style(
 			'waicam-courses',
