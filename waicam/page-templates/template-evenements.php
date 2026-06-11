@@ -202,27 +202,56 @@ $hero_year = get_theme_mod( 'waicam_events_hero_year', gmdate( 'Y' ) );
 			</div>
 
 			<?php
-			$calendar_search = isset( $_GET['event_search'] ) ? sanitize_text_field( wp_unslash( $_GET['event_search'] ) ) : '';
-			$calendar_date   = isset( $_GET['event_date'] ) ? sanitize_text_field( wp_unslash( $_GET['event_date'] ) ) : '';
-			if ( $calendar_date && ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $calendar_date ) ) {
-				$calendar_date = '';
+			$calendar_search     = isset( $_GET['event_search'] ) ? sanitize_text_field( wp_unslash( $_GET['event_search'] ) ) : '';
+			$calendar_status     = isset( $_GET['event_status'] ) ? sanitize_key( wp_unslash( $_GET['event_status'] ) ) : 'upcoming';
+			$allowed_statuses    = array( 'upcoming', 'past', 'all' );
+			$calendar_status     = in_array( $calendar_status, $allowed_statuses, true ) ? $calendar_status : 'upcoming';
+			$calendar_start_date = isset( $_GET['event_start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['event_start_date'] ) ) : '';
+			$calendar_end_date   = isset( $_GET['event_end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['event_end_date'] ) ) : '';
+			$legacy_event_date   = isset( $_GET['event_date'] ) ? sanitize_text_field( wp_unslash( $_GET['event_date'] ) ) : '';
+
+			if ( $legacy_event_date && ! $calendar_start_date && ! $calendar_end_date ) {
+				$calendar_start_date = $legacy_event_date;
+				$calendar_end_date   = $legacy_event_date;
 			}
+			if ( $calendar_start_date && ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $calendar_start_date ) ) {
+				$calendar_start_date = '';
+			}
+			if ( $calendar_end_date && ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $calendar_end_date ) ) {
+				$calendar_end_date = '';
+			}
+			if ( $calendar_start_date && $calendar_end_date && strtotime( $calendar_start_date ) > strtotime( $calendar_end_date ) ) {
+				$temporary_date       = $calendar_start_date;
+				$calendar_start_date = $calendar_end_date;
+				$calendar_end_date   = $temporary_date;
+			}
+
 			$events_page     = isset( $_GET['events_page'] ) ? max( 1, absint( $_GET['events_page'] ) ) : 1;
-			$events_per_page = 6;
-			$calendar_base   = function_exists( 'tribe_get_events_link' ) ? tribe_get_events_link() : waicam_events_page_url();
+			$events_per_page = 12;
+			$calendar_base   = get_permalink();
 			$calendar_feed   = function_exists( 'tribe_get_ical_link' ) ? tribe_get_ical_link() : add_query_arg( 'ical', '1', $calendar_base );
 			$calendar_webcal = set_url_scheme( $calendar_feed, 'webcal' );
 			$calendar_google = add_query_arg( 'cid', rawurlencode( $calendar_webcal ), 'https://calendar.google.com/calendar/r' );
 			$calendar_args   = array(
 				'posts_per_page' => $events_per_page,
 				'paged'          => $events_page,
-				'order'          => 'ASC',
+				'order'          => 'past' === $calendar_status && ! $calendar_start_date && ! $calendar_end_date ? 'DESC' : 'ASC',
 			);
-			if ( $calendar_date ) {
-				$calendar_args['starts_after']  = $calendar_date . ' 00:00:00';
-				$calendar_args['starts_before'] = $calendar_date . ' 23:59:59';
-			} else {
-				$calendar_args['ends_after'] = current_time( 'Y-m-d H:i:s' );
+
+			if ( $calendar_start_date ) {
+				$calendar_args['starts_after'] = $calendar_start_date . ' 00:00:00';
+			}
+			if ( $calendar_end_date ) {
+				$calendar_args['starts_before'] = $calendar_end_date . ' 23:59:59';
+			}
+			if ( ! $calendar_start_date && ! $calendar_end_date ) {
+				if ( 'past' === $calendar_status ) {
+					$calendar_args['ends_before'] = current_time( 'Y-m-d H:i:s' );
+				} elseif ( 'upcoming' === $calendar_status ) {
+					$calendar_args['ends_after'] = current_time( 'Y-m-d H:i:s' );
+				} else {
+					$calendar_args['starts_after'] = '1970-01-01 00:00:00';
+				}
 			}
 			if ( $calendar_search ) {
 				$calendar_args['s'] = $calendar_search;
@@ -231,8 +260,10 @@ $hero_year = get_theme_mod( 'waicam_events_hero_year', gmdate( 'Y' ) );
 			$calendar_total_pages = ( $calendar_events && ! empty( $calendar_events->max_num_pages ) ) ? (int) $calendar_events->max_num_pages : 1;
 			$calendar_url_args    = array_filter(
 				array(
-					'event_search' => $calendar_search,
-					'event_date'   => $calendar_date,
+					'event_search'     => $calendar_search,
+					'event_status'     => $calendar_status,
+					'event_start_date' => $calendar_start_date,
+					'event_end_date'   => $calendar_end_date,
 				),
 				static function( $value ) {
 					return '' !== $value;
@@ -240,40 +271,59 @@ $hero_year = get_theme_mod( 'waicam_events_hero_year', gmdate( 'Y' ) );
 			);
 			$calendar_previous_url = add_query_arg( array_merge( $calendar_url_args, array( 'events_page' => max( 1, $events_page - 1 ) ) ), get_permalink() ) . '#events-calendar';
 			$calendar_next_url     = add_query_arg( array_merge( $calendar_url_args, array( 'events_page' => $events_page + 1 ) ), get_permalink() ) . '#events-calendar';
+			$calendar_status_label = array(
+				'upcoming' => __( 'Évènements à venir', 'waicam' ),
+				'past'     => __( 'Évènements passés', 'waicam' ),
+				'all'      => __( 'Tous les évènements', 'waicam' ),
+			)[ $calendar_status ];
+			$calendar_period_label = $calendar_status_label;
+			if ( $calendar_start_date || $calendar_end_date ) {
+				$calendar_period_label = sprintf(
+					__( 'Du %1$s au %2$s', 'waicam' ),
+					$calendar_start_date ? wp_date( 'j F Y', strtotime( $calendar_start_date ) ) : __( 'début', 'waicam' ),
+					$calendar_end_date ? wp_date( 'j F Y', strtotime( $calendar_end_date ) ) : __( 'maintenant', 'waicam' )
+				);
+			}
 			?>
 
-			<form class="events-calendar-toolbar" role="search" method="get" action="<?php echo esc_url( get_permalink() ); ?>">
-				<?php if ( $calendar_date ) : ?>
-					<input type="hidden" name="event_date" value="<?php echo esc_attr( $calendar_date ); ?>" />
-				<?php endif; ?>
+			<form class="events-calendar-toolbar events-calendar-toolbar--filters" role="search" method="get" action="<?php echo esc_url( get_permalink() ); ?>">
 				<label class="events-calendar-toolbar__search" for="events-calendar-search">
 					<span class="screen-reader-text"><?php esc_html_e( 'Rechercher des évènements', 'waicam' ); ?></span>
 					<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.8 18.1a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Zm5.2-1.1 4.2 4.2" /></svg>
 					<input id="events-calendar-search" type="search" name="event_search" value="<?php echo esc_attr( $calendar_search ); ?>" placeholder="<?php esc_attr_e( 'Rechercher évènements', 'waicam' ); ?>" />
 				</label>
-				<button class="events-calendar-toolbar__submit" type="submit"><?php esc_html_e( 'Chercher', 'waicam' ); ?></button>
-				<nav class="events-calendar-toolbar__views" aria-label="<?php esc_attr_e( 'Vues du calendrier', 'waicam' ); ?>">
-					<a class="is-active" href="#events-calendar"><?php esc_html_e( 'Liste', 'waicam' ); ?></a>
-					<a href="<?php echo esc_url( add_query_arg( 'eventDisplay', 'month', $calendar_base ) ); ?>"><?php esc_html_e( 'Mois', 'waicam' ); ?></a>
-					<a href="<?php echo esc_url( add_query_arg( 'eventDisplay', 'day', $calendar_base ) ); ?>"><?php esc_html_e( 'Jour', 'waicam' ); ?></a>
-				</nav>
+				<label class="events-calendar-toolbar__select" for="events-calendar-status">
+					<span><?php esc_html_e( 'Afficher', 'waicam' ); ?></span>
+					<select id="events-calendar-status" name="event_status">
+						<option value="upcoming" <?php selected( $calendar_status, 'upcoming' ); ?>><?php esc_html_e( 'Évènements à venir', 'waicam' ); ?></option>
+						<option value="past" <?php selected( $calendar_status, 'past' ); ?>><?php esc_html_e( 'Évènements passés', 'waicam' ); ?></option>
+						<option value="all" <?php selected( $calendar_status, 'all' ); ?>><?php esc_html_e( 'Tous les évènements', 'waicam' ); ?></option>
+					</select>
+				</label>
+				<label class="events-calendar-toolbar__date" for="events-calendar-start-date">
+					<span><?php esc_html_e( 'Du', 'waicam' ); ?></span>
+					<input id="events-calendar-start-date" type="date" name="event_start_date" value="<?php echo esc_attr( $calendar_start_date ); ?>" />
+				</label>
+				<label class="events-calendar-toolbar__date" for="events-calendar-end-date">
+					<span><?php esc_html_e( 'Au', 'waicam' ); ?></span>
+					<input id="events-calendar-end-date" type="date" name="event_end_date" value="<?php echo esc_attr( $calendar_end_date ); ?>" />
+				</label>
+				<button class="events-calendar-toolbar__submit" type="submit"><?php esc_html_e( 'Filtrer', 'waicam' ); ?></button>
+				<?php if ( $calendar_search || 'upcoming' !== $calendar_status || $calendar_start_date || $calendar_end_date ) : ?>
+					<a class="events-calendar-toolbar__reset" href="<?php echo esc_url( get_permalink() . '#events-calendar' ); ?>"><?php esc_html_e( 'Réinitialiser', 'waicam' ); ?></a>
+				<?php endif; ?>
 			</form>
 
 			<div class="events-calendar-controls">
 				<div class="events-calendar-controls__nav" aria-label="<?php esc_attr_e( 'Navigation calendrier', 'waicam' ); ?>">
-					<a href="<?php echo esc_url( add_query_arg( 'eventDisplay', 'past', $calendar_base ) ); ?>" aria-label="<?php esc_attr_e( 'Évènements précédents', 'waicam' ); ?>">‹</a>
-					<a href="<?php echo esc_url( $calendar_next_url ); ?>" aria-label="<?php esc_attr_e( 'Évènements suivants', 'waicam' ); ?>">›</a>
-					<form class="events-calendar-date-filter" method="get" action="<?php echo esc_url( get_permalink() ); ?>">
-						<?php if ( $calendar_search ) : ?>
-							<input type="hidden" name="event_search" value="<?php echo esc_attr( $calendar_search ); ?>" />
-						<?php endif; ?>
-						<label class="events-calendar-controls__today" for="events-calendar-date">
-							<span><?php esc_html_e( 'Aujourd’hui', 'waicam' ); ?></span>
-							<input id="events-calendar-date" type="date" name="event_date" value="<?php echo esc_attr( $calendar_date ); ?>" onchange="this.form.submit()" />
-						</label>
-					</form>
+					<?php if ( 1 < $events_page ) : ?>
+						<a href="<?php echo esc_url( $calendar_previous_url ); ?>" aria-label="<?php esc_attr_e( 'Évènements précédents', 'waicam' ); ?>">‹</a>
+					<?php endif; ?>
+					<?php if ( $events_page < $calendar_total_pages ) : ?>
+						<a href="<?php echo esc_url( $calendar_next_url ); ?>" aria-label="<?php esc_attr_e( 'Évènements suivants', 'waicam' ); ?>">›</a>
+					<?php endif; ?>
 				</div>
-				<strong><?php echo esc_html( $calendar_date ? wp_date( 'j F Y', strtotime( $calendar_date ) ) : __( 'À venir', 'waicam' ) ); ?></strong>
+				<strong><?php echo esc_html( $calendar_period_label ); ?></strong>
 			</div>
 
 			<div class="events-calendar-list" role="list">
@@ -328,15 +378,21 @@ $hero_year = get_theme_mod( 'waicam_events_hero_year', gmdate( 'Y' ) );
 			</div>
 
 			<div class="events-calendar-footer">
-				<a class="events-calendar-footer__previous" href="<?php echo esc_url( 1 < $events_page ? $calendar_previous_url : add_query_arg( 'eventDisplay', 'past', $calendar_base ) ); ?>">‹ <?php esc_html_e( 'Évènements précédents', 'waicam' ); ?></a>
-				<?php if ( $events_page < $calendar_total_pages || $calendar_total_pages <= 1 ) : ?>
-					<a class="events-calendar-footer__next" href="<?php echo esc_url( $events_page < $calendar_total_pages ? $calendar_next_url : add_query_arg( 'eventDisplay', 'list', $calendar_base ) ); ?>">
+				<?php if ( 1 < $events_page ) : ?>
+					<a class="events-calendar-footer__previous" href="<?php echo esc_url( $calendar_previous_url ); ?>">‹ <?php esc_html_e( 'Évènements précédents', 'waicam' ); ?></a>
+				<?php else : ?>
+					<span class="events-calendar-footer__previous is-disabled">‹ <?php esc_html_e( 'Évènements précédents', 'waicam' ); ?></span>
+				<?php endif; ?>
+				<?php if ( $events_page < $calendar_total_pages ) : ?>
+					<a class="events-calendar-footer__next" href="<?php echo esc_url( $calendar_next_url ); ?>">
 						<span><?php esc_html_e( 'Évènements suivants', 'waicam' ); ?></span>
 						<span class="arrow-plain">→</span>
 						<svg class="arrow-wave" viewBox="0 0 96 16" focusable="false" role="presentation" aria-hidden="true">
 							<path d="M1 8 C11 1 21 1 31 8 S51 15 61 8 S81 1 95 8" />
 						</svg>
 					</a>
+				<?php else : ?>
+					<span class="events-calendar-footer__next is-disabled"><?php esc_html_e( 'Évènements suivants', 'waicam' ); ?> →</span>
 				<?php endif; ?>
 				<details class="events-calendar-subscribe">
 					<summary><?php esc_html_e( 'S’abonner au calendrier', 'waicam' ); ?></summary>

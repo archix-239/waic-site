@@ -10833,3 +10833,129 @@ body.admin-bar.menu-open .navbar .nav-links {
     width: 100%;
   }
 }
+
+/* Events/Formations campaign cards — prevent long titles from being clipped */
+.events-campaign-feature {
+  height: auto;
+  min-height: clamp(412px, 42vw, 560px);
+  align-items: stretch;
+  overflow: visible;
+}
+
+.events-campaign-feature__copy {
+  min-height: clamp(412px, 42vw, 560px);
+  overflow: visible;
+}
+
+.events-campaign-feature__copy-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.events-campaign-feature__copy h2 {
+  font-size: clamp(1.75rem, 2.65vw, 3.05rem);
+  line-height: 1.04;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.events-campaign-feature__copy p {
+  overflow-wrap: anywhere;
+}
+
+.events-campaign-feature__visual {
+  height: auto;
+  min-height: clamp(412px, 42vw, 560px);
+  align-self: stretch;
+}
+
+.events-campaign-feature__image {
+  height: 100%;
+  min-height: clamp(412px, 42vw, 560px);
+}
+
+@media (max-width: 1100px) {
+  .events-campaign-feature,
+  .events-campaign-feature__copy,
+  .events-campaign-feature__visual,
+  .events-campaign-feature__image {
+    min-height: 0;
+  }
+}
+
+/* Events calendar filters — status + date interval stay on the custom page */
+.events-calendar-toolbar--filters {
+  grid-template-columns: minmax(220px, 1fr) minmax(180px, 240px) minmax(150px, 190px) minmax(150px, 190px) auto auto;
+  gap: 12px;
+  align-items: center;
+  min-height: auto;
+  padding: 14px;
+}
+
+.events-calendar-toolbar__select,
+.events-calendar-toolbar__date {
+  display: grid;
+  gap: 6px;
+  color: #152247;
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.events-calendar-toolbar__select select,
+.events-calendar-toolbar__date input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid rgba(21, 34, 71, .22);
+  border-radius: 4px;
+  background: #fff;
+  color: #111;
+  padding: 0 12px;
+  font: inherit;
+  font-size: .95rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.events-calendar-toolbar__reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  color: #152247;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.events-calendar-footer .is-disabled {
+  opacity: .42;
+  pointer-events: none;
+}
+
+@media (max-width: 1180px) {
+  .events-calendar-toolbar--filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .events-calendar-toolbar--filters .events-calendar-toolbar__search {
+    grid-column: 1 / -1;
+    min-height: 56px;
+    border: 1px solid rgba(21, 34, 71, .14);
+  }
+}
+
+@media (max-width: 640px) {
+  .events-calendar-toolbar--filters {
+    grid-template-columns: 1fr;
+  }
+
+  .events-calendar-toolbar__submit,
+  .events-calendar-toolbar__reset {
+    width: 100%;
+    margin: 0;
+  }
+}

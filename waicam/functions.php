@@ -7,7 +7,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'WAICAM_VERSION', '3.0.6' );
+define( 'WAICAM_VERSION', '3.0.7' );
 define( 'WAICAM_DIR', get_template_directory() );
 define( 'WAICAM_URI', get_template_directory_uri() );
 
