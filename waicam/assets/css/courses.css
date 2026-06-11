@@ -1,0 +1,492 @@
+/* ============================================================
+   WAI-CAM — Formations LearnPress
+   ============================================================ */
+
+.waicam-courses-page,
+.waicam-course-single {
+  background: #f5f8ff;
+  color: #152247;
+  font-family: "Inter", "Poppins", Arial, sans-serif;
+}
+
+.waicam-courses-hero,
+.waicam-course-single__hero {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(420px, 54vw, 640px);
+  display: grid;
+  align-items: center;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(14, 106, 46, .22), transparent 30%),
+    linear-gradient(135deg, #152247 0%, #1b2f61 52%, #E41D44 100%);
+  color: #fff;
+}
+
+.waicam-courses-hero::after,
+.waicam-course-single__hero::after {
+  content: "";
+  position: absolute;
+  right: -10vw;
+  bottom: -18vw;
+  width: clamp(280px, 42vw, 700px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 34px solid rgba(255,255,255,.12);
+}
+
+.waicam-courses-hero__inner,
+.waicam-course-single__copy {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.waicam-courses-kicker,
+.waicam-courses-eyebrow {
+  display: inline-flex;
+  margin: 0 0 16px;
+  padding: 10px 16px;
+  background: #E41D44;
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  box-shadow: 8px 8px 0 rgba(255,255,255,.16);
+}
+
+.waicam-courses-eyebrow {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #E41D44;
+}
+
+.waicam-courses-hero h1,
+.waicam-course-single__copy h1 {
+  max-width: 940px;
+  margin: 0;
+  color: #fff;
+  font-family: "Poppins", "Inter", sans-serif;
+  font-size: clamp(2.8rem, 8vw, 7rem);
+  line-height: .9;
+  letter-spacing: -.065em;
+  text-transform: uppercase;
+}
+
+.waicam-courses-hero p:not(.waicam-courses-kicker),
+.waicam-course-single__copy p:not(.waicam-courses-kicker) {
+  max-width: 760px;
+  margin: 26px 0 0;
+  color: rgba(255,255,255,.90);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.55;
+}
+
+.waicam-courses-section,
+.waicam-course-single__content {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: clamp(56px, 8vw, 104px) 0;
+}
+
+.waicam-courses-section__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 460px);
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.waicam-courses-section__intro h2,
+.waicam-course-single__content h2 {
+  margin: 0;
+  color: #152247;
+  font-family: "Poppins", "Inter", sans-serif;
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  line-height: .92;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+
+.waicam-courses-section__intro > p {
+  margin: 0;
+  color: rgba(21, 34, 71, .78);
+  font-size: 1.08rem;
+  line-height: 1.6;
+}
+
+.waicam-courses-search {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(210px, 290px) auto;
+  gap: 14px;
+  align-items: stretch;
+  margin: 0 0 36px;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid rgba(21, 34, 71, .10);
+  box-shadow: 0 18px 44px rgba(21, 34, 71, .08);
+}
+
+.waicam-courses-search__field,
+.waicam-courses-search__select {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
+  padding: 0 16px;
+  border: 1px solid rgba(21, 34, 71, .16);
+  background: #f8fbff;
+}
+
+.waicam-courses-search__field i {
+  color: #E41D44;
+}
+
+.waicam-courses-search input,
+.waicam-courses-search select {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #152247;
+  font: inherit;
+  font-weight: 700;
+}
+
+.waicam-courses-search button {
+  border: 0;
+  padding: 0 30px;
+  background: #E41D44;
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.waicam-courses-search button:hover,
+.waicam-courses-search button:focus-visible {
+  background: #152247;
+}
+
+.waicam-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.waicam-course-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: #fff;
+  border: 1px solid rgba(21, 34, 71, .10);
+  box-shadow: 0 18px 44px rgba(21, 34, 71, .08);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.waicam-course-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 58px rgba(21, 34, 71, .14);
+}
+
+.waicam-course-card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #dff4ef;
+}
+
+.waicam-course-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  transition: transform .35s ease;
+}
+
+.waicam-course-card:hover .waicam-course-card__media img {
+  transform: scale(1.04);
+}
+
+.waicam-course-card__placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: #152247;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+
+.waicam-course-card__badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 8px 12px;
+  background: #E41D44;
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.waicam-course-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.waicam-course-card h3 {
+  margin: 0 0 12px;
+  color: #152247;
+  font-family: "Poppins", "Inter", sans-serif;
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.04;
+}
+
+.waicam-course-card h3 a {
+  color: inherit;
+}
+
+.waicam-course-card__body p {
+  margin: 0 0 20px;
+  color: rgba(21, 34, 71, .78);
+  line-height: 1.55;
+}
+
+.waicam-course-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.waicam-course-card__meta li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(21, 34, 71, .06);
+  color: #152247;
+  font-size: .88rem;
+  font-weight: 800;
+}
+
+.waicam-course-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.waicam-course-card__footer span {
+  color: #152247;
+  font-weight: 900;
+  font-size: 1.05rem;
+}
+
+.waicam-course-card__footer a,
+.waicam-course-single__primary,
+.waicam-course-single__secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  background: #152247;
+  color: #fff !important;
+  border: 2px solid #152247;
+  font-weight: 900;
+  font-size: .86rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.waicam-course-card__footer a:hover,
+.waicam-course-single__primary:hover,
+.waicam-course-single__secondary:hover {
+  background: #E41D44;
+  border-color: #E41D44;
+}
+
+.waicam-courses-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 44px;
+}
+
+.waicam-courses-pagination .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 2px solid rgba(21, 34, 71, .16);
+  color: #152247;
+  font-weight: 900;
+}
+
+.waicam-courses-pagination .page-numbers.current,
+.waicam-courses-pagination .page-numbers:hover {
+  background: #E41D44;
+  border-color: #E41D44;
+  color: #fff;
+}
+
+.waicam-courses-empty,
+.waicam-courses-notice {
+  padding: clamp(34px, 6vw, 70px);
+  background: #fff;
+  border-left: 8px solid #E41D44;
+  box-shadow: 0 18px 44px rgba(21, 34, 71, .08);
+}
+
+.waicam-course-single__hero {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+  gap: clamp(28px, 5vw, 70px);
+  padding: clamp(48px, 7vw, 96px) max(20px, calc((100vw - 1200px) / 2));
+}
+
+.waicam-course-single__copy {
+  width: auto;
+  margin: 0;
+}
+
+.waicam-course-single__summary {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  color: #152247;
+  box-shadow: 18px 18px 0 rgba(255,255,255,.16);
+}
+
+.waicam-course-single__image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.waicam-course-single__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+}
+
+.waicam-course-single__price {
+  padding: 24px 24px 0;
+  color: #E41D44;
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+
+.waicam-course-single__meta {
+  margin: 0;
+  padding: 20px 24px 0;
+  list-style: none;
+}
+
+.waicam-course-single__meta li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(21,34,71,.12);
+}
+
+.waicam-course-single__meta span {
+  color: rgba(21,34,71,.64);
+}
+
+.waicam-course-single__enroll {
+  padding: 24px;
+}
+
+.waicam-course-single__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.waicam-course-single__secondary {
+  background: transparent;
+  color: #fff !important;
+  border-color: rgba(255,255,255,.7);
+}
+
+.waicam-course-single__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+  gap: 32px;
+  align-items: start;
+}
+
+.waicam-course-single__main,
+.waicam-course-single__learnpress {
+  background: #fff;
+  padding: clamp(26px, 4vw, 46px);
+  box-shadow: 0 18px 44px rgba(21,34,71,.08);
+}
+
+.waicam-course-single__entry {
+  color: rgba(21,34,71,.82);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.waicam-course-single__learnpress .learn-press-course-tabs,
+.waicam-course-single__learnpress .course-tabs,
+.waicam-course-single__learnpress .course-tab-panels {
+  margin-top: 20px;
+}
+
+@media (max-width: 980px) {
+  .waicam-courses-section__intro,
+  .waicam-courses-search,
+  .waicam-course-single__hero,
+  .waicam-course-single__content {
+    grid-template-columns: 1fr;
+  }
+
+  .waicam-courses-search button {
+    min-height: 56px;
+  }
+
+  .waicam-courses-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .waicam-courses-section,
+  .waicam-course-single__content {
+    width: min(100% - 28px, 1200px);
+  }
+
+  .waicam-courses-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .waicam-course-card__footer,
+  .waicam-course-single__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .waicam-course-card__footer a,
+  .waicam-course-single__primary,
+  .waicam-course-single__secondary {
+    width: 100%;
+  }
+}
