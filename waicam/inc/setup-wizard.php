@@ -45,35 +45,45 @@ function waicam_setup_pages_and_menu() {
 			'template' => 'page-templates/template-temoignages.php',
 			'order'    => 6,
 		),
+		'agenda-evenements' => array(
+			'title'    => __( 'Évènements', 'waicam' ),
+			'template' => 'page-templates/template-evenements.php',
+			'order'    => 7,
+		),
 		'partenaires' => array(
 			'title'    => __( 'Partenaires', 'waicam' ),
 			'template' => 'page-templates/template-partenaires.php',
-			'order'    => 7,
+			'order'    => 8,
 		),
 		'contact' => array(
 			'title'    => __( 'Contact', 'waicam' ),
 			'template' => 'page-templates/template-contact.php',
-			'order'    => 8,
+			'order'    => 9,
 		),
 		'rejoindre' => array(
 			'title'    => __( 'Rejoindre', 'waicam' ),
 			'template' => 'page-templates/template-rejoindre.php',
-			'order'    => 9,
+			'order'    => 10,
 		),
 		'faire-un-don' => array(
 			'title'    => __( 'Faire un don', 'waicam' ),
 			'template' => 'page-templates/template-don.php',
-			'order'    => 10,
+			'order'    => 11,
 		),
 		'blog' => array(
 			'title'    => __( 'Blog', 'waicam' ),
 			'template' => '', // index.php est utilisé automatiquement quand la page est définie comme "page des articles"
-			'order'    => 11,
+			'order'    => 12,
 		),
 		'galerie' => array(
 			'title'    => __( 'Galerie', 'waicam' ),
 			'template' => 'page-templates/template-galerie.php',
-			'order'    => 12,
+			'order'    => 13,
+		),
+		'produits' => array(
+			'title'    => __( 'Produits', 'waicam' ),
+			'template' => 'page-templates/template-produits.php',
+			'order'    => 14,
 		),
 	);
 
@@ -129,9 +139,10 @@ function waicam_setup_pages_and_menu() {
 			array( 'slug' => 'programmes',  'title' => __( 'Programmes', 'waicam' ),  'classes' => '' ),
 			array( 'slug' => 'formations',  'title' => __( 'Formations', 'waicam' ),  'classes' => '' ),
 			array( 'slug' => 'equipe',      'title' => __( 'Équipe', 'waicam' ),      'classes' => '' ),
-			array( 'slug' => 'evenement',   'title' => __( 'Évènements', 'waicam' ),  'classes' => '', 'is_archive' => true ),
+			array( 'slug' => 'agenda-evenements', 'title' => __( 'Évènements', 'waicam' ),  'classes' => '' ),
 			array( 'slug' => 'blog',        'title' => __( 'Blog', 'waicam' ),         'classes' => '' ),
 			array( 'slug' => 'galerie',     'title' => __( 'Galerie', 'waicam' ),      'classes' => '' ),
+			array( 'slug' => 'produits',    'title' => __( 'Produits', 'waicam' ),     'classes' => '' ),
 			array( 'slug' => 'partenaires', 'title' => __( 'Partenaires', 'waicam' ), 'classes' => '' ),
 			array( 'slug' => 'contact',       'title' => __( 'Contact', 'waicam' ),       'classes' => '' ),
 			array( 'slug' => 'rejoindre',     'title' => __( 'Rejoindre', 'waicam' ),     'classes' => 'btn-nav' ),
@@ -203,7 +214,7 @@ function waicam_setup_admin_page() {
 	}
 
 	$pages_status = array(
-		'accueil', 'about', 'programmes', 'formations', 'equipe', 'temoignages', 'partenaires', 'contact', 'rejoindre', 'faire-un-don', 'blog', 'galerie',
+		'accueil', 'about', 'programmes', 'formations', 'equipe', 'temoignages', 'agenda-evenements', 'partenaires', 'contact', 'rejoindre', 'faire-un-don', 'blog', 'galerie',
 	);
 
 	$cpt_required = array(
@@ -310,3 +321,154 @@ function waicam_admin_setup_notice() {
 	<?php
 }
 add_action( 'admin_notices', 'waicam_admin_setup_notice' );
+
+/**
+ * Ajoute la page Évènements au menu principal existant si elle manque.
+ *
+ * Le setup initial crée déjà la page, mais certains sites ont un menu
+ * configuré avant la refonte. Cette passe légère évite de forcer l'utilisateur
+ * à reconstruire son menu à la main.
+ */
+function waicam_ensure_events_menu_item() {
+	if ( get_option( 'waicam_events_menu_item_added' ) ) {
+		return;
+	}
+
+	$locations = get_theme_mod( 'nav_menu_locations', array() );
+	if ( empty( $locations['primary'] ) ) {
+		return;
+	}
+
+	$menu_id    = (int) $locations['primary'];
+	$events_url = waicam_events_page_url();
+	$items      = wp_get_nav_menu_items( $menu_id );
+	$parent_id  = 0;
+	$position   = 1;
+
+	if ( $items ) {
+		foreach ( $items as $item ) {
+			$position = max( $position, (int) $item->menu_order + 1 );
+
+			if ( untrailingslashit( $item->url ) === untrailingslashit( $events_url ) ) {
+				update_option( 'waicam_events_menu_item_added', '1' );
+				return;
+			}
+
+			if ( 0 === $parent_id && 'inspire' === waicam_slug( $item->title ) ) {
+				$parent_id = (int) $item->ID;
+			}
+		}
+	}
+
+	wp_update_nav_menu_item(
+		$menu_id,
+		0,
+		array(
+			'menu-item-title'     => __( 'Évènements', 'waicam' ),
+			'menu-item-url'       => $events_url,
+			'menu-item-status'    => 'publish',
+			'menu-item-type'      => 'custom',
+			'menu-item-parent-id' => $parent_id,
+			'menu-item-position'  => $position,
+		)
+	);
+
+	update_option( 'waicam_events_menu_item_added', '1' );
+}
+add_action( 'admin_init', 'waicam_ensure_events_menu_item' );
+
+/**
+ * Crée la page Produits lors d'une mise à jour v3 si elle n'existe pas encore.
+ *
+ * Cela évite de réinstaller le thème pour obtenir les nouvelles pages ajoutées
+ * après l'activation initiale. Les pages existantes ne sont pas remplacées.
+ */
+function waicam_ensure_products_page() {
+	if ( get_option( 'waicam_products_page_ensured' ) ) {
+		return;
+	}
+
+	$existing = get_page_by_path( 'produits' );
+	if ( $existing ) {
+		$current_template = get_post_meta( $existing->ID, '_wp_page_template', true );
+		if ( '' === $current_template || 'default' === $current_template ) {
+			update_post_meta( $existing->ID, '_wp_page_template', 'page-templates/template-produits.php' );
+		}
+		update_option( 'waicam_products_page_ensured', '1' );
+		return;
+	}
+
+	$page_id = wp_insert_post( array(
+		'post_title'   => __( 'Produits', 'waicam' ),
+		'post_name'    => 'produits',
+		'post_status'  => 'publish',
+		'post_type'    => 'page',
+		'post_content' => '',
+		'menu_order'   => 14,
+	) );
+
+	if ( $page_id && ! is_wp_error( $page_id ) ) {
+		update_post_meta( $page_id, '_wp_page_template', 'page-templates/template-produits.php' );
+	}
+
+	update_option( 'waicam_products_page_ensured', '1' );
+}
+add_action( 'admin_init', 'waicam_ensure_products_page' );
+
+/**
+ * Ajoute la page Produits au menu principal existant si elle manque.
+ */
+function waicam_ensure_products_menu_item() {
+	if ( get_option( 'waicam_products_menu_item_added' ) ) {
+		return;
+	}
+
+	$products_page = get_page_by_path( 'produits' );
+	if ( ! $products_page ) {
+		return;
+	}
+
+	$locations = get_theme_mod( 'nav_menu_locations', array() );
+	if ( empty( $locations['primary'] ) ) {
+		return;
+	}
+
+	$menu_id      = (int) $locations['primary'];
+	$products_url = get_permalink( $products_page );
+	$items        = wp_get_nav_menu_items( $menu_id );
+	$parent_id    = 0;
+	$position     = 1;
+
+	if ( $items ) {
+		foreach ( $items as $item ) {
+			$position = max( $position, (int) $item->menu_order + 1 );
+
+			if ( untrailingslashit( $item->url ) === untrailingslashit( $products_url ) ) {
+				update_option( 'waicam_products_menu_item_added', '1' );
+				return;
+			}
+
+			$item_slug = waicam_slug( $item->title );
+			if ( 0 === $parent_id && in_array( $item_slug, array( 'get-involved', 'nous-rejoindre' ), true ) ) {
+				$parent_id = (int) $item->ID;
+			}
+		}
+	}
+
+	wp_update_nav_menu_item(
+		$menu_id,
+		0,
+		array(
+			'menu-item-title'     => __( 'Produits', 'waicam' ),
+			'menu-item-object-id' => $products_page->ID,
+			'menu-item-object'    => 'page',
+			'menu-item-type'      => 'post_type',
+			'menu-item-status'    => 'publish',
+			'menu-item-parent-id' => $parent_id,
+			'menu-item-position'  => $position,
+		)
+	);
+
+	update_option( 'waicam_products_menu_item_added', '1' );
+}
+add_action( 'admin_init', 'waicam_ensure_products_menu_item' );
