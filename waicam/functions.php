@@ -7,7 +7,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'WAICAM_VERSION', '3.0.12' );
+define( 'WAICAM_VERSION', '3.0.13' );
 define( 'WAICAM_DIR', get_template_directory() );
 define( 'WAICAM_URI', get_template_directory_uri() );
 
@@ -106,6 +106,12 @@ function waicam_enqueue_assets() {
 		get_stylesheet_uri(),
 		array( 'waicam-extras' ),
 		waicam_asset_version( 'style.css' )
+	);
+
+	// Critical overrides kept inline to bypass aggressive host/plugin CSS caches.
+	wp_add_inline_style(
+		'waicam-theme',
+		'.home-news-grid-gwc__inner{max-width:1320px}.home-news-grid-gwc__cards{gap:28px}.home-news-grid-gwc__card{max-width:430px;min-height:560px;height:560px;grid-template-rows:150px 410px}.home-news-grid-gwc__card h3{padding:22px 24px 18px}.home-news-grid-gwc__card-media img{min-height:410px}@media(max-width:980px){.home-news-grid-gwc__card{max-width:430px;min-height:520px;height:520px;grid-template-rows:135px 385px}}'
 	);
 
 	// JavaScript principal
