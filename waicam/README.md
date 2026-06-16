@@ -2,7 +2,7 @@
 
 Thème WordPress officiel converti depuis la maquette HTML/CSS validée par la cliente.
 
-**Version :** 1.1.0 — adapté à l'environnement Local by Flywheel + CPT UI + ACF + Fluent Forms
+**Version :** 3.0.10 — version indépendante du thème WAI-CAM v2, adaptée à Local by Flywheel + CPT UI + ACF + Fluent Forms
 **WordPress requis :** 6.0+
 **Testé jusqu'à :** 6.9.4
 **PHP requis :** 8.0+
@@ -18,7 +18,9 @@ Ces extensions doivent être **déjà installées et actives** dans WordPress :
 | **Custom Post Type UI** | Fournit les CPT (déjà déclarés via l'interface) |
 | **Advanced Custom Fields** | Fournit les champs personnalisés des CPT |
 | **Fluent Forms** | Fournit les formulaires (contact, adhésion, partenariat) |
-| **WooCommerce** | E-commerce (boutique, adhésions, produits) |
+| **WooCommerce** | E-commerce (boutique, dons, produits) |
+| **MemberPress** | Espace membre, adhésions et contenus réservés |
+| **LearnPress** | Optionnel : affichage d’une page individuelle de cours si des cours LearnPress existent |
 
 Le thème **NE redéclare PAS** les CPT — il les utilise. Si tu désactives CPT UI, les contenus seront invisibles (mais pas perdus).
 
@@ -51,14 +53,28 @@ Le thème **NE redéclare PAS** les CPT — il les utilise. Si tu désactives CP
 
 ### 1. Compresser le dossier en .zip
 
-Avant l'upload, le dossier `waicam/` doit être compressé en `waicam.zip`.
+Avant l'upload, copiez/renommez le dossier du thème en `waicam-v3/`, puis compressez ce dossier en `waicam-v3.zip`. Cette étape permet à WordPress d'installer cette version à côté du thème WAI-CAM v2 sans remplacer le dossier existant `waicam/`.
 
 ### 2. Uploader dans WordPress
 
 1. WP-Admin → **Apparence → Thèmes**
 2. Bouton **Ajouter** → **Téléverser un thème**
-3. Sélectionner `waicam.zip` → **Installer maintenant**
+3. Sélectionner `waicam-v3.zip` → **Installer maintenant**
 4. Cliquer **Activer**
+
+## 🔁 Mettre à jour le thème sans perdre la configuration
+
+Pour une correction ou une nouvelle page, gardez toujours le même dossier de thème `waicam-v3/` et incrémentez la version du thème (`style.css` + `WAICAM_VERSION` dans `functions.php`). Ne créez pas un dossier `waicam-v3-new/`, sinon WordPress considérera qu'il s'agit d'un autre thème.
+
+Procédure recommandée :
+
+1. Préparer le nouveau zip en gardant le dossier racine `waicam-v3/`.
+2. WP-Admin → **Apparence → Thèmes → Ajouter → Téléverser un thème**.
+3. Envoyer le zip et choisir **Remplacer le thème actuel par la version téléversée**.
+4. Purger les caches : plugin de cache, cache hébergeur/CDN et cache navigateur.
+5. Vérifier que `assets/css/wp-extras.css?ver=...` utilise bien le nouveau numéro de version.
+
+Le contenu WordPress (pages, médias, produits WooCommerce, galeries, CPT UI/ACF) reste en base de données. Les routines de mise à jour du thème ajoutent les nouvelles pages sans remplacer les pages existantes.
 
 ### 3. Lancer l'installation automatique
 
@@ -87,7 +103,19 @@ Cette étape est obligatoire pour que les CPT et leurs archives fonctionnent.
    - Formulaire inscription programme → (à créer)
    - Formulaire newsletter → (à créer ou laisser ID 2 si "Subscription Form" est utilisé)
 
-### 6. Configurer les coordonnées et réseaux sociaux
+### 6. Configurer MemberPress / Espace membre
+
+Le thème ajoute une page **Espace membre** (`/espace-membre/`) avec le template `WAI-CAM — Espace membre`. Cette page sert d’habillage visuel WAI-CAM autour des formulaires MemberPress.
+
+1. Installer et activer **MemberPress**.
+2. Aller dans **MemberPress → Settings / Options → Pages**.
+3. Assigner la page **Espace membre** comme page **Account**.
+4. Créer les niveaux d’adhésion dans **MemberPress → Memberships**.
+5. Protéger les contenus réservés via **MemberPress → Rules**.
+
+Le thème crée aussi automatiquement la page `espace-membre` lors d’une mise à jour si elle n’existe pas, puis l’ajoute au menu principal sans dupliquer les entrées existantes.
+
+### 7. Configurer les coordonnées et réseaux sociaux
 
 **Apparence → Personnaliser → WAI-CAM → Coordonnées** + **Réseaux sociaux**
 

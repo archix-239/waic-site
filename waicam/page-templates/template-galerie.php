@@ -2,146 +2,186 @@
 /**
  * Template Name: WAI-CAM — Galerie Photo
  *
- * Page galerie multimédia (powered by Envira Gallery Lite).
- * Affiche 4 sections thématiques. Chaque section utilise une galerie Envira
- * dont l'ID est configuré via le Customizer.
+ * Page galerie multimédia alimentée par Envira Gallery.
+ * Chaque galerie Envira représente un évènement et peut être retrouvée par son nom.
  *
  * @package WAICAM
  */
 
 get_header();
 
-// IDs des galeries Envira Gallery (configurables via Customizer → WAI-CAM → Galeries)
-$gal_formations  = get_theme_mod( 'waicam_envira_gallery_formations', '' );
-$gal_conferences = get_theme_mod( 'waicam_envira_gallery_conferences', '' );
-$gal_terrain     = get_theme_mod( 'waicam_envira_gallery_terrain', '' );
-$gal_evenements  = get_theme_mod( 'waicam_envira_gallery_evenements', '' );
+$gallery_search = isset( $_GET['gallery_search'] ) ? sanitize_text_field( wp_unslash( $_GET['gallery_search'] ) ) : '';
 
-/**
- * Affiche une galerie Envira si configurée, sinon un message d'aide à l'admin.
- */
-function waicam_render_envira( $id, $section_label ) {
-	if ( $id && shortcode_exists( 'envira-gallery' ) ) {
-		echo do_shortcode( '[envira-gallery id="' . esc_attr( $id ) . '"]' );
-		return;
+$configured_galleries = array_filter(
+	array(
+		absint( get_theme_mod( 'waicam_envira_gallery_formations', 0 ) ),
+		absint( get_theme_mod( 'waicam_envira_gallery_conferences', 0 ) ),
+		absint( get_theme_mod( 'waicam_envira_gallery_terrain', 0 ) ),
+		absint( get_theme_mod( 'waicam_envira_gallery_evenements', 0 ) ),
+	)
+);
+
+$gallery_cover_id = static function( $gallery_id ) {
+	$gallery_id = absint( $gallery_id );
+	if ( ! $gallery_id ) {
+		return 0;
 	}
 
-	if ( current_user_can( 'manage_options' ) ) {
-		echo '<div class="gallery-empty gallery-empty--admin">';
-		echo '<p><strong>' . esc_html( $section_label ) . '</strong> — ' . esc_html__( 'aucune galerie liée pour cette section.', 'waicam' ) . '</p>';
-		echo '<p>' . sprintf(
-			/* translators: 1: lien admin envira, 2: lien customizer */
-			wp_kses_post( __( '1. <a href="%1$s">Crée une galerie Envira</a>, copie son ID. 2. Va dans <a href="%2$s">Apparence → Personnaliser → WAI-CAM → Galeries</a> et colle l\'ID.', 'waicam' ) ),
-			esc_url( admin_url( 'edit.php?post_type=envira' ) ),
-			esc_url( admin_url( 'customize.php' ) )
-		) . '</p>';
-		echo '</div>';
-	} else {
-		echo '<p class="gallery-empty">' . esc_html__( 'Galerie en cours de constitution.', 'waicam' ) . '</p>';
+	if ( has_post_thumbnail( $gallery_id ) ) {
+		return get_post_thumbnail_id( $gallery_id );
+	}
+
+	$envira_data = get_post_meta( $gallery_id, '_eg_gallery_data', true );
+	if ( is_array( $envira_data ) && ! empty( $envira_data['gallery'] ) && is_array( $envira_data['gallery'] ) ) {
+		foreach ( $envira_data['gallery'] as $attachment_key => $attachment ) {
+			if ( is_array( $attachment ) && ! empty( $attachment['id'] ) ) {
+				return absint( $attachment['id'] );
+			}
+			if ( is_numeric( $attachment_key ) ) {
+				return absint( $attachment_key );
+			}
+		}
+	}
+
+	return 0;
+};
+
+$gallery_items = array();
+
+if ( post_type_exists( 'envira' ) ) {
+	$envira_query_args = array(
+		'post_type'      => 'envira',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'orderby'        => 'title',
+		'order'          => 'ASC',
+	);
+	if ( $gallery_search ) {
+		$envira_query_args['s'] = $gallery_search;
+	}
+
+	$envira_query = new WP_Query( $envira_query_args );
+	if ( $envira_query->have_posts() ) {
+		while ( $envira_query->have_posts() ) {
+			$envira_query->the_post();
+			$gallery_items[] = array(
+				'id'    => get_the_ID(),
+				'title' => get_the_title(),
+			);
+		}
+		wp_reset_postdata();
 	}
 }
+
+if ( empty( $gallery_items ) && ! empty( $configured_galleries ) ) {
+	foreach ( $configured_galleries as $gallery_id ) {
+		$gallery_post  = get_post( $gallery_id );
+		$gallery_title = $gallery_post ? get_the_title( $gallery_post ) : sprintf( __( 'Galerie évènement #%d', 'waicam' ), $gallery_id );
+		if ( $gallery_search && false === stripos( remove_accents( $gallery_title ), remove_accents( $gallery_search ) ) ) {
+			continue;
+		}
+		$gallery_items[] = array(
+			'id'    => $gallery_id,
+			'title' => $gallery_title,
+		);
+	}
+}
+
+usort(
+	$gallery_items,
+	static function( $a, $b ) {
+		return strcasecmp( remove_accents( $a['title'] ), remove_accents( $b['title'] ) );
+	}
+);
 ?>
+
+<section class="gwc-news-landing waicam-gallery-page" aria-labelledby="waicam-gallery-title">
+	<div class="gwc-news-stream-header waicam-gallery-header">
+		<span class="gwc-news-label"><?php esc_html_e( 'Galerie photo', 'waicam' ); ?></span>
+		<h1 id="waicam-gallery-title" class="gwc-news-heading">
+			<span class="gwc-wave-underline">
+				<?php esc_html_e( 'Revivez nos évènements', 'waicam' ); ?>
+				<svg class="gwc-wave-svg" viewBox="0 0 512 24" role="presentation" aria-hidden="true" focusable="false">
+					<path d="M0 12 C16 1 32 1 48 12 S80 23 96 12 S128 1 144 12 S176 23 192 12 S224 1 240 12 S272 23 288 12 S320 1 336 12 S368 23 384 12 S416 1 432 12 S464 23 480 12 S496 1 512 12" />
+				</svg>
+			</span>
+		</h1>
+		<p class="waicam-gallery-intro"><?php esc_html_e( 'Parcourez les galeries Envira classées par nom d’évènement et retrouvez rapidement les photos d’une formation, conférence, mission terrain ou rencontre WAI-CAM.', 'waicam' ); ?></p>
+	</div>
+
+	<form class="events-calendar-toolbar waicam-gallery-toolbar" role="search" method="get" action="<?php echo esc_url( get_permalink() ); ?>">
+		<label class="events-calendar-toolbar__search" for="waicam-gallery-search">
+			<span class="screen-reader-text"><?php esc_html_e( 'Rechercher une galerie par nom d’évènement', 'waicam' ); ?></span>
+			<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.8 18.1a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Zm5.2-1.1 4.2 4.2" /></svg>
+			<input id="waicam-gallery-search" type="search" name="gallery_search" value="<?php echo esc_attr( $gallery_search ); ?>" placeholder="<?php esc_attr_e( 'Rechercher par nom d’évènement', 'waicam' ); ?>" />
+		</label>
+		<button class="events-calendar-toolbar__submit" type="submit"><?php esc_html_e( 'Chercher', 'waicam' ); ?></button>
+		<nav class="events-calendar-toolbar__views" aria-label="<?php esc_attr_e( 'Filtres galerie', 'waicam' ); ?>">
+			<a class="is-active" href="#waicam-gallery-results"><?php esc_html_e( 'Galeries', 'waicam' ); ?></a>
+			<?php if ( $gallery_search ) : ?>
+				<a href="<?php echo esc_url( get_permalink() ); ?>"><?php esc_html_e( 'Tout voir', 'waicam' ); ?></a>
+			<?php endif; ?>
+		</nav>
+	</form>
+
+	<?php if ( ! empty( $gallery_items ) ) : ?>
+		<ul id="waicam-gallery-results" class="gwc-news-list waicam-gallery-list">
+			<?php foreach ( $gallery_items as $gallery_item ) :
+				$gallery_id    = absint( $gallery_item['id'] );
+				$gallery_title = $gallery_item['title'];
+				$cover_id      = $gallery_cover_id( $gallery_id );
+				$target_id     = 'waicam-gallery-event-' . $gallery_id;
+				?>
+				<li class="gwc-news-item waicam-gallery-item">
+					<a class="gwc-news-card waicam-gallery-card" href="#<?php echo esc_attr( $target_id ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Voir la galerie : %s', 'waicam' ), $gallery_title ) ); ?>">
+						<div class="gwc-news-item-title" title="<?php echo esc_attr( $gallery_title ); ?>">
+							<span class="gwc-news-title-text"><?php echo esc_html( $gallery_title ); ?></span>
+						</div>
+						<div class="gwc-news-item-image<?php echo $cover_id ? ' has-image' : ''; ?>">
+							<?php if ( $cover_id ) : ?>
+								<picture><?php echo wp_get_attachment_image( $cover_id, 'large', false, array( 'alt' => $gallery_title, 'loading' => 'lazy' ) ); ?></picture>
+							<?php else : ?>
+								<span class="gwc-news-image-placeholder waicam-gallery-placeholder" aria-hidden="true"></span>
+							<?php endif; ?>
+						</div>
+					</a>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+
+		<div class="waicam-gallery-event-list" aria-label="<?php esc_attr_e( 'Galeries par évènement', 'waicam' ); ?>">
+			<?php foreach ( $gallery_items as $gallery_item ) :
+				$gallery_id    = absint( $gallery_item['id'] );
+				$gallery_title = $gallery_item['title'];
+				?>
+				<section id="waicam-gallery-event-<?php echo esc_attr( $gallery_id ); ?>" class="waicam-gallery-event">
+					<div class="waicam-gallery-event__header">
+						<span><?php esc_html_e( 'Galerie évènement', 'waicam' ); ?></span>
+						<h2><?php echo esc_html( $gallery_title ); ?></h2>
+					</div>
+					<div class="waicam-gallery-event__body">
+						<?php
+						if ( shortcode_exists( 'envira-gallery' ) ) {
+							echo do_shortcode( '[envira-gallery id="' . esc_attr( $gallery_id ) . '"]' );
+						} elseif ( current_user_can( 'manage_options' ) ) {
+							echo '<div class="gallery-empty gallery-empty--admin"><p>' . esc_html__( 'Activez Envira Gallery pour afficher cette galerie.', 'waicam' ) . '</p></div>';
+						} else {
+							echo '<p class="gallery-empty">' . esc_html__( 'Galerie en cours de constitution.', 'waicam' ) . '</p>';
+						}
+						?>
+					</div>
+				</section>
+			<?php endforeach; ?>
+		</div>
+	<?php else : ?>
+		<div class="gwc-news-empty waicam-gallery-empty">
+			<p><?php esc_html_e( 'Aucune galerie ne correspond à votre recherche pour le moment.', 'waicam' ); ?></p>
+			<?php if ( current_user_can( 'manage_options' ) ) : ?>
+				<p><?php esc_html_e( 'Créez des galeries Envira ou renseignez leurs IDs dans Apparence → Personnaliser → WAI-CAM → Galeries.', 'waicam' ); ?></p>
+			<?php endif; ?>
+		</div>
+	<?php endif; ?>
+</section>
 
 <?php
-get_template_part( 'template-parts/page-hero', null, array(
-	'title'    => __( 'Galerie photo', 'waicam' ),
-	'subtitle' => __( "Plongez dans les moments forts de Women in AI Cameroon : formations, conférences, missions terrain et grands rendez-vous qui font vivre le mouvement.", 'waicam' ),
-	'crumb'    => __( 'Galerie', 'waicam' ),
-) );
-?>
-
-<!-- ============================================
-     RÉSUMÉ — STATS
-     ============================================ -->
-<section class="gallery-stats">
-	<div class="gallery-stats-grid">
-		<div class="gallery-stat">
-			<div class="gallery-stat-num">10</div>
-			<div class="gallery-stat-lbl"><?php esc_html_e( 'Régions couvertes', 'waicam' ); ?></div>
-		</div>
-		<div class="gallery-stat">
-			<div class="gallery-stat-num">4</div>
-			<div class="gallery-stat-lbl"><?php esc_html_e( 'Programmes phares', 'waicam' ); ?></div>
-		</div>
-		<div class="gallery-stat">
-			<div class="gallery-stat-num">500+</div>
-			<div class="gallery-stat-lbl"><?php esc_html_e( 'Participantes formées', 'waicam' ); ?></div>
-		</div>
-		<div class="gallery-stat">
-			<div class="gallery-stat-num">2026</div>
-			<div class="gallery-stat-lbl"><?php esc_html_e( 'Année en cours', 'waicam' ); ?></div>
-		</div>
-	</div>
-</section>
-
-<!-- ============================================
-     SECTION FORMATIONS
-     ============================================ -->
-<section class="gallery-section" id="formations">
-	<div class="section-header">
-		<div class="section-tag"><?php esc_html_e( 'Formations & Ateliers', 'waicam' ); ?></div>
-		<h2 class="section-title"><?php echo wp_kses_post( __( 'Apprendre, pratiquer, <span>transmettre</span>', 'waicam' ) ); ?></h2>
-		<p class="section-desc"><?php esc_html_e( "Sessions de formation, ateliers pratiques, masterclasses : les femmes et les jeunes au cœur de l'apprentissage de l'IA.", 'waicam' ); ?></p>
-	</div>
-	<div class="gallery-section-body">
-		<?php waicam_render_envira( $gal_formations, __( 'Formations', 'waicam' ) ); ?>
-	</div>
-</section>
-
-<!-- ============================================
-     SECTION CONFÉRENCES
-     ============================================ -->
-<section class="gallery-section gallery-section--alt" id="conferences">
-	<div class="section-header">
-		<div class="section-tag"><?php esc_html_e( 'Conférences', 'waicam' ); ?></div>
-		<h2 class="section-title"><?php echo wp_kses_post( __( 'Faire <span>entendre nos voix</span>', 'waicam' ) ); ?></h2>
-		<p class="section-desc"><?php esc_html_e( "Plénières nationales, panels d'expertes, rencontres institutionnelles : WAI-CAM porte la voix des femmes camerounaises dans le débat sur l'IA.", 'waicam' ); ?></p>
-	</div>
-	<div class="gallery-section-body">
-		<?php waicam_render_envira( $gal_conferences, __( 'Conférences', 'waicam' ) ); ?>
-	</div>
-</section>
-
-<!-- ============================================
-     SECTION TERRAIN
-     ============================================ -->
-<section class="gallery-section" id="terrain">
-	<div class="section-header">
-		<div class="section-tag"><?php esc_html_e( 'Missions terrain', 'waicam' ); ?></div>
-		<h2 class="section-title"><?php echo wp_kses_post( __( 'L\'IA <span>jusqu\'au dernier village</span>', 'waicam' ) ); ?></h2>
-		<p class="section-desc"><?php esc_html_e( "Du Centre à l'Extrême-Nord, du Littoral à l'Est : WAI-CAM va à la rencontre des communautés pour rendre l'IA accessible partout.", 'waicam' ); ?></p>
-	</div>
-	<div class="gallery-section-body">
-		<?php waicam_render_envira( $gal_terrain, __( 'Missions terrain', 'waicam' ) ); ?>
-	</div>
-</section>
-
-<!-- ============================================
-     SECTION ÉVÈNEMENTS
-     ============================================ -->
-<section class="gallery-section gallery-section--alt" id="evenements">
-	<div class="section-header">
-		<div class="section-tag"><?php esc_html_e( 'Évènements', 'waicam' ); ?></div>
-		<h2 class="section-title"><?php echo wp_kses_post( __( 'Les <span>moments forts</span> du mouvement', 'waicam' ) ); ?></h2>
-		<p class="section-desc"><?php esc_html_e( "Lancements officiels, fêtes de la jeunesse, rencontres partenaires : revivez les temps forts de WAI-CAM.", 'waicam' ); ?></p>
-	</div>
-	<div class="gallery-section-body">
-		<?php waicam_render_envira( $gal_evenements, __( 'Évènements', 'waicam' ) ); ?>
-	</div>
-</section>
-
-<!-- ============================================
-     CTA — VOUS ÊTES DANS UNE PHOTO ?
-     ============================================ -->
-<section class="gallery-cta">
-	<div class="gallery-cta-inner">
-		<div class="gallery-cta-icon"><i class="fa-solid fa-camera-retro"></i></div>
-		<h3><?php esc_html_e( 'Vous étiez à un évènement WAI-CAM ?', 'waicam' ); ?></h3>
-		<p><?php esc_html_e( "Vous reconnaissez-vous sur l'une de nos photos ? Vous souhaitez recevoir des clichés d'un évènement particulier ou nous signaler une utilisation ? Contactez-nous.", 'waicam' ); ?></p>
-		<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn-primary">
-			<i class="fa-solid fa-envelope"></i> <?php esc_html_e( 'Nous écrire', 'waicam' ); ?>
-		</a>
-	</div>
-</section>
-
-<?php get_footer();
+get_footer();
