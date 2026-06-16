@@ -7,7 +7,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'WAICAM_VERSION', '3.0.8' );
+define( 'WAICAM_VERSION', '3.0.9' );
 define( 'WAICAM_DIR', get_template_directory() );
 define( 'WAICAM_URI', get_template_directory_uri() );
 
@@ -381,6 +381,7 @@ function waicam_default_menu() {
 			home_url('/rejoindre')   => __( 'Devenir membre', 'waicam' ),
 			home_url('/partenaires') => __( 'Partenariats', 'waicam' ),
 			home_url('/produits')    => __( 'Produits', 'waicam' ),
+				home_url('/espace-membre') => __( 'Espace membre', 'waicam' ),
 			home_url('/faire-un-don') => __( 'Faire un don', 'waicam' ),
 			home_url('/contact')     => __( 'Contact', 'waicam' ),
 		) ),

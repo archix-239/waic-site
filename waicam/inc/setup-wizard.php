@@ -85,6 +85,11 @@ function waicam_setup_pages_and_menu() {
 			'template' => 'page-templates/template-produits.php',
 			'order'    => 14,
 		),
+		'espace-membre' => array(
+			'title'    => __( 'Espace membre', 'waicam' ),
+			'template' => 'page-templates/template-espace-membre.php',
+			'order'    => 15,
+		),
 	);
 
 	$created_ids = array();
@@ -143,6 +148,7 @@ function waicam_setup_pages_and_menu() {
 			array( 'slug' => 'blog',        'title' => __( 'Blog', 'waicam' ),         'classes' => '' ),
 			array( 'slug' => 'galerie',     'title' => __( 'Galerie', 'waicam' ),      'classes' => '' ),
 			array( 'slug' => 'produits',    'title' => __( 'Produits', 'waicam' ),     'classes' => '' ),
+			array( 'slug' => 'espace-membre', 'title' => __( 'Espace membre', 'waicam' ), 'classes' => '' ),
 			array( 'slug' => 'partenaires', 'title' => __( 'Partenaires', 'waicam' ), 'classes' => '' ),
 			array( 'slug' => 'contact',       'title' => __( 'Contact', 'waicam' ),       'classes' => '' ),
 			array( 'slug' => 'rejoindre',     'title' => __( 'Rejoindre', 'waicam' ),     'classes' => 'btn-nav' ),
@@ -214,7 +220,7 @@ function waicam_setup_admin_page() {
 	}
 
 	$pages_status = array(
-		'accueil', 'about', 'programmes', 'formations', 'equipe', 'temoignages', 'agenda-evenements', 'partenaires', 'contact', 'rejoindre', 'faire-un-don', 'blog', 'galerie',
+		'accueil', 'about', 'programmes', 'formations', 'equipe', 'temoignages', 'agenda-evenements', 'partenaires', 'contact', 'rejoindre', 'faire-un-don', 'blog', 'galerie', 'produits', 'espace-membre',
 	);
 
 	$cpt_required = array(
@@ -472,3 +478,96 @@ function waicam_ensure_products_menu_item() {
 	update_option( 'waicam_products_menu_item_added', '1' );
 }
 add_action( 'admin_init', 'waicam_ensure_products_menu_item' );
+
+/**
+ * Crée la page Espace membre lors d'une mise à jour v3 si elle n'existe pas encore.
+ */
+function waicam_ensure_member_area_page() {
+	if ( get_option( 'waicam_member_area_page_ensured' ) ) {
+		return;
+	}
+
+	$existing = get_page_by_path( 'espace-membre' );
+	if ( $existing ) {
+		$current_template = get_post_meta( $existing->ID, '_wp_page_template', true );
+		if ( '' === $current_template || 'default' === $current_template ) {
+			update_post_meta( $existing->ID, '_wp_page_template', 'page-templates/template-espace-membre.php' );
+		}
+		update_option( 'waicam_member_area_page_ensured', '1' );
+		return;
+	}
+
+	$page_id = wp_insert_post( array(
+		'post_title'   => __( 'Espace membre', 'waicam' ),
+		'post_name'    => 'espace-membre',
+		'post_status'  => 'publish',
+		'post_type'    => 'page',
+		'post_content' => '',
+		'menu_order'   => 15,
+	) );
+
+	if ( $page_id && ! is_wp_error( $page_id ) ) {
+		update_post_meta( $page_id, '_wp_page_template', 'page-templates/template-espace-membre.php' );
+	}
+
+	update_option( 'waicam_member_area_page_ensured', '1' );
+}
+add_action( 'admin_init', 'waicam_ensure_member_area_page' );
+
+/**
+ * Ajoute Espace membre au menu principal existant si l'entrée manque.
+ */
+function waicam_ensure_member_area_menu_item() {
+	if ( get_option( 'waicam_member_area_menu_item_added' ) ) {
+		return;
+	}
+
+	$member_page = get_page_by_path( 'espace-membre' );
+	if ( ! $member_page ) {
+		return;
+	}
+
+	$locations = get_theme_mod( 'nav_menu_locations', array() );
+	if ( empty( $locations['primary'] ) ) {
+		return;
+	}
+
+	$menu_id    = (int) $locations['primary'];
+	$member_url = get_permalink( $member_page );
+	$items      = wp_get_nav_menu_items( $menu_id );
+	$parent_id  = 0;
+	$position   = 1;
+
+	if ( $items ) {
+		foreach ( $items as $item ) {
+			$position = max( $position, (int) $item->menu_order + 1 );
+
+			if ( untrailingslashit( $item->url ) === untrailingslashit( $member_url ) ) {
+				update_option( 'waicam_member_area_menu_item_added', '1' );
+				return;
+			}
+
+			$item_slug = waicam_slug( $item->title );
+			if ( 0 === $parent_id && in_array( $item_slug, array( 'get-involved', 'nous-rejoindre' ), true ) ) {
+				$parent_id = (int) $item->ID;
+			}
+		}
+	}
+
+	wp_update_nav_menu_item(
+		$menu_id,
+		0,
+		array(
+			'menu-item-title'     => __( 'Espace membre', 'waicam' ),
+			'menu-item-object-id' => $member_page->ID,
+			'menu-item-object'    => 'page',
+			'menu-item-type'      => 'post_type',
+			'menu-item-status'    => 'publish',
+			'menu-item-parent-id' => $parent_id,
+			'menu-item-position'  => $position,
+		)
+	);
+
+	update_option( 'waicam_member_area_menu_item_added', '1' );
+}
+add_action( 'admin_init', 'waicam_ensure_member_area_menu_item' );

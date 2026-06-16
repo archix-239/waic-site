@@ -10959,3 +10959,301 @@ body.admin-bar.menu-open .navbar .nav-links {
     margin: 0;
   }
 }
+
+/* MemberPress / Espace membre */
+.memberpress-portal-page {
+  background: #fff;
+  color: #152247;
+}
+
+.memberpress-portal-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(78px, 11vw, 150px) 20px clamp(56px, 8vw, 110px);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(228, 29, 68, .14), transparent 28%),
+    linear-gradient(135deg, #152247 0%, #1d315f 58%, #0E6A2E 100%);
+  color: #fff;
+}
+
+.memberpress-portal-hero::after {
+  content: "";
+  position: absolute;
+  right: -8vw;
+  bottom: -42px;
+  width: min(46vw, 560px);
+  height: 120px;
+  border: 3px solid rgba(255, 255, 255, .28);
+  border-radius: 999px 999px 0 0;
+  transform: rotate(-8deg);
+}
+
+.memberpress-portal-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1040px);
+  margin: 0 auto;
+}
+
+.memberpress-portal-hero__kicker,
+.memberpress-portal-panel__intro span {
+  display: inline-flex;
+  margin: 0 0 18px;
+  color: #E41D44;
+  font-size: .82rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.memberpress-portal-hero h1 {
+  max-width: 820px;
+  margin: 0 0 18px;
+  color: #fff;
+  font-size: clamp(2.55rem, 7vw, 5.8rem);
+  line-height: .92;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+
+.memberpress-portal-hero p {
+  max-width: 720px;
+  margin: 0;
+  color: rgba(255, 255, 255, .86);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.6;
+}
+
+.memberpress-portal-panel {
+  width: min(100% - 40px, 1180px);
+  margin: clamp(44px, 7vw, 86px) auto clamp(64px, 9vw, 110px);
+}
+
+.memberpress-portal-panel__intro {
+  display: grid;
+  grid-template-columns: minmax(260px, .88fr) minmax(320px, 1.12fr);
+  gap: clamp(20px, 5vw, 70px);
+  align-items: end;
+  margin-bottom: clamp(26px, 4vw, 48px);
+}
+
+.memberpress-portal-panel__intro h2 {
+  margin: 0;
+  color: #152247;
+  font-size: clamp(2rem, 4.6vw, 4.3rem);
+  line-height: .95;
+  letter-spacing: -.045em;
+  text-transform: uppercase;
+}
+
+.memberpress-portal-panel__intro p {
+  margin: 0;
+  padding: clamp(20px, 3vw, 30px);
+  background: #F5F8FF;
+  border-left: 7px solid #E41D44;
+  color: rgba(21, 34, 71, .78);
+  font-size: clamp(1rem, 1.45vw, 1.22rem);
+  line-height: 1.6;
+}
+
+.memberpress-portal-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, .36fr) minmax(0, .64fr);
+  gap: clamp(20px, 3vw, 34px);
+  align-items: start;
+}
+
+.memberpress-portal-help,
+.memberpress-portal-account,
+.mp_wrapper,
+.mepr-login-form-wrap,
+.mepr-account-form,
+.mepr-signup-form,
+.mepr_pro_error,
+.mepr_error,
+.mepr_updated {
+  border-radius: 0;
+}
+
+.memberpress-portal-help,
+.memberpress-portal-account {
+  background: #fff;
+  border: 1px solid rgba(21, 34, 71, .10);
+  box-shadow: 14px 14px 0 rgba(21, 34, 71, .06);
+}
+
+.memberpress-portal-help {
+  padding: clamp(24px, 3vw, 34px);
+  border-top: 7px solid #0E6A2E;
+}
+
+.memberpress-portal-help h3,
+.memberpress-portal-empty h3 {
+  margin: 0 0 16px;
+  color: #152247;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  line-height: 1.1;
+}
+
+.memberpress-portal-help ul {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.memberpress-portal-help li {
+  position: relative;
+  padding-left: 24px;
+  color: rgba(21, 34, 71, .78);
+  line-height: 1.5;
+}
+
+.memberpress-portal-help li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 10px;
+  height: 10px;
+  background: #E41D44;
+  border-radius: 50%;
+}
+
+.memberpress-portal-help__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #0E6A2E;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.memberpress-portal-account {
+  padding: clamp(22px, 4vw, 44px);
+  border-top: 7px solid #E41D44;
+}
+
+.memberpress-portal-empty {
+  padding: 28px;
+  background: #F5F8FF;
+  border: 1px dashed rgba(21, 34, 71, .25);
+}
+
+.memberpress-portal-empty p {
+  margin: 0;
+  color: rgba(21, 34, 71, .76);
+  line-height: 1.6;
+}
+
+.mp_wrapper,
+.memberpress-portal-account .mepr-form {
+  max-width: none !important;
+  margin: 0 !important;
+  color: #152247;
+  font-family: inherit;
+}
+
+.mp_wrapper label,
+.mepr-form label,
+.mepr-account-form label {
+  color: #152247;
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.mp_wrapper input[type="text"],
+.mp_wrapper input[type="email"],
+.mp_wrapper input[type="password"],
+.mp_wrapper input[type="url"],
+.mp_wrapper input[type="tel"],
+.mp_wrapper select,
+.mp_wrapper textarea,
+.mepr-form input[type="text"],
+.mepr-form input[type="email"],
+.mepr-form input[type="password"],
+.mepr-form select,
+.mepr-form textarea {
+  width: 100% !important;
+  min-height: 52px;
+  border: 2px solid rgba(21, 34, 71, .18) !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  color: #152247 !important;
+  font: inherit;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.mp_wrapper input:focus,
+.mp_wrapper select:focus,
+.mp_wrapper textarea:focus,
+.mepr-form input:focus,
+.mepr-form select:focus,
+.mepr-form textarea:focus {
+  border-color: #E41D44 !important;
+  box-shadow: 0 0 0 4px rgba(228, 29, 68, .12) !important;
+  outline: none !important;
+}
+
+.mp_wrapper .button,
+.mp_wrapper input[type="submit"],
+.mepr-submit,
+.mepr-form input[type="submit"] {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 24px !important;
+  border: 2px solid #152247 !important;
+  border-radius: 0 !important;
+  background: #152247 !important;
+  color: #fff !important;
+  font-weight: 900 !important;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.mp_wrapper .button:hover,
+.mp_wrapper input[type="submit"]:hover,
+.mepr-submit:hover,
+.mepr-form input[type="submit"]:hover {
+  background: #E41D44 !important;
+  border-color: #E41D44 !important;
+  transform: translateY(-2px);
+}
+
+.mepr_error,
+.mepr_pro_error {
+  border: 1px solid rgba(228, 29, 68, .28) !important;
+  background: rgba(228, 29, 68, .08) !important;
+  color: #152247 !important;
+}
+
+.mepr_updated {
+  border: 1px solid rgba(14, 106, 46, .28) !important;
+  background: rgba(14, 106, 46, .08) !important;
+  color: #152247 !important;
+}
+
+@media (max-width: 900px) {
+  .memberpress-portal-panel__intro,
+  .memberpress-portal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .memberpress-portal-panel {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .memberpress-portal-account,
+  .memberpress-portal-help {
+    padding: 22px;
+    box-shadow: 8px 8px 0 rgba(21, 34, 71, .06);
+  }
+}
