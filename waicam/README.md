@@ -2,7 +2,7 @@
 
 Thème WordPress officiel converti depuis la maquette HTML/CSS validée par la cliente.
 
-**Version :** 3.0.10 — version indépendante du thème WAI-CAM v2, adaptée à Local by Flywheel + CPT UI + ACF + Fluent Forms
+**Version :** 3.0.11 — version indépendante du thème WAI-CAM v2, adaptée à Local by Flywheel + CPT UI + ACF + Fluent Forms
 **WordPress requis :** 6.0+
 **Testé jusqu'à :** 6.9.4
 **PHP requis :** 8.0+
@@ -72,7 +72,7 @@ Procédure recommandée :
 2. WP-Admin → **Apparence → Thèmes → Ajouter → Téléverser un thème**.
 3. Envoyer le zip et choisir **Remplacer le thème actuel par la version téléversée**.
 4. Purger les caches : plugin de cache, cache hébergeur/CDN et cache navigateur.
-5. Vérifier que `assets/css/wp-extras.css?ver=...` utilise bien le nouveau numéro de version.
+5. Vérifier que `assets/css/wp-extras.css?ver=...` change bien après la mise à jour. Les assets locaux du thème utilisent maintenant `filemtime()` pour générer automatiquement une version différente quand le fichier CSS/JS est modifié.
 
 Le contenu WordPress (pages, médias, produits WooCommerce, galeries, CPT UI/ACF) reste en base de données. Les routines de mise à jour du thème ajoutent les nouvelles pages sans remplacer les pages existantes.
 

@@ -7,9 +7,23 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'WAICAM_VERSION', '3.0.10' );
+define( 'WAICAM_VERSION', '3.0.11' );
 define( 'WAICAM_DIR', get_template_directory() );
 define( 'WAICAM_URI', get_template_directory_uri() );
+
+
+/**
+ * Return an asset version based on file modification time.
+ *
+ * This makes theme updates safer on hosts/CDNs that keep serving old CSS/JS
+ * when the semantic theme version changes but the asset URL remains cached.
+ */
+function waicam_asset_version( $relative_path ) {
+	$relative_path = ltrim( (string) $relative_path, '/' );
+	$file_path     = WAICAM_DIR . '/' . $relative_path;
+
+	return file_exists( $file_path ) ? (string) filemtime( $file_path ) : WAICAM_VERSION;
+}
 
 /**
  * Theme setup
@@ -73,7 +87,7 @@ function waicam_enqueue_assets() {
 		'waicam-style',
 		WAICAM_URI . '/assets/css/main.css',
 		array( 'waicam-fonts', 'waicam-fontawesome' ),
-		WAICAM_VERSION
+		waicam_asset_version( 'assets/css/main.css' )
 	);
 
 	// CSS additionnel (extraction des styles inline + nouvelles classes templates)
@@ -81,7 +95,7 @@ function waicam_enqueue_assets() {
 		'waicam-extras',
 		WAICAM_URI . '/assets/css/wp-extras.css',
 		array( 'waicam-style' ),
-		WAICAM_VERSION
+		waicam_asset_version( 'assets/css/wp-extras.css' )
 	);
 
 	// style.css (obligatoire WordPress)
@@ -89,7 +103,7 @@ function waicam_enqueue_assets() {
 		'waicam-theme',
 		get_stylesheet_uri(),
 		array( 'waicam-extras' ),
-		WAICAM_VERSION
+		waicam_asset_version( 'style.css' )
 	);
 
 	// JavaScript principal
@@ -97,7 +111,7 @@ function waicam_enqueue_assets() {
 		'waicam-main',
 		WAICAM_URI . '/assets/js/main.js',
 		array(),
-		WAICAM_VERSION,
+		waicam_asset_version( 'assets/js/main.js' ),
 		true
 	);
 
