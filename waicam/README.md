@@ -2,7 +2,7 @@
 
 Thème WordPress officiel converti depuis la maquette HTML/CSS validée par la cliente.
 
-**Version :** 3.0.9 — version indépendante du thème WAI-CAM v2, adaptée à Local by Flywheel + CPT UI + ACF + Fluent Forms
+**Version :** 3.0.10 — version indépendante du thème WAI-CAM v2, adaptée à Local by Flywheel + CPT UI + ACF + Fluent Forms
 **WordPress requis :** 6.0+
 **Testé jusqu'à :** 6.9.4
 **PHP requis :** 8.0+

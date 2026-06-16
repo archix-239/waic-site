@@ -6864,6 +6864,7 @@ footer ul li {
   min-height: clamp(260px, 38vw, 460px);
   display: grid;
   place-items: center;
+  justify-items: center;
   gap: 12px;
   padding: clamp(32px, 6vw, 78px);
   color: #fff;
@@ -6879,10 +6880,15 @@ footer ul li {
 .events-campaign-hero__placeholder strong {
   color: #fff;
   font-family: "Poppins", "Inter", Arial, sans-serif;
-  font-size: clamp(3rem, 10vw, 8rem);
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  font-size: clamp(2.5rem, 8vw, 6.4rem);
   font-weight: 900;
   line-height: .9;
-  letter-spacing: -.055em;
+  letter-spacing: -.04em;
+  text-align: center;
+  white-space: nowrap;
 }
 .events-campaign-hero__sticker {
   position: absolute;
@@ -6928,6 +6934,10 @@ footer ul li {
   }
   .events-campaign-hero__media {
     width: min(92vw, 620px);
+  }
+  .events-campaign-hero__placeholder strong {
+    font-size: clamp(2.2rem, 13vw, 4.5rem);
+    white-space: normal;
   }
   .events-campaign-hero__sticker {
     left: 24px;
