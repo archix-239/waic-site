@@ -7,22 +7,24 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'WAICAM_VERSION', '3.0.11' );
+define( 'WAICAM_VERSION', '3.0.12' );
 define( 'WAICAM_DIR', get_template_directory() );
 define( 'WAICAM_URI', get_template_directory_uri() );
 
 
 /**
- * Return an asset version based on file modification time.
+ * Return an asset version based on the file content hash.
  *
  * This makes theme updates safer on hosts/CDNs that keep serving old CSS/JS
  * when the semantic theme version changes but the asset URL remains cached.
+ * A content hash is more reliable than filemtime() when ZIP deployment or
+ * hosting layers preserve/normalize file modification times.
  */
 function waicam_asset_version( $relative_path ) {
 	$relative_path = ltrim( (string) $relative_path, '/' );
 	$file_path     = WAICAM_DIR . '/' . $relative_path;
 
-	return file_exists( $file_path ) ? (string) filemtime( $file_path ) : WAICAM_VERSION;
+	return file_exists( $file_path ) ? WAICAM_VERSION . '-' . substr( md5_file( $file_path ), 0, 12 ) : WAICAM_VERSION;
 }
 
 /**
